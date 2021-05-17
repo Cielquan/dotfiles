@@ -19,7 +19,7 @@ clone_repo() {
         printf "\n\n## dotfiles repo found - Skip cloning\n"
         return
     fi
-    if ! command -v git > /dev/null 2>&1; then    
+    if ! command -v git > /dev/null 2>&1; then
         printf "\n\n## Installing missing git\n"
         sudo apt-get install -y git 1> /dev/null
     fi
@@ -39,7 +39,7 @@ if answer_is_yes "Do you want to install the dotfiles?"; then
     printf "If you want to customize the install add your parameters before pressing enter.\n"
     printf "Args: "
     read -r ARGV </dev/tty
-    python3 ~/.dotfiles/.bin/2_install_dotfiles.py $ARGV 
+    python3 ~/.dotfiles/.bin/2_install_dotfiles.py $ARGV
 fi
 
 if answer_is_yes "Do you want to install linux basics?"; then

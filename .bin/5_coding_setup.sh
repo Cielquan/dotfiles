@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+# This scripts needs elevated permissions for `apt` calls
+
 set -e
 sudo -v
 

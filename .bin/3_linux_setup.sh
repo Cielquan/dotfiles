@@ -5,7 +5,7 @@
 set -e
 sudo -v
 
-PACKAGES="ldnsutils htop git nano curl wget"
+PACKAGES="ldnsutils net-tools htop git nano curl wget unzip fontconfig"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   install basic linux stuff

@@ -12,19 +12,20 @@ PY_VERSIONS="3.6 3.7 3.8 3.9"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 printf "\n\n## Adding deadsnakes ppa\n"
-sudo add-apt-repository -yqq ppa:deadsnakes/ppa && sudo apt-get update
+sudo add-apt-repository -y ppa:deadsnakes/ppa && sudo apt-get update
 
 echo ${PY_VERSIONs} | tr ' ' '\n' | while read version; do
     printf "\n\n## Installing python${version}\n"
     if ! command -v python${version} > /dev/null 2>&1; then
-        sudo apt-get install -yqq python${version}
+        #sudo apt-get install -yqq python${version}
+        echo "installing ..."
     else
         printf "\n\n## python${version} is already installed\n"
     fi
     printf "\n\n## Installing venv and dev packages\n"
-    sudo apt-get install -yqq python${version}-venv python${version}-dev
+    # sudo apt-get install -yqq python${version}-venv python${version}-dev
 done
-
+exit 36
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   install and setup poetry
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

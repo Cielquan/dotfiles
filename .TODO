@@ -1,13 +1,13 @@
-remove user data
-- git/gitconfig
-- sh/profile.d/timezone.sh
+fix user input in python script in oneliner
+
+fix nerdfont
+
+apt quiet
 
 show upgradeable packages on first shell link in some VM .. ryder dotfiles/sh/profile.d/welcome.sh ?
 
 check LS_COLORS
 
 .gitconfig
-
-setup scripts
 
 fix repo gitignore

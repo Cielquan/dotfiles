@@ -6,6 +6,19 @@
 
 ####################################
 
+BOLD="$(tput bold 2>/dev/null || printf '')"
+GREY="$(tput setaf 0 2>/dev/null || printf '')"
+UNDERLINE="$(tput smul 2>/dev/null || printf '')"
+RED="$(tput setaf 1 2>/dev/null || printf '')"
+GREEN="$(tput setaf 2 2>/dev/null || printf '')"
+YELLOW="$(tput setaf 3 2>/dev/null || printf '')"
+BLUE="$(tput setaf 4 2>/dev/null || printf '')"
+MAGENTA="$(tput setaf 5 2>/dev/null || printf '')"
+NO_COLOR="$(tput sgr0 2>/dev/null || printf '')"
+
+
+####################################
+
 
 # Detect machine
 unameOut="$(uname -s)"

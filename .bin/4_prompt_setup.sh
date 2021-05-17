@@ -14,7 +14,7 @@ else
 fi
 
 printf "\n\n## Installing nerdfont\n"
-current_version=$(curl -sS https://github.com/ryanoasis/nerd-fonts/releases/latest | grep -Po 'v\d+\.\d+\.\d+')
+current_version=$(curl -sSL -w %{url_effective} -o /dev/null https://github.com/ryanoasis/nerd-fonts/releases/latest | grep -Po 'v\d+\.\d+\.\d+')
 curl -sSL -o ~/Downloads/DejaVuSansMono.zip https://github.com/ryanoasis/nerd-fonts/releases/download/${current_version}/DejaVuSansMono.zip
 mkdir -p ~/.local/share/fonts
 unzip -o ~/Downloads/DejaVuSansMono.zip -d ~/.local/share/fonts/ 1> /dev/null

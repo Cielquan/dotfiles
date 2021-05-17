@@ -1,0 +1,148 @@
+add_newline = false
+
+format = """
+$cmd_duration\
+$status\
+$line_break
+[┌──────> ](bold green)\
+$time\
+$shlvl\
+$battery\
+$memory_usage\
+$jobs
+[│ ](bold green)\
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$hg_branch\
+$kubernetes\
+$docker_context\
+$package\
+$cmake\
+$dart\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$helm\
+$java\
+$julia\
+$kotlin\
+$nim\
+$nodejs\
+$lua\
+$ocaml\
+$perl\
+$php\
+$purescript\
+$python\
+$ruby\
+$rust\
+$swift\
+$terraform\
+$zig\
+$nix_shell\
+$conda\
+$aws\
+$gcloud\
+$openstack\
+$env_var\
+$crystal\
+$custom
+[└─$character](bold green)"""
+
+[cmd_duration]
+    format = "[ $duration]($style) "
+    min_time = 2_000
+
+[status]
+    format = "[$symbol ... Exit Code: $status](fg:$style)"
+    symbol = "| \\(╯°□°）╯︵ ┻━┻"
+    style = "red"
+    disabled = false
+
+# New line
+
+[time]
+    format = '[$symbol\[$time\]]($style) '
+    time_format = "%R"
+    disabled = false
+
+[shlvl]
+    format = "[$symbol $shlvl]($style) "
+    symbol = ""
+    style = "bold 208"
+    threshold = 2
+    disabled = false
+
+[battery]
+    unknown_symbol = ""
+    empty_symbol = ""
+    discharging_symbol = ""
+    charging_symbol = ""
+    full_symbol = ""
+
+    [[battery.display]]
+        threshold = 10
+        style = "bold fg:red"
+
+    [[battery.display]]
+        threshold = 30
+        style = "fg:#ff8800"
+
+    [[battery.display]]
+        threshold = 50
+        style = "fg:yellow"
+
+[memory_usage]
+    format = "[$symbol ${ram_pct}( | ${swap_pct})]($style) "
+    symbol = ""
+    style = "bold red"
+    threshold = 80
+    disabled = false
+
+# New line
+
+[username]
+    format = "[$user]($style) "
+    show_always = true
+
+[hostname]
+    format = "[@](bright-red)[$hostname]($style) "
+    style = "bold green"
+
+[directory]
+    format = "in [$path]($style)[$read_only]($read_only_style) "
+    truncate_to_repo = false
+    truncation_length = 5
+    truncation_symbol = "…/"
+
+[git_branch]
+    style = "bold yellow"
+
+[git_commit]
+    tag_disabled = false
+
+[git_state]
+    style = "bold purple"
+
+[git_status]
+    format = '([\[$ahead_behind\]]($style) )'
+    ahead = "⇡${count}"
+    diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+    behind = "⇣${count}"
+
+[python]
+    style = "bold blue"
+    python_binary = ["python3", "python"]
+
+# New line
+
+[character]
+    success_symbol = "[](bold green)"
+    error_symbol = "[](bold green)"

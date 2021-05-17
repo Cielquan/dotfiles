@@ -1,0 +1,334 @@
+# TODO: check pretty format
+# TODO: check outcommented aliases
+# https://git-scm.com/docs/git-config
+
+# undoing, fixing, or removing commits in git:
+# https://sethrobertson.github.io/GitFixUm/fixup.html
+
+[alias]
+    # Amend commit without editing
+    recommit = commit --amend --no-edit
+    # `git remote prune origin`: remove remote-tracking branches that were deleted from the remote repo
+    # `git gc`: cleanup unnecessary files and optimize the local repository
+    # `git clean -df`: remove untracked files and directories from the working tree
+    # `git stash clear`: remove all stashed states
+    trim = !git remote prune origin && git gc
+    cleanup = !git clean -df && git stash clear
+	a = add
+    # List aliases
+	aliases = config --get-regexp alias
+    # Amend the currently staged files to the latest commit
+	amend = commit --amend --reuse-message=HEAD
+    br = branch
+    branches = branch -a
+    c = commit
+    # Commit all changes.
+    ca = !git add --all && git commit -v
+    # Find commits by source code.
+    cfc = "!f() { \
+        git log --date=short --decorate --pretty=custom -S\"$1\"; \
+    }; f"
+    # Find commits by commit message.
+    cfm = "!f() { \
+        git log --date=short --decorate --pretty=custom --grep=\"$1\"; \
+    }; f"
+    cl = clone
+    cm = commit -m
+    cminit = commit --no-verify --allow-empty -m '(empty) initial commit'
+    cmskip = commit --no-verify --allow-empty -m '(empty) commit to [skip ci]'
+    cmv = commit --no-verify -m
+    co = checkout
+    cob = checkout -b
+	# List contributors with number of commits
+	contributors = shortlog --summary --numbered
+    cp = cherry-pick
+    # Credit an author on the latest commit.
+    credit = "!f() { \
+        if [ -n \"$1\" ] && [ -n \"$2\" ]; then \
+            git commit --amend --author \"$1 <$2>\" --no-edit --reuse-message=HEAD; \
+        fi \
+    }; f"
+	# # Credit an author on the latest commit
+	# credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
+    # Credit a co-author on the latest commit.
+    #
+    # https://help.github.com/en/articles/creating-a-commit-with-multiple-authors
+    # https://help.github.com/en/articles/creating-a-commit-on-behalf-of-an-organization
+    credit-co-author = "!f() { \
+        if [ -n \"$1\" ] && [ -n \"$2\" ]; then \
+            GIT_EDITOR=\"git interpret-trailers --in-place --trailer='Co-authored-by: $1 <$2>'\" git commit --amend; \
+        fi \
+    }; f"
+    # d = diff -- . ':!*package-lock.json' ':!*yarn.lock'
+    # dc = diff --cached -- . ':!*package-lock.json' ':!*yarn.lock'
+	# # Show the diff between the latest commit and the current state
+	# d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+
+	# # `git di $number` shows the diff between the state `$number` revisions ago and the current state
+	# di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+    dev = checkout development
+	# Remove branches that have already been merged with master
+	# a.k.a. ‘delete merged’
+	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+    f = fetch
+    # Allow `$ git git git...`
+    git = !exec git
+    # https://github.com/janmoesen/tilde
+	# Switch branches, creating them if necessary. I want to unlearn using
+	# "git checkout" for switching between branches because of the possible
+	# dataloss when not paying attention. (You could see the PEBKAC, but I
+	# could reply with another four letter acronym, slightly resembling TOFU.)
+	#
+	# Suppose I have modified a file named "password" and have two branches,
+	# "password-expiry-mechanism" and "password-reset-mail". If I want to
+	# switch to either branch, I would type "git checkout pass<Tab><Enter>",
+	# but the autocomplete would stop at "git checkout password" because of
+	# the ambiguity. Because I press <Enter> without really thinking, I have
+	# now reset my "password" file. With "git go pass<Tab><Enter>", I would
+	# simply have created a new branch called "password". (I would be forced
+	# to use "--" to separate paths from banch names, which is a Good Thing™.)
+	go = checkout -B
+	# Switch to a branch, creating it if necessary
+	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+    # # Show custom text-based graphical log of the commit history.
+    # g = log --graph --pretty=custom
+    # # Show custom log of the commit history.
+    # l = log --pretty=custom
+    # # List contributors.
+    # lc = shortlog --email --numbered --summary
+    # # List remote branches.
+    # lrb = "!f() { \
+    #     remote=\"${1:-origin}\"; \
+    #     git ls-remote --heads \"$remote\"; \
+    # }; f"
+    # # Merge GitHub pull request on top of the current branch or,
+    # # if a branch name is specified, on top of the specified branch.
+    # mpr = "!f() { \
+    #     current_branch=\"$(git symbolic-ref --short HEAD)\"; \
+    #     branch=\"${2:-$current_branch}\"; \
+    #     \
+    #     if [ $(printf \"%s\" \"$1\" | grep '^[0-9]\\+$' > /dev/null; printf $?) -eq 0 ]; then \
+    #         git fetch origin refs/pull/$1/head:pr/$1 && \
+    #         git checkout -B \"$branch\" && \
+    #         git rebase \"$branch\" pr/$1 && \
+    #         git checkout -B \"$branch\" && \
+    #         git merge pr/$1 && \
+    #         git branch --delete --force pr/$1 && \
+    #         git commit --amend --message=\"$(git log -1 --pretty=%B)\n\nClose: #$1\"; \
+    #     fi \
+    # }; f"
+    log1 = log --pretty=oneline -1
+    log5 = log --pretty=oneline -5
+    log10 = log --pretty=oneline -10
+    logg = log --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+    logl = log --pretty=oneline
+    logs = log --show-signature
+    master = checkout master
+    main = checkout main
+    mg = merge
+    pl = pull
+    ps = push --follow-tags
+    remotes = remote -v
+    rb = rebase
+	# Interactive rebase with the given number of latest commits
+	reb = "!r() { git rebase -i HEAD~$1; }; r"
+    # # Remove the tag with the specified tag name if
+    # # exists and tag the latest commit with that name.
+    # retag = "!f() { \
+    #     git tag --delete \"$1\" &> /dev/null; \
+    #     git tag \"$1\"; \
+    # }; f"
+	# # Remove the old tag with this name and tag the latest commit with it.
+	# retag = "!r() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; r"
+    # # Remove last commits (by default it removes the last commit).
+    # rlc = "!f() { \
+    #     number_of_commits=\"${1:-1}\"; \
+    #     git reset --hard \"HEAD~$number_of_commits\"; \
+    # }; f"
+    s = status -s
+    st = status
+    tags = tag -l
+    # # Update the content of the last commit by including all
+    # # staged changes.
+    # #
+    # # Note: "Update" is used loosely. Git doesn't actually
+    # # update the last commit, but instead, creates a new commit
+    # # based on the last commit and replaces it.
+    # u = commit --amend --no-edit
+    # # Update the content of the last commit by including all
+    # # local changes.
+    # ua = !git add --all && git commit --amend --no-edit
+    # # Undo last commits (by default it undoes the last commit).
+    # ulc = "!f() { \
+    #     number_of_commits=\"${1:-1}\"; \
+    #     git reset --soft \"HEAD~$number_of_commits\"; \
+    # }; f"
+    # # Update the content of the last commit by including all
+    # # staged changes as well as allow the user to change its
+    # # commit message.
+    # um = commit --amend
+    unstage = reset HEAD --
+    # # Start web-based visualizer.
+    # w = instaweb --httpd=webrick
+
+
+[color "branch"]
+
+    current = green bold
+    local = green
+    remote = yellow
+
+[color "diff"]
+
+    frag = magenta bold # line info
+    meta = yellow bold
+
+    new = green # additions
+    old = red # deletions
+
+    newMoved = cyan
+    oldMoved = blue
+
+[color "status"]
+
+    added = green reverse
+    changed = yellow reverse
+    untracked = red reverse
+
+[commit]
+
+    # TODO: read
+	# https://help.github.com/articles/signing-commits-using-gpg/
+	# https://gist.github.com/scisco/e6aad7393f19147266f9385f320ae27a
+    gpgSign = false  # TODO: reactivate
+
+
+[core]
+
+    abbrev = 12
+    attributesFile = ~/.gitattributes
+    editor = nano
+    excludesFile = ~/.gitignore
+    preloadIndex = true
+	# Speed up commands involving untracked files such as `git status`.
+	# https://git-scm.com/docs/git-update-index#_untracked_cache
+	untrackedCache = true
+	# Treat spaces before tabs and all kinds of trailing whitespace as an error
+	# [default] trailing-space: looks for spaces at the end of a line
+	# [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+
+[diff]
+
+    # Show blocks of moved text of at least 20
+    # alphanumeric characters differently than adds/deletes.
+    #
+    # https://git-scm.com/docs/git-diff#git-diff-zebra
+
+    colorMoved = zebra
+	algorithm = patience # patience|minimal|histogram|myers
+
+[diff "bin"]
+
+    # Use `hexdump` to diff binary files.
+
+    textconv = hexdump --canonical --no-squeezing
+
+[help]
+
+    # If a command is mistyped, make Git automatically run
+    # the command it thinks the user wanted to type while also
+    # giving the user some time to prevent it from doing so.
+    #
+    # https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#_help_autocorrect
+
+    autocorrect = 20
+
+[init]
+
+    defaultBranch = main
+
+[merge]
+
+#    verifySignatures = True  # TODO: alias?
+	# Include summaries of merged commits in newly created merge commit messages
+	log = 1024
+
+[pretty]
+    # graph / orig #  '%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+    # zellwk # '%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d'
+    custom = "%C(magenta)%h%C(red)%d %C(yellow)%ar %C(green)%s %C(yellow)(%an)"
+    #                     │        │            │            │             └─ author name
+    #                     │        │            │            └─ message
+    #                     │        │            └─ date (relative)
+    #                     │        └─ decorations (branch, heads or tags)
+    #                     └─ hash (abbreviated)
+    # https://github.com/necolas/dotfiles
+    # tut: http://gitimmersion.com/lab_10.html
+    # ref: http://linux.die.net/man/1/git-log
+    # Result: <short-sha> <commit-message> (<pointer-names>) -- <commit-author-name>; <relative-time>
+    nice = "%C(yellow)%h%C(reset) %C(white)%s%C(cyan)%d%C(reset) -- %an; %ar"
+
+
+[pull]
+
+    ff = only
+    # rebase = true # TODO: check
+
+[push]
+
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault
+	default = simple
+    # Make `git push` automatically push relevant
+    # annotated tags when pushing branches out.
+    followTags = true
+
+[tag]
+
+    gpgSign = false  # TODO: reactivate
+
+[user]
+
+    # Do not guess the user's identity.
+    # https://github.com/git/git/blob/90f7b16b3adc78d4bbabbd426fb69aa78c714f71/Documentation/config.txt#L2847-L2855
+
+    useConfigOnly = true
+
+    # [!] DO NOT store sensitive information such as the Git user
+    # credentials (`name` / `email`), or things such as the `signingkey`
+    # in this file, add them in `~/.gitconfig.d/local.gitconfig`!
+    # Or let them be added by the script to `~/.gitconfig.d/user.gitconfig`
+    #
+    # See also: https://github.com/alrra/dotfiles#gitconfiglocal
+
+# TODO: check URL config stuff
+[url "git@github.com:"]
+
+	insteadOf = "gh:"
+	pushInsteadOf = "github:"
+	pushInsteadOf = "git://github.com/"
+
+[url "git://github.com/"]
+
+	insteadOf = "github:"
+
+[url "git@gist.github.com:"]
+
+	insteadOf = "gst:"
+	pushInsteadOf = "gist:"
+	pushInsteadOf = "git://gist.github.com/"
+
+[url "git://gist.github.com/"]
+  insteadOf = "gist:"
+
+[include]
+
+    # Load local configs.
+    # https://git-scm.com/docs/git-config#_includes
+    #
+    # [!] The following needs to remain at the end of this file in
+    #     order to allow any of the above configs to be overwritten
+    #     by the local ones
+
+    path = ~/.gitconfig.d/user.gitconfig
+	path = ~/.gitconfig.d/local.gitconfig

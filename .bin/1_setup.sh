@@ -21,7 +21,7 @@ clone_repo() {
     fi
     if ! command -v git > /dev/null 2>&1; then    
         printf "\n\n## Installing missing git\n"
-        sudo apt-get install -yqq git
+        sudo apt-get install -y git 1> /dev/null
     fi
     printf "\n\n## Cloning dotfiles repo\n"
     git clone -q https://github.com/Cielquan/dotfiles.git ~/.dotfiles

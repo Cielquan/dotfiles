@@ -12,19 +12,18 @@ git clone https://github.com/Cielquan/dotfiles.git
 
 or oneliner with ``curl``:
 ```
-curl -sSL https://raw.githubusercontent.com/Cielquan/dotfiles/main/.bin/0_clone.sh | sh -s
+curl -sSL https://raw.githubusercontent.com/Cielquan/dotfiles/main/.bin/1_setup.sh | sh -s
 ```
 or with ``wget``:
 ```
-wget -qO - https://raw.githubusercontent.com/Cielquan/dotfiles/main/.bin/0_clone.sh | sh -s
+wget -qO - https://raw.githubusercontent.com/Cielquan/dotfiles/main/.bin/1_setup.sh | sh -s
 ```
 
 ### Scripts
 In the repo's ``.bin`` directory are all the scripts for usage of the repo.
 
-The ``0_clone.sh`` script is intendet to be used like above for the oneliner install.
-
-The ``1_setup.sh`` script is intendet to call all the other script.
+The ``1_setup.sh`` script is intendet to call all the other scripts and git clone the
+repo if missing.
 
 The python script ``2_install_dotfiles.py`` (for installing the dotfiles) has CLI
 options. Run the script with ``--help`` for more information about the script and

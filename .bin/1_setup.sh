@@ -6,8 +6,6 @@ set -e
 #   utils
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-# PWD=$(pwd)
-
 answer_is_yes() {
     printf "%b" "   [?] $1 (y/n) "
     read -r REPLY </dev/tty
@@ -33,9 +31,6 @@ clone_repo() {
 #   call scripts
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-# cd into `.bin` dir
-# cd $(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-
 if answer_is_yes "Do you want to install the dotfiles?"; then
     clone_repo
     printf "\n\n## Starting script ...\n"
@@ -59,8 +54,6 @@ if answer_is_yes "Do you want to install coding setup?"; then
     printf "\n\n## Starting script ...\n"
     ~/.dotfiles/.bin/5_coding_setup.sh
 fi
-
-# cd $PWD
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   finish

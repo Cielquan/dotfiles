@@ -22,7 +22,7 @@ echo ${PY_VERSIONS} | tr ' ' '\n' | while read version; do
         printf "## python${version} is already installed\n"
     fi
     printf "## Installing venv and dev packages\n"
-    # sudo apt-get install -yqq python${version}-venv python${version}-dev
+    sudo apt-get install -yqq python${version}-venv python${version}-dev
 done
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

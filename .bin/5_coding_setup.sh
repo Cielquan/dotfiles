@@ -14,15 +14,15 @@ PY_VERSIONS="3.6 3.7 3.8 3.9"
 printf "\n\n## Adding deadsnakes ppa\n"
 sudo add-apt-repository -yqq ppa:deadsnakes/ppa && sudo apt-get update
 
-# TODO: error
 echo ${PY_VERSIONs} | tr ' ' '\n' | while read version; do
-    if ! command -v python${version} &> /dev/null; then
-        printf "\n\n## Installing python${version}\n"
-        sudo apt-get install -yqq python${version} python${version}-venv python${version}-dev
+    printf "\n\n## Installing python${version}\n"
+    if ! command -v python${version} > /dev/null 2>&1; then
+        sudo apt-get install -yqq python${version}
     else
-        printf "\n\n## python${version} is installed. Installing additional packages\n"
-        sudo apt-get install -yqq python${version}-venv python${version}-dev
+        printf "\n\n## python${version} is already installed\n"
     fi
+    printf "\n\n## Installing venv and dev packages\n"
+    sudo apt-get install -yqq python${version}-venv python${version}-dev
 done
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

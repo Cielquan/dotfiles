@@ -38,8 +38,8 @@ if answer_is_yes "Do you want to install the dotfiles?"; then
     printf "\n\n## Please see the script's help page above. "
     printf "If you want to customize the install add your parameters before pressing enter.\n"
     printf "Args: "
-    read -r ARGS </dev/tty
-    python3 ~/.dotfiles/.bin/2_install_dotfiles.py $ARGS
+    read -r ARGV </dev/tty
+    python3 ~/.dotfiles/.bin/2_install_dotfiles.py $ARGV
 fi
 
 if answer_is_yes "Do you want to install linux basics?"; then

@@ -12,11 +12,11 @@ git clone https://github.com/Cielquan/dotfiles.git
 
 or oneliner with ``curl``:
 ```
-curl -sSL https://raw.githubusercontent.com/Cielquan/dotfiles/main/.bin/1_setup.sh | sh -s
+curl -sSL https://raw.githubusercontent.com/Cielquan/dotfiles/main/.bin/1_setup.sh | sh -s && ~/.dotfiles/.bin/1_setup.sh
 ```
 or with ``wget``:
 ```
-wget -qO - https://raw.githubusercontent.com/Cielquan/dotfiles/main/.bin/1_setup.sh | sh -s
+wget -qO - https://raw.githubusercontent.com/Cielquan/dotfiles/main/.bin/1_setup.sh | sh -s && ~/.dotfiles/.bin/1_setup.sh
 ```
 
 ### Scripts

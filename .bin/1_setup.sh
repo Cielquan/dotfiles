@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 set -e
-echo "DIR:" $( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P )
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   utils
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -14,12 +14,20 @@ answer_is_yes() {
     test "${answers#*$REPLY}" != "$answers" && return 0 || return 1
 }
 
+called_locally() {
+    echo $( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd) | grep -e .dotfiles/.bin && return 0 || return 1
+}
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   clone repo
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if test -d ~/.dotfiles/.git; then
     printf "\n\n## dotfiles repo found - Skip cloning\n"
+    if ! called_locally; then
+        printf "\n\n## ERROR please call the script from your local machine: ~/.dotfiles/.bin/1_setup.sh\n"
+        exit 1
+    fi
 else
     if ! command -v git > /dev/null 2>&1; then
         printf "\n\n## Installing missing git\n"
@@ -27,7 +35,7 @@ else
     fi
     printf "\n\n## Cloning dotfiles repo\n"
     git clone -q https://github.com/Cielquan/dotfiles.git ~/.dotfiles
-    printf "\n\n## Repo is cloned and ready for usage. Call ~/.dotfiles/.bin/1_setup.sh"
+    printf "\n\n## Repo is cloned and ready for usage. Call ~/.dotfiles/.bin/1_setup.sh\n"
     exit 0
 fi
 

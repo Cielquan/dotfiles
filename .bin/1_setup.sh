@@ -21,10 +21,10 @@ clone_repo() {
     fi
     if ! command -v git > /dev/null 2>&1; then    
         printf "\n\n## Installing missing git\n"
-        sudo apt install -y git
+        sudo apt-get install -yqq git
     fi
     printf "\n\n## Cloning dotfiles repo\n"
-    git clone https://github.com/Cielquan/dotfiles.git ~/.dotfiles
+    git clone -q https://github.com/Cielquan/dotfiles.git ~/.dotfiles
 }
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -34,6 +34,7 @@ clone_repo() {
 if answer_is_yes "Do you want to install the dotfiles?"; then
     clone_repo
     printf "\n\n## Starting script ...\n"
+    # TODO: update call to allow selection of packages
     python3 ~/.dotfiles/.bin/2_install_dotfiles.py
 fi
 

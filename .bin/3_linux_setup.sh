@@ -12,24 +12,24 @@ PACKAGES="ldnsutils htop git nano curl wget"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 printf "\n\n## Updating repos\n"
-sudo apt-get update
+sudo apt-get update -qq
 
 printf "\n\n## Install certs and apt https\n"
-sudo apt-get install -y ca-certificates apt-transport-https
+sudo apt-get install -yqq ca-certificates apt-transport-https
 
 printf "\n\n## Add git ppa\n"
-sudo add-apt-repository -y ppa:git-core/ppa
+sudo add-apt-repository -yqq ppa:git-core/ppa
 
 printf "\n\n## Updating repos\n"
-sudo apt-get update
+sudo apt-get update -qq
 
 printf "\n\n## Upgade all\n"
-sudo apt-get dist-upgrade -y
+sudo apt-get dist-upgrade -yqq
 
 echo ${PACKAGES} | tr ' ' '\n' | while read package; do
     printf "\n\n## Installing ${package}\n"
     if ! command -v ${package} > /dev/null 2>&1; then    
-        sudo apt-get install -y ${package}
+        sudo apt-get install -yqq ${package}
     else
         printf "## ${package} is installed\n"
     fi

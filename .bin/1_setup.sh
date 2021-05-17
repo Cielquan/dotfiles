@@ -20,6 +20,7 @@ clone_repo() {
     if test -d ~/.dotfiles/.git; then
         printf "\n\n## dotfiles repo found - Skip cloning\n"
         return
+    fi
     if ! command -v git > /dev/null 2>&1; then    
         printf "\n\n## Installing missing git\n"
         sudo apt install -y git

@@ -10,7 +10,7 @@ set -e
 
 answer_is_yes() {
     printf "%b" "   [?] $1 (y/n) "
-    read -r REPLY
+    read -r REPLY </dev/tty
     printf "\n"
     answers="yY"
     test "${answers#*$REPLY}" != "$answers" && return 0 || return 1

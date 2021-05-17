@@ -33,9 +33,12 @@ clone_repo() {
 
 if answer_is_yes "Do you want to install the dotfiles?"; then
     clone_repo
-    printf "\n\n## Starting script ...\n"
-    # TODO: update call to allow selection of packages
-    python3 ~/.dotfiles/.bin/2_install_dotfiles.py
+    python3 ~/.dotfiles/.bin/2_install_dotfiles.py --help
+    printf "\n\n## Please see the script's help page above. "
+    printf "If you want to customize the install add your parameters before pressing enter.\n"
+    printf "Args: "
+    read -r ARGS
+    python3 ~/.dotfiles/.bin/2_install_dotfiles.py $ARGS
 fi
 
 if answer_is_yes "Do you want to install linux basics?"; then

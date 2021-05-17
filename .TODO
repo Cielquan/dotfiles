@@ -1,8 +1,6 @@
-fix user input in python script in oneliner
+fix user input in python script in oneliner for git
 
-fix nerdfont
-
-apt quiet
+script to install vscode plugins and grab config
 
 show upgradeable packages on first shell link in some VM .. ryder dotfiles/sh/profile.d/welcome.sh ?
 

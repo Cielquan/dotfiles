@@ -1,6 +1,39 @@
 fix user input in python script in oneliner for git
 
 script to install vscode plugins and grab config
+Win:
+$ code --list-extensions
+alexcvzz.vscode-sqlite
+atlassian.atlascode
+ban.spellright (inactive)
+bungcip.better-toml
+C.Riedel.krys-colors
+CoenraadS.bracket-pair-colorizer-2
+eamodio.gitlens
+file-icons.file-icons
+formulahendry.code-runner
+Gruntfuggly.todo-tree
+jeff-hykin.better-dockerfile-syntax
+lextudio.restructuredtext
+matklad.rust-analyzer
+mechatroner.rainbow-csv
+ms-python.python
+ms-python.vscode-pylance
+ms-toolsai.jupyter
+njpwerner.autodocstring
+njqdev.vscode-python-typehint
+oderwat.indent-rainbow
+patbenatar.advanced-new-file
+redhat.vscode-yaml
+rust-lang.rust (inactive)
+samuelcolvin.jinjahtml
+sleistner.vscode-fileutils
+snooty.snooty
+streetsidesoftware.code-spell-checker (inactive)
+tomoki1207.pdf
+usernamehw.errorlens
+VisualStudioExptTeam.vscodeintellicode
+
 
 show upgradeable packages on first shell link in some VM .. ryder dotfiles/sh/profile.d/welcome.sh ?
 

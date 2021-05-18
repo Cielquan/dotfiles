@@ -1,3 +1,4 @@
+.vscode/
 .venv
 .dotfiles_installed
 .config.ini

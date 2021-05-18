@@ -15,7 +15,7 @@ answer_is_yes() {
 }
 
 called_locally() {
-    echo $( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd) | grep -qe .dotfiles/.bin && return 0 || return 1
+    echo $( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd ) | grep -qe .dotfiles/.bin && return 0 || return 1
 }
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

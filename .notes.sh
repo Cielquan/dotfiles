@@ -79,3 +79,20 @@ src/git/gitconfig       linguist-language=gitconfig
 src/git/gitignore       linguist-language=gitignore
 src/tmux/tmux.conf      linguist-language=sh
 #################################
+
+
+def osify_vscode_settings() -> None:
+    """Replace `bin`/`Scripts` in venv dir paths with the other based on os."""
+    if sys.platform == "win32":
+        bin_dir_new = "Scripts"
+        bin_dir_old = "bin"
+    else:
+        bin_dir_new = "bin"
+        bin_dir_old = "Scripts"
+
+    local_settings_file = [f for f in HOME_DIR.glob("**/Code/User/settings.json")]
+    for file in local_settings_file:
+        with open(file) as read_file:
+            content = read_file.read()
+        with open(file, "w") as write_file:
+            write_file.write(content.replace(bin_dir_old, bin_dir_new))

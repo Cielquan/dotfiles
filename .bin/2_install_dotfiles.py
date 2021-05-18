@@ -111,7 +111,7 @@ def create_git_user_file(config: CONFIG_TYPE) -> None:
             except EOFError:
                 data = ""
                 print(
-                    f"Could not get user input for {info}."
+                    f"\nERROR Could not get user input for {info}. "
                     f"Please check the config file and add data: {file_path}"
                 )
             if info == "git_signingkey" and data == "":

@@ -28,7 +28,6 @@ fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 while read -r line; do
-    echo '##########'
     # skip empty line and lines staring with '#'
     if [ -z "$line" ] || [ $(echo $line | cut -c1-1) = "#" ]; then
         continue
@@ -48,3 +47,24 @@ while read -r line; do
         $(code --disable-extension $line)
     fi
 done <${BIN_DIR}/../configs/vscode/extensions.txt
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   copy configs
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+if [ -z "$APPDATA" ]; then
+    copy_target="$APPDATA/Code/User/settings.json"
+    old_bin="bin"
+    new_bin="Scripts"
+else
+    copy_target="$HOME/.config/Code/User/settings.json"
+    old_bin="Scripts"
+    new_bin="bin"
+fi
+
+cp ${BIN_DIR}/../configs/vscode/settings.json $copy_target
+cp ${BIN_DIR}/../configs/vscode/keybindings.json $copy_target
+cp ${BIN_DIR}/../configs/vscode/sphinx_docstring_template_custom.mustache $copy_target
+
+# OSify settings.json
+sed -i "s|.venv/${old_bin}|.venv/${new_bin}|g" $copy_target/settings.json

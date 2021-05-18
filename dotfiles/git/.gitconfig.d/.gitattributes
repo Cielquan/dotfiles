@@ -1,7 +1,7 @@
 # ====================================================================
-# GITATTRIBUTES FOR PYTHON(-WEB) PROJECTS
+# GITATTRIBUTES
 #
-# These settings are general purpose for python(-web) projects.
+# These settings are general purpose.
 #
 # Details per file setting:
 #   `text`      get normalized (i.e. convert CRLF to LF).
@@ -23,12 +23,20 @@
 
 
 # ==============================
+# Rust
+# ==============================
+
+*.rs                text diff=rust
+
+
+# ==============================
 # Python
 # ==============================
 
 *.py                text diff=python
 *.pyc               binary
 *.pyd               binary
+*.pyi               text diff=python
 *.pyw               text diff=python
 *.pyx               text diff=python
 *.pyz               text diff=python
@@ -139,7 +147,7 @@ TODO                text
 # Text
 # ==============================
 
-*.md                text
+*.md                text diff=markdown
 *.rst               text
 *.txt               text
 # Binary

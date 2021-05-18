@@ -1,4 +1,7 @@
-fix user input in python script in oneliner for git
+Allow setup.py in config dirs which handles setup instead of 2_install_dotfiles.py
+
+Windows %APPDATA%\Code\User\settings.json
+Linux $HOME/.config/Code/User/settings.json
 
 script to install vscode plugins and grab config
 Win:

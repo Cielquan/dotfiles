@@ -71,5 +71,9 @@
     {
         "key": "ctrl+alt+a",
         "command": "git.stage"
+    },
+    {
+        "key": "ctrl+[Semicolon]",
+        "command": "workbench.action.terminal.new"
     }
 ]

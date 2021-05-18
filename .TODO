@@ -35,7 +35,7 @@ usernamehw.errorlens
 VisualStudioExptTeam.vscodeintellicode
 
 
-show upgradeable packages on first shell link in some VM .. ryder dotfiles/sh/profile.d/welcome.sh ?
+show upgradeable packages on first shell link in some VM .. ryder dotfiles/sh/profile.d/welcome.sh ? .. also on ubuntu 20.04 server when ssh login
 
 check LS_COLORS
 

@@ -15,7 +15,7 @@ INSTALL_LIST_TYPE = Set[str]
 CONFIG_TYPE = Dict[str, str]
 
 HOME_DIR = Path.home()
-DOTFILE_DIR = Path(__file__).parents[1].absolute()
+DOTFILE_DIR = Path(__file__).parents[1].joinpath("dotfiles").absolute()
 CHECK_FILE = DOTFILE_DIR.joinpath(".dotfiles_installed")
 CONFIG_FILE = DOTFILE_DIR.joinpath(".config.ini")
 

@@ -53,14 +53,16 @@ done <${BIN_DIR}/../configs/vscode/extensions.txt
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if [ -z "$APPDATA" ]; then
-    copy_target="$APPDATA/Code/User/settings.json"
+    copy_target="$APPDATA/Code/User"
     old_bin="bin"
     new_bin="Scripts"
 else
-    copy_target="$HOME/.config/Code/User/settings.json"
+    copy_target="$HOME/.config/Code/User"
     old_bin="Scripts"
     new_bin="bin"
 fi
+
+mkdir -p $copy_target
 
 cp ${BIN_DIR}/../configs/vscode/settings.json $copy_target
 cp ${BIN_DIR}/../configs/vscode/keybindings.json $copy_target

@@ -1,10 +1,3 @@
-Allow setup.py in config dirs which handles setup instead of 2_install_dotfiles.py
-
-Windows %APPDATA%\Code\User\settings.json
-Linux $HOME/.config/Code/User/settings.json
-
-script to install vscode plugins and grab config
-
 show upgradeable packages on first shell link in some VM .. ryder dotfiles/sh/profile.d/welcome.sh ? .. also on ubuntu 20.04 server when ssh login
 
 check LS_COLORS

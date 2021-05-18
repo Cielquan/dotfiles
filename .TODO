@@ -3,36 +3,49 @@ fix user input in python script in oneliner for git
 script to install vscode plugins and grab config
 Win:
 $ code --list-extensions
-alexcvzz.vscode-sqlite
-atlassian.atlascode
-ban.spellright (inactive)
-bungcip.better-toml
-C.Riedel.krys-colors
-CoenraadS.bracket-pair-colorizer-2
-eamodio.gitlens
-file-icons.file-icons
-formulahendry.code-runner
-Gruntfuggly.todo-tree
+
+# For color theme
 jeff-hykin.better-dockerfile-syntax
-lextudio.restructuredtext
-matklad.rust-analyzer
-mechatroner.rainbow-csv
-ms-python.python
-ms-python.vscode-pylance
-ms-toolsai.jupyter
-njpwerner.autodocstring
-njqdev.vscode-python-typehint
-oderwat.indent-rainbow
-patbenatar.advanced-new-file
-redhat.vscode-yaml
-rust-lang.rust (inactive)
 samuelcolvin.jinjahtml
-sleistner.vscode-fileutils
-snooty.snooty
-streetsidesoftware.code-spell-checker (inactive)
-tomoki1207.pdf
+lextudio.restructuredtext
+bungcip.better-toml
+redhat.vscode-yaml
+
+# Better editor - optical
+CoenraadS.bracket-pair-colorizer-2
+oderwat.indent-rainbow
 usernamehw.errorlens
+file-icons.file-icons
+
+# Additional utils
+Gruntfuggly.todo-tree
+patbenatar.advanced-new-file
+eamodio.gitlens
+
+# Langs
 VisualStudioExptTeam.vscodeintellicode
+ms-python.vscode-pylance
+njqdev.vscode-python-typehint
+njpwerner.autodocstring
+rust-lang.rust (inactive)
+matklad.rust-analyzer
+snooty.snooty
+
+# File handles
+mechatroner.rainbow-csv
+alexcvzz.vscode-sqlite
+tomoki1207.pdf
+
+# Win
+atlassian.atlascode
+
+# Advanced
+sleistner.vscode-fileutils
+formulahendry.code-runner
+
+# Spelling
+ban.spellright (inactive)
+streetsidesoftware.code-spell-checker (inactive)
 
 
 show upgradeable packages on first shell link in some VM .. ryder dotfiles/sh/profile.d/welcome.sh ? .. also on ubuntu 20.04 server when ssh login

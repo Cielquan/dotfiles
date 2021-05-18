@@ -52,7 +52,7 @@ done <${BIN_DIR}/../configs/vscode/extensions.txt
 #   copy configs
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-if [ -z "$APPDATA" ]; then
+if [ -n "$APPDATA" ]; then
     copy_target="$APPDATA/Code/User"
     old_bin="bin"
     new_bin="Scripts"
@@ -62,8 +62,12 @@ else
     new_bin="bin"
 fi
 
-mkdir -p $copy_target
+if ! [ -d $copy_target ]; then
+    printf "## Creating dir '$copy_target'\n"
+    mkdir -p $copy_target
+fi
 
+printf "## Copying configs to '$copy_target'\n"
 cp ${BIN_DIR}/../configs/vscode/settings.json $copy_target
 cp ${BIN_DIR}/../configs/vscode/keybindings.json $copy_target
 cp ${BIN_DIR}/../configs/vscode/sphinx_docstring_template_custom.mustache $copy_target

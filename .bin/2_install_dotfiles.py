@@ -36,10 +36,11 @@ INSTALL_LISTS = {
     "poetry": ["poetry"],
     "sh": ["sh"],
     "starship": ["bash", "starship"],
+    "vscode": ["vscode"],
     "wget": ["wget"],
     "default": ["bash", "bin", "curl", "less", "wget"],
     "prompt": ["starship"],
-    "coding": ["cargo", "git", "gpg", "pdb", "pdbpp", "pip", "poetry"],
+    "coding": ["cargo", "git", "gpg", "pdb", "pdbpp", "pip", "poetry", "vscode"],
 }
 INSTALL_LISTS["all"] = [k for k in INSTALL_LISTS if k != "all"]
 
@@ -83,6 +84,9 @@ def install(install_list: INSTALL_LIST_TYPE, config: CONFIG_TYPE) -> None:
     if "git" in install_list:
         create_git_user_file(config)
 
+    if "vscode" in install_list:
+        osify_vscode_settings(config)
+
 
 def create_git_user_file(config: CONFIG_TYPE) -> None:
     """Create/Overwrite the git user config file."""
@@ -116,6 +120,23 @@ def create_git_user_file(config: CONFIG_TYPE) -> None:
 
     file_path.touch()
     file_path.write_text(config_text)
+
+
+def osify_vscode_settings() -> None:
+    """Replace `bin`/`Scripts` in venv dir paths with the other based on os."""
+    if sys.platform == "win32":
+        bin_dir_new = "Scripts"
+        bin_dir_old = "bin"
+    else:
+        bin_dir_new = "bin"
+        bin_dir_old = "Scripts"
+
+    local_settings_file = [f for f in HOME_DIR.glob("**/Code/User/settings.json")]
+    for file in local_settings_file:
+        with open(file) as read_file:
+            content = read_file.read()
+        with open(file, "w") as write_file:
+            write_file.write(content.replace(bin_dir_old, bin_dir_new))
 
 
 def uninstall(install_list: INSTALL_LIST_TYPE, config: CONFIG_TYPE) -> None:
@@ -256,19 +277,20 @@ def parser() -> argparse.ArgumentParser:
 
 
 if __name__ == "__main__":
-    args = parser().parse_args()
-    install_conf, conf_vars = parse_config_file()
+    # args = parser().parse_args()
+    # install_conf, conf_vars = parse_config_file()
 
-    install_this = parse_install_list(
-        args.install_list or list(install_conf) or ["default"]
-    )
+    # install_this = parse_install_list(
+    #     args.install_list or list(install_conf) or ["default"]
+    # )
 
-    if args.backup_suffix:
-        conf_vars["backup_suffix"] = args.backup_suffix
-    elif "backup_suffix" not in conf_vars:
-        conf_vars["backup_suffix"] = DEFAULT_BACKUP_SUFFIX
+    # if args.backup_suffix:
+    #     conf_vars["backup_suffix"] = args.backup_suffix
+    # elif "backup_suffix" not in conf_vars:
+    #     conf_vars["backup_suffix"] = DEFAULT_BACKUP_SUFFIX
 
-    if args.install:
-        install(install_this, conf_vars)
-    else:
-        uninstall(install_this, conf_vars)
+    # if args.install:
+    #     install(install_this, conf_vars)
+    # else:
+    #     uninstall(install_this, conf_vars)
+    osify_vscode_settings()

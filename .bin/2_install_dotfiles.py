@@ -36,11 +36,10 @@ INSTALL_LISTS = {
     "poetry": ["poetry"],
     "sh": ["sh"],
     "starship": ["bash", "starship"],
-    "vscode": ["vscode"],
     "wget": ["wget"],
     "default": ["bash", "bin", "curl", "less", "wget"],
     "prompt": ["starship"],
-    "coding": ["cargo", "git", "gpg", "pdb", "pdbpp", "pip", "poetry", "vscode"],
+    "coding": ["cargo", "git", "gpg", "pdb", "pdbpp", "pip", "poetry"],
 }
 INSTALL_LISTS["all"] = [k for k in INSTALL_LISTS if k != "all"]
 

@@ -7,20 +7,20 @@ You need python 3.6 or newer to run the installer script.
 ### Git clone repo and run setup script
 ```
 git clone https://github.com/Cielquan/dotfiles.git
-./dotfiles/.bin/1_setup.sh
+./dotfiles/bin/1_setup.sh
 ```
 
 or oneliner with ``curl``:
 ```
-curl -sSL https://raw.githubusercontent.com/Cielquan/dotfiles/main/.bin/1_setup.sh | sh -s && ~/.dotfiles/.bin/1_setup.sh
+curl -sSL https://raw.githubusercontent.com/Cielquan/dotfiles/main/bin/1_setup.sh | sh -s && ~/.dotfiles/bin/1_setup.sh
 ```
 or with ``wget``:
 ```
-wget -qO - https://raw.githubusercontent.com/Cielquan/dotfiles/main/.bin/1_setup.sh | sh -s && ~/.dotfiles/.bin/1_setup.sh
+wget -qO - https://raw.githubusercontent.com/Cielquan/dotfiles/main/bin/1_setup.sh | sh -s && ~/.dotfiles/bin/1_setup.sh
 ```
 
 ### Scripts
-In the repo's ``.bin`` directory are all the scripts for usage of the repo.
+In the repo's ``bin`` directory are all the scripts for usage of the repo.
 
 The ``1_setup.sh`` script is intendet to call all the other scripts and git clone the
 repo if missing.

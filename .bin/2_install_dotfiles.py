@@ -151,9 +151,9 @@ def uninstall(install_list: INSTALL_LIST_TYPE, config: CONFIG_TYPE) -> None:
 
 def get_all_dotfiles():
     """Create list of all dotfiles."""
-    len_repo_dir = len(DOTFILE_DIR.parts)
+    len_df_dir = len(DOTFILE_DIR.parts)
     return [
-        Path(*p.parts[(len_repo_dir):]) for p in DOTFILE_DIR.glob("**/*") if p.is_file()
+        Path(*p.parts[len_df_dir:]) for p in DOTFILE_DIR.glob("**/*") if p.is_file()
     ]
 
 

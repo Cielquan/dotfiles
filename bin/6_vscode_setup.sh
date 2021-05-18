@@ -48,6 +48,9 @@ while read -r line; do
     fi
 done <${BIN_DIR}/../configs/vscode/extensions.txt
 
+# Install color theme
+git clone https://github.com/Cielquan/krys-colors ~/.vscode/extensions/krys-colors
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   copy configs
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

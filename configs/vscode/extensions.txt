@@ -1,0 +1,39 @@
+### For color theme
+jeff-hykin.better-dockerfile-syntax
+samuelcolvin.jinjahtml
+lextudio.restructuredtext
+bungcip.better-toml
+redhat.vscode-yaml
+
+### Better editor - optical
+CoenraadS.bracket-pair-colorizer-2
+oderwat.indent-rainbow
+usernamehw.errorlens
+file-icons.file-icons
+
+### Additional utils
+Gruntfuggly.todo-tree
+patbenatar.advanced-new-file
+eamodio.gitlens
+
+### Langs
+VisualStudioExptTeam.vscodeintellicode
+ms-python.vscode-pylance
+njqdev.vscode-python-typehint
+njpwerner.autodocstring
+rust-lang.rust (inactive)
+matklad.rust-analyzer
+snooty.snooty
+
+### File handles
+mechatroner.rainbow-csv
+alexcvzz.vscode-sqlite
+tomoki1207.pdf
+
+### Advanced
+sleistner.vscode-fileutils
+formulahendry.code-runner
+
+### Spelling
+# ban.spellright (inactive)
+# streetsidesoftware.code-spell-checker (inactive)

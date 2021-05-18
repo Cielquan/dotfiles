@@ -63,9 +63,14 @@ if answer_is_yes "Do you want to install starship prompt? Its automatically used
     ~/.dotfiles/bin/4_prompt_setup.sh
 fi
 
-if answer_is_yes "Do you want to install coding setup?"; then
+if answer_is_yes "Do you want to install coding setup (languages)?"; then
     printf "\n\n## Starting script ...\n"
     ~/.dotfiles/bin/5_coding_setup.sh
+fi
+
+if answer_is_yes "Do you want to install and setup VSCode?"; then
+    printf "\n\n## Starting script ...\n"
+    ~/.dotfiles/bin/6_vscode_setup.sh
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -206,9 +206,9 @@
 [core]
 
     abbrev = 12
-    attributesFile = ~/.gitattributes
+    attributesFile = ~/.gitconfig.d/global.gitattributes
     editor = nano
-    excludesFile = ~/.gitignore
+    excludesFile = ~/.gitconfig.d/global.gitignore
     preloadIndex = true
 	# Speed up commands involving untracked files such as `git status`.
 	# https://git-scm.com/docs/git-update-index#_untracked_cache

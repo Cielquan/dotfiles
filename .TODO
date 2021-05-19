@@ -4,4 +4,4 @@ check LS_COLORS
 
 .gitconfig
 
-fix repo gitignore
+recheck py script config / installed check files

@@ -33,23 +33,16 @@ while read -r line; do
         continue
     fi
 
-    echo $line
+    printf "\n## Extension: ${line}\n"
 
-    do_inactivate=$(echo "$line" | grep -qe inactive && echo 1 || echo 0)
-
-    if [ $do_inactivate = 1 ]; then
-        line=$(echo $line | sed 's/ (inactive)//')
-    fi
-
-    $(code --install-extension --force $line)
-
-    if [ $do_inactivate = 1 ]; then
-        $(code --disable-extension $line)
-    fi
+    echo "$(code --install-extension "${line}" --force)"
 done <${BIN_DIR}/../configs/vscode/extensions.txt
 
 # Install color theme
-git clone https://github.com/Cielquan/krys-colors ~/.vscode/extensions/krys-colors
+if ! [ -d ~/.vscode/extensions/krys-colors ]; then
+    printf "\n## Install color theme\n"
+    git clone https://github.com/Cielquan/krys-colors ~/.vscode/extensions/krys-colors
+fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   copy configs

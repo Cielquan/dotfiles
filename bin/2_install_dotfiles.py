@@ -16,8 +16,6 @@ CONFIG_TYPE = Dict[str, str]
 
 HOME_DIR = Path.home()
 DOTFILE_DIR = Path(__file__).parents[1].joinpath("dotfiles").absolute()
-CHECK_FILE = DOTFILE_DIR.joinpath(".dotfiles_installed")
-CONFIG_FILE = DOTFILE_DIR.joinpath(".config.ini")
 
 GIT_INFOS = ["git_name", "git_email", "git_signingkey"]
 
@@ -81,10 +79,10 @@ def install(install_list: INSTALL_LIST_TYPE, config: CONFIG_TYPE) -> None:
         shutil.copy(orig_path, dest_path.parent)
 
     if "git" in install_list:
-        create_git_user_file(config)
+        create_git_user_file()
 
 
-def create_git_user_file(config: CONFIG_TYPE) -> None:
+def create_git_user_file() -> None:
     """Create/Overwrite the git user config file."""
     file_path = HOME_DIR / ".gitconfig.d" / "user.gitconfig"
 
@@ -97,22 +95,17 @@ def create_git_user_file(config: CONFIG_TYPE) -> None:
     )
 
     for info in GIT_INFOS:
-        if config.get(info):
-            if info == "git_signingkey" and config[info] == "":
-                continue
-            config_text += info[4:] + "=" + config[info] + "\n"
-        else:
-            try:
-                data = input(f"\n\n## Please enter your {info}: ").strip()
-            except EOFError:
-                data = ""
-                print(
-                    f"\nERROR Could not get user input for {info}. "
-                    f"Please check the config file and add data: {file_path}"
-                )
-            if info == "git_signingkey" and data == "":
-                continue
-            config_text += info[4:] + "=" + data + "\n"
+        try:
+            data = input(f"\n\n## Please enter your {info}: ").strip()
+        except EOFError:
+            data = ""
+            print(
+                f"\nERROR Could not get user input for {info}. "
+                f"Please check the config file and add data: {file_path}"
+            )
+        if info == "git_signingkey" and data == "":
+            continue
+        config_text += info[4:] + "=" + data + "\n"
 
     file_path.touch()
     file_path.write_text(config_text)
@@ -181,34 +174,6 @@ def parse_install_list(list_to_install: List[str]) -> INSTALL_LIST_TYPE:
     return install_this
 
 
-def parse_config_file() -> Tuple[INSTALL_LIST_TYPE, CONFIG_TYPE]:
-    """Read config file and parse its content.
-
-    Example file content:
-        install=default,prompt
-        git_name=Max Mustermann
-        git_email=max@mustermann.com
-        git_signingkey=ABCDEFGHI123456789
-        backup_suffix=.bak
-    """
-    if not CONFIG_FILE.is_file():
-        return set(), {}
-
-    with open(CONFIG_FILE) as conffile:
-        content = conffile.read().split("\n")
-
-    file_config_raw = [l.split("=") for l in content if l and not l.startswith("[")]
-    file_config = {kv[0].strip().casefold(): kv[1].strip() for kv in file_config_raw}
-
-    install_config = set()
-    if "install" in file_config:
-        install_config = set(
-            [t.strip().casefold() for t in file_config.pop("install").split(",")]
-        )
-
-    return install_config, file_config
-
-
 def parser() -> argparse.ArgumentParser:
     """Create a CLI parser."""
     parser = argparse.ArgumentParser(description="Installer for dotfiles.")
@@ -228,8 +193,6 @@ def parser() -> argparse.ArgumentParser:
         help=(
             f"Overwrites the default suffix '{DEFAULT_BACKUP_SUFFIX}' "
             "for the backup files. "
-            f"Can be set in config file '{CONFIG_FILE}' with 'backup_suffix='. "
-            "Config hierarchy is CLI > config file > default"
         ),
     )
     parser.add_argument(
@@ -241,9 +204,6 @@ def parser() -> argparse.ArgumentParser:
             f"Overwrites the default install-list: {INSTALL_LISTS['default']}. "
             f"Valid targets are: {[k for k in INSTALL_LISTS]}. "
             "For further info which target includes which directories see this script. "
-            f"Can be set in config file '{CONFIG_FILE}' with 'install=' "
-            "(comma separated list). "
-            "Config hierarchy is CLI > config file > default"
         ),
     )
     return parser
@@ -251,15 +211,15 @@ def parser() -> argparse.ArgumentParser:
 
 if __name__ == "__main__":
     args = parser().parse_args()
-    install_conf, conf_vars = parse_config_file()
-
     install_this = parse_install_list(
-        args.install_list or list(install_conf) or ["default"]
+        args.install_list or ["default"]
     )
+
+    conf_vars = {}
 
     if args.backup_suffix:
         conf_vars["backup_suffix"] = args.backup_suffix
-    elif "backup_suffix" not in conf_vars:
+    else:
         conf_vars["backup_suffix"] = DEFAULT_BACKUP_SUFFIX
 
     if args.install:

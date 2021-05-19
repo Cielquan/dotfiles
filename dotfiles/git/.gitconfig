@@ -35,6 +35,7 @@
     cl = clone
     cm = commit -m
     cminit = commit --no-verify --allow-empty -m '(empty) initial commit'
+
     cmskip = commit --no-verify --allow-empty -m '(empty) commit to [skip ci]'
     cmv = commit --no-verify -m
     co = checkout
@@ -175,23 +176,23 @@
 [color "branch"]
 
     current = green bold
-    local = green
+    local = brightgreen
     remote = yellow
 
 [color "diff"]
 
-    frag = magenta bold # line info
     meta = yellow bold
+    frag = magenta bold # line info
 
-    new = green # additions
-    old = red # deletions
+    new = brightgreen # additions
+    old = brightred # deletions
 
-    newMoved = cyan
-    oldMoved = blue
+    newMoved = brightcyan
+    oldMoved = brightblue
 
 [color "status"]
 
-    added = green reverse
+    added = brightgreen
     changed = yellow reverse
     untracked = red reverse
 

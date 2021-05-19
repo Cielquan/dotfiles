@@ -10,10 +10,13 @@
 # Note that `binary` is a macro for `-text -diff`.
 # ====================================================================
 
-# Exclude files from exporting
+# Exclude files/dirs from exporting
 .gitattributes      export-ignore linguist-language=gitattributes
 .gitignore          export-ignore linguist-language=gitignore
-.gitconfig          linguist-language=gitconfig
+.gitconfig          export-ignore linguist-language=gitconfig
+.github             export-ignore
+.editorconfig       export-ignore
+tests               export-ignore
 
 # Auto detect
 #    Handle line endings automatically for files detected as

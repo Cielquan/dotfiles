@@ -46,6 +46,7 @@
     },
     "terminal.integrated.defaultProfile.windows": "bash (git)",
     "terminal.integrated.automationShell.windows": "bash (git)",
+    // TODO: When line is removed Code opens a PS on boot.
     "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
     // EDITOR
     "files.autoSave": "onFocusChange",
@@ -303,5 +304,5 @@
         "--config ${workspaceFolder}/tox.ini",
     ],
     "restructuredtext.linter.run": "onSave",
-    "restructuredtext.sphinxBuildPath": "${workspaceFolder}/.venv/Scripts/sphinx-build",
+    "restructuredtext.sphinxBuildPath": "${workspaceFolder}/.venv/bin/sphinx-build",
 }

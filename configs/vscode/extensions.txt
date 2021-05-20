@@ -5,6 +5,9 @@ lextudio.restructuredtext
 bungcip.better-toml
 redhat.vscode-yaml
 
+### Keybindings
+k--kato.intellij-idea-keybindings
+
 ### Better editor - optical
 CoenraadS.bracket-pair-colorizer-2
 oderwat.indent-rainbow

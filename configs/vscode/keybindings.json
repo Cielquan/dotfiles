@@ -1,82 +1,25 @@
 // Place your key bindings in this file to override the defaultsauto[]
+// Comments based on keyboard with german (no dead keys) layout
 [
-    {
-        "key": "ctrl+y",
-        "command": "editor.action.deleteLines",
-        "when": "textInputFocus && !editorReadonly"
-    },
-    {
-        "key": "ctrl+shift+k",
-        "command": "-editor.action.deleteLines",
-        "when": "textInputFocus && !editorReadonly"
-    },
-    {
-        "key": "ctrl+y",
-        "command": "-redo",
-        "when": "textInputFocus && !editorReadonly"
-    },
-    {
-        "key": "ctrl+y",
-        "command": "-editor.action.customEditor.redo",
-        "when": "focusedCustomEditorIsEditable && !inputFocus"
-    },
-    {
-        "key": "ctrl+d",
-        "command": "editor.action.copyLinesDownAction",
-        "when": "editorTextFocus && !editorReadonly"
-    },
-    {
-        "key": "shift+alt+down",
-        "command": "-editor.action.copyLinesDownAction",
-        "when": "editorTextFocus && !editorReadonly"
-    },
-    {
-        "key": "ctrl+d",
-        "command": "-editor.action.addSelectionToNextFindMatch",
-        "when": "editorFocus"
-    },
-    {
-        "key": "ctrl+r",
-        "command": "-workbench.action.openRecent"
-    },
-    {
-        "key": "ctrl+r",
-        "command": "editor.action.startFindReplaceAction"
-    },
-    {
-        "key": "ctrl+h",
-        "command": "-editor.action.startFindReplaceAction"
-    },
-    {
-        "key": "shift+f6",
-        "command": "editor.action.refactor",
-        "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
-    },
-    {
-        "key": "ctrl+shift+r",
-        "command": "-editor.action.refactor",
-        "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
-    },
-    {
-        "key": "ctrl+numpad_divide",
-        "command": "editor.action.commentLine",
-        "when": "editorTextFocus && !editorReadonly"
-    },
-    {
-        "key": "ctrl+oem_2",
-        "command": "-editor.action.commentLine",
-        "when": "editorTextFocus && !editorReadonly"
-    },
+    // ==============================
+    // ctrl + alt + a -> git stage
+    // ==============================
     {
         "key": "ctrl+alt+a",
         "command": "git.stage"
     },
+    // ==============================
+    // ctrl + ö -> new terminal
+    // ==============================
     {
         "key": "ctrl+[Semicolon]",
         "command": "workbench.action.terminal.new"
     },
+    // ==============================
+    // ctrl + + shift + ö -> split terminal
+    // ==============================
     {
-        "key": "ctrl+shift+oem_3",
+        "key": "ctrl+shift+[Semicolon]",
         "command": "workbench.action.terminal.split",
         "when": "terminalFocus && terminalProcessSupported"
     },
@@ -85,21 +28,9 @@
         "command": "-workbench.action.terminal.split",
         "when": "terminalFocus && terminalProcessSupported"
     },
-    {
-        "key": "ctrl+shift+oem_3",
-        "command": "workbench.action.terminal.splitInstance",
-        "when": "terminalProcessSupported && terminalTabsFocus"
-    },
-    {
-        "key": "ctrl+shift+5",
-        "command": "-workbench.action.terminal.splitInstance",
-        "when": "terminalProcessSupported && terminalTabsFocus"
-    },
-    {
-        "key": "ctrl+shift+oem_3",
-        "command": "-workbench.action.terminal.new",
-        "when": "terminalProcessSupported"
-    },
+    // ==============================
+    // ctrl + n -> default to advancedNewFile
+    // ==============================
     {
         "key": "ctrl+n",
         "command": "extension.advancedNewFile"

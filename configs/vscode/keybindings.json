@@ -42,5 +42,13 @@
     {
         "key": "ctrl+n",
         "command": "-workbench.action.files.newUntitledFile"
+    },
+    // ==============================
+    // ctrl + n -> close tab
+    // ==============================
+    {
+        "key": "ctrl+w",
+        "command": "-editor.action.smartSelect.grow",
+        "when": "editorTextFocus"
     }
 ]

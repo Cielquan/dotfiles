@@ -118,12 +118,13 @@
     #         git commit --amend --message=\"$(git log -1 --pretty=%B)\n\nClose: #$1\"; \
     #     fi \
     # }; f"
-    log1 = log --pretty=oneline -1
-    log5 = log --pretty=oneline -5
-    log10 = log --pretty=oneline -10
-    logg = log --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-    logl = log --pretty=oneline
+    lg = log --graph --format=oneliner
+    lgs = log --graph --format=onelinersig
+    ll = log --format=twoliner
+    lls = log --format=twolinersig
     logs = log --show-signature
+    l = log --format=oneliner
+    ls = log --format=onelinersig
     master = checkout master
     main = checkout main
     mg = merge
@@ -247,20 +248,17 @@
 	log = 1024
 
 [pretty]
-    # graph / orig #  '%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-    # zellwk # '%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d'
-    custom = "%C(magenta)%h%C(red)%d %C(yellow)%ar %C(green)%s %C(yellow)(%an)"
-    #                     │        │            │            │             └─ author name
-    #                     │        │            │            └─ message
-    #                     │        │            └─ date (relative)
-    #                     │        └─ decorations (branch, heads or tags)
-    #                     └─ hash (abbreviated)
-    # https://github.com/necolas/dotfiles
-    # tut: http://gitimmersion.com/lab_10.html
-    # ref: http://linux.die.net/man/1/git-log
-    # Result: <short-sha> <commit-message> (<pointer-names>) -- <commit-author-name>; <relative-time>
-    nice = "%C(yellow)%h%C(reset) %C(white)%s%C(cyan)%d%C(reset) -- %an; %ar"
-
+    # %h abbr hash
+    # %d refs (branch, heads or tags) with ()
+    # %s subject from message
+    # %cr relative date (committer)
+    # %cs isodate (committer)
+    # %an author name
+    # https://git-scm.com/docs/pretty-formats
+    oneliner    = "%C(red)%h%C(reset) %C(yellow)%d%C(reset) %s %C(green)(%cr) %C(blue)<%an>%C(reset)"
+    onelinerSig = "%C(red)%h%C(reset) %C(yellow)%d%C(reset) %s %C(green)(%cr) %C(blue)<%an>%C(reset) %C(magenta)GPG: %G?"
+    twoliner    = "%C(red)%h%C(reset)  %s %C(yellow)%d%C(reset) %n    %C(green)%ci %C(blue)<%an>%C(reset)%n"
+    twolinerSig = "%C(red)%h%C(reset)  %s %C(yellow)%d%C(reset) %n    %C(green)%ci %C(blue)<%an>%C(reset) %C(magenta)GPG: %G? [%GT] %GS%C(reset)%n"
 
 [pull]
 

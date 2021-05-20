@@ -44,11 +44,15 @@
         "command": "-workbench.action.files.newUntitledFile"
     },
     // ==============================
-    // ctrl + n -> close tab
+    // remove IntelliJ keymap bindings
     // ==============================
     {
         "key": "ctrl+w",
         "command": "-editor.action.smartSelect.grow",
         "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "-git.sync"
     }
 ]

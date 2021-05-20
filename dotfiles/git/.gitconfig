@@ -210,7 +210,7 @@
     editor = nano
     excludesFile = ~/.gitconfig.d/global.gitignore
     preloadIndex = true
-	# Speed up commands involving untracked files such as `git status`.
+	# Speeds up commands involving untracked files e.g. `git status`.
     # Test if usable with `git update-index --test-untracked-cache`
 	# https://git-scm.com/docs/git-update-index#_untracked_cache
 	untrackedCache = true
@@ -219,22 +219,18 @@
 
     # Show blocks of moved text of at least 20
     # alphanumeric characters differently than adds/deletes.
-    #
     # https://git-scm.com/docs/git-diff#git-diff-zebra
-
     colorMoved = zebra
 	algorithm = histogram # myers|minimal||patience|histogram
 
 [diff "bin"]
 
-    # Use `hexdump` to diff binary files.
+    # diff binary files with `hexdump`
     textconv = hexdump --canonical --no-squeezing
 
 [help]
 
-    # If a command is mistyped, make Git automatically run
-    # the command it thinks the user wanted to type while also
-    # giving the user some time to prevent it from doing so.
+    # For mistyped commands with one guess git runs this guess automatically.
     # https://git-scm.com/docs/git-config#Documentation/git-config.txt-helpautoCorrect
     autoCorrect = 20
 
@@ -244,7 +240,7 @@
 
 [merge]
 
-	# Include summaries of merged commits in newly created merge commit messages
+    # Include subjects of merged commits in merge commit message
 	log = 1024
 
 [pretty]
@@ -263,14 +259,12 @@
 [pull]
 
     ff = only
-    # rebase = true # TODO: check
 
 [push]
 
 	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault
 	default = simple
-    # Make `git push` automatically push relevant
-    # annotated tags when pushing branches out.
+    # Push relevant annotated tags also
     followTags = true
 
 [tag]
@@ -279,46 +273,46 @@
 
 [user]
 
+    # DO NOT store your user data (e.g. `name` / `email` / `signingkey`) here.
+    # The dotfile installer script will prompt for those data and adds them to
+    # `~/.gitconfig.d/user.gitconfig`
+
     # Do not guess the user's identity.
     # https://github.com/git/git/blob/90f7b16b3adc78d4bbabbd426fb69aa78c714f71/Documentation/config.txt#L2847-L2855
-
     useConfigOnly = true
 
-    # [!] DO NOT store sensitive information such as the Git user
-    # credentials (`name` / `email`), or things such as the `signingkey`
-    # in this file, add them in `~/.gitconfig.d/local.gitconfig`!
-    # Or let them be added by the script to `~/.gitconfig.d/user.gitconfig`
-    #
-    # See also: https://github.com/alrra/dotfiles#gitconfiglocal
-
-# TODO: check URL config stuff
 [url "git@github.com:"]
 
+    # Shortcut for github URLs with SSH
 	insteadOf = "gh:"
+    # Use SSH instead of git://
 	pushInsteadOf = "github:"
 	pushInsteadOf = "git://github.com/"
 
 [url "git://github.com/"]
 
+    # Shortcut for github URLs with git://
 	insteadOf = "github:"
 
 [url "git@gist.github.com:"]
 
+    # Shortcut for github gist URLs with SSH
 	insteadOf = "gst:"
+    # Use SSH instead of git://
 	pushInsteadOf = "gist:"
 	pushInsteadOf = "git://gist.github.com/"
 
 [url "git://gist.github.com/"]
-  insteadOf = "gist:"
+
+    # Shortcut for github gist URLs with git://
+    insteadOf = "gist:"
 
 [include]
 
-    # Load local configs.
     # https://git-scm.com/docs/git-config#_includes
-    #
-    # [!] The following needs to remain at the end of this file in
-    #     order to allow any of the above configs to be overwritten
-    #     by the local ones
 
+    # Load user data (see [user] above)
     path = ~/.gitconfig.d/user.gitconfig
+
+    # Load local config. Use this file to overwrite configs set above
 	path = ~/.gitconfig.d/local.gitconfig

@@ -127,6 +127,7 @@
     master = checkout master
     main = checkout main
     mg = merge
+    mgv = merge --verify-signatures
     pl = pull
     ps = push --follow-tags
     remotes = remote -v
@@ -209,12 +210,9 @@
     excludesFile = ~/.gitconfig.d/global.gitignore
     preloadIndex = true
 	# Speed up commands involving untracked files such as `git status`.
+    # Test if usable with `git update-index --test-untracked-cache`
 	# https://git-scm.com/docs/git-update-index#_untracked_cache
 	untrackedCache = true
-	# Treat spaces before tabs and all kinds of trailing whitespace as an error
-	# [default] trailing-space: looks for spaces at the end of a line
-	# [default] space-before-tab: looks for spaces before tabs at the beginning of a line
-	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 
 [diff]
 
@@ -224,12 +222,11 @@
     # https://git-scm.com/docs/git-diff#git-diff-zebra
 
     colorMoved = zebra
-	algorithm = patience # patience|minimal|histogram|myers
+	algorithm = histogram # myers|minimal||patience|histogram
 
 [diff "bin"]
 
     # Use `hexdump` to diff binary files.
-
     textconv = hexdump --canonical --no-squeezing
 
 [help]
@@ -237,10 +234,8 @@
     # If a command is mistyped, make Git automatically run
     # the command it thinks the user wanted to type while also
     # giving the user some time to prevent it from doing so.
-    #
-    # https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#_help_autocorrect
-
-    autocorrect = 20
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-helpautoCorrect
+    autoCorrect = 20
 
 [init]
 
@@ -248,7 +243,6 @@
 
 [merge]
 
-#    verifySignatures = True  # TODO: alias?
 	# Include summaries of merged commits in newly created merge commit messages
 	log = 1024
 

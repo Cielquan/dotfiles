@@ -1,7 +1,12 @@
 {
-    //GLOBAL
+    // ---------------------------------------------------------------------------------
+    // | GLOBAL                                                                        |
+    // ---------------------------------------------------------------------------------
     "telemetry.enableTelemetry": false,
-    // TERMINAL
+    "files.autoSave": "onFocusChange",
+    // ---------------------------------------------------------------------------------
+    // | TERMINAL                                                                      |
+    // ---------------------------------------------------------------------------------
     "terminal.integrated.tabs.enabled": true,
     "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.cursorStyle": "block",
@@ -13,7 +18,7 @@
         "python3.7 (global)": {"path": "python3.7"},
         "python3.8 (global)": {"path": "python3.8"},
         "python3.9 (global)": {"path": "python3.9"},
-        "python3.10 (global)": {"path": "python3.10"},
+        "python3.10 (global)": {"path": "python3.10"}
     },
     "terminal.integrated.defaultProfile.linux": "bash",
     "terminal.integrated.automationShell.linux": "bash",
@@ -42,14 +47,15 @@
         "python3.7 (global)": {"path": "python3.7"},
         "python3.8 (global)": {"path": "python3.8"},
         "python3.9 (global)": {"path": "python3.9"},
-        "python3.10 (global)": {"path": "python3.10"},
+        "python3.10 (global)": {"path": "python3.10"}
     },
     "terminal.integrated.defaultProfile.windows": "bash (git)",
     "terminal.integrated.automationShell.windows": "bash (git)",
     // TODO: When line is removed Code opens a PS on boot.
     "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
-    // EDITOR
-    "files.autoSave": "onFocusChange",
+    // ---------------------------------------------------------------------------------
+    // | EDITOR                                                                        |
+    // ---------------------------------------------------------------------------------
     "window.zoomLevel": 0,
     "editor.mouseWheelZoom": true,
     "editor.minimap.enabled": true,
@@ -66,10 +72,17 @@
         }
     ],
     "diffEditor.ignoreTrimWhitespace": false,
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "vsintellicode.features.python.deepLearning": "enabled",
-    // COLORS / THEMES
+    // ---------------------------------------------------------------------------------
+    // | COLORS / THEMES                                                               |
+    // ---------------------------------------------------------------------------------
+    // ==============================
+    // ICON THEME
+    // ==============================
     "workbench.iconTheme": "file-icons",
+    "material-icon-theme.showWelcomeMessage": false,
+    // ==============================
+    // COLOR THEME
+    // ==============================
     "workbench.colorTheme": "Krys Colors",
     "editor.semanticTokenColorCustomizations": {
         "[Krys Colors]": {
@@ -145,11 +158,16 @@
                 "variable.readonly:python": {
                     "foreground": "#F8F8F2",
                     "fontStyle": "bold"
-                },
+                }
             }
         }
     },
-    "material-icon-theme.showWelcomeMessage": false,
+    // ---------------------------------------------------------------------------------
+    // | EXTENSIONS (coloring/highlighting)                                            |
+    // ---------------------------------------------------------------------------------
+    // ==============================
+    // Bracket Pair Colorizer 2
+    // ==============================
     "bracket-pair-colorizer-2.colors": [
         "#E86233",
         "#6F84FF",
@@ -159,22 +177,37 @@
     ],
     "bracket-pair-colorizer-2.highlightActiveScope": true,
     "bracket-pair-colorizer-2.showBracketsInGutter": true,
+    // ==============================
+    // indent-rainbow
+    // ==============================
     "indentRainbow.colors": [
         "rgba(255,255,64,0.07)",
         "rgba(127,255,127,0.07)",
         "rgba(255,127,255,0.07)",
-        "rgba(79,236,236,0.07)",
+        "rgba(79,236,236,0.07)"
     ],
     "indentRainbow.ignoreErrorLanguages": [
         "markdown",
-        "restructuredtext",
+        "restructuredtext"
     ],
-    // ERROR LENS
+    // ==============================
+    // Error Lens
+    // ==============================
     "errorLens.addAnnotationTextPrefixes": true,
     "errorLens.delay": 1,
     "errorLens.gutterIconsEnabled": true,
     "errorLens.gutterIconSet": "defaultOutline",
-    // TODO HIGHLIGHT
+    // ---------------------------------------------------------------------------------
+    // | EXTENSIONS (tooling)                                                          |
+    // ---------------------------------------------------------------------------------
+    // ==============================
+    // VS IntelliCode
+    // ==============================
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "vsintellicode.features.python.deepLearning": "enabled",
+    // ==============================
+    // Todo Tree
+    // ==============================
     "todo-tree.filtering.includeHiddenFiles": true,
     "todo-tree.regex.regex": "((^|//|#|<!--|;|/\\*|\\.\\.)\\s*($TAGS))",
     "todo-tree.general.enableFileWatcher": true,
@@ -185,12 +218,12 @@
         "TODO:",
         "BUG:",
         "FIXME:",
-        "HACK:",
+        "HACK:"
     ],
     "todo-tree.highlights.enabled": true,
     "todo-tree.highlights.defaultHighlight": {
         "opacity": 100,
-        "type": "tag",
+        "type": "tag"
     },
     "todo-tree.highlights.customHighlight": {
         "NOTE:": {
@@ -200,7 +233,7 @@
             "iconColour": "green",
             "rulerColour": "rgba(0,0,0,0)",
             "hideFromTree": true,
-            "hideFromStatusBar": true,
+            "hideFromStatusBar": true
         },
         "CHANGE ME": {
             "foreground": "black",
@@ -209,7 +242,7 @@
             "iconColour": "aqua",
             "rulerColour": "rgba(0,0,0,0)",
             // "hideFromTree": true,
-            "hideFromStatusBar": true,
+            "hideFromStatusBar": true
         },
         "TODO:": {
             "foreground": "black",
@@ -217,7 +250,7 @@
             "icon": "checklist",
             "iconColour": "#ff00d4",
             "type": "text", 
-            "rulerColour": "#ff00d4",
+            "rulerColour": "#ff00d4"
         },
         "BUG:": {
             "foreground": "white",
@@ -226,7 +259,7 @@
             "iconColour": "red",
             "gutterIcon": true,
             "type": "text",
-            "rulerColour": "red",
+            "rulerColour": "red"
         },
         "FIXME:": {
             "foreground": "white",
@@ -235,7 +268,7 @@
             "iconColour": "orangered",
             "gutterIcon": true,
             "type": "whole-line",
-            "rulerColour": "red",
+            "rulerColour": "red"
         },
         "HACK:": {
             "foreground": "black",
@@ -244,8 +277,8 @@
             "iconColour": "orange",
             "gutterIcon": true,
             "type": "text",
-            "rulerColour": "red",
-        },
+            "rulerColour": "red"
+        }
     },
     "todo-tree.tree.showCountsInTree": true,
     "todo-tree.filtering.excludeGlobs": [
@@ -264,9 +297,11 @@
         "**/*venv*/**",
         // FILES
         "**/.gitignore",
-        "**/.gitattributes",
+        "**/.gitattributes"
     ],
-    // SPELLING
+    // ==============================
+    // Spell Right
+    // ==============================
     "spellright.language": [
         "en"
     ],
@@ -279,9 +314,16 @@
         "**/.gitignore",
         "**/.spellignore"
     ],
-    // RUST
+    // ---------------------------------------------------------------------------------
+    // | EXTENSIONS (languages)                                                        |
+    // ---------------------------------------------------------------------------------
+    // ==============================
+    // rust-analyzer (rust)
+    // ==============================
     "rust-analyzer.inlayHints.typeHints": true,
+    // ==============================
     // PYTHON
+    // ==============================
     "python.terminal.activateEnvInCurrentTerminal": false,
     "python.venvPath": "${workspaceFolder}/.venv/bin/activate",
     "python.pythonPath": "${workspaceFolder}/.venv/bin/python",
@@ -293,16 +335,21 @@
     "python.linting.mypyPath": "${workspaceFolder}/.venv/bin/mypy",
     "python.analysis.disabled": ["undefined-variable"],
     "python.analysis.completeFunctionParens": true,
+    // ==============================
+    // Python Docstring Generator (python)
+    // ==============================
     "autoDocstring.docstringFormat": "sphinx",
     "autoDocstring.includeExtendedSummary": true,
     "autoDocstring.customTemplatePath": "~/.config/Code/User/sphinx_docstring_template_custom.mustache",
-    // RST
+    // ==============================
+    // reStructuredText
+    // ==============================
     "restructuredtext.builtDocumentationPath": "${workspaceFolder}/docs/build/html",
     "restructuredtext.confPath": "${workspaceFolder}/docs/source",
     "restructuredtext.linter.executablePath": "${workspaceFolder}/.venv/bin/rstcheck",
     "restructuredtext.linter.extraArgs": [
-        "--config ${workspaceFolder}/tox.ini",
+        "--config ${workspaceFolder}/tox.ini"
     ],
     "restructuredtext.linter.run": "onSave",
-    "restructuredtext.sphinxBuildPath": "${workspaceFolder}/.venv/bin/sphinx-build",
+    "restructuredtext.sphinxBuildPath": "${workspaceFolder}/.venv/bin/sphinx-build"
 }

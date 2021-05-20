@@ -16,11 +16,27 @@
         "python3.10 (global)": {"path": "python3.10"},
     },
     "terminal.integrated.defaultProfile.linux": "bash",
-    "terminal.integrated.automationShell.linux": "",
+    "terminal.integrated.automationShell.linux": "bash",
     "terminal.integrated.profiles.windows": {
-        "bash (git)": {"source": "Git Bash"},
-        "PowerShell": {"source": "PowerShell"},
-        "cmd": {"path": "cmd"},
+        "bash (git)": {
+            "source": "Git Bash",
+            "args": [
+                "--login"
+            ],
+            "icon": "terminal-bash"
+        },
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell"
+        },
+        "cmd": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [],
+            "icon": "terminal-cmd"
+        },
         "python (global)": {"path": "python"},
         "python3.6 (global)": {"path": "python3.6"},
         "python3.7 (global)": {"path": "python3.7"},
@@ -29,7 +45,8 @@
         "python3.10 (global)": {"path": "python3.10"},
     },
     "terminal.integrated.defaultProfile.windows": "bash (git)",
-    "terminal.integrated.automationShell.windows": "",
+    "terminal.integrated.automationShell.windows": "bash (git)",
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
     // EDITOR
     "files.autoSave": "onFocusChange",
     "window.zoomLevel": 0,
@@ -286,5 +303,5 @@
         "--config ${workspaceFolder}/tox.ini",
     ],
     "restructuredtext.linter.run": "onSave",
-    "restructuredtext.sphinxBuildPath": "${workspaceFolder}/.venv/bin/sphinx-build",
+    "restructuredtext.sphinxBuildPath": "${workspaceFolder}/.venv/Scripts/sphinx-build",
 }

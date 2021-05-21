@@ -1,4 +1,3 @@
-# TODO: check outcommented aliases
 # https://git-scm.com/docs/git-config
 
 # undoing, fixing, or removing commits in git:
@@ -150,7 +149,7 @@
 
 [commit]
 
-    gpgSign = false  # TODO: reactivate
+    gpgSign = false
 
 
 [core]
@@ -219,7 +218,7 @@
 
 [tag]
 
-    gpgSign = false  # TODO: reactivate
+    gpgSign = false
 
 [user]
 

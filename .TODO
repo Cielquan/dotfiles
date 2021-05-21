@@ -1,6 +1,6 @@
 check LS_COLORS
 
-.gitconfig
+.gitconfig - diff aliases
 
 git alias
 # # Start web-based visualizer.

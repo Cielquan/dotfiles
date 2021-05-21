@@ -159,6 +159,7 @@
     editor = nano
     excludesFile = ~/.gitconfig.d/global.gitignore
     preloadIndex = true
+    symlinks = true
 	# Speeds up commands involving untracked files e.g. `git status`.
     # Test if usable with `git update-index --test-untracked-cache`
 	# https://git-scm.com/docs/git-update-index#_untracked_cache

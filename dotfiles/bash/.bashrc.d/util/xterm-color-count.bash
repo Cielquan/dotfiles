@@ -1,0 +1,1 @@
+../../../../bin/util/xterm-color-count.bash

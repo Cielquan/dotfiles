@@ -234,26 +234,28 @@
 
     # Shortcut for github URLs with SSH
 	insteadOf = "gh:"
-    # Use SSH instead of git://
+    # Use SSH instead of git:// or HTTPS
 	pushInsteadOf = "github:"
+	pushInsteadOf = "https://github.com/"
 	pushInsteadOf = "git://github.com/"
 
-[url "git://github.com/"]
+[url "https://github.com/"]
 
-    # Shortcut for github URLs with git://
+    # Shortcut for github URLs with HTTPS
 	insteadOf = "github:"
 
 [url "git@gist.github.com:"]
 
     # Shortcut for github gist URLs with SSH
 	insteadOf = "gst:"
-    # Use SSH instead of git://
+    # Use SSH instead of git:// or HTTPS
 	pushInsteadOf = "gist:"
+	pushInsteadOf = "https://gist.github.com/"
 	pushInsteadOf = "git://gist.github.com/"
 
-[url "git://gist.github.com/"]
+[url "https://gist.github.com/"]
 
-    # Shortcut for github gist URLs with git://
+    # Shortcut for github gist URLs with HTTPS
     insteadOf = "gist:"
 
 [include]

@@ -3,45 +3,53 @@
 # This scripts needs elevated permissions for `apt` calls
 
 set -e
-sudo -v
+printf "\n"
 
-BIN_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd )
+SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)
+. ${SCRIPT_DIR}/util/shell_script_utils.sh
+
+info "Starting VSCode setup ..."
+sudo -v
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   install code
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-if ! command -v code > /dev/null 2>&1; then
-    printf "\n\n## Install VSCode\n"
+if ! installed code; then
+    info "Installing VSCode"
     wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
     sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
     sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
     rm -f packages.microsoft.gpg
     sudo apt-get update 1> /dev/null
     sudo apt-get install -y code 1> /dev/null
+    success "Done"
 else
-    printf "## VSCode is installed\n"
+    info "VSCode is already installed"
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   install code extensions
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+info "Installing VSCode extensions"
 while read -r line; do
     # skip empty line and lines staring with '#'
     if [ -z "$line" ] || [ $(echo $line | cut -c1-1) = "#" ]; then
         continue
     fi
 
-    printf "\n## Extension: ${line}\n"
+    info "Extension: ${line}"
 
     echo "$(code --install-extension "${line}" --force)"
-done <${BIN_DIR}/../configs/vscode/extensions.txt
+    success "Done"
+done <${SCRIPT_DIR}/../configs/vscode/extensions.txt
 
 # Install color theme
 if ! [ -d ~/.vscode/extensions/krys-colors ]; then
-    printf "\n## Install color theme\n"
+    info "Installing krys-colors color theme"
     git clone https://github.com/Cielquan/krys-colors ~/.vscode/extensions/krys-colors
+    success "Done"
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -59,14 +67,19 @@ else
 fi
 
 if ! [ -d $copy_target ]; then
-    printf "## Creating dir '$copy_target'\n"
+    info "Creating '$copy_target'"
     mkdir -p $copy_target
 fi
 
-printf "## Copying configs to '$copy_target'\n"
-cp ${BIN_DIR}/../configs/vscode/settings.json $copy_target
-cp ${BIN_DIR}/../configs/vscode/keybindings.json $copy_target
-cp ${BIN_DIR}/../configs/vscode/sphinx_docstring_template_custom.mustache $copy_target
+info "Copying configs to '$copy_target'"
+cp ${SCRIPT_DIR}/../configs/vscode/settings.json $copy_target
+cp ${SCRIPT_DIR}/../configs/vscode/keybindings.json $copy_target
+cp ${SCRIPT_DIR}/../configs/vscode/sphinx_docstring_template_custom.mustache $copy_target
+success "Done"
 
 # OSify settings.json
+info "OSify configs"
 sed -i "s|.venv/${old_bin}|.venv/${new_bin}|g" $copy_target/settings.json
+success "Done"
+
+success "VSCode setup finished ..."

@@ -3,34 +3,48 @@
 # This scripts needs elevated permissions for `apt` calls
 
 set -e
-sudo -v
+printf "\n"
 
-PACKAGES="ldnsutils net-tools htop git nano curl wget unzip fontconfig"
+SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)
+. ${SCRIPT_DIR}/util/shell_script_utils.sh
+
+info "Starting basic linux setup ..."
+sudo -v
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   install basic linux stuff
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-printf "\n\n## Updating repos\n"
-sudo apt-get update 1> /dev/null
+PACKAGES="ldnsutils net-tools htop git nano curl wget unzip fontconfig"
 
-printf "\n\n## Install certs and apt https\n"
+info "Updating repos"
+sudo apt-get update 1> /dev/null
+success "Done"
+
+info "Installing certs and apt https"
 sudo apt-get install -y ca-certificates apt-transport-https 1> /dev/null
+success "Done"
 
-printf "\n\n## Add git ppa\n"
+info "Adding git ppa"
 sudo add-apt-repository -y ppa:git-core/ppa 1> /dev/null
+success "Done"
 
-printf "\n\n## Updating repos\n"
+info "Updating repos"
 sudo apt-get update 1> /dev/null
+success "Done"
 
-printf "\n\n## Upgade all\n"
+info "Upgading all"
 sudo apt-get dist-upgrade -y 1> /dev/null
+success "Done"
 
 echo ${PACKAGES} | tr ' ' '\n' | while read package; do
-    printf "\n\n## Installing ${package}\n"
-    if ! command -v ${package} > /dev/null 2>&1; then    
+    info "Installing ${package}"
+    if ! installed ${package}; then    
         sudo apt-get install -y ${package} 1> /dev/null
+        success "Done"
     else
-        printf "## ${package} is installed\n"
+        info "${package} is already installed"
     fi
 done
+
+success "Basic linux setup finished ..."

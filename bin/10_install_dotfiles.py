@@ -81,6 +81,8 @@ def install(install_list: INSTALL_LIST_TYPE, config: CONFIG_TYPE) -> None:
     if "git" in install_list:
         create_git_user_file()
 
+    print("Installing dotfiles finished ...")
+
 
 def create_git_user_file() -> None:
     """Create/Overwrite the git user config file."""
@@ -113,7 +115,7 @@ def create_git_user_file() -> None:
 
 def uninstall(install_list: INSTALL_LIST_TYPE, config: CONFIG_TYPE) -> None:
     """Uninstall dotfiles and restoring files form existing backup files."""
-    print("Start uninstalling ...")
+    print("Start uninstalling dotfiles ...")
     print("INFO Directories are not removed.")
 
     for file in get_all_dotfiles():
@@ -140,6 +142,8 @@ def uninstall(install_list: INSTALL_LIST_TYPE, config: CONFIG_TYPE) -> None:
         if backup_path.is_file() and config["backup"]:
             print(f"INFO Restoring from backup file: {backup_path}")
             backup_path.rename(dest_path)
+
+    print("Uninstalling dotfiles finished ...")
 
 
 def get_all_dotfiles():
@@ -212,7 +216,8 @@ def parser() -> argparse.ArgumentParser:
         help=(
             f"Overwrites the default install-list: {INSTALL_LISTS['default']}. "
             f"Valid targets are: {[k for k in INSTALL_LISTS]}. "
-            "For further info which target includes which directories see this script. "
+            "Install-list also applies when uninstalling. "
+            "For further info which target includes which directories see this script."
         ),
     )
     return parser
@@ -220,9 +225,7 @@ def parser() -> argparse.ArgumentParser:
 
 if __name__ == "__main__":
     args = parser().parse_args()
-    install_this = parse_install_list(
-        args.install_list or ["default"]
-    )
+    install_this = parse_install_list(args.install_list or ["default"])
 
     conf_vars = {}
 

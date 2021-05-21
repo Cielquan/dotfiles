@@ -76,7 +76,7 @@ def install(install_list: INSTALL_LIST_TYPE, config: CONFIG_TYPE) -> None:
                 dest_path.rename(backup_path)
 
         dest_path.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy(orig_path, dest_path.parent)
+        shutil.copy(orig_path, dest_path.parent, follow_symlinks=True)
 
     if "git" in install_list:
         create_git_user_file()

@@ -63,6 +63,11 @@ if answer_is_yes "Do you want to install starship prompt? Its automatically used
     ~/.dotfiles/bin/30_prompt_setup.sh
 fi
 
+if answer_is_yes "Do you want to install LS-COLORS?"; then
+    printf "\n\n## Starting script ...\n"
+    ~/.dotfiles/bin/31_ls_colors.sh
+fi
+
 if answer_is_yes "Do you want to install coding setup (languages)?"; then
     printf "\n\n## Starting script ...\n"
     ~/.dotfiles/bin/40_coding_setup.sh

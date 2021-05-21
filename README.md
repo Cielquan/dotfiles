@@ -52,6 +52,11 @@ This script installs the [starship prompt](https://starship.rs/)
 and the [nerd font](https://www.nerdfonts.com/) DejaVuSansMono for starship prompt to
 use. The prompt is automatically loaded by the bash config from this repo.
 
+#### `31_ls_colors.sh`
+This script will download the LS_COLORS file from
+[gh:trapd00r/LS_COLORS](https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS)
+and set it up to be used if your terminal supports 256 colors.
+
 #### `40_coding_setup.sh`
 This script installs programming langauges and some tooling for them.
 The deadsnakes ppa is added and from there different python versions are installed.

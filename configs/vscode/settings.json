@@ -4,6 +4,7 @@
     // ---------------------------------------------------------------------------------
     "telemetry.enableTelemetry": false,
     "files.autoSave": "onFocusChange",
+    "workbench.startupEditor": "newUntitledFile",
     // ---------------------------------------------------------------------------------
     // | TERMINAL                                                                      |
     // ---------------------------------------------------------------------------------
@@ -354,5 +355,6 @@
         "--config ${workspaceFolder}/tox.ini"
     ],
     "restructuredtext.linter.run": "onSave",
-    "restructuredtext.sphinxBuildPath": "${workspaceFolder}/.venv/bin/sphinx-build"
+    "restructuredtext.sphinxBuildPath": "${workspaceFolder}/.venv/bin/sphinx-build",
+    "redhat.telemetry.enabled": false
 }

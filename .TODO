@@ -2,3 +2,6 @@ check LS_COLORS
 
 .gitconfig
 
+git alias
+# # Start web-based visualizer.
+# w = instaweb --httpd=webrick

@@ -9,12 +9,12 @@
     # List aliases
 	aliases = config --get-regexp alias
     # Amend the currently staged files to the latest commit
-	amend = commit --amend --reuse-message=HEAD
+	amend = commit --amend --no-edit
     br = branch
     branches = branch -a
     c = commit
     # Commit all changes.
-    ca = !git add --all && git commit -v
+    ca = !git add --all && git commit -vv
     # Find commits by source code.
     cfc = "!f() { \
         git log --date=short --decorate --pretty=custom -S\"$1\"; \
@@ -28,9 +28,7 @@
     # `git stash clear`: remove all stashed states
     cleanup = !git clean -df && git stash clear
     cm = commit -m
-    cminit = commit --no-verify --allow-empty -m '(empty) initial commit'
-
-    cmskip = commit --no-verify --allow-empty -m '(empty) commit to [skip ci]'
+    cmskip = commit --no-verify --allow-empty -m 'empty commit to [skip ci]'
     cmv = commit --no-verify -m
     co = checkout
     cob = checkout -b
@@ -125,8 +123,6 @@
     mgv = merge --verify-signatures
     pl = pull
     ps = push --follow-tags
-    # Amend commit without editing
-    recommit = commit --amend --no-edit
     remotes = remote -v
     rb = rebase
 	# Interactive rebase with the given number of latest commits

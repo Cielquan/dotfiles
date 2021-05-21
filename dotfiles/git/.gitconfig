@@ -12,25 +12,25 @@
 	amend = commit --amend --no-edit --reuse-message=HEAD
     br = branch
     # Remove branches that have already been merged
-	brdm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
-    branches = branch -a
+	brdm = "!git branch --merged | grep --invert-match '\\*' | xargs --max-args=1 git branch --delete"
+    branches = branch --all
     c = commit
     # Commit all changes.
-    ca = !git add --all && git commit -vv
+    ca = !git add --all && git commit --verbose --verbose
     # Find commits by source code.
     cfc = "!f() { \
-        git log --date=short --decorate --pretty=custom -S\"$1\"; \
+        git log --decorate --pretty=oneliner -S\"$1\"; \
     }; f"
     # Find commits by commit message.
     cfm = "!f() { \
-        git log --date=short --decorate --pretty=custom --grep=\"$1\"; \
+        git log --decorate --pretty=oneliner --grep=\"$1\"; \
     }; f"
     cl = clone
-    # `git clean -df`: remove untracked files and directories from the working tree
+    # `git clean -d --force`: remove untracked files and directories from the working tree
     # `git stash clear`: remove all stashed states
-    cleanup = !git clean -df && git stash clear
-    cm = commit -m
-    cmv = commit --no-verify -m
+    cleanup = !git clean -d --force && git stash clear
+    cm = commit --message
+    cmv = commit --no-verify --message
 	# Switch to a branch, creating it if necessary
 	co = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 	# List contributors with number of commits
@@ -90,52 +90,38 @@
             git checkout -B \"$branch\" && \
             git merge pr/$1 && \
             git branch --delete --force pr/$1 && \
-            git commit --amend --message=\"$(git log -1 --pretty=%B)\n\nClose: #$1\"; \
+            git commit --amend --message=\"$(git log --max-count=1 --pretty=%B)\n\nClose: #$1\"; \
         fi \
     }; f"
     pl = pull
     ps = push
-    remotes = remote -v
+    remotes = remote --verbose
     rb = rebase
 	# Interactive rebase with the given number of latest commits
-	rbi = "!f() { git rebase -i HEAD~$1; }; f"
+	rbi = "!f() { git rebase --interactive HEAD~$1; }; f"
 	# # Remove the old tag with this name and tag the latest commit with it.
-	# retag = "!f() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; f"
+	# retag = "!f() { git tag --delete $1 && git push origin :refs/tags/$1 && git tag $1; }; f"
     # # Remove last commits (by default it removes the last commit).
     # rlc = "!f() { \
     #     number_of_commits=\"${1:-1}\"; \
     #     git reset --hard \"HEAD~$number_of_commits\"; \
     # }; f"
-    s = status -s
+    s = status --short
     # Create empty commit to let CI skip
-    skipci = !git stash -q && \
-        git commit --no-verify --allow-empty -m 'empty commit to [skip ci]' && \
-        git stash pop -q
+    skipci = !git stash --quiet && \
+        git commit --no-verify --allow-empty --message 'empty commit to [skip ci]' && \
+        git stash pop --quiet
     st = status
-    tags = tag -l
+    tags = tag --list
     # `git remote prune origin`: remove remote-tracking branches that were deleted from
     # the remote repo
     # `git gc`: cleanup unnecessary files and optimize the local repository
     trim = !git remote prune origin && git gc
-    # # Update the content of the last commit by including all
-    # # staged changes.
-    # #
-    # # Note: "Update" is used loosely. Git doesn't actually
-    # # update the last commit, but instead, creates a new commit
-    # # based on the last commit and replaces it.
-    # u = commit --amend --no-edit
-    # # Update the content of the last commit by including all
-    # # local changes.
-    # ua = !git add --all && git commit --amend --no-edit
     # # Undo last commits (by default it undoes the last commit).
     # ulc = "!f() { \
     #     number_of_commits=\"${1:-1}\"; \
     #     git reset --soft \"HEAD~$number_of_commits\"; \
     # }; f"
-    # # Update the content of the last commit by including all
-    # # staged changes as well as allow the user to change its
-    # # commit message.
-    # um = commit --amend
     unstage = reset HEAD --
     # # Start web-based visualizer.
     # w = instaweb --httpd=webrick

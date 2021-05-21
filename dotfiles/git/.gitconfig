@@ -9,8 +9,10 @@
     # List aliases
 	aliases = config --get-regexp alias
     # Amend the currently staged files to the latest commit
-	amend = commit --amend --no-edit
+	amend = commit --amend --no-edit --reuse-message=HEAD
     br = branch
+    # Remove branches that have already been merged
+	brdm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
     branches = branch -a
     c = commit
     # Commit all changes.
@@ -28,12 +30,11 @@
     # `git stash clear`: remove all stashed states
     cleanup = !git clean -df && git stash clear
     cm = commit -m
-    cmskip = commit --no-verify --allow-empty -m 'empty commit to [skip ci]'
     cmv = commit --no-verify -m
-    co = checkout
-    cob = checkout -b
+	# Switch to a branch, creating it if necessary
+	co = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 	# List contributors with number of commits
-	contributors = shortlog --summary --numbered
+	contributors = shortlog --summary --numbered --email
     cp = cherry-pick
     # Credit an author on the latest commit.
     credit = "!f() { \
@@ -41,10 +42,7 @@
             git commit --amend --author \"$1 <$2>\" --no-edit --reuse-message=HEAD; \
         fi \
     }; f"
-	# # Credit an author on the latest commit
-	# credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
     # Credit a co-author on the latest commit.
-    #
     # https://help.github.com/en/articles/creating-a-commit-with-multiple-authors
     # https://help.github.com/en/articles/creating-a-commit-on-behalf-of-an-organization
     credit-co-author = "!f() { \
@@ -52,64 +50,22 @@
             GIT_EDITOR=\"git interpret-trailers --in-place --trailer='Co-authored-by: $1 <$2>'\" git commit --amend; \
         fi \
     }; f"
+    # TODO: check diff commands
     # d = diff -- . ':!*package-lock.json' ':!*yarn.lock'
     # dc = diff --cached -- . ':!*package-lock.json' ':!*yarn.lock'
 	# # Show the diff between the latest commit and the current state
 	# d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
-
 	# # `git di $number` shows the diff between the state `$number` revisions ago and the current state
 	# di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
     dev = checkout development
-	# Remove branches that have already been merged with master
-	# a.k.a. ‘delete merged’
-	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
     f = fetch
     # Allow `$ git git git...`
     git = !exec git
-    # https://github.com/janmoesen/tilde
-	# Switch branches, creating them if necessary. I want to unlearn using
-	# "git checkout" for switching between branches because of the possible
-	# dataloss when not paying attention. (You could see the PEBKAC, but I
-	# could reply with another four letter acronym, slightly resembling TOFU.)
-	#
-	# Suppose I have modified a file named "password" and have two branches,
-	# "password-expiry-mechanism" and "password-reset-mail". If I want to
-	# switch to either branch, I would type "git checkout pass<Tab><Enter>",
-	# but the autocomplete would stop at "git checkout password" because of
-	# the ambiguity. Because I press <Enter> without really thinking, I have
-	# now reset my "password" file. With "git go pass<Tab><Enter>", I would
-	# simply have created a new branch called "password". (I would be forced
-	# to use "--" to separate paths from banch names, which is a Good Thing™.)
-	go = checkout -B
-	# Switch to a branch, creating it if necessary
-	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
-    # # Show custom text-based graphical log of the commit history.
-    # g = log --graph --pretty=custom
-    # # Show custom log of the commit history.
-    # l = log --pretty=custom
-    # # List contributors.
-    # lc = shortlog --email --numbered --summary
     # # List remote branches.
-    # lrb = "!f() { \
-    #     remote=\"${1:-origin}\"; \
-    #     git ls-remote --heads \"$remote\"; \
-    # }; f"
-    # # Merge GitHub pull request on top of the current branch or,
-    # # if a branch name is specified, on top of the specified branch.
-    # mpr = "!f() { \
-    #     current_branch=\"$(git symbolic-ref --short HEAD)\"; \
-    #     branch=\"${2:-$current_branch}\"; \
-    #     \
-    #     if [ $(printf \"%s\" \"$1\" | grep '^[0-9]\\+$' > /dev/null; printf $?) -eq 0 ]; then \
-    #         git fetch origin refs/pull/$1/head:pr/$1 && \
-    #         git checkout -B \"$branch\" && \
-    #         git rebase \"$branch\" pr/$1 && \
-    #         git checkout -B \"$branch\" && \
-    #         git merge pr/$1 && \
-    #         git branch --delete --force pr/$1 && \
-    #         git commit --amend --message=\"$(git log -1 --pretty=%B)\n\nClose: #$1\"; \
-    #     fi \
-    # }; f"
+    rbranches = "!f() { \
+        remote=\"${1:-origin}\"; \
+        git ls-remote --heads \"$remote\"; \
+    }; f"
     lg = log --graph --format=oneliner
     lgs = log --graph --format=onelinersig
     ll = log --format=twoliner
@@ -121,26 +77,40 @@
     main = checkout main
     mg = merge
     mgv = merge --verify-signatures
+    # Merge GitHub pull request on top of the current branch or,
+    # if a branch name is specified, on top of the specified branch.
+    mpr = "!f() { \
+        current_branch=\"$(git symbolic-ref --short HEAD)\"; \
+        branch=\"${2:-$current_branch}\"; \
+        \
+        if [ $(printf \"%s\" \"$1\" | grep '^[0-9]\\+$' > /dev/null; printf $?) -eq 0 ]; then \
+            git fetch origin refs/pull/$1/head:pr/$1 && \
+            git checkout -B \"$branch\" && \
+            git rebase \"$branch\" pr/$1 && \
+            git checkout -B \"$branch\" && \
+            git merge pr/$1 && \
+            git branch --delete --force pr/$1 && \
+            git commit --amend --message=\"$(git log -1 --pretty=%B)\n\nClose: #$1\"; \
+        fi \
+    }; f"
     pl = pull
-    ps = push --follow-tags
+    ps = push
     remotes = remote -v
     rb = rebase
 	# Interactive rebase with the given number of latest commits
-	reb = "!r() { git rebase -i HEAD~$1; }; r"
-    # # Remove the tag with the specified tag name if
-    # # exists and tag the latest commit with that name.
-    # retag = "!f() { \
-    #     git tag --delete \"$1\" &> /dev/null; \
-    #     git tag \"$1\"; \
-    # }; f"
+	rbi = "!f() { git rebase -i HEAD~$1; }; f"
 	# # Remove the old tag with this name and tag the latest commit with it.
-	# retag = "!r() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; r"
+	# retag = "!f() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; f"
     # # Remove last commits (by default it removes the last commit).
     # rlc = "!f() { \
     #     number_of_commits=\"${1:-1}\"; \
     #     git reset --hard \"HEAD~$number_of_commits\"; \
     # }; f"
     s = status -s
+    # Create empty commit to let CI skip
+    skipci = !git stash -q && \
+        git commit --no-verify --allow-empty -m 'empty commit to [skip ci]' && \
+        git stash pop -q
     st = status
     tags = tag -l
     # `git remote prune origin`: remove remote-tracking branches that were deleted from

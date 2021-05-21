@@ -53,7 +53,7 @@ if answer_is_yes "Do you want to install the dotfiles?"; then
     python3 ~/.dotfiles/bin/2_install_dotfiles.py $ARGV
 fi
 
-if answer_is_yes "Do you want to install linux basics?"; then
+if answer_is_yes "Do you want to install linux basics? Some following scripts depends on those."; then
     printf "\n\n## Starting script ...\n"
     ~/.dotfiles/bin/3_linux_setup.sh
 fi

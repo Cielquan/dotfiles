@@ -11,7 +11,9 @@
 # ====================================================================
 
 # Exclude files/dirs from exporting
+*.gitattributes     export-ignore linguist-language=gitattributes
 .gitattributes      export-ignore linguist-language=gitattributes
+*.gitignore         export-ignore linguist-language=gitignore
 .gitignore          export-ignore linguist-language=gitignore
 .gitconfig          export-ignore linguist-language=gitconfig
 .github             export-ignore

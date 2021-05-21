@@ -1,4 +1,3 @@
-# TODO: check pretty format
 # TODO: check outcommented aliases
 # https://git-scm.com/docs/git-config
 
@@ -6,14 +5,6 @@
 # https://sethrobertson.github.io/GitFixUm/fixup.html
 
 [alias]
-    # Amend commit without editing
-    recommit = commit --amend --no-edit
-    # `git remote prune origin`: remove remote-tracking branches that were deleted from the remote repo
-    # `git gc`: cleanup unnecessary files and optimize the local repository
-    # `git clean -df`: remove untracked files and directories from the working tree
-    # `git stash clear`: remove all stashed states
-    trim = !git remote prune origin && git gc
-    cleanup = !git clean -df && git stash clear
 	a = add
     # List aliases
 	aliases = config --get-regexp alias
@@ -33,6 +24,9 @@
         git log --date=short --decorate --pretty=custom --grep=\"$1\"; \
     }; f"
     cl = clone
+    # `git clean -df`: remove untracked files and directories from the working tree
+    # `git stash clear`: remove all stashed states
+    cleanup = !git clean -df && git stash clear
     cm = commit -m
     cminit = commit --no-verify --allow-empty -m '(empty) initial commit'
 
@@ -131,6 +125,8 @@
     mgv = merge --verify-signatures
     pl = pull
     ps = push --follow-tags
+    # Amend commit without editing
+    recommit = commit --amend --no-edit
     remotes = remote -v
     rb = rebase
 	# Interactive rebase with the given number of latest commits
@@ -151,6 +147,10 @@
     s = status -s
     st = status
     tags = tag -l
+    # `git remote prune origin`: remove remote-tracking branches that were deleted from
+    # the remote repo
+    # `git gc`: cleanup unnecessary files and optimize the local repository
+    trim = !git remote prune origin && git gc
     # # Update the content of the last commit by including all
     # # staged changes.
     # #
@@ -217,8 +217,8 @@
 
 [diff]
 
-    # Show blocks of moved text of at least 20
-    # alphanumeric characters differently than adds/deletes.
+    # Show blocks of moved text of at least 20 alphanumeric characters differently than
+    # adds/deletes.
     # https://git-scm.com/docs/git-diff#git-diff-zebra
     colorMoved = zebra
 	algorithm = histogram # myers|minimal||patience|histogram

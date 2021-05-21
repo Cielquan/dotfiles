@@ -1,6 +1,5 @@
-check LS_COLORS
-https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS
 # TODO: add test for 256 color support to .profile.d/dircolors.sh
+https://github.com/l0b0/xterm-color-count
 
 .gitconfig - diff aliases
 

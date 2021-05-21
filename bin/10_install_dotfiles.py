@@ -64,7 +64,7 @@ def install(install_list: INSTALL_LIST_TYPE, config: CONFIG_TYPE) -> None:
         elif dest_path.exists() and not dest_path.is_file():
             print(f"ERROR Skipping. Path is not a dir/symlink/file: {dest_path}")
             continue
-        elif dest_path.is_file():
+        elif dest_path.is_file() and config["backup"]:
             backup_path = dest_path.parent / (dest_path.name + config["backup_suffix"])
             print(f"INFO Renaming file as backup file: {backup_path}")
 
@@ -137,7 +137,7 @@ def uninstall(install_list: INSTALL_LIST_TYPE, config: CONFIG_TYPE) -> None:
             dest_path.unlink()
 
         backup_path = dest_path.parent / (dest_path.name + config["backup_suffix"])
-        if backup_path.is_file():
+        if backup_path.is_file() and config["backup"]:
             print(f"INFO Restoring from backup file: {backup_path}")
             backup_path.rename(dest_path)
 
@@ -187,6 +187,15 @@ def parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument(
+        "--no-backup",
+        dest="backup",
+        action="store_false",
+        help=(
+            "Do not backup existing files. Just overwrite them."
+            "When `--uninstall`  is set do not restore backup files."
+        ),
+    )
+    parser.add_argument(
         "--backup-suffix",
         nargs="?",
         default="",
@@ -216,6 +225,8 @@ if __name__ == "__main__":
     )
 
     conf_vars = {}
+
+    conf_vars["backup"] = args.backup
 
     if args.backup_suffix:
         conf_vars["backup_suffix"] = args.backup_suffix

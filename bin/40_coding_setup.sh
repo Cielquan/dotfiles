@@ -3,7 +3,6 @@
 # This scripts needs elevated permissions for `apt` calls
 
 set -e
-printf "\n"
 
 SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)
 . ${SCRIPT_DIR}/util/shell_script_utils.sh
@@ -26,7 +25,6 @@ echo ${PY_VERSIONS} | tr ' ' '\n' | while read version; do
     info "Installing python${version}"
     if ! installed python${version}; then
         sudo apt-get install -y python${version} 1> /dev/null
-        success "Done"
     else
         info "python${version} is already installed"
     fi

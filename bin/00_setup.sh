@@ -1,7 +1,6 @@
 #!/usr/bin/env sh
 
 set -e
-printf "\n"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   utils
@@ -73,26 +72,27 @@ if answer_is_yes "Do you want to install the dotfiles?"; then
     python3 ~/.dotfiles/bin/10_install_dotfiles.py $ARGV
 fi
 
-if answer_is_yes "Do you want to install linux basics? " \
-    "Some following scripts depend on those."
-then
+printf "\n"
+if answer_is_yes "Do you want to install linux basics? Some following scripts depend on those."; then
     ~/.dotfiles/bin/20_linux_setup.sh
 fi
 
-if answer_is_yes "Do you want to install starship prompt? Its automatically used by " \
-    "bash."
-then
+printf "\n"
+if answer_is_yes "Do you want to install starship prompt? Its automatically used by bash."; then
     ~/.dotfiles/bin/30_prompt_setup.sh
 fi
 
+printf "\n"
 if answer_is_yes "Do you want to install LS-COLORS?"; then
     ~/.dotfiles/bin/31_ls_colors.sh
 fi
 
+printf "\n"
 if answer_is_yes "Do you want to install coding setup (languages)?"; then
     ~/.dotfiles/bin/40_coding_setup.sh
 fi
 
+printf "\n"
 if answer_is_yes "Do you want to install and setup VSCode?"; then
     ~/.dotfiles/bin/41_vscode_setup.sh
 fi
@@ -101,4 +101,5 @@ fi
 #   finish
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-success "Setup finished please restart the shell for the new environment.
+printf "\n"
+success "Setup finished please restart the shell for the new environment."

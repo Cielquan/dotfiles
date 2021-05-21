@@ -3,7 +3,6 @@
 # This scripts needs elevated permissions for `apt` calls
 
 set -e
-printf "\n"
 
 SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)
 . ${SCRIPT_DIR}/util/shell_script_utils.sh

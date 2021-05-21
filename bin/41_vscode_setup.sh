@@ -3,7 +3,6 @@
 # This scripts needs elevated permissions for `apt` calls
 
 set -e
-printf "\n"
 
 SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)
 . ${SCRIPT_DIR}/util/shell_script_utils.sh
@@ -40,9 +39,7 @@ while read -r line; do
     fi
 
     info "Extension: ${line}"
-
-    echo "$(code --install-extension "${line}" --force)"
-    success "Done"
+    code --install-extension "${line}" --force && success "Done" || error "Failed to install"
 done <${SCRIPT_DIR}/../configs/vscode/extensions.txt
 
 # Install color theme

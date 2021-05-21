@@ -44,7 +44,7 @@ INSTALL_LISTS["all"] = [k for k in INSTALL_LISTS if k != "all"]
 
 def install(install_list: INSTALL_LIST_TYPE, config: CONFIG_TYPE) -> None:
     """Install dotfiles and backup existing files."""
-    print("Start installing ...")
+    print("INFO Start installing dotfiles ...")
 
     for file in get_all_dotfiles():
         if file.parts[0] not in install_list:
@@ -81,7 +81,7 @@ def install(install_list: INSTALL_LIST_TYPE, config: CONFIG_TYPE) -> None:
     if "git" in install_list:
         create_git_user_file()
 
-    print("Installing dotfiles finished ...")
+    print("SUCCESS Installing dotfiles finished ...")
 
 
 def create_git_user_file() -> None:
@@ -98,7 +98,7 @@ def create_git_user_file() -> None:
 
     for info in GIT_INFOS:
         try:
-            data = input(f"\n\n## Please enter your {info}: ").strip()
+            data = input(f"## Please enter your {info}: ").strip()
         except EOFError:
             data = ""
             print(
@@ -115,7 +115,7 @@ def create_git_user_file() -> None:
 
 def uninstall(install_list: INSTALL_LIST_TYPE, config: CONFIG_TYPE) -> None:
     """Uninstall dotfiles and restoring files form existing backup files."""
-    print("Start uninstalling dotfiles ...")
+    print("INFO Start uninstalling dotfiles ...")
     print("INFO Directories are not removed.")
 
     for file in get_all_dotfiles():
@@ -143,7 +143,7 @@ def uninstall(install_list: INSTALL_LIST_TYPE, config: CONFIG_TYPE) -> None:
             print(f"INFO Restoring from backup file: {backup_path}")
             backup_path.rename(dest_path)
 
-    print("Uninstalling dotfiles finished ...")
+    print("SUCCESS Uninstalling dotfiles finished ...")
 
 
 def get_all_dotfiles():

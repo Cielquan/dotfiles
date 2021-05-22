@@ -14,10 +14,10 @@ info "Installing starship prompt ..."
 if installed starship; then
     info "starship prompt is already installed."
 else
-    info "Installing starship prompt"
+    info "Installing starship prompt."
     local link="https://starship.rs/install.sh"
     curl ${curl_args} ${link} | sh -s -- -y
-    success "Done"
+    success "Done."
 fi
 
 if answer_is_yes "Do you want to download 'DejaVuSansMono' Nerdfont?"; then
@@ -28,23 +28,25 @@ if answer_is_yes "Do you want to download 'DejaVuSansMono' Nerdfont?"; then
     local current_version=$(curl ${curl_args} -w %{url_effective} -o /dev/null ${link} | grep -Po 'v\d+\.\d+\.\d+')
     local link="https://github.com/ryanoasis/nerd-fonts/releases/download/${current_version}/DejaVuSansMono.zip"
     curl ${curl_args} --create-dirs -o ${font_dir}/DejaVuSansMono.zip ${link}
+    success "Done."
 
-    info "Unzipping nerdfont."
+    info "Unzipping nerdfont and removing archive."
     unzip -o ${font_dir}/DejaVuSansMono.zip -d ${font_dir} 1> /dev/null
     rm -f ${font_dir}/DejaVuSansMono.zip
+    success "Done."
 
     info "Installing nerdfont."
     local fc_installed="y"
     if ! installed fc-cache; then
         fc_installed="n"
-        if answer_is_yes "For installing the 'fontconfig' package needs to be installed. Installing?"; then
+        if answer_is_yes "For installing the 'fontconfig' package needs to be installed. Install?"; then
             direct_install fontconfig
             fc_installed="y"
         fi
     fi
     if [ ${fc_installed} = "y" ]; then
         fc-cache -f
-        success "Done"
+        success "Done."
     else
         warn "Aborting install."
     fi

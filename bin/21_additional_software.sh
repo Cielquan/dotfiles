@@ -70,6 +70,7 @@ fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if answer_is_yes "Do you want to install 'brave-browser' package and ppa?"; then
+    info "Install ppa."
     local link="https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg"
     local dest="/usr/share/keyrings/brave-browser-archive-keyring.gpg"
     sudo curl ${curl_args} -o ${dest} ${link}
@@ -78,6 +79,7 @@ if answer_is_yes "Do you want to install 'brave-browser' package and ppa?"; then
     local repo="deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] ${link} stable main"
     echo "${repo}" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
     sudo apt-get update
+    success "Done."
 
     direct_install brave-browser
 fi

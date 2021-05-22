@@ -15,7 +15,7 @@ sudo -v
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if installed code; then
-    info "VSCode is already installed"
+    info "VSCode is already installed."
 else
     info "Installing VSCode"
     local link="https://packages.microsoft.com/keys/microsoft.asc"
@@ -25,14 +25,14 @@ else
     rm -f packages.microsoft.gpg
     sudo apt-get update 1> /dev/null
     direct_install code
-    success "Done"
+    success "Done."
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   install code extensions
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-info "Installing VSCode extensions"
+info "Installing VSCode extensions."
 while read -r line; do
     # skip empty line and lines staring with '#'
     if [ -z "$line" ] || [ $(echo $line | cut -c1-1) = "#" ]; then
@@ -40,14 +40,14 @@ while read -r line; do
     fi
 
     info "Extension: ${line}"
-    code --install-extension "${line}" --force && success "Done" || error "Failed to install"
+    code --install-extension "${line}" --force && success "Done." || error "Failed to install."
 done <${SCRIPT_DIR}/../configs/vscode/extensions.txt
 
 # Install color theme
 if ! [ -d ~/.vscode/extensions/krys-colors ]; then
-    info "Installing krys-colors color theme"
+    info "Installing krys-colors color theme."
     git clone https://github.com/Cielquan/krys-colors ~/.vscode/extensions/krys-colors
-    success "Done"
+    success "Done."
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -69,16 +69,16 @@ if ! [ -d $copy_target ]; then
     mkdir -p $copy_target
 fi
 
-info "Copying configs to '$copy_target'"
+info "Copying configs to '$copy_target'."
 cp ${SCRIPT_DIR}/../configs/vscode/settings.json $copy_target
 cp ${SCRIPT_DIR}/../configs/vscode/keybindings.json $copy_target
 cp ${SCRIPT_DIR}/../configs/vscode/sphinx_docstring_template_custom.mustache $copy_target
-success "Done"
+success "Done."
 
 # OSify settings.json
-info "OSify configs"
+info "OSify configs."
 sed -i "s|.venv/${old_bin}|.venv/${new_bin}|g" $copy_target/settings.json
-success "Done"
+success "Done."
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   FINISH

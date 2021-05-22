@@ -16,15 +16,15 @@ sudo -v
 
 PACKAGES="nano curl unzip htop"
 
-info "Updating repos"
+info "Updating repos."
 sudo apt-get update 1> /dev/null
-success "Done"
+success "Done."
 
 direct_install ca-certificates apt-transport-https
 
-info "Upgading system"
+info "Upgading system."
 sudo apt-get dist-upgrade -y 1> /dev/null
-success "Done"
+success "Done."
 
 echo ${PACKAGES} | tr ' ' '\n' | while read package; do
     direct_install ${package}

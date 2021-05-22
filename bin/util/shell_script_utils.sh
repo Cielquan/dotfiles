@@ -177,7 +177,6 @@ add_ppa() {
 }
 
 add_apt_source() {
-    sudo
     apt_source="${1}"
     apt_source_dir="/etc/apt/sources.list.d/"
     apt_source_file="${2}"
@@ -243,8 +242,6 @@ checked_install_via_ppa() {
     ppa="${2}"
     FORCE="${3}"
     DEFAULT="${4}"
-    ppa_needed
-    ppa_added
     if apt-cache search "${package}" | grep -q "${package}"; then
         success "Found ${package} in your repositories. PPA can be added."
         ppa_needed="n"

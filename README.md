@@ -18,24 +18,31 @@ git clone https://github.com/Cielquan/dotfiles.git
 
 or oneliner with `curl`:
 ```
-curl -sSL https://raw.githubusercontent.com/Cielquan/dotfiles/main/bin/00_setup.sh | sh -s && ~/.dotfiles/bin/00_setup.sh
+curl -sSL https://raw.githubusercontent.com/Cielquan/dotfiles/main/bin/00_setup.sh | sh && ~/.dotfiles/bin/00_setup.sh
 ```
 or with `wget`:
 ```
-wget -qO - https://raw.githubusercontent.com/Cielquan/dotfiles/main/bin/00_setup.sh | sh -s && ~/.dotfiles/bin/00_setup.sh
+wget -qO - https://raw.githubusercontent.com/Cielquan/dotfiles/main/bin/00_setup.sh | sh && ~/.dotfiles/bin/00_setup.sh
 ```
 
 ## Scripts
 You can find all the scripts to utilize this repo inside the `/bin` directory.
+All shell scripts below that ask for the users permission can be called with one of
+these switches `-f | -y | --force | --yes` to skip prompting and taking the default
+actions. You can also set this switch for the `00_setup.sh` script which will than pass
+this switch down to the other scripts.
 
 #### `00_setup.sh`
 This shell script will install git if missing and then git clone the repo if its not
 called from within the repo (like in the oneliner setups above). If it is called from
 within it will call all the other scripts in numeric order.
+This script takes the `-d | --dotfiles-dir` argument to change the location and name of the
+local git repository. Defaults to `~/.dotfiles`.
 
 #### `10_install_dotfiles.py`
 This python script installes the dotfiles you can find inside the `/dotfiles` directory.
-It will rename existing files by appending a suffix und then copy the files to their locations.
+It will rename existing files by appending a suffix und then copy the files to their
+locations.
 The script can take different configuration via it's CLI. Call the script with `--help`
 for more information about its options.
 To uninstall the dotfiles run the python script again with the `--uninstall` switch.
@@ -62,7 +69,8 @@ This script installs programming langauges and some tooling for them.
 The deadsnakes ppa is added and from there different python versions are installed.
 See the top of the script for the actual versions. But it keeps the default installed
 one. The corresponding pythonX.Y-venv and pythonX.Y-dev packages are also installed for
-all versions. Then [poetry](https://python-poetry.org/) is installed and configured to create python venvs inside the project dirs. Then rust and nodejs are installed.
+all versions. Then [poetry](https://python-poetry.org/) is installed and configured to
+create python venvs inside the project dirs. Then rust and nodejs are installed.
 
 #### `41_vscode_setup.sh`
 This script installs the VS Code IDE. Afterwards my default config and keybindings are

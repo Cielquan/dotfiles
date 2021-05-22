@@ -204,7 +204,7 @@ direct_install() {
         elevate_priv "install ${*}"
         sudo="sudo"
     fi
-    ${sudo} apt-get install -y "${*}" 1> /dev/null
+    ${sudo} apt-get install -y "${@}" 1> /dev/null
     success "Done."
 }
 

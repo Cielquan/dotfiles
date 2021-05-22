@@ -35,7 +35,11 @@ installed() {
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 called_locally() {
-    echo "${SCRIPT_DIR}" | grep -q .dotfiles/bin && return 0 || return 1
+    if echo "${SCRIPT_DIR}" | grep -q .dotfiles/bin; then
+        return 0
+    else
+        return 1
+    fi
 }
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

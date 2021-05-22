@@ -16,53 +16,45 @@ sudo -v
 
 PY_VERSIONS="3.6 3.7 3.8 3.9"
 
-info "Adding deadsnakes ppa"
-sudo add-apt-repository -y ppa:deadsnakes/ppa 1> /dev/null 
-sudo apt-get update 1> /dev/null
-success "Done"
+if answer_is_yes "Do you want to install python versions ${PY_VERSIONS}?"; then
+    add_ppa deadsnakes/ppa
 
-echo ${PY_VERSIONS} | tr ' ' '\n' | while read version; do
-    info "Installing python${version}"
-    if ! installed python${version}; then
-        sudo apt-get install -y python${version} 1> /dev/null
-    else
-        info "python${version} is already installed"
-    fi
-    info "Installing venv and dev packages"
-    sudo apt-get install -y python${version}-venv python${version}-dev 1> /dev/null
-    success "Done"
-done
+    echo ${PY_VERSIONS} | tr ' ' '\n' | while read version; do
+        checked_install python${version}
+        direct_install python${version}-venv python${version}-dev
+    done
+fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   install and setup poetry
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-info "Installing poetry"
-curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 - -y
-success "Done"
+if answer_is_yes "Do you want to install poetry?"; then
+    info "Installing poetry"
+    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 - -y
+    success "Done"
 
-info "Setting poetry so put venv into project directory"
-source $HOME/.poetry/env && poetry config virtualenvs.in-project true
-success "Done"
+    info "Setting poetry so put venv into project directory"
+    source $HOME/.poetry/env && poetry config virtualenvs.in-project true
+    success "Done"
+fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   install rust
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-info "Installing rust"
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-success "Done"
+if answer_is_yes "Do you want to install rust?"; then
+    info "Installing rust"
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    success "Done"
+fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   install node
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-if ! installed nodejs; then
-    info "Installing nodejs"
-    sudo apt-get install -y nodejs 1> /dev/null
-    success "Done"
-else
-    info "nodeJS is already installed"
+if answer_is_yes "Do you want to install nodeJS?"; then
+    checked_install nodejs
 fi
 
 success "Coding setup finsihed ..."

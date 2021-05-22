@@ -8,7 +8,7 @@ SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)
 info "Installing starship prompt ..."
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#   install starship prompt and nerdfont
+#   Install starship prompt
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if installed starship; then
@@ -19,6 +19,10 @@ else
     curl ${CURL_ARGS} ${link} | sh -s -- -y
     success "Done."
 fi
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   Install DejaVuSansMono nerdfont
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if answer_is_yes "Do you want to download 'DejaVuSansMono' Nerdfont?"; then
     local font_dir="${HOME}/.local/share/fonts"

@@ -11,7 +11,7 @@ info "Installing additonal software ..."
 sudo -v
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#   additional basic tooling
+#   Additional basic tooling
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 PACKAGES="ldnsutils net-tools wget"
@@ -70,16 +70,24 @@ fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if answer_is_yes "Do you want to install 'brave-browser' package and ppa?"; then
-    info "Install ppa."
-    local link="https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg"
-    local dest="/usr/share/keyrings/brave-browser-archive-keyring.gpg"
-    sudo curl ${CURL_ARGS} -o ${dest} ${link}
+    info "Install brave-browser ppa."
 
-    local link="https://brave-browser-apt-release.s3.brave.com/"
-    local repo="deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] ${link} stable main"
-    echo "${repo}" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-    sudo apt-get update
+    info "Installing brave-browser keyring."
+    link="https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg"
+    keyring="/usr/share/keyrings/brave-browser-archive-keyring.gpg"
+    if test_writeable "${keyring}"; then
+        sudo=""
+    else
+        sudo="sudo"
+        elevate_priv "add keyring"
+    fi
+    ${sudo} curl ${CURL_ARGS} -o ${keyring} ${link}
     success "Done."
+
+    apt_source="deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"
+    add_apt_source ${apt_source} "brave-browser-release.list"
+
+    apt_update
 
     direct_install brave-browser
 fi

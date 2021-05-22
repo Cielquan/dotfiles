@@ -1,17 +1,14 @@
 #!/usr/bin/env sh
 
-# This script needs elevated permissions for `apt` calls
-
 set -e
 
 SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)
 . ${SCRIPT_DIR}/util/shell_script_utils.sh
 
 info "Starting coding setup ..."
-sudo -v
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#   install python versions
+#   Install python versions
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 PY_VERSIONS="3.6 3.7 3.8 3.9"
@@ -26,7 +23,7 @@ if answer_is_yes "Do you want to install python versions ${PY_VERSIONS}?"; then
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#   install and setup poetry
+#   Install and setup poetry
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if answer_is_yes "Do you want to install poetry?"; then
@@ -41,7 +38,7 @@ if answer_is_yes "Do you want to install poetry?"; then
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#   install rust
+#   Install rust
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if answer_is_yes "Do you want to install rust?"; then
@@ -52,7 +49,7 @@ if answer_is_yes "Do you want to install rust?"; then
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#   install node
+#   Install node
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if answer_is_yes "Do you want to install nodeJS?"; then

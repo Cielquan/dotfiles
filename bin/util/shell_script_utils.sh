@@ -59,8 +59,12 @@ answer_is_yes() {
 CURL_ARGS="--proto =https --tlsv1.2 -sSLf"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#   Permission
+#   Permission / Testing
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+installed() {
+    command -v "$1" 1> /dev/null 2>&1
+}
 
 test_writeable() {
     # Test if a location is writeable by trying to write to it. Windows does not let
@@ -76,27 +80,87 @@ test_writeable() {
     fi
 }
 
+test_apt_install() {
+    if [ -r /var/lib/dpkg/lock-frontend ]; then return 0; else return 1; fi
+}
+
+test_apt_update() {
+    if [ -r /var/lib/apt/lists/lock ]; then return 0; else return 1; fi
+}
+
+elevate_priv() {
+    local reason=$1
+    if [ "${reason}" != "" ]; then
+        warn "Elevated permissions are required to ${reason}."
+    fi
+    # source: https://sh.rustup.rs
+    if ! installed sudo; then
+        error 'Could not find the command "sudo", needed to get permissions for install.'
+        info "If you are on Windows, please run your shell as an administrator, then"
+        info "rerun this script. Otherwise, please run this script as root, or install"
+        info "sudo."
+        exit 1
+    fi
+    if ! sudo -v; then
+        error "Superuser not granted, aborting installation"
+        exit 1
+    fi
+}
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   Installation
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-installed() {
-    command -v "$1" 1> /dev/null 2>&1
+apt_update() {
+    info "Updating package lists."
+    if test_apt_update; then
+        apt-get update 1> /dev/null
+    else
+        elevate_priv "upgrate"
+        sudo apt-get update 1> /dev/null
+    fi
+    success "Done."
 }
 
 add_ppa() {
     local ppa=$1
     info "Adding ${ppa} ppa"
+    elevate_priv "add a ppa"
     sudo add-apt-repository -y ppa:${ppa} 1> /dev/null
-    sudo apt-get update 1> /dev/null
     success "Done."
+
+    apt_update
+}
+
+add_apt_source() {
+    local sudo
+    local apt_source=$1
+    local apt_source_dir="/etc/apt/sources.list.d/"
+    local apt_source_file=$2
+    info "Adding apt source '${apt_source_file}'."
+    if test_writeable "${apt_source_dir}"; then
+        sudo=""
+    else
+        sudo="sudo"
+        elevate_priv "add an apt source"
+    fi
+    echo "${apt_source}" | ${sudo} tee ${apt_source_dir}/${apt_source_file} > /dev/null
+    success "Done."
+
+    apt_update
 }
 
 direct_install() {
     # Can install multiple packages at once
     # but does not check if they are already installed.
     info "Installing ${*}."
-    sudo apt-get install -y ${*} 1> /dev/null
+    if test_apt_install; then
+        sudo=""
+    else
+        elevate_priv "install ${*}"
+        sudo="sudo"
+    fi
+    ${sudo} apt-get install -y ${*} 1> /dev/null
     success "Done."
 }
 
@@ -116,7 +180,13 @@ checked_install() {
     if installed ${package}; then
         info "${package} is already installed."
     else
-        sudo apt-get install -y ${package} 1> /dev/null
+        if test_apt_install; then
+            sudo=""
+        else
+            elevate_priv "install ${package}"
+            sudo="sudo"
+        fi
+        ${sudo} apt-get install -y ${package} 1> /dev/null
         success "Done."
     fi
 }
@@ -127,17 +197,20 @@ checked_install_via_ppa() {
     # If the package is already installed the install step is skipped.
     local package=$1
     local ppa=$2
-    local ppa_needed="y"
-    local ppa_added="n"
+    local ppa_needed
+    local ppa_added
     if $(apt-cache search ${package} | grep -q ${package}); then
         success "Found ${package} in your repositories. PPA can be added."
         ppa_needed="n"
     else
+        ppa_needed="y"
         info "Could not find ${package} in your repositories. PPA must be added to install."
     fi
     if answer_is_yes "Do you want to add ${ppa} ppa?"; then
         add_ppa ${ppa}
         ppa_added="y"
+    else
+        ppa_added="n"
     fi
     if [ ${ppa_needed} = "n" ] || [ ${ppa_needed} = ${ppa_added} ]; then
         checked_install ${package}

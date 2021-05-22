@@ -1,35 +1,39 @@
 #!/usr/bin/env sh
 
-# This script needs elevated permissions for `apt` calls
-
 set -e
 
 SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)
 . ${SCRIPT_DIR}/util/shell_script_utils.sh
 
 info "Starting VSCode setup ..."
-sudo -v
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#   install code
+#   Install code
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if installed code; then
     info "VSCode is already installed."
 else
-    info "Installing VSCode"
-    local link="https://packages.microsoft.com/keys/microsoft.asc"
+    info "Installing VSCode ppa."
+
+    info "Installing mircosoft packages keyring."
+    link="https://packages.microsoft.com/keys/microsoft.asc"
     curl ${CURL_ARGS} ${link} | gpg --dearmor > packages.microsoft.gpg
+    elevate_priv "install keyring"
     sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
-    sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
     rm -f packages.microsoft.gpg
-    sudo apt-get update 1> /dev/null
-    direct_install code
     success "Done."
+
+    apt_source="deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main"
+    add_apt_source ${apt_source} "vscode.list"
+
+    apt_update
+
+    direct_install code
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#   install code extensions
+#   Install code extensions
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 info "Installing VSCode extensions."
@@ -51,7 +55,7 @@ if ! [ -d ~/.vscode/extensions/krys-colors ]; then
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#   copy configs
+#   Copy configs
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if [ -n "$APPDATA" ]; then

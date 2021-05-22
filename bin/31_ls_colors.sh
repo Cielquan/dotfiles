@@ -8,7 +8,7 @@ SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)
 info "Installing LS_COLORS ..."
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#   install LS_COLORS
+#   Install LS_COLORS
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 dircolors_dir=$HOME/.config/dircolors

@@ -30,6 +30,13 @@ installed() {
     command -v "$1" 1> /dev/null 2>&1
 }
 
+answer_is_yes() {
+    printf '%b' "${CYAN}[?] $1 (y/n) ${NO_COLOR}"
+    read -r REPLY </dev/tty
+    answers="yY"
+    test "${answers#*$REPLY}" != "$answers" && return 0 || return 1
+}
+
 called_locally() {
     echo ${SCRIPT_DIR} | grep -q .dotfiles/bin && return 0 || return 1
 }
@@ -39,7 +46,7 @@ called_locally() {
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if [ -d ~/.dotfiles/.git ]; then
-    info "dotfiles repo found - Skip cloning"
+    info "'dotfiles' repo found - Skip cloning."
     if ! called_locally; then
         error "Please call the script from your local machine: " \
             "~/.dotfiles/bin/00_setup.sh"
@@ -47,12 +54,17 @@ if [ -d ~/.dotfiles/.git ]; then
     fi
 else
     if ! installed git; then
-        info "Installing missing git"
-        sudo apt-get install -y git 1> /dev/null
+        if answer_is_yes "To clone the 'dotfiles' repo 'git' is needed. Install?"; then
+            direct_install git
+        else
+            error "Missing 'git' cannot clone the 'dotfiles' repo."
+            exit 1
+        fi
     fi
-    info "Cloning dotfiles repo"
+    info "Cloning dotfiles repo."
     git clone -q https://github.com/Cielquan/dotfiles.git ~/.dotfiles
-    success "Repo is cloned and ready for usage. Call ~/.dotfiles/bin/00_setup.sh"
+    success "Done."
+    info "Repo is ready for usage. Call ~/.dotfiles/bin/00_setup.sh"
     exit 0
 fi
 

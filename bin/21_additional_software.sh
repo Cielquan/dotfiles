@@ -57,7 +57,7 @@ done
 Q="Do you want to install 'git' package or ppa?"
 DEFAULT="yes"
 if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
-    checked_install_via_ppa git phoerious/git-core/ppa "${FORCE}" ""
+    checked_install_via_ppa git git-core/ppa "${FORCE}" ""
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

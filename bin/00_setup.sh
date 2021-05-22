@@ -31,7 +31,7 @@ installed() {
 }
 
 called_locally() {
-    echo ${SCRIPT_DIR} | grep -qe .dotfiles/bin && return 0 || return 1
+    echo ${SCRIPT_DIR} | grep -q .dotfiles/bin && return 0 || return 1
 }
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -75,6 +75,11 @@ fi
 printf "\n"
 if answer_is_yes "Do you want to install linux basics? Some following scripts depend on those."; then
     ~/.dotfiles/bin/20_linux_setup.sh
+fi
+
+printf "\n"
+if answer_is_yes "Do you want to install additional software for linux?."; then
+    ~/.dotfiles/bin/21_additional_software.sh
 fi
 
 printf "\n"

@@ -222,7 +222,7 @@ checked_install() {
     package="${1}"
     info "Installing ${package}."
     if installed "${package}"; then
-        info "${package} is already installed."
+        success "${package} is already installed."
     else
         if test_apt_install; then
             sudo=""

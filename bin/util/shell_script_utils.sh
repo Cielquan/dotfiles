@@ -77,9 +77,8 @@ add_ppa() {
 direct_install() {
     # Can install multiple packages at once
     # but does not check if they are already installed.
-    local packages=$1
-    info "Installing ${packages}."
-    sudo apt-get install -y ${packages} 1> /dev/null
+    info "Installing ${*}."
+    sudo apt-get install -y ${*} 1> /dev/null
     success "Done."
 }
 
@@ -128,3 +127,6 @@ checked_install_via_ppa() {
         warn "Skip installing ${package}. No repository to install from."
     fi
 }
+
+curl_args="--proto =https --tlsv1.2 -sSLf"
+export curl_args

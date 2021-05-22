@@ -55,15 +55,15 @@ info() {
 }
 
 warn() {
-    printf '%b\n' "${YELLOW}[!] $*${NO_COLOR}"
+    printf '%b\n' "${BOLD}${YELLOW}[!]${NO_COLOR}${YELLOW} $*${NO_COLOR}"
 }
 
 error() {
-    printf '%b\n' "${RED}[x] $*${NO_COLOR}" >&2
+    printf '%b\n' "${BOLD}${RED}[x]${NO_COLOR}${RED} $*${NO_COLOR}" >&2
 }
 
 success() {
-    printf '%b\n' "${GREEN}[✓]${NO_COLOR} $*"
+    printf '%b\n' "${BOLD}${GREEN}[✓]${NO_COLOR} $*"
 }
 
 answer_is_yes() {
@@ -71,7 +71,7 @@ answer_is_yes() {
     FORCE="${2}"
     YN="${3}" # Default
     if [ -z "${FORCE-}" ]; then
-        printf '%b' "${CYAN}[?] ${QUESTION} (y/n) ${NO_COLOR}"
+        printf '%b' "${BOLD}${CYAN}[?]${NO_COLOR} ${CYAN}${QUESTION} ${BOLD}[y/N] ${NO_COLOR}"
         set +e
         read -r YN </dev/tty
         rc=$?

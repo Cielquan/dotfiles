@@ -5,7 +5,7 @@ import shutil
 import sys
 
 from pathlib import Path
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Set
 
 
 if sys.version_info < (3, 6):

@@ -12,7 +12,7 @@ info "Installing starship prompt ..."
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if installed starship; then
-    info "starship prompt is already installed"
+    info "starship prompt is already installed."
 else
     info "Installing starship prompt"
     local link="https://starship.rs/install.sh"
@@ -20,18 +20,34 @@ else
     success "Done"
 fi
 
-if answer_is_yes "Do you want to install 'DejaVuSansMono' Nerdfont?"; then
-    info "Installing nerdfont"
+if answer_is_yes "Do you want to download 'DejaVuSansMono' Nerdfont?"; then
+    local font_dir="${HOME}/.local/share/fonts"
+
+    info "Downloading nerdfont."
     local link="https://github.com/ryanoasis/nerd-fonts/releases/latest"
     local current_version=$(curl ${curl_args} -w %{url_effective} -o /dev/null ${link} | grep -Po 'v\d+\.\d+\.\d+')
     local link="https://github.com/ryanoasis/nerd-fonts/releases/download/${current_version}/DejaVuSansMono.zip"
-    curl ${curl_args} -o DejaVuSansMono.zip ${link}
-    mkdir -p ${HOME}/.local/share/fonts
-    unzip -o DejaVuSansMono.zip -d ${HOME}/.local/share/fonts/ 1> /dev/null
-    rm -f DejaVuSansMono.zip
-    direct_install fontconfig
-    fc-cache -f
-    success "Done"
+    curl ${curl_args} --create-dirs -o ${font_dir}/DejaVuSansMono.zip ${link}
+
+    info "Unzipping nerdfont."
+    unzip -o ${font_dir}/DejaVuSansMono.zip -d ${font_dir} 1> /dev/null
+    rm -f ${font_dir}/DejaVuSansMono.zip
+
+    info "Installing nerdfont."
+    local fc_installed="y"
+    if ! installed fc-cache; then
+        fc_installed="n"
+        if answer_is_yes "For installing the 'fontconfig' package needs to be installed. Installing?"; then
+            direct_install fontconfig
+            fc_installed="y"
+        fi
+    fi
+    if [ ${fc_installed} = "y" ]; then
+        fc-cache -f
+        success "Done"
+    else
+        warn "Aborting install."
+    fi
 else
     warn "You need to install a Nerdfont yourself to (fully) utilize starship prompt."
 fi

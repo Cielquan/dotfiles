@@ -46,7 +46,7 @@ installed() {
 }
 
 answer_is_yes() {
-    printf '%b' "${YELLOW}[?] $1 (y/n) ${NO_COLOR}"
+    printf '%b' "${CYAN}[?] $1 (y/n) ${NO_COLOR}"
     read -r REPLY </dev/tty
     answers="yY"
     test "${answers#*$REPLY}" != "$answers" && return 0 || return 1

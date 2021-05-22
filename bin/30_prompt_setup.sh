@@ -2,8 +2,9 @@
 
 set -e
 
-SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)
-. ${SCRIPT_DIR}/util/shell_script_utils.sh
+SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "${0}")")" && pwd -P)
+# shellcheck disable=1091
+. "${SCRIPT_DIR}/util/shell_script_utils.sh"
 
 info "Installing starship prompt ..."
 
@@ -15,8 +16,8 @@ if installed starship; then
     info "starship prompt is already installed."
 else
     info "Installing starship prompt."
-    local link="https://starship.rs/install.sh"
-    curl ${CURL_ARGS} ${link} | sh -s -- -y
+    link="https://starship.rs/install.sh"
+    curl "${CURL_ARGS}" ${link} | sh -s -- -y
     success "Done."
 fi
 
@@ -25,32 +26,32 @@ fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 Q="Do you want to download 'DejaVuSansMono' Nerdfont?"
-if answer_is_yes ${Q}; then
-    local font_dir="${HOME}/.local/share/fonts"
+if answer_is_yes "${Q}"; then
+    font_dir="${HOME}/.local/share/fonts"
 
     info "Downloading nerdfont."
-    local link="https://github.com/ryanoasis/nerd-fonts/releases/latest"
-    local current_version=$(curl ${CURL_ARGS} -w %{url_effective} -o /dev/null ${link} | grep -Po 'v\d+\.\d+\.\d+')
-    local link="https://github.com/ryanoasis/nerd-fonts/releases/download/${current_version}/DejaVuSansMono.zip"
-    curl ${CURL_ARGS} --create-dirs -o ${font_dir}/DejaVuSansMono.zip ${link}
+    link="https://github.com/ryanoasis/nerd-fonts/releases/latest"
+    current_version=$(curl "${CURL_ARGS}" -w "%{url_effective}" -o /dev/null ${link} | grep -Po 'v\d+\.\d+\.\d+')
+    link="https://github.com/ryanoasis/nerd-fonts/releases/download/${current_version}/DejaVuSansMono.zip"
+    curl "${CURL_ARGS}" --create-dirs -o "${font_dir}/DejaVuSansMono.zip" "${link}"
     success "Done."
 
     info "Unzipping nerdfont and removing archive."
-    unzip -o ${font_dir}/DejaVuSansMono.zip -d ${font_dir} 1> /dev/null
-    rm -f ${font_dir}/DejaVuSansMono.zip
+    unzip -o "${font_dir}/DejaVuSansMono.zip" -d "${font_dir}" 1> /dev/null
+    rm -f "${font_dir}/DejaVuSansMono.zip"
     success "Done."
 
     info "Installing nerdfont."
-    local fc_installed="y"
+    fc_installed="y"
     if ! installed fc-cache; then
         fc_installed="n"
         Q="For installing the 'fontconfig' package needs to be installed. Install?"
-        if answer_is_yes ${Q}; then
+        if answer_is_yes "${Q}"; then
             direct_install fontconfig
             fc_installed="y"
         fi
     fi
-    if [ ${fc_installed} = "y" ]; then
+    if [ "${fc_installed}" = "y" ]; then
         fc-cache -f
         success "Done."
     else

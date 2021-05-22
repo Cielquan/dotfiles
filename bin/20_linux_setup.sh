@@ -4,8 +4,9 @@
 
 set -e
 
-SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)
-. ${SCRIPT_DIR}/util/shell_script_utils.sh
+SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "${0}")")" && pwd -P)
+# shellcheck disable=1091
+. "${SCRIPT_DIR}/util/shell_script_utils.sh"
 
 info "Starting basic linux setup ..."
 
@@ -29,8 +30,8 @@ fi
 ${sudo} apt-get dist-upgrade -y 1> /dev/null
 success "Done."
 
-echo ${PACKAGES} | tr ' ' '\n' | while read package; do
-    checked_install ${package}
+echo "${PACKAGES}" | tr ' ' '\n' | while read -r package; do
+    checked_install "${package}"
 done
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

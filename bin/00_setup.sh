@@ -12,7 +12,7 @@ GREEN="$(tput setaf 2 2>/dev/null || printf '')"
 CYAN="$(tput setaf 6 2>/dev/null || printf '')"
 NO_COLOR="$(tput sgr0 2>/dev/null || printf '')"
 
-SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)
+SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "${0}")")" && pwd -P)
 
 info() {
     printf '%b\n' "${BOLD}${CYAN}>${NO_COLOR} $*"
@@ -35,18 +35,18 @@ installed() {
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 called_locally() {
-    echo ${SCRIPT_DIR} | grep -q .dotfiles/bin && return 0 || return 1
+    echo "${SCRIPT_DIR}" | grep -q .dotfiles/bin && return 0 || return 1
 }
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   Clone repo
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-if [ -d ~/.dotfiles/.git ]; then
+if [ -d "${HOME}/.dotfiles/.git" ]; then
     info "'dotfiles' repo found - Skip cloning."
     if ! called_locally; then
         error "Please call the script from your local machine:" \
-            "~/.dotfiles/bin/00_setup.sh"
+            "${HOME}/.dotfiles/bin/00_setup.sh"
         exit 1
     fi
 else
@@ -56,9 +56,9 @@ else
         exit 1
     fi
     info "Cloning dotfiles repo."
-    git clone -q https://github.com/Cielquan/dotfiles.git ~/.dotfiles
+    git clone -q https://github.com/Cielquan/dotfiles.git "${HOME}/.dotfiles"
     success "Done."
-    info "Repo is ready for usage. Call ~/.dotfiles/bin/00_setup.sh"
+    info "Repo is ready for usage. Call ${HOME}/.dotfiles/bin/00_setup.sh"
     exit 0
 fi
 
@@ -66,52 +66,53 @@ fi
 #   Call scripts
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-. ${SCRIPT_DIR}/util/shell_script_utils.sh
+# shellcheck disable=1091
+. "${SCRIPT_DIR}/util/shell_script_utils.sh"
 
 if answer_is_yes "Do you want to install the dotfiles?"; then
     info "Installer script's help page:"
-    python3 ~/.dotfiles/bin/10_install_dotfiles.py --help
+    python3 "${HOME}/.dotfiles/bin/10_install_dotfiles.py" --help
     info "Please see the script's help page above. If you want to customize the" \
         "install add your parameters before pressing enter."
     printf "Args: "
     read -r ARGV </dev/tty
-    python3 ~/.dotfiles/bin/10_install_dotfiles.py $ARGV
+    python3 "${HOME}/.dotfiles/bin/10_install_dotfiles.py" "${ARGV}"
 fi
 
 printf "\n"
 Q="Do you want to install linux basics? Some following scripts depend on those."
-if answer_is_yes ${Q}; then
-    ~/.dotfiles/bin/20_linux_setup.sh
+if answer_is_yes "${Q}"; then
+    "${HOME}/.dotfiles/bin/20_linux_setup.sh"
 fi
 
 printf "\n"
 Q="Do you want to install additional software for linux?."
-if answer_is_yes ${Q}; then
-    ~/.dotfiles/bin/21_additional_software.sh
+if answer_is_yes "${Q}"; then
+    "${HOME}/.dotfiles/bin/21_additional_software.sh"
 fi
 
 printf "\n"
 Q="Do you want to install starship prompt? Its automatically used by bash."
-if answer_is_yes ${Q}; then
-    ~/.dotfiles/bin/30_prompt_setup.sh
+if answer_is_yes "${Q}"; then
+    "${HOME}/.dotfiles/bin/30_prompt_setup.sh"
 fi
 
 printf "\n"
 Q="Do you want to install LS-COLORS?"
-if answer_is_yes ${Q}; then
-    ~/.dotfiles/bin/31_ls_colors.sh
+if answer_is_yes "${Q}"; then
+    "${HOME}/.dotfiles/bin/31_ls_colors.sh"
 fi
 
 printf "\n"
 Q="Do you want to install coding setup (languages)?"
-if answer_is_yes ${Q}; then
-    ~/.dotfiles/bin/40_coding_setup.sh
+if answer_is_yes "${Q}"; then
+    "${HOME}/.dotfiles/bin/40_coding_setup.sh"
 fi
 
 printf "\n"
 Q="Do you want to install and setup VSCode?"
-if answer_is_yes ${Q}; then
-    ~/.dotfiles/bin/41_vscode_setup.sh
+if answer_is_yes "${Q}"; then
+    "${HOME}/.dotfiles/bin/41_vscode_setup.sh"
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

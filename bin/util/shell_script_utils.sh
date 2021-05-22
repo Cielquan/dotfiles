@@ -69,8 +69,14 @@ success() {
 answer_is_yes() {
     printf '%b' "${CYAN}[?] $1 (y/n) ${NO_COLOR}"
     read -r REPLY </dev/tty
-    answers="yY"
-    test "${answers#*${REPLY}}" != "$answers" && return 0 || return 1
+    case $(echo "${REPLY}" | tr '[:upper:]' '[:lower:]') in
+        "y" | "yes")
+            return 0
+            ;;
+        "n" | "no")
+            return 1
+            ;;
+    esac
 }
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

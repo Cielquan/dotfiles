@@ -32,7 +32,7 @@ fi
 if answer_is_yes "Do you want to install poetry?"; then
     info "Installing poetry."
     local link="https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py"
-    curl ${curl_args} ${link} | python3 - -y
+    curl ${CURL_ARGS} ${link} | python3 - -y
     success "Done."
 
     info "Setting poetry so put venv into project directory."
@@ -47,7 +47,7 @@ fi
 if answer_is_yes "Do you want to install rust?"; then
     info "Installing rust."
     local link="https://sh.rustup.rs"
-    curl ${curl_args} ${link} | sh -s -- -y
+    curl ${CURL_ARGS} ${link} | sh -s -- -y
     success "Done."
 fi
 

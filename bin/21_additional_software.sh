@@ -73,7 +73,7 @@ if answer_is_yes "Do you want to install 'brave-browser' package and ppa?"; then
     info "Install ppa."
     local link="https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg"
     local dest="/usr/share/keyrings/brave-browser-archive-keyring.gpg"
-    sudo curl ${curl_args} -o ${dest} ${link}
+    sudo curl ${CURL_ARGS} -o ${dest} ${link}
 
     local link="https://brave-browser-apt-release.s3.brave.com/"
     local repo="deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] ${link} stable main"

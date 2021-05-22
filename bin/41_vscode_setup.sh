@@ -60,8 +60,6 @@ if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
         apt_source="deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main"
         add_apt_source "${apt_source}" "vscode.list"
 
-        apt_update
-
         direct_install code
     fi
 fi

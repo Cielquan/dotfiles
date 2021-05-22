@@ -130,8 +130,6 @@ if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
     apt_source="deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"
     add_apt_source "${apt_source}" "brave-browser-release.list"
 
-    apt_update
-
     direct_install brave-browser
 fi
 

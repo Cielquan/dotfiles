@@ -110,18 +110,17 @@ checked_install_via_ppa() {
     # If the package is already installed the install step is skipped.
     local package=$1
     local ppa=$2
+    local ppa_needed="y"
+    local ppa_added="n"
     if $(apt-cache search ${package} | grep -q ${package}); then
         success "Found ${package} in your repositories. PPA can be added."
-        local ppa_needed="n"
+        ppa_needed="n"
     else
         info "Could not find ${package} in your repositories. PPA must be added to install."
-        local ppa_needed="y"
     fi
     if answer_is_yes "Do you want to add ${ppa} ppa?"; then
         add_ppa ${ppa}
-        local ppa_added="y"
-    else
-        local ppa_added="n"
+        ppa_added="y"
     fi
     if [ ${ppa_needed} = "n" ] || [ ${ppa_needed} = ${ppa_added} ]; then
         checked_install ${package}

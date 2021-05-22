@@ -31,7 +31,7 @@ fi
 
 if answer_is_yes "Do you want to install poetry?"; then
     info "Installing poetry"
-    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 - -y
+    wget -qO- https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 - -y
     success "Done"
 
     info "Setting poetry so put venv into project directory"
@@ -45,7 +45,7 @@ fi
 
 if answer_is_yes "Do you want to install rust?"; then
     info "Installing rust"
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    wget -qO- https://sh.rustup.rs | sh -s -- -y
     success "Done"
 fi
 

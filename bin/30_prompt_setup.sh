@@ -15,7 +15,7 @@ if installed starship; then
     info "starship prompt is already installed"
 else
     info "Installing starship prompt"
-    curl -fsSL https://starship.rs/install.sh | sh -s -- -y
+    wget -qO- https://starship.rs/install.sh | sh -s -- -y
     success "Done"
 fi
 

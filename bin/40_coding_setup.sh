@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-# This scripts needs elevated permissions for `apt` calls
+# This script needs elevated permissions for `apt` calls
 
 set -e
 

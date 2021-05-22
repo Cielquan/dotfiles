@@ -1,1 +1,5 @@
 .gitconfig - diff aliases
+
+find way to call script directly not DL + install call (problem with user input)
+
+add switches to script to skip confirmations

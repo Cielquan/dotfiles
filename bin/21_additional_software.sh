@@ -123,7 +123,8 @@ if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
         sudo="sudo"
         elevate_priv "add keyring"
     fi
-    ${sudo} curl "${CURL_ARGS}" -o "${keyring}" "${link}"
+    # shellcheck disable=2086
+    ${sudo} curl ${CURL_ARGS} -o "${keyring}" "${link}"
     success "Done."
 
     apt_source="deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"

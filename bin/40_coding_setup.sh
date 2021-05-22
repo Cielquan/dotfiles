@@ -62,7 +62,8 @@ DEFAULT="yes"
 if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
     info "Installing poetry."
     link="https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py"
-    curl "${CURL_ARGS}" ${link} | python3 - -y
+    # shellcheck disable=2086
+    curl ${CURL_ARGS} ${link} | python3 - -y
     success "Done."
 
     info "Setting poetry so put venv into project directory."
@@ -80,7 +81,8 @@ DEFAULT="yes"
 if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
     info "Installing rust."
     link="https://sh.rustup.rs"
-    curl "${CURL_ARGS}" ${link} | sh -s -- -y
+    # shellcheck disable=2086
+    curl ${CURL_ARGS} ${link} | sh -s -- -y
     success "Done."
 fi
 

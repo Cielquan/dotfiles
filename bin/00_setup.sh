@@ -124,7 +124,8 @@ if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
         printf "Args: "
         read -r ARGV </dev/tty
     fi
-    python3 "${SCRIPT_DIR}/10_install_dotfiles.py" "${ARGV}"
+    # shellcheck disable=2086
+    python3 "${SCRIPT_DIR}/10_install_dotfiles.py" ${ARGV}
 fi
 
 printf "\n"

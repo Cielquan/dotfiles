@@ -45,7 +45,8 @@ if installed starship; then
 else
     info "Installing starship prompt."
     link="https://starship.rs/install.sh"
-    curl "${CURL_ARGS}" ${link} | sh -s -- -y
+    # shellcheck disable=2086
+    curl ${CURL_ARGS} ${link} | sh -s -- -y
     success "Done."
 fi
 
@@ -60,9 +61,11 @@ if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
 
     info "Downloading nerdfont."
     link="https://github.com/ryanoasis/nerd-fonts/releases/latest"
-    current_version=$(curl "${CURL_ARGS}" -w "%{url_effective}" -o /dev/null ${link} | grep -Po 'v\d+\.\d+\.\d+')
+    # shellcheck disable=2086
+    current_version=$(curl ${CURL_ARGS} -w "%{url_effective}" -o /dev/null ${link} | grep -Po 'v\d+\.\d+\.\d+')
     link="https://github.com/ryanoasis/nerd-fonts/releases/download/${current_version}/DejaVuSansMono.zip"
-    curl "${CURL_ARGS}" --create-dirs -o "${font_dir}/DejaVuSansMono.zip" "${link}"
+    # shellcheck disable=2086
+    curl ${CURL_ARGS} --create-dirs -o "${font_dir}/DejaVuSansMono.zip" "${link}"
     success "Done."
 
     info "Unzipping nerdfont and removing archive."

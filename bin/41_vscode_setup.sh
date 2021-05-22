@@ -50,7 +50,8 @@ if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
 
         info "Installing mircosoft packages keyring."
         link="https://packages.microsoft.com/keys/microsoft.asc"
-        curl "${CURL_ARGS}" "${link}" | gpg --dearmor > packages.microsoft.gpg
+        # shellcheck disable=2086
+        curl ${CURL_ARGS} "${link}" | gpg --dearmor > packages.microsoft.gpg
         elevate_priv "install keyring"
         sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
         rm -f packages.microsoft.gpg

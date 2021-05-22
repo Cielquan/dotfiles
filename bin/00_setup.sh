@@ -105,6 +105,10 @@ fi
 # shellcheck disable=1091
 . "${SCRIPT_DIR}/util/shell_script_utils.sh"
 
+if [ -n "${FORCE-}" ]; then
+    elevate_priv "do default actions from the scripts"
+fi
+
 Q="Do you want to install the dotfiles?"
 DEFAULT="yes"
 if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then

@@ -65,3 +65,50 @@ test_writeable() {
         return 1
     fi
 }
+
+install() {
+    local package=$1
+    if answer_is_yes "Do you want to install ${package}?"; then
+        info "Installing ${package}."
+        if installed ${package}; then
+            info "${package} is already installed."
+        else
+            sudo apt-get install -y ${package} 1> /dev/null
+            success "Done."
+        fi
+    fi
+}
+
+install_via_ppa() {
+    local package=$1
+    local ppa=$2
+    if answer_is_yes "Do you want to install ${package}?"; then
+        if $(apt-cache search ${package} | grep -qe ${package}); then
+            success "Found ${package} in your repositories. PPA can be added."
+            local ppa_needed="n"
+        else
+            info "Could not find ${package} in your repositories. PPA must be added to install."
+            local ppa_needed="y"
+        fi
+        if answer_is_yes "Do you want to add ${ppa} ppa?"; then
+            info "Adding ${ppa} ppa"
+            sudo add-apt-repository -y ppa:${ppa} 1> /dev/null
+            sudo apt-get update 1> /dev/null
+            success "Done."
+            local ppa_added="y"
+        else
+            local ppa_added="n"
+        fi
+        if [ ${ppa_needed} = "n" ] || [ ${ppa_needed} = ${ppa_added} ]; then
+            info "Installing ${package}."
+            if installed ${package}; then
+                info "${package} is already installed."
+            else
+                sudo apt-get install -y ${package} 1> /dev/null
+                success "Done."
+            fi
+        else
+            warn "Skip installing ${package}. No repository to install from."
+        fi
+    fi
+}

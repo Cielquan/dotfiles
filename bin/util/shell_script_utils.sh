@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   Script messages
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 BOLD="$(tput bold 2>/dev/null || printf '')"
 UNDERLINE="$(tput smul 2>/dev/null || printf '')"
 BLINK="$(tput blink 2>/dev/null || printf '')"
@@ -41,16 +45,22 @@ success() {
     printf '%b\n' "${GREEN}[✓]${NO_COLOR} $*"
 }
 
-installed() {
-    command -v "$1" 1> /dev/null 2>&1
-}
-
 answer_is_yes() {
     printf '%b' "${CYAN}[?] $1 (y/n) ${NO_COLOR}"
     read -r REPLY </dev/tty
     answers="yY"
     test "${answers#*$REPLY}" != "$answers" && return 0 || return 1
 }
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   Default parameters
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+CURL_ARGS="--proto =https --tlsv1.2 -sSLf"
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   Permission
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 test_writeable() {
     # Test if a location is writeable by trying to write to it. Windows does not let
@@ -64,6 +74,14 @@ test_writeable() {
     else
         return 1
     fi
+}
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   Installation
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+installed() {
+    command -v "$1" 1> /dev/null 2>&1
 }
 
 add_ppa() {
@@ -127,6 +145,3 @@ checked_install_via_ppa() {
         warn "Skip installing ${package}. No repository to install from."
     fi
 }
-
-curl_args="--proto =https --tlsv1.2 -sSLf"
-export curl_args

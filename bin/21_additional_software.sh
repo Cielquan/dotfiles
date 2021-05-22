@@ -57,7 +57,7 @@ done
 Q="Do you want to install 'git' package or ppa?"
 DEFAULT="yes"
 if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
-    checked_install_via_ppa git phoerious/git-core/ppa
+    checked_install_via_ppa git phoerious/git-core/ppa "${FORCE}" ""
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -102,7 +102,7 @@ fi
 Q="Do you want to install 'keepassxc' package or ppa?"
 DEFAULT="no"
 if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
-    checked_install_via_ppa keepassxc phoerious/keepassxc
+    checked_install_via_ppa keepassxc phoerious/keepassxc "${FORCE}" ""
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

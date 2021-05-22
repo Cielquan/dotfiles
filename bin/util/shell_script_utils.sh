@@ -241,6 +241,8 @@ checked_install_via_ppa() {
     # If the package is already installed the install step is skipped.
     package="${1}"
     ppa="${2}"
+    FORCE="${3}"
+    DEFAULT="${4}"
     ppa_needed
     ppa_added
     if apt-cache search "${package}" | grep -q "${package}"; then
@@ -250,7 +252,8 @@ checked_install_via_ppa() {
         ppa_needed="y"
         info "Could not find ${package} in your repositories. PPA must be added to install."
     fi
-    if answer_is_yes "Do you want to add ${ppa} ppa?"; then
+    Q="Do you want to add ${ppa} ppa?"
+    if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT:-${ppa_needed}}"; then
         add_ppa "${ppa}"
         ppa_added="y"
     else

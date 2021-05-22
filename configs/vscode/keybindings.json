@@ -54,5 +54,10 @@
     {
         "key": "ctrl+t",
         "command": "-git.sync"
+    },
+    {
+        "key": "ctrl+shift+c",
+        "command": "-copyFilePath",
+        "when": "!editorFocus"
     }
 ]

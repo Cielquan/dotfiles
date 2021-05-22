@@ -66,6 +66,14 @@ test_writeable() {
     fi
 }
 
+add_ppa() {
+    local ppa=$1
+    info "Adding ${ppa} ppa"
+    sudo add-apt-repository -y ppa:${ppa} 1> /dev/null
+    sudo apt-get update 1> /dev/null
+    success "Done."
+}
+
 direct_install() {
     # Can install multiple packages at once
     # but does not check if they are already installed.
@@ -79,10 +87,7 @@ direct_install_via_ppa() {
     # Installs a package from a ppa which gets added before installing.
     local package=$1
     local ppa=$2
-    info "Adding ${ppa} ppa"
-    sudo add-apt-repository -y ppa:${ppa} 1> /dev/null
-    sudo apt-get update 1> /dev/null
-    success "Done."
+    add_ppa ${ppa}
     direct_install ${package}
 }
 
@@ -113,10 +118,7 @@ checked_install_via_ppa() {
         local ppa_needed="y"
     fi
     if answer_is_yes "Do you want to add ${ppa} ppa?"; then
-        info "Adding ${ppa} ppa"
-        sudo add-apt-repository -y ppa:${ppa} 1> /dev/null
-        sudo apt-get update 1> /dev/null
-        success "Done."
+        add_ppa ${ppa}
         local ppa_added="y"
     else
         local ppa_added="n"

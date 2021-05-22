@@ -3,7 +3,7 @@
 set -e
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#   utils
+#   utils (vendored)
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 BOLD="$(tput bold 2>/dev/null || printf '')"
@@ -30,12 +30,9 @@ installed() {
     command -v "$1" 1> /dev/null 2>&1
 }
 
-answer_is_yes() {
-    printf '%b' "${CYAN}[?] $1 (y/n) ${NO_COLOR}"
-    read -r REPLY </dev/tty
-    answers="yY"
-    test "${answers#*$REPLY}" != "$answers" && return 0 || return 1
-}
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   utils (local
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 called_locally() {
     echo ${SCRIPT_DIR} | grep -q .dotfiles/bin && return 0 || return 1
@@ -54,12 +51,9 @@ if [ -d ~/.dotfiles/.git ]; then
     fi
 else
     if ! installed git; then
-        if answer_is_yes "To clone the 'dotfiles' repo 'git' is needed. Install?"; then
-            direct_install git
-        else
-            error "Missing 'git' cannot clone the 'dotfiles' repo."
-            exit 1
-        fi
+        error "Missing 'git' cannot clone the 'dotfiles' repo."
+        info "Please install 'git' and rerun the script."
+        exit 1
     fi
     info "Cloning dotfiles repo."
     git clone -q https://github.com/Cielquan/dotfiles.git ~/.dotfiles

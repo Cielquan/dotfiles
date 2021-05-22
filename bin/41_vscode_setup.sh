@@ -79,4 +79,8 @@ info "OSify configs"
 sed -i "s|.venv/${old_bin}|.venv/${new_bin}|g" $copy_target/settings.json
 success "Done"
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   FINISH
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 success "VSCode setup finished ..."

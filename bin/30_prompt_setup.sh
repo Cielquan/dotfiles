@@ -33,4 +33,8 @@ else
     warn "You need to install a Nerdfont yourself to (fully) utilize starship prompt."
 fi
 
-success "starship prompt installed ..."
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   FINISH
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+success "Installing starship prompt finished ..."

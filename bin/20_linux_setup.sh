@@ -32,4 +32,8 @@ echo ${PACKAGES} | tr ' ' '\n' | while read package; do
     direct_install ${package}
 done
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   FINISH
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 success "Basic linux setup finished ..."

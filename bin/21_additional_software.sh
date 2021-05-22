@@ -64,3 +64,9 @@ fi
 if answer_is_yes "Do you want to install 'keepassxc' package or ppa?"; then
     checked_install_via_ppa keepassxc phoerious/keepassxc
 fi
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   FINISH
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+success "Installing additonal software finsihed ..."

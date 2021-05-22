@@ -103,7 +103,7 @@ if answer_is_yes "Do you want to install and setup VSCode?"; then
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#   finish
+#   FINISH
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 printf "\n"

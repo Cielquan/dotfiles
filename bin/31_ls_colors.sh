@@ -17,5 +17,10 @@ dircolors_dir=$HOME/.config/dircolors
 mkdir -p $dircolors_dir
 wget -qO $dircolors_dir/LS_COLORS https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS
 dircolors -b $dircolors_dir/LS_COLORS > $dircolors_dir/ls_colors.sh
+success "Done."
 
-success "LS_COLORS installed ..."
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   FINISH
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+info "Installing LS_COLORS finished ..."

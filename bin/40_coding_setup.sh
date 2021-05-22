@@ -57,4 +57,8 @@ if answer_is_yes "Do you want to install nodeJS?"; then
     checked_install nodejs
 fi
 
-success "Coding setup finsihed ..."
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   FINISH
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+success "Coding setup finished ..."

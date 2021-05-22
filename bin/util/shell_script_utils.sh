@@ -4,23 +4,23 @@
 #   Script messages
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-BOLD="$(tput bold 2>/dev/null || printf '')"
-UNDERLINE="$(tput smul 2>/dev/null || printf '')"
-BLINK="$(tput blink 2>/dev/null || printf '')"
-REVERSE="$(tput rev 2>/dev/null || printf '')"
+BOLD="$(tput bold 2> /dev/null || printf '')"
+UNDERLINE="$(tput smul 2> /dev/null || printf '')"
+BLINK="$(tput blink 2> /dev/null || printf '')"
+REVERSE="$(tput rev 2> /dev/null || printf '')"
 export BOLD
 export UNDERLINE
 export BLINK
 export REVERSE
 
-BLACK="$(tput setaf 0 2>/dev/null || printf '')"
-RED="$(tput setaf 1 2>/dev/null || printf '')"
-GREEN="$(tput setaf 2 2>/dev/null || printf '')"
-YELLOW="$(tput setaf 3 2>/dev/null || printf '')"
-BLUE="$(tput setaf 4 2>/dev/null || printf '')"
-MAGENTA="$(tput setaf 5 2>/dev/null || printf '')"  # often violet
-CYAN="$(tput setaf 6 2>/dev/null || printf '')"
-WHITE="$(tput setaf 7 2>/dev/null || printf '')"
+BLACK="$(tput setaf 0 2> /dev/null || printf '')"
+RED="$(tput setaf 1 2> /dev/null || printf '')"
+GREEN="$(tput setaf 2 2> /dev/null || printf '')"
+YELLOW="$(tput setaf 3 2> /dev/null || printf '')"
+BLUE="$(tput setaf 4 2> /dev/null || printf '')"
+MAGENTA="$(tput setaf 5 2> /dev/null || printf '')"  # often violet
+CYAN="$(tput setaf 6 2> /dev/null || printf '')"
+WHITE="$(tput setaf 7 2> /dev/null || printf '')"
 export BLACK
 export RED
 export GREEN
@@ -30,14 +30,14 @@ export MAGENTA
 export CYAN
 export WHITE
 
-BLACK_BG="$(tput setab 0 2>/dev/null || printf '')"
-RED_BG="$(tput setab 1 2>/dev/null || printf '')"
-GREEN_BG="$(tput setab 2 2>/dev/null || printf '')"
-YELLOW_BG="$(tput setab 3 2>/dev/null || printf '')"
-BLUE_BG="$(tput setab 4 2>/dev/null || printf '')"
-MAGENTA_BG="$(tput setab 5 2>/dev/null || printf '')"  # often violet
-CYAN_BG="$(tput setab 6 2>/dev/null || printf '')"
-WHITE_BG="$(tput setab 7 2>/dev/null || printf '')"
+BLACK_BG="$(tput setab 0 2> /dev/null || printf '')"
+RED_BG="$(tput setab 1 2> /dev/null || printf '')"
+GREEN_BG="$(tput setab 2 2> /dev/null || printf '')"
+YELLOW_BG="$(tput setab 3 2> /dev/null || printf '')"
+BLUE_BG="$(tput setab 4 2> /dev/null || printf '')"
+MAGENTA_BG="$(tput setab 5 2> /dev/null || printf '')"  # often violet
+CYAN_BG="$(tput setab 6 2> /dev/null || printf '')"
+WHITE_BG="$(tput setab 7 2> /dev/null || printf '')"
 export BLACK_BG
 export RED_BG
 export GREEN_BG
@@ -47,7 +47,7 @@ export MAGENTA_BG
 export CYAN_BG
 export WHITE_BG
 
-NO_COLOR="$(tput sgr0 2>/dev/null || printf '')"
+NO_COLOR="$(tput sgr0 2> /dev/null || printf '')"
 export NO_COLOR
 
 info() {
@@ -93,7 +93,7 @@ test_writeable() {
     # you test writeability other than by writing: https://stackoverflow.com/q/1999988
     # source: https://sh.rustup.rs
     path="${1:-}/test.txt"
-    if touch "${path}" 2>/dev/null; then
+    if touch "${path}" 2> /dev/null; then
         rm "${path}"
         return 0
     else

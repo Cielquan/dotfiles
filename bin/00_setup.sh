@@ -6,11 +6,11 @@ set -e
 #   utils (vendored)
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-BOLD="$(tput bold 2>/dev/null || printf '')"
-RED="$(tput setaf 1 2>/dev/null || printf '')"
-GREEN="$(tput setaf 2 2>/dev/null || printf '')"
-CYAN="$(tput setaf 6 2>/dev/null || printf '')"
-NO_COLOR="$(tput sgr0 2>/dev/null || printf '')"
+BOLD="$(tput bold 2> /dev/null || printf '')"
+RED="$(tput setaf 1 2> /dev/null || printf '')"
+GREEN="$(tput setaf 2 2> /dev/null || printf '')"
+CYAN="$(tput setaf 6 2> /dev/null || printf '')"
+NO_COLOR="$(tput sgr0 2> /dev/null || printf '')"
 
 SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "${0}")")" && pwd -P)
 

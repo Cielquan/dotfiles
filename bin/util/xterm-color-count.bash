@@ -6,6 +6,7 @@ trap 'tput sgr0' exit       # Clean up even if user hits ^C
 
 # First, test if terminal supports OSC 4 at all.
 printf '\e]4;%d;?\a' 0
+# shellcheck disable=2162
 read -d $'\a' -s -t 0.1 </dev/tty
 if [ -z "$REPLY" ]; then
     # OSC 4 not supported, so we'll fall back to terminfo 
@@ -17,6 +18,7 @@ else
     while [[ $((min+1)) -lt $max ]]; do
         i=$(( (min+max)/2 ))
         printf '\e]4;%d;?\a' $i
+        # shellcheck disable=2162
         read -d $'\a' -s -t 0.1 </dev/tty
         if [ -z "$REPLY" ]; then
             max=$i

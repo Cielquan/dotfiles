@@ -6,6 +6,34 @@ SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "${0}")")" && pwd -P)
 # shellcheck disable=1091
 . "${SCRIPT_DIR}/util/shell_script_utils.sh"
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   Parse argv
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# PARSER
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+
+    -f | -y | --force | --yes)
+        FORCE="yes"
+        shift 1
+        ;;
+
+    -- | -n | --no)
+        shift 1
+        ;;
+
+    *)
+        error "Unknown option: $1"
+        exit 1
+        ;;
+    esac
+done
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   START
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 info "Starting coding setup ..."
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -15,7 +43,8 @@ info "Starting coding setup ..."
 PY_VERSIONS="3.6 3.7 3.8 3.9"
 
 Q="Do you want to install python versions ${PY_VERSIONS}?"
-if answer_is_yes "${Q}"; then
+DEFAULT="yes"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
     add_ppa deadsnakes/ppa
 
     echo "${PY_VERSIONS}" | tr ' ' '\n' | while read -r version; do
@@ -29,7 +58,8 @@ fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 Q="Do you want to install poetry?"
-if answer_is_yes "${Q}"; then
+DEFAULT="yes"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
     info "Installing poetry."
     link="https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py"
     curl "${CURL_ARGS}" ${link} | python3 - -y
@@ -46,7 +76,8 @@ fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 Q="Do you want to install rust?"
-if answer_is_yes "${Q}"; then
+DEFAULT="yes"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
     info "Installing rust."
     link="https://sh.rustup.rs"
     curl "${CURL_ARGS}" ${link} | sh -s -- -y
@@ -58,7 +89,8 @@ fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 Q="Do you want to install nodeJS?"
-if answer_is_yes "${Q}"; then
+DEFAULT="yes"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
     checked_install nodejs
 fi
 

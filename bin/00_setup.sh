@@ -39,14 +39,50 @@ called_locally() {
 }
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   Parse argv
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# DEFAULTS
+DOTFILES_DIR="${HOME}/.dotfiles"
+
+# PARSER
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+    -d | --dotfiles-dir)
+        DOTFILES_DIR="$2"
+        shift 2
+        ;;
+
+    -f | -y | --force | --yes)
+        FORCE="yes"
+        shift 1
+        ;;
+
+    -- | -n | --no)
+        shift 1
+        ;;
+
+    -d=* | --dotfiles-dir=*)
+        DOTFILES_DIR="${1#*=}"
+        shift 1
+        ;;
+
+    *)
+        error "Unknown option: $1"
+        exit 1
+        ;;
+    esac
+done
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   Clone repo
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-if [ -d "${HOME}/.dotfiles/.git" ]; then
+if [ -d "${DOTFILES_DIR}/.git" ]; then
     info "'dotfiles' repo found - Skip cloning."
     if ! called_locally; then
         error "Please call the script from your local machine:" \
-            "${HOME}/.dotfiles/bin/00_setup.sh"
+            "${DOTFILES_DIR}/bin/00_setup.sh"
         exit 1
     fi
 else
@@ -56,9 +92,9 @@ else
         exit 1
     fi
     info "Cloning dotfiles repo."
-    git clone -q https://github.com/Cielquan/dotfiles.git "${HOME}/.dotfiles"
+    git clone -q https://github.com/Cielquan/dotfiles.git "${DOTFILES_DIR}"
     success "Done."
-    info "Repo is ready for usage. Call ${HOME}/.dotfiles/bin/00_setup.sh"
+    info "Repo is ready for usage. Call ${DOTFILES_DIR}/bin/00_setup.sh"
     exit 0
 fi
 
@@ -69,50 +105,60 @@ fi
 # shellcheck disable=1091
 . "${SCRIPT_DIR}/util/shell_script_utils.sh"
 
-if answer_is_yes "Do you want to install the dotfiles?"; then
-    info "Installer script's help page:"
-    python3 "${HOME}/.dotfiles/bin/10_install_dotfiles.py" --help
-    info "Please see the script's help page above. If you want to customize the" \
-        "install add your parameters before pressing enter."
-    printf "Args: "
-    read -r ARGV </dev/tty
-    python3 "${HOME}/.dotfiles/bin/10_install_dotfiles.py" "${ARGV}"
+Q="Do you want to install the dotfiles?"
+DEFAULT="yes"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    if [ -z "${FORCE-}" ]; then
+        info "Installer script's help page:"
+        python3 "${SCRIPT_DIR}/10_install_dotfiles.py" --help
+        info "Please see the script's help page above. If you want to customize the" \
+            "install add your parameters before pressing enter."
+        printf "Args: "
+        read -r ARGV </dev/tty
+    fi
+    python3 "${SCRIPT_DIR}/10_install_dotfiles.py" "${ARGV}"
 fi
 
 printf "\n"
 Q="Do you want to install linux basics? Some following scripts depend on those."
-if answer_is_yes "${Q}"; then
-    "${HOME}/.dotfiles/bin/20_linux_setup.sh"
+DEFAULT="yes"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    "${SCRIPT_DIR}/20_linux_setup.sh"
 fi
 
 printf "\n"
 Q="Do you want to install additional software for linux?."
-if answer_is_yes "${Q}"; then
-    "${HOME}/.dotfiles/bin/21_additional_software.sh"
+DEFAULT="yes"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    "${SCRIPT_DIR}/21_additional_software.sh" "--${FORCE:-no}"
 fi
 
 printf "\n"
 Q="Do you want to install starship prompt? Its automatically used by bash."
-if answer_is_yes "${Q}"; then
-    "${HOME}/.dotfiles/bin/30_prompt_setup.sh"
+DEFAULT="no"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    "${SCRIPT_DIR}/30_prompt_setup.sh" "--${FORCE:-no}"
 fi
 
 printf "\n"
 Q="Do you want to install LS-COLORS?"
-if answer_is_yes "${Q}"; then
-    "${HOME}/.dotfiles/bin/31_ls_colors.sh"
+DEFAULT="yes"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    "${SCRIPT_DIR}/31_ls_colors.sh"
 fi
 
 printf "\n"
 Q="Do you want to install coding setup (languages)?"
-if answer_is_yes "${Q}"; then
-    "${HOME}/.dotfiles/bin/40_coding_setup.sh"
+DEFAULT="no"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    "${SCRIPT_DIR}/40_coding_setup.sh" "--${FORCE:-no}"
 fi
 
 printf "\n"
 Q="Do you want to install and setup VSCode?"
-if answer_is_yes "${Q}"; then
-    "${HOME}/.dotfiles/bin/41_vscode_setup.sh"
+DEFAULT="no"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    "${SCRIPT_DIR}/41_vscode_setup.sh" "--${FORCE:-no}"
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

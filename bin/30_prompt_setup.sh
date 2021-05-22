@@ -6,6 +6,34 @@ SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "${0}")")" && pwd -P)
 # shellcheck disable=1091
 . "${SCRIPT_DIR}/util/shell_script_utils.sh"
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   Parse argv
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# PARSER
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+
+    -f | -y | --force | --yes)
+        FORCE="yes"
+        shift 1
+        ;;
+
+    -- | -n | --no)
+        shift 1
+        ;;
+
+    *)
+        error "Unknown option: $1"
+        exit 1
+        ;;
+    esac
+done
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   START
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 info "Installing starship prompt ..."
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -25,8 +53,9 @@ fi
 #   Install DejaVuSansMono nerdfont
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Q="Do you want to download 'DejaVuSansMono' Nerdfont?"
-if answer_is_yes "${Q}"; then
+Q="Do you want to download 'DejaVuSansMono' Nerdfont (for starship prompt)?"
+DEFAULT="yes"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
     font_dir="${HOME}/.local/share/fonts"
 
     info "Downloading nerdfont."
@@ -46,7 +75,8 @@ if answer_is_yes "${Q}"; then
     if ! installed fc-cache; then
         fc_installed="n"
         Q="For installing the 'fontconfig' package needs to be installed. Install?"
-        if answer_is_yes "${Q}"; then
+        DEFAULT="yes"
+        if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
             direct_install fontconfig
             fc_installed="y"
         fi

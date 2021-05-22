@@ -67,9 +67,22 @@ success() {
 }
 
 answer_is_yes() {
-    printf '%b' "${CYAN}[?] $1 (y/n) ${NO_COLOR}"
-    read -r REPLY </dev/tty
-    case $(echo "${REPLY}" | tr '[:upper:]' '[:lower:]') in
+    QUESTION="${1}"
+    FORCE="${2}"
+    YN="${3}" # Default
+    if [ -z "${FORCE-}" ]; then
+        printf '%b' "${CYAN}[?] ${QUESTION} (y/n) ${NO_COLOR}"
+        set +e
+        read -r YN </dev/tty
+        rc=$?
+        set -e
+        if [ $rc -ne 0 ]; then
+            error "Error reading from prompt. Please rerun with the '--yes' option to" \
+                "take the default options or try running from another terminal or shell."
+        exit 1
+    fi
+    fi
+    case $(echo "${YN}" | tr '[:upper:]' '[:lower:]') in
         "y" | "yes")
             return 0
             ;;

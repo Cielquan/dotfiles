@@ -6,6 +6,34 @@ SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "${0}")")" && pwd -P)
 # shellcheck disable=1091
 . "${SCRIPT_DIR}/util/shell_script_utils.sh"
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   Parse argv
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# PARSER
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+
+    -f | -y | --force | --yes)
+        FORCE="yes"
+        shift 1
+        ;;
+
+    -- | -n | --no)
+        shift 1
+        ;;
+
+    *)
+        error "Unknown option: $1"
+        exit 1
+        ;;
+    esac
+done
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   START
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 info "Starting VSCode setup ..."
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -13,7 +41,8 @@ info "Starting VSCode setup ..."
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 Q="Do you want to install VSCode?"
-if answer_is_yes "${Q}"; then
+DEFAULT="yes"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
     if installed code; then
         info "VSCode is already installed."
     else
@@ -41,7 +70,8 @@ fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 Q="Do you want to install VSCode extionsions from the list?"
-if answer_is_yes "${Q}"; then
+DEFAULT="yes"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
     info "Installing VSCode extensions."
     while read -r line; do
         # skip empty line and lines staring with '#'
@@ -70,7 +100,8 @@ fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 Q="Do you want to copy the VSCode configuration files?"
-if answer_is_yes "${Q}"; then
+DEFAULT="yes"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
 
     if [ -n "${APPDATA}" ]; then
         copy_target="${APPDATA}/Code/User"

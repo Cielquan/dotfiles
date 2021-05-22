@@ -1,14 +1,11 @@
 #!/usr/bin/env sh
 
-# This script needs elevated permissions for `apt` calls
-
 set -e
 
 SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)
 . ${SCRIPT_DIR}/util/shell_script_utils.sh
 
 info "Installing additonal software ..."
-sudo -v
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   Additional basic tooling

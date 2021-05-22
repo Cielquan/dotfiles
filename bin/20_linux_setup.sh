@@ -14,7 +14,7 @@ sudo -v
 #   install basic linux stuff
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-PACKAGES="nano wget unzip htop"
+PACKAGES="nano curl unzip htop"
 
 info "Updating repos"
 sudo apt-get update 1> /dev/null

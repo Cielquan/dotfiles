@@ -14,8 +14,8 @@ info "Installing LS_COLORS ..."
 info "Download and install LS_COLORS"
 dircolors_dir=$HOME/.config/dircolors
 
-mkdir -p $dircolors_dir
-wget -qO $dircolors_dir/LS_COLORS https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS
+local link="https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS"
+curl ${curl_args} --create-dirs -o $dircolors_dir/LS_COLORS ${link}
 dircolors -b $dircolors_dir/LS_COLORS > $dircolors_dir/ls_colors.sh
 success "Done."
 

@@ -14,7 +14,7 @@ sudo -v
 #   additional basic tooling
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-PACKAGES="ldnsutils net-tools curl"
+PACKAGES="ldnsutils net-tools wget"
 
 echo ${PACKAGES} | tr ' ' '\n' | while read package; do
     if answer_is_yes "Do you want to install '${package}' package?"; then
@@ -72,7 +72,7 @@ fi
 if answer_is_yes "Do you want to install 'brave-browser' package and ppa?"; then
     local link="https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg"
     local dest="/usr/share/keyrings/brave-browser-archive-keyring.gpg"
-    sudo curl --proto '=https' --tlsv1.2 -sSLf -o ${dest} ${link}
+    sudo curl ${curl_args} -o ${dest} ${link}
 
     local link="https://brave-browser-apt-release.s3.brave.com/"
     local repo="deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] ${link} stable main"

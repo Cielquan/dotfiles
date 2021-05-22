@@ -66,49 +66,64 @@ test_writeable() {
     fi
 }
 
-install() {
+direct_install() {
+    # Can install multiple packages at once
+    # but does not check if they are already installed.
+    local packages=$1
+    info "Installing ${packages}."
+    sudo apt-get install -y ${packages} 1> /dev/null
+    success "Done."
+}
+
+direct_install_via_ppa() {
+    # Installs a package from a ppa which gets added before installing.
     local package=$1
-    if answer_is_yes "Do you want to install ${package}?"; then
-        info "Installing ${package}."
-        if installed ${package}; then
-            info "${package} is already installed."
-        else
-            sudo apt-get install -y ${package} 1> /dev/null
-            success "Done."
-        fi
+    local ppa=$2
+    info "Adding ${ppa} ppa"
+    sudo add-apt-repository -y ppa:${ppa} 1> /dev/null
+    sudo apt-get update 1> /dev/null
+    success "Done."
+    direct_install ${package}
+}
+
+checked_install() {
+    # Installs a single package but checks if it is already installed.
+    # If it is the install step is skipped.
+    local package=$1
+    info "Installing ${package}."
+    if installed ${package}; then
+        info "${package} is already installed."
+    else
+        sudo apt-get install -y ${package} 1> /dev/null
+        success "Done."
     fi
 }
 
-install_via_ppa() {
+checked_install_via_ppa() {
+    # Installs a package from a ppa, but checks if there is a need to add the ppa.
+    # If not the addition is optional.
+    # If the package is already installed the install step is skipped.
     local package=$1
     local ppa=$2
-    if answer_is_yes "Do you want to install ${package}?"; then
-        if $(apt-cache search ${package} | grep -qe ${package}); then
-            success "Found ${package} in your repositories. PPA can be added."
-            local ppa_needed="n"
-        else
-            info "Could not find ${package} in your repositories. PPA must be added to install."
-            local ppa_needed="y"
-        fi
-        if answer_is_yes "Do you want to add ${ppa} ppa?"; then
-            info "Adding ${ppa} ppa"
-            sudo add-apt-repository -y ppa:${ppa} 1> /dev/null
-            sudo apt-get update 1> /dev/null
-            success "Done."
-            local ppa_added="y"
-        else
-            local ppa_added="n"
-        fi
-        if [ ${ppa_needed} = "n" ] || [ ${ppa_needed} = ${ppa_added} ]; then
-            info "Installing ${package}."
-            if installed ${package}; then
-                info "${package} is already installed."
-            else
-                sudo apt-get install -y ${package} 1> /dev/null
-                success "Done."
-            fi
-        else
-            warn "Skip installing ${package}. No repository to install from."
-        fi
+    if $(apt-cache search ${package} | grep -q ${package}); then
+        success "Found ${package} in your repositories. PPA can be added."
+        local ppa_needed="n"
+    else
+        info "Could not find ${package} in your repositories. PPA must be added to install."
+        local ppa_needed="y"
+    fi
+    if answer_is_yes "Do you want to add ${ppa} ppa?"; then
+        info "Adding ${ppa} ppa"
+        sudo add-apt-repository -y ppa:${ppa} 1> /dev/null
+        sudo apt-get update 1> /dev/null
+        success "Done."
+        local ppa_added="y"
+    else
+        local ppa_added="n"
+    fi
+    if [ ${ppa_needed} = "n" ] || [ ${ppa_needed} = ${ppa_added} ]; then
+        checked_install ${package}
+    else
+        warn "Skip installing ${package}. No repository to install from."
     fi
 }

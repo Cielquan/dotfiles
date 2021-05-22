@@ -20,11 +20,9 @@ info "Updating repos"
 sudo apt-get update 1> /dev/null
 success "Done"
 
-info "Installing certs and apt-transport-https"
-sudo apt-get install -y ca-certificates apt-transport-https 1> /dev/null
-success "Done"
+direct_install ca-certificates apt-transport-https
 
-info "Upgading all"
+info "Upgading system"
 sudo apt-get dist-upgrade -y 1> /dev/null
 success "Done"
 

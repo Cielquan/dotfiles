@@ -81,10 +81,14 @@ test_writeable() {
 }
 
 test_apt_install() {
+    # TODO: kind hacky .. find smth better
+    # Test if sudo is needed for apt-get install / upgrade / dist-upgrade
     if [ -r /var/lib/dpkg/lock-frontend ]; then return 0; else return 1; fi
 }
 
 test_apt_update() {
+    # TODO: kind hacky .. find smth better
+    # Test if sudo is needed for apt-get update
     if [ -r /var/lib/apt/lists/lock ]; then return 0; else return 1; fi
 }
 

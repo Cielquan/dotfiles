@@ -14,7 +14,8 @@ info "Installing additonal software ..."
 PACKAGES="ldnsutils net-tools wget"
 
 echo ${PACKAGES} | tr ' ' '\n' | while read package; do
-    if answer_is_yes "Do you want to install '${package}' package?"; then
+    Q="Do you want to install '${package}' package?"
+    if answer_is_yes ${Q}; then
         checked_install ${package}
     fi
 done
@@ -23,7 +24,8 @@ done
 #   git
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-if answer_is_yes "Do you want to install 'git' package or ppa?"; then
+Q="Do you want to install 'git' package or ppa?"
+if answer_is_yes ${Q}; then
     checked_install_via_ppa git phoerious/git-core/ppa
 fi
 
@@ -31,16 +33,20 @@ fi
 #   docker.io / docker-compose
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-if answer_is_yes "Do you want to install/setup docker stuff?"; then
-    if answer_is_yes "Do you want to install 'docker.io' package?"; then
+Q="Do you want to install/setup docker stuff?"
+if answer_is_yes ${Q}; then
+    Q="Do you want to install 'docker.io' package?"
+    if answer_is_yes ${Q}; then
         checked_install docker.io
     fi
 
-    if answer_is_yes "Do you want to install 'docker-compose' package?"; then
+    Q="Do you want to install 'docker-compose' package?"
+    if answer_is_yes ${Q}; then
         checked_install docker-compose
     fi
 
-    if answer_is_yes "Do you want to add the current user to 'docker' group?"; then
+    Q="Do you want to add the current user to 'docker' group?"
+    if answer_is_yes ${Q}; then
         if $(groups | grep -q docker); then
             info "User is already in 'docker' group."
         # https://stackoverflow.com/a/46040491
@@ -58,7 +64,8 @@ fi
 #   KeePassXC
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-if answer_is_yes "Do you want to install 'keepassxc' package or ppa?"; then
+Q="Do you want to install 'keepassxc' package or ppa?"
+if answer_is_yes ${Q}; then
     checked_install_via_ppa keepassxc phoerious/keepassxc
 fi
 
@@ -66,7 +73,8 @@ fi
 #   Brave
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-if answer_is_yes "Do you want to install 'brave-browser' package and ppa?"; then
+Q="Do you want to install 'brave-browser' package and ppa?"
+if answer_is_yes ${Q}; then
     info "Install brave-browser ppa."
 
     info "Installing brave-browser keyring."

@@ -11,78 +11,88 @@ info "Starting VSCode setup ..."
 #   Install code
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-if installed code; then
-    info "VSCode is already installed."
-else
-    info "Installing VSCode ppa."
+Q="Do you want to install VSCode?"
+if answer_is_yes ${Q}; then
+    if installed code; then
+        info "VSCode is already installed."
+    else
+        info "Installing VSCode ppa."
 
-    info "Installing mircosoft packages keyring."
-    link="https://packages.microsoft.com/keys/microsoft.asc"
-    curl ${CURL_ARGS} ${link} | gpg --dearmor > packages.microsoft.gpg
-    elevate_priv "install keyring"
-    sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
-    rm -f packages.microsoft.gpg
-    success "Done."
+        info "Installing mircosoft packages keyring."
+        link="https://packages.microsoft.com/keys/microsoft.asc"
+        curl ${CURL_ARGS} ${link} | gpg --dearmor > packages.microsoft.gpg
+        elevate_priv "install keyring"
+        sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
+        rm -f packages.microsoft.gpg
+        success "Done."
 
-    apt_source="deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main"
-    add_apt_source ${apt_source} "vscode.list"
+        apt_source="deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main"
+        add_apt_source ${apt_source} "vscode.list"
 
-    apt_update
+        apt_update
 
-    direct_install code
+        direct_install code
+    fi
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   Install code extensions
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-info "Installing VSCode extensions."
-while read -r line; do
-    # skip empty line and lines staring with '#'
-    if [ -z "$line" ] || [ $(echo $line | cut -c1-1) = "#" ]; then
-        continue
+Q="Do you want to install VSCode extionsions from the list?"
+if answer_is_yes ${Q}; then
+    info "Installing VSCode extensions."
+    while read -r line; do
+        # skip empty line and lines staring with '#'
+        if [ -z "$line" ] || [ $(echo $line | cut -c1-1) = "#" ]; then
+            continue
+        fi
+
+        info "Extension: ${line}"
+        code --install-extension "${line}" --force && success "Done." || error "Failed to install."
+    done <${SCRIPT_DIR}/../configs/vscode/extensions.txt
+
+    # Install color theme
+    if ! [ -d ~/.vscode/extensions/krys-colors ]; then
+        info "Installing krys-colors color theme."
+        git clone https://github.com/Cielquan/krys-colors ~/.vscode/extensions/krys-colors
+        success "Done."
     fi
-
-    info "Extension: ${line}"
-    code --install-extension "${line}" --force && success "Done." || error "Failed to install."
-done <${SCRIPT_DIR}/../configs/vscode/extensions.txt
-
-# Install color theme
-if ! [ -d ~/.vscode/extensions/krys-colors ]; then
-    info "Installing krys-colors color theme."
-    git clone https://github.com/Cielquan/krys-colors ~/.vscode/extensions/krys-colors
-    success "Done."
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   Copy configs
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-if [ -n "$APPDATA" ]; then
-    copy_target="$APPDATA/Code/User"
-    old_bin="bin"
-    new_bin="Scripts"
-else
-    copy_target="$HOME/.config/Code/User"
-    old_bin="Scripts"
-    new_bin="bin"
+Q="Do you want to copy the VSCode configuration files?"
+if answer_is_yes ${Q}; then
+
+    if [ -n "$APPDATA" ]; then
+        copy_target="$APPDATA/Code/User"
+        old_bin="bin"
+        new_bin="Scripts"
+    else
+        copy_target="$HOME/.config/Code/User"
+        old_bin="Scripts"
+        new_bin="bin"
+    fi
+
+    if ! [ -d $copy_target ]; then
+        info "Creating '$copy_target'"
+        mkdir -p $copy_target
+    fi
+
+    info "Copying configs to '$copy_target'."
+    cp ${SCRIPT_DIR}/../configs/vscode/settings.json $copy_target
+    cp ${SCRIPT_DIR}/../configs/vscode/keybindings.json $copy_target
+    cp ${SCRIPT_DIR}/../configs/vscode/sphinx_docstring_template_custom.mustache $copy_target
+    success "Done."
+
+    # OSify settings.json
+    info "OSify configs."
+    sed -i "s|.venv/${old_bin}|.venv/${new_bin}|g" $copy_target/settings.json
+    success "Done."
 fi
-
-if ! [ -d $copy_target ]; then
-    info "Creating '$copy_target'"
-    mkdir -p $copy_target
-fi
-
-info "Copying configs to '$copy_target'."
-cp ${SCRIPT_DIR}/../configs/vscode/settings.json $copy_target
-cp ${SCRIPT_DIR}/../configs/vscode/keybindings.json $copy_target
-cp ${SCRIPT_DIR}/../configs/vscode/sphinx_docstring_template_custom.mustache $copy_target
-success "Done."
-
-# OSify settings.json
-info "OSify configs."
-sed -i "s|.venv/${old_bin}|.venv/${new_bin}|g" $copy_target/settings.json
-success "Done."
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   FINISH

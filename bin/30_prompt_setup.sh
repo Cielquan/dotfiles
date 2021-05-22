@@ -24,7 +24,8 @@ fi
 #   Install DejaVuSansMono nerdfont
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-if answer_is_yes "Do you want to download 'DejaVuSansMono' Nerdfont?"; then
+Q="Do you want to download 'DejaVuSansMono' Nerdfont?"
+if answer_is_yes ${Q}; then
     local font_dir="${HOME}/.local/share/fonts"
 
     info "Downloading nerdfont."
@@ -43,7 +44,8 @@ if answer_is_yes "Do you want to download 'DejaVuSansMono' Nerdfont?"; then
     local fc_installed="y"
     if ! installed fc-cache; then
         fc_installed="n"
-        if answer_is_yes "For installing the 'fontconfig' package needs to be installed. Install?"; then
+        Q="For installing the 'fontconfig' package needs to be installed. Install?"
+        if answer_is_yes ${Q}; then
             direct_install fontconfig
             fc_installed="y"
         fi

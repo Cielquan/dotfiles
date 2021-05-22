@@ -45,7 +45,7 @@ called_locally() {
 if [ -d ~/.dotfiles/.git ]; then
     info "'dotfiles' repo found - Skip cloning."
     if ! called_locally; then
-        error "Please call the script from your local machine: " \
+        error "Please call the script from your local machine:" \
             "~/.dotfiles/bin/00_setup.sh"
         exit 1
     fi
@@ -71,7 +71,7 @@ fi
 if answer_is_yes "Do you want to install the dotfiles?"; then
     info "Installer script's help page:"
     python3 ~/.dotfiles/bin/10_install_dotfiles.py --help
-    info "Please see the script's help page above. If you want to customize the " \
+    info "Please see the script's help page above. If you want to customize the" \
         "install add your parameters before pressing enter."
     printf "Args: "
     read -r ARGV </dev/tty
@@ -79,32 +79,38 @@ if answer_is_yes "Do you want to install the dotfiles?"; then
 fi
 
 printf "\n"
-if answer_is_yes "Do you want to install linux basics? Some following scripts depend on those."; then
+Q="Do you want to install linux basics? Some following scripts depend on those."
+if answer_is_yes ${Q}; then
     ~/.dotfiles/bin/20_linux_setup.sh
 fi
 
 printf "\n"
-if answer_is_yes "Do you want to install additional software for linux?."; then
+Q="Do you want to install additional software for linux?."
+if answer_is_yes ${Q}; then
     ~/.dotfiles/bin/21_additional_software.sh
 fi
 
 printf "\n"
-if answer_is_yes "Do you want to install starship prompt? Its automatically used by bash."; then
+Q="Do you want to install starship prompt? Its automatically used by bash."
+if answer_is_yes ${Q}; then
     ~/.dotfiles/bin/30_prompt_setup.sh
 fi
 
 printf "\n"
-if answer_is_yes "Do you want to install LS-COLORS?"; then
+Q="Do you want to install LS-COLORS?"
+if answer_is_yes ${Q}; then
     ~/.dotfiles/bin/31_ls_colors.sh
 fi
 
 printf "\n"
-if answer_is_yes "Do you want to install coding setup (languages)?"; then
+Q="Do you want to install coding setup (languages)?"
+if answer_is_yes ${Q}; then
     ~/.dotfiles/bin/40_coding_setup.sh
 fi
 
 printf "\n"
-if answer_is_yes "Do you want to install and setup VSCode?"; then
+Q="Do you want to install and setup VSCode?"
+if answer_is_yes ${Q}; then
     ~/.dotfiles/bin/41_vscode_setup.sh
 fi
 

@@ -13,7 +13,8 @@ info "Starting coding setup ..."
 
 PY_VERSIONS="3.6 3.7 3.8 3.9"
 
-if answer_is_yes "Do you want to install python versions ${PY_VERSIONS}?"; then
+Q="Do you want to install python versions ${PY_VERSIONS}?"
+if answer_is_yes ${Q}; then
     add_ppa deadsnakes/ppa
 
     echo ${PY_VERSIONS} | tr ' ' '\n' | while read version; do
@@ -26,7 +27,8 @@ fi
 #   Install and setup poetry
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-if answer_is_yes "Do you want to install poetry?"; then
+Q="Do you want to install poetry?"
+if answer_is_yes ${Q}; then
     info "Installing poetry."
     local link="https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py"
     curl ${CURL_ARGS} ${link} | python3 - -y
@@ -41,7 +43,8 @@ fi
 #   Install rust
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-if answer_is_yes "Do you want to install rust?"; then
+Q="Do you want to install rust?"
+if answer_is_yes ${Q}; then
     info "Installing rust."
     local link="https://sh.rustup.rs"
     curl ${CURL_ARGS} ${link} | sh -s -- -y
@@ -52,7 +55,8 @@ fi
 #   Install node
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-if answer_is_yes "Do you want to install nodeJS?"; then
+Q="Do you want to install nodeJS?"
+if answer_is_yes ${Q}; then
     checked_install nodejs
 fi
 

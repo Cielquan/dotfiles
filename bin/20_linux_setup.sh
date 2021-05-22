@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+# No questions asked
+
 set -e
 
 SCRIPT_DIR=$( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)

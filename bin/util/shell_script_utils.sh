@@ -160,7 +160,7 @@ apt_update() {
     if test_apt_update; then
         apt-get update 1> /dev/null
     else
-        elevate_priv "upgrate"
+        elevate_priv "update"
         sudo apt-get update 1> /dev/null
     fi
     success "Done."

@@ -59,5 +59,9 @@
         "key": "ctrl+shift+c",
         "command": "-copyFilePath",
         "when": "!editorFocus"
+    },
+    {
+        "key": "shift shift",
+        "command": "-workbench.action.showCommands"
     }
 ]

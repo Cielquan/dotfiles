@@ -27,6 +27,7 @@ njpwerner.autodocstring
 # rust-lang.rust
 matklad.rust-analyzer
 snooty.snooty
+timonwong.shellcheck
 
 ### File handles
 mechatroner.rainbow-csv

@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 # Our ~/.profile should already have made a directory with the supported
 # options for us; if not, we won't be wrapping grep(1) with a function at all
 [ -d "${HOME}"/.cache/sh/opt/grep ] || return

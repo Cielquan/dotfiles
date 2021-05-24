@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Make sure the shell is interactive
 case $- in
     *i*) ;;

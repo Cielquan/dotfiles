@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 # Some systems' /etc/profile setups export their prompt strings (PS1, PS2...),
 # which really fouls things up when switching between non-login shells; let's
 # put things right by unsetting each of them to break the export, and then just

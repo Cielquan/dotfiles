@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # enable color support of ls
 if [[ $("${HOME}"/.bashrc.d/util/xterm-color-count.bash) == "256" ]] && [[ -x /usr/bin/dircolors ]]; then
     ([[ -r ${HOME}/.config/dircolors/ls_colors.sh ]] && \

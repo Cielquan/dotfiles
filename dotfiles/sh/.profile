@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 # Add ~/.local/bin to PATH if it exists
 if [ -d "${HOME}"/.local/bin ] ; then
     PATH=${HOME}/.local/bin:${PATH}

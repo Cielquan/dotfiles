@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 # Don't let anyone write(1) to my terminal
 command -p mesg n 2>/dev/null
 

@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 # If the shell is interactive, and ~/.shrc exists, source it
 case $- in
     *i*)

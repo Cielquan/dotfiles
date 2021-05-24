@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Enable simple aliases to be sudo'ed. ("sudone"?)
 # http://www.gnu.org/software/bash/manual/bashref.html#Aliases says: "If the
 # last character of the alias value is a space or tab character, then the next
@@ -114,6 +116,7 @@ export -f dockerbash
 
 alias steam-wine='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Steam/Steam.exe'
 
+
 ### python / pip
 gpip() {
     PIP_REQUIRE_VIRTUALENV="" pip "$@"
@@ -138,11 +141,13 @@ whatsgoingon() {
 }
 export -f whatsgoingon
 
+
 # Create a new directory and enter it
 function mkd() {
 	mkdir -p "$@" && ( cd "$_" || ( echo "cd failed." && return 1 ));
 }
 export -f mkd
+
 
 # Determine size of a file or total size of a directory
 function fs() {
@@ -158,6 +163,7 @@ function fs() {
 	fi;
 }
 export -f fs
+
 
 # Create a data URL from a file
 function dataurl() {

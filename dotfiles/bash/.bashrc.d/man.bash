@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Set 'man' colors
 # shellcheck disable=1091
 source "${HOME}/.bashrc.d/util/color_check.bash"

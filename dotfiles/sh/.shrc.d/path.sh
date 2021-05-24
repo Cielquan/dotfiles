@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 # Function to manage contents of PATH variable within the current shell
 path() {
 

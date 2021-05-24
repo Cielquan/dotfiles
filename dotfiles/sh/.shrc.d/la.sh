@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 # Run ls -A if we can (-A is not POSIX), ls -a otherwise
 la() {
     # Prefer --almost-all (exclude "." and "..") if available

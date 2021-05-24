@@ -35,7 +35,7 @@ unset color_prompt
 PROMPT_COMMAND='ec=$?; test ${ec} = 0 || echo "*** Exit Code: ${ec} ***" >&2'
 # PROMPT_COMMAND equivalent for bash-preexec framework
 precmd_exit_code() { ec=$?; test ${ec} = 0 || echo "*** Exit Code: ${ec} ***" >&2; }
-precmd_functions+=(precmd_exit_code)
+#precmd_functions+=(precmd_exit_code)
 
 # If this is an xterm set the title to user@host:dir
 case "${TERM}" in

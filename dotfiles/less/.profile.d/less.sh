@@ -1,2 +1,2 @@
-LESSKEY=${$HOME}/.config/less/lesskey
+LESSKEY=${HOME}/.config/less/lesskey
 export LESSKEY

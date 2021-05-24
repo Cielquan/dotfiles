@@ -243,7 +243,7 @@ checked_install_via_ppa() {
     FORCE="${3}"
     DEFAULT="${4}"
     if apt-cache search "${package}" | grep -q "${package}"; then
-        success "Found ${package} in your repositories. PPA can be added."
+        success "Found ${package} in your repositories. [optional]"
         ppa_needed="n"
     else
         ppa_needed="y"

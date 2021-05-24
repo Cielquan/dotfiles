@@ -2,13 +2,13 @@
 path() {
 
     # Check first argument to figure out operation
-    case $1 in
+    case ${1} in
 
         # List current directories in PATH
         list|'')
-            set -- "$PATH":
-            while [ -n "$1" ] ; do
-                case $1 in
+            set -- "${PATH}":
+            while [ -n "${1}" ] ; do
+                case ${1} in
                     :*) ;;
                     *) printf '%s\n' "${1%%:*}" ;;
                 esac
@@ -20,10 +20,10 @@ path() {
         _argcheck)
             shift
             if [ "$#" -gt 2 ] ; then
-                printf >&2 'path(): %s: too many arguments\n' "$1"
+                printf >&2 'path(): %s: too many arguments\n' "${1}"
                 return 2
             fi
-            case $2 in
+            case ${2} in
                 *:*)
                     printf >&2 'path(): %s: %s contains colon\n' "$@"
                     return 2
@@ -35,51 +35,51 @@ path() {
         # Add a directory at the start of $PATH
         insert)
             if ! [ "$#" -eq 2 ] ; then
-                set -- "$1" "$PWD"
+                set -- "${1}" "${PWD}"
             fi
             path _argcheck "$@" || return
-            if path check "$2" ; then
+            if path check "${2}" ; then
                 printf >&2 'path(): %s: %s already in PATH\n' "$@"
                 return 1
             fi
-            PATH=${2}${PATH:+:"$PATH"}
+            PATH=${2}${PATH:+:"${PATH}"}
             ;;
 
         # Add a directory to the end of $PATH
         append)
             if ! [ "$#" -eq 2 ] ; then
-                set -- "$1" "$PWD"
+                set -- "${1}" "${PWD}"
             fi
             path _argcheck "$@" || return
-            if path check "$2" ; then
+            if path check "${2}" ; then
                 printf >&2 'path(): %s: %s already in PATH\n' "$@"
                 return 1
             fi
-            PATH=${PATH:+"$PATH":}${2}
+            PATH=${PATH:+"${PATH}":}${2}
             ;;
 
         # Remove a directory from $PATH
         remove)
             if ! [ "$#" -eq 2 ] ; then
-                set -- "$1" "$PWD"
+                set -- "${1}" "${PWD}"
             fi
             path _argcheck "$@" || return
-            if ! path check "$2" ; then
+            if ! path check "${2}" ; then
                 printf >&2 'path(): %s: %s not in PATH\n' "$@"
                 return 1
             fi
             PATH=$(
-                path=:$PATH:
+                path=:${PATH}:
                 path=${path%%:"$2":*}:${path#*:"$2":}
                 path=${path#:}
-                printf '%s:' "$path"
+                printf '%s:' "${path}"
             )
             PATH=${PATH%%:}
             ;;
 
-        # Remove the first directory in $PATH
+        # Remove the first directory in ${PATH}
         shift)
-            case $PATH in
+            case ${PATH} in
                 '')
                     printf >&2 'path(): %s: PATH is empty!\n' "$@"
                     return 1
@@ -96,7 +96,7 @@ path() {
 
         # Remove the last directory in $PATH
         pop)
-            case $PATH in
+            case ${PATH} in
                 '')
                     printf >&2 'path(): %s: PATH is empty!\n' "$@"
                     return 1
@@ -115,10 +115,10 @@ path() {
         check)
             path _argcheck "$@" || return
             if ! [ "$#" -eq 2 ] ; then
-                set -- "$1" "$PWD"
+                set -- "${1}" "${PWD}"
             fi
-            case :$PATH: in
-                *:"$2":*) return 0 ;;
+            case :${PATH}: in
+                *:"${2}":*) return 0 ;;
             esac
             return 1
             ;;
@@ -150,7 +150,7 @@ EOF
 
         # Command not found
         *)
-            printf >&2 'path(): %s: Unknown command (try "help")\n' "$1"
+            printf >&2 'path(): %s: Unknown command (try "help")\n' "${1}"
             return 2
             ;;
     esac

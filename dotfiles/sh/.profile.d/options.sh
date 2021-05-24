@@ -5,27 +5,27 @@ options() {
 
     # Check or create the directory to cache the options
     # Shift the program name off; remaining arguments are the options to check
-    dir=$HOME/.cache/sh/opt/$1
-    prog=$1
+    dir=${HOME}/.cache/sh/opt/${1}
+    prog=${1}
     shift
 
     # Directory already exists; bail out
-    [ -d "$dir" ] && return
+    [ -d "${dir}" ] && return
 
     # Create the directory and step into it
-    mkdir -p -- "$dir" || return
-    cd -- "$dir" || return
+    mkdir -p -- "${dir}" || return
+    cd -- "${dir}" || return
 
     # Write the program's --help output to a file, even if it's empty
     # This probably only works with GNU tools in general
-    "$prog" --help </dev/null >help 2>/dev/null || return
+    "${prog}" --help </dev/null >help 2>/dev/null || return
 
     # Iterate through remaining arguments (desired options), creating files to
     # show they're available if found in the help output
     for opt do
         command grep -q -- \
-            '[^[:alnum:]]--'"$opt"'[^[:alnum:]]' help || continue
-        touch -- "$opt"
+            '[^[:alnum:]]--'"${opt}"'[^[:alnum:]]' help || continue
+        touch -- "${opt}"
     done
 }
 

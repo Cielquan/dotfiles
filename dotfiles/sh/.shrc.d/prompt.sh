@@ -13,6 +13,6 @@ PS4='+ '
 
 # If we have an SSH_CLIENT or SSH_CONNECTION environment variable, put the
 # hostname in PS1 too.
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_CONNECTION" ] ; then
+if [ -n "${SSH_CLIENT}" ] || [ -n "${SSH_CONNECTION}" ] ; then
     PS1=$(hostname -s)'$ '
 fi

@@ -8,7 +8,7 @@ command -p stty -ixon -ctlecho 2>/dev/null
 HISTSIZE=4096
 
 # If HOSTNAME isn't set by this shell, we'll do it
-if [ -z "$HOSTNAME" ] ; then
+if [ -z "${HOSTNAME}" ] ; then
     HOSTNAME=$(uname -n)
 fi
 
@@ -17,14 +17,16 @@ unset -v MAILCHECK
 
 # Load all the POSIX-compatible functions from ~/.shrc.d; more advanced shells
 # like bash will have their own functions in addition to these
-for sh in "$HOME"/.shrc.d/*.sh ; do
-    [ -e "$sh" ] || continue
-    . "$sh"
+for sh in "${HOME}"/.shrc.d/*.sh ; do
+    [ -e "${sh}" ] || continue
+    # shellcheck disable=1090
+    . "${sh}"
 done
 unset -v sh
 
 # If ENV_EXT was set and exists, source that too, then clean it away
-if [ -e "$ENV_EXT" ] ; then
-    . "$ENV_EXT"
+if [ -e "${ENV_EXT}" ] ; then
+    # shellcheck disable=1090
+    . "${ENV_EXT}"
 fi
 unset -v ENV_EXT

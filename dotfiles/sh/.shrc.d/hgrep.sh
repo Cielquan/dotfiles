@@ -8,9 +8,9 @@ hgrep() {
         printf >&2 'hgrep(): Need a pattern\n'
         return 2
     fi
-    if [ -z "$HISTFILE" ] ; then
+    if [ -z "${HISTFILE}" ] ; then
         printf >&2 'hgrep(): HISTFILE unset or null\n'
         return 2
     fi
-    grep "$@" "$HISTFILE"
+    grep "$@" "${HISTFILE}"
 }

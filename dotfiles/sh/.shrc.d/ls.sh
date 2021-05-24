@@ -1,6 +1,6 @@
 # Our ~/.profile should already have made a directory with the supported
 # options for us; if not, we won't be wrapping ls(1) with a function at all
-[ -d "$HOME"/.cache/sh/opt/ls ] || return
+[ -d "${HOME}"/.cache/sh/opt/ls ] || return
 
 # If the system has already aliased ls(1) for us, like Slackware or OpenBSD
 # does, just get rid of it
@@ -23,21 +23,21 @@ ls() {
 
     # GNU options:
     ## Add --block-size=K to always show the filesize in kibibytes
-    if [ -e "$HOME"/.cache/sh/opt/ls/block-size ] ; then
+    if [ -e "${HOME}"/.cache/sh/opt/ls/block-size ] ; then
         set -- --block-size=1024 "$@"
     fi
     ## Add --color if the terminal has at least 8 colors
-    if [ -e "$HOME"/.cache/sh/opt/ls/color ] &&
+    if [ -e "${HOME}"/.cache/sh/opt/ls/color ] &&
             [ "$(exec 2>/dev/null;tput colors||tput Co||echo 0)" -ge 8 ] ; then
         set -- --color=auto "$@"
     fi
     ## Force the new entry quoting off
-    if [ -e "$HOME"/.cache/sh/opt/ls/quoting-style ] ; then
+    if [ -e "${HOME}"/.cache/sh/opt/ls/quoting-style ] ; then
         set -- --quoting-style=literal "$@"
     fi
     ## Add --time-style='+%Y-%m-%d %H:%M:%S' to show the date in my preferred
     ## (fixed) format
-    if [ -e "$HOME"/.cache/sh/opt/ls/time-style ] ; then
+    if [ -e "${HOME}"/.cache/sh/opt/ls/time-style ] ; then
         set -- --time-style='+%Y-%m-%d %H:%M:%S' "$@"
     fi
 

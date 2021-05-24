@@ -32,10 +32,9 @@ unset color_prompt
 
 
 # On error prints error code before next prompt
+# shellcheck disable=SC2154
 PROMPT_COMMAND='ec=$?; test ${ec} = 0 || echo "*** Exit Code: ${ec} ***" >&2'
-# PROMPT_COMMAND equivalent for bash-preexec framework
-precmd_exit_code() { ec=$?; test ${ec} = 0 || echo "*** Exit Code: ${ec} ***" >&2; }
-#precmd_functions+=(precmd_exit_code)
+
 
 # If this is an xterm set the title to user@host:dir
 case "${TERM}" in

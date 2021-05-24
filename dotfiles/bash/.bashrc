@@ -16,13 +16,14 @@ unalias -a
 
 # If ENV is set, source it to get all the POSIX-compatible interactive stuff;
 # we should be able to do this even if we're running a truly ancient Bash
-if [ -n "$ENV" ] ; then
-    . "$ENV"
+if [ -n "${ENV}" ] ; then
+    # shellcheck disable=1090
+    . "${ENV}"
 fi
 
 # Ensure we're using at least version 3.0
 # shellcheck disable=SC2128
-[ -n "$BASH_VERSINFO" ] || return    # Check version array exists (>=2.0)
+[ -n "${BASH_VERSINFO}" ] || return    # Check version array exists (>=2.0)
 ((BASH_VERSINFO[0] >= 3)) || return  # Check actual major version number
 
 # Clear away command_not_found_handle if a system bashrc file set it up
@@ -96,13 +97,14 @@ if ((BASH_VERSINFO[0] >= 4)) ; then
 fi
 
 # Load Bash-specific startup files
-for bash in "$HOME"/.bashrc.d/*.bash ; do
-    [[ -e $bash ]] || continue
-    source "$bash"
+for bash in "${HOME}"/.bashrc.d/*.bash ; do
+    [[ -e ${bash} ]] || continue
+    # shellcheck disable=1090
+    source "${bash}"
 done
 unset -v bash
 
 # Load starship prompt if installed (needs to be called at the end)
 if command -v starship &> /dev/null; then
-    eval "$(starship init $0)"
+    eval "$(starship init "${0}")"
 fi

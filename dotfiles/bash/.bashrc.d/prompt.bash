@@ -8,11 +8,13 @@ function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
-
-source util/color_check.bash
+# shellcheck disable=1091
+source "${HOME}/.bashrc.d/util/color_check.bash"
 
 # https://www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html
-if [ "$color_prompt" = yes ]; then
+# 'color_prompt' comes from the sourced file
+# shellcheck disable=2154
+if [ "${color_prompt}" = yes ]; then
 # std: PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
     PS1='\[\033[0m\]\A `
         `\[\033[0m\]${debian_chroot:+($debian_chroot)}`
@@ -30,15 +32,15 @@ unset color_prompt
 
 
 # On error prints error code before next prompt
-PROMPT_COMMAND='ec=$?; test $ec = 0 || echo "*** Exit Code: $ec ***" >&2'
+PROMPT_COMMAND='ec=$?; test ${ec} = 0 || echo "*** Exit Code: ${ec} ***" >&2'
 # PROMPT_COMMAND equivalent for bash-preexec framework
-precmd_exit_code() { ec=$?; test $ec = 0 || echo "*** Exit Code: $ec ***" >&2; }
+precmd_exit_code() { ec=$?; test ${ec} = 0 || echo "*** Exit Code: ${ec} ***" >&2; }
 precmd_functions+=(precmd_exit_code)
 
 # If this is an xterm set the title to user@host:dir
-case "$TERM" in
+case "${TERM}" in
 xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]${PS1}"
     ;;
 *)
     ;;

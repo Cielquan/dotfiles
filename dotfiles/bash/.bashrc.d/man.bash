@@ -1,7 +1,10 @@
 # Set 'man' colors
-source util/color_check.bash
+# shellcheck disable=1091
+source "${HOME}/.bashrc.d/util/color_check.bash"
 
-if [ "$color_prompt" = yes ]; then
+# 'color_prompt' comes from the sourced file
+# shellcheck disable=2154
+if [ "${color_prompt}" = yes ]; then
 	man() {
 	env \
 	LESS_TERMCAP_mb=$'\e[01;31m' \

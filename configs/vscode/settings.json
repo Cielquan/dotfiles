@@ -348,6 +348,7 @@
     // ==============================
     // reStructuredText
     // ==============================
+    "redhat.telemetry.enabled": false,
     "restructuredtext.builtDocumentationPath": "${workspaceFolder}/docs/build/html",
     "restructuredtext.confPath": "${workspaceFolder}/docs/source",
     "restructuredtext.linter.executablePath": "${workspaceFolder}/.venv/bin/rstcheck",
@@ -355,6 +356,5 @@
         "--config ${workspaceFolder}/tox.ini"
     ],
     "restructuredtext.linter.run": "onSave",
-    "restructuredtext.sphinxBuildPath": "${workspaceFolder}/.venv/bin/sphinx-build",
-    "redhat.telemetry.enabled": false
+    "restructuredtext.sphinxBuildPath": "${workspaceFolder}/.venv/bin/sphinx-build"
 }

@@ -106,5 +106,5 @@ unset -v bash
 
 # Load starship prompt if installed (needs to be called at the end)
 if command -v starship &> /dev/null; then
-    eval "$(starship init "${0}")"
+    eval "$(starship init bash)"
 fi

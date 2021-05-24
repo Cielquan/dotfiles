@@ -80,6 +80,10 @@
     // | COLORS / THEMES                                                               |
     // ---------------------------------------------------------------------------------
     // ==============================
+    // FONTS
+    // ==============================
+    "editor.fontFamily": "'DejaVuSansMono Nerd Font Mono','Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    // ==============================
     // ICON THEME
     // ==============================
     "workbench.iconTheme": "file-icons",

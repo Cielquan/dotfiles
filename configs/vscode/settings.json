@@ -334,6 +334,7 @@
     // ==============================
     // PYTHON
     // ==============================
+    "python.showStartPage": false,
     "python.terminal.activateEnvInCurrentTerminal": false,
     "python.venvPath": "${workspaceFolder}/.venv/bin/activate",
     "python.pythonPath": "${workspaceFolder}/.venv/bin/python",

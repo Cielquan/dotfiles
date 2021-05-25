@@ -103,7 +103,7 @@ DEFAULT="yes"
 if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
 
     if [ -n "${APPDATA}" ]; then
-        copy_target="${APPDATA}/Code/User"
+        copy_target=$(echo "${APPDATA}/Code/User" | sed 's|\\|/|g')
         old_bin="bin"
         new_bin="Scripts"
     else
@@ -125,7 +125,12 @@ if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
 
     # OSify settings.json
     info "OSify configs."
+    # Switch `bin` and `Scripts` for python venvs accoring to OS
     sed -i "s|.venv/${old_bin}|.venv/${new_bin}|g" "${copy_target}/settings.json"
+    # Fix path for `sphinx_docstring_template_custom.mustache` file
+    export old="\"autoDocstring.customTemplatePath\": \".*sphinx_docstring_template_custom.mustache\","
+    export new="\"autoDocstring.customTemplatePath\": \"${copy_target}/sphinx_docstring_template_custom.mustache\","
+    sed -i "s|${old}|${new}|g" "${copy_target}/settings.json"
     success "Done."
 fi
 

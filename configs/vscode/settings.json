@@ -60,7 +60,7 @@
     // ---------------------------------------------------------------------------------
     // | EDITOR                                                                        |
     // ---------------------------------------------------------------------------------
-    "window.zoomLevel": 0,
+    "window.zoomLevel": -0.001,
     "editor.mouseWheelZoom": true,
     "editor.minimap.enabled": true,
     "editor.minimap.scale": 1,

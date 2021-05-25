@@ -256,7 +256,11 @@ checked_install_via_ppa() {
     else
         ppa_added="n"
     fi
-    if [ ${ppa_needed} = "n" ] || [ ${ppa_needed} = ${ppa_added} ]; then
+    if [ ${ppa_needed} = "n" ] && [ ${ppa_added} = "y" ]; then
+        # Install possible updates from optionally added ppa.
+        direct_install "${package}"
+    elif [ ${ppa_needed} = ${ppa_added} ]; then
+        # Install if `not needed & not added` or `needed and added`.
         checked_install "${package}"
     else
         warn "Skip installing ${package}. No repository to install from."

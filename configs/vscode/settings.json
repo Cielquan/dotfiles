@@ -82,7 +82,9 @@
     // ==============================
     // FONTS
     // ==============================
-    "editor.fontFamily": "'DejaVuSansMono Nerd Font Mono','Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontFamily": "'Hack Nerd Font Mono', monospace",
+    "editor.fontLigatures": true,
+    "terminal.integrated.fontFamily": "'Hack Nerd Font Mono', monospace",
     // ==============================
     // ICON THEME
     // ==============================

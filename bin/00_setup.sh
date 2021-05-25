@@ -170,9 +170,17 @@ if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
     "${SCRIPT_DIR}/41_vscode_setup.sh" "--${FORCE:-no}"
 fi
 
+printf "\n"
+info "Installation of a nerdfont is highly recommend if you installed starship prompt."
+Q="Do you want to install the vendored nerdfont?"
+DEFAULT="no"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    "${SCRIPT_DIR}/42_nerdfonts.sh" "--${FORCE:-no}"
+fi
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   FINISH
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 printf "\n"
-success "Setup finished please restart the shell for the new environment."
+success "Setup finished please reboot your system to fully finish the installation."

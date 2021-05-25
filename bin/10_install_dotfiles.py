@@ -17,7 +17,7 @@ CONFIG_TYPE = Dict[str, str]
 HOME_DIR = Path.home()
 DOTFILE_DIR = Path(__file__).parents[1].joinpath("dotfiles").absolute()
 
-GIT_INFOS = ["git_name", "git_email", "git_signingkey"]
+GIT_INFOS = ["git_name", "git_email", "git_signingKey"]
 
 DEFAULT_BACKUP_SUFFIX = ".df.bak"
 INSTALL_LISTS = {
@@ -96,6 +96,8 @@ def create_git_user_file() -> None:
         "[user]\n"
     )
 
+    print("## For the git config some data is required. The signingkey is optional.")
+
     for info in GIT_INFOS:
         try:
             data = input(f"## Please enter your {info}: ").strip()
@@ -105,7 +107,7 @@ def create_git_user_file() -> None:
                 f"\nERROR Could not get user input for {info}. "
                 f"Please check the config file and add data: {file_path}"
             )
-        if info == "git_signingkey" and data == "":
+        if info == "git_signingKey" and data == "":
             continue
         config_text += info[4:] + "=" + data + "\n"
 

@@ -5,13 +5,13 @@
     "telemetry.enableTelemetry": false,
     "files.autoSave": "onFocusChange",
     "workbench.startupEditor": "newUntitledFile",
+    "workbench.editor.untitled.hint": "hidden",
     // ---------------------------------------------------------------------------------
     // | TERMINAL                                                                      |
     // ---------------------------------------------------------------------------------
     "terminal.integrated.tabs.enabled": true,
     "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.cursorStyle": "block",
-    "terminal.integrated.fontFamily": "",
     "terminal.integrated.profiles.linux": {
         "bash": {
             "path": "bash",

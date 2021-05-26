@@ -82,9 +82,9 @@
     // ==============================
     // FONTS
     // ==============================
-    "editor.fontFamily": "'Hack Nerd Font Mono', monospace",
+    "editor.fontFamily": "'Hack Nerd Font Mono', 'Hack NF', Consolas, monospace",
     "editor.fontLigatures": true,
-    "terminal.integrated.fontFamily": "'Hack Nerd Font Mono', monospace",
+    "terminal.integrated.fontFamily": "'Hack Nerd Font Mono', 'Hack NF', Consolas, monospace",
     // ==============================
     // ICON THEME
     // ==============================

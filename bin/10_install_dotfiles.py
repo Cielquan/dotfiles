@@ -80,6 +80,11 @@ def install(install_list: INSTALL_LIST_TYPE, config: CONFIG_TYPE) -> None:
 
     if "git" in install_list:
         create_git_user_file()
+        print(
+            "WARNING The gitconfig uses 'bright' colors added in version 2.26.0. "
+            "Please make sure that your git version is greater or equal elsewise you "
+            "will experience errors when running 'git'."
+        )
 
     print("SUCCESS Installing dotfiles finished ...")
 

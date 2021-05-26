@@ -24,9 +24,6 @@ link="https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS"
 # shellcheck disable=2086
 curl ${CURL_ARGS} --create-dirs -o "$dircolors_dir/LS_COLORS" "${link}"
 success "Done."
-info "Install LS_COLORS."
-dircolors -b "$dircolors_dir/LS_COLORS" > "$dircolors_dir/ls_colors.sh"
-success "Done."
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   FINISH

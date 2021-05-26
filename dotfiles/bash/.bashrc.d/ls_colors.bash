@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 
 # enable color support of ls
-if [[ $("${HOME}"/.bashrc.d/util/xterm-color-count.bash) == "256" ]] && [[ -x /usr/bin/dircolors ]]; then
-    ([[ -r ${HOME}/.config/dircolors/ls_colors.sh ]] && \
-        eval "$(dircolors -b "${HOME}"/.config/dircolors/ls_colors.sh)") || \
+# shellcheck disable=1091
+. "${HOME}"/.bashrc.d/util/xterm-color-count.bash
+
+if [[ -x /usr/bin/dircolors ]]; then
+    if [[ -r "${HOME}"/.config/dircolors/LS_COLORS ]] && [[ "${SUPPORTED_COLORS}" == "256" ]]; then
+        eval "$(dircolors -b "${HOME}"/.config/dircolors/LS_COLORS)"
+    else
         eval "$(dircolors -b)"
+    fi
 fi

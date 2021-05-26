@@ -31,5 +31,5 @@ fi
 
 
 SUPPORTED_COLORS=${max}
+unset max
 export SUPPORTED_COLORS
-echo "${SUPPORTED_COLORS}"

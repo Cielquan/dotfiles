@@ -5,5 +5,3 @@ find way to call script directly not DL + install call (problem with user input)
 rewrite script 10 as shell script ?
 
 check fonts on win
-
-add check for git version .. for bright colors >=2.26.0 is needed

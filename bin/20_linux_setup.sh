@@ -18,25 +18,30 @@ info "Starting basic linux setup ..."
 #   Install basic linux stuff
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-PACKAGES="nano curl unzip htop"
-
 apt_update
 
 direct_install ca-certificates apt-transport-https
 
-info "Upgading system."
-if test_apt_install; then
-    sudo=""
-else
-    elevate_priv "upgrade"
-    sudo="sudo"
-fi
-${sudo} apt-get dist-upgrade -y 1> /dev/null
-success "Done."
+upgrade_system() {
+    info "Upgading system."
+    if test_apt_install; then
+        sudo=""
+    else
+        elevate_priv "upgrade"
+        sudo="sudo"
+    fi
+    ${sudo} apt-get dist-upgrade -y 1> /dev/null
+    success "Done."
+}
+upgrade_system
 
-echo "${PACKAGES}" | tr ' ' '\n' | while read -r package; do
-    checked_install "${package}"
-done
+install_packages() {
+    PACKAGES="${1}"
+    echo "${PACKAGES}" | tr ' ' '\n' | while read -r package; do
+        checked_install "${package}"
+    done
+}
+install_packages "nano curl unzip htop"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   FINISH

@@ -114,8 +114,8 @@ if [ -n "${FORCE-}" ]; then
 fi
 
 Q="Do you want to install the dotfiles?"
-DEFAULT="yes"
-if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+DEFAULT_ANSWER="yes"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
     if [ -z "${FORCE-}" ]; then
         info "Installer script's help page:"
         python3 "${SCRIPT_DIR}/10_install_dotfiles.py" --help
@@ -130,51 +130,51 @@ fi
 
 printf "\n"
 Q="Do you want to install linux basics? Some following scripts depend on those."
-DEFAULT="yes"
-if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+DEFAULT_ANSWER="yes"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
     "${SCRIPT_DIR}/20_linux_setup.sh"
 fi
 
 printf "\n"
 Q="Do you want to install additional software for linux?."
-DEFAULT="yes"
-if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+DEFAULT_ANSWER="yes"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
     "${SCRIPT_DIR}/21_additional_software.sh" "--${FORCE:-no}"
 fi
 
 printf "\n"
 Q="Do you want to install starship prompt? Its automatically used by bash."
-DEFAULT="no"
-if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+DEFAULT_ANSWER="no"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
     "${SCRIPT_DIR}/30_prompt_setup.sh" "--${FORCE:-no}"
 fi
 
 printf "\n"
 Q="Do you want to install LS-COLORS?"
-DEFAULT="yes"
-if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+DEFAULT_ANSWER="yes"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
     "${SCRIPT_DIR}/31_ls_colors.sh"
 fi
 
 printf "\n"
 Q="Do you want to install coding setup (languages)?"
-DEFAULT="no"
-if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+DEFAULT_ANSWER="no"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
     "${SCRIPT_DIR}/40_coding_setup.sh" "--${FORCE:-no}"
 fi
 
 printf "\n"
 Q="Do you want to install and setup VSCode?"
-DEFAULT="no"
-if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+DEFAULT_ANSWER="no"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
     "${SCRIPT_DIR}/41_vscode_setup.sh" "--${FORCE:-no}"
 fi
 
 printf "\n"
 info "Installation of a nerdfont is highly recommend if you installed starship prompt."
 Q="Do you want to install the vendored nerdfont?"
-DEFAULT="no"
-if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+DEFAULT_ANSWER="no"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
     "${SCRIPT_DIR}/42_nerdfonts.sh" "--${FORCE:-no}"
 fi
 

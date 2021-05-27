@@ -42,8 +42,8 @@ info "Installing nerdfonts ..."
 
 install_nerdfonts() {
     Q="Do you want to install vendored nerdfonts?"
-    DEFAULT="yes"
-    if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    DEFAULT_ANSWER="yes"
+    if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
 
         if [ -n "${APPDATA}" ]; then
             font_target_dir="/c/Windows/Fonts"
@@ -75,8 +75,8 @@ install_nerdfonts() {
             if ! installed fc-cache; then
                 fc_installed="n"
                 Q="For installation the 'fontconfig' package needs to be installed. Install?"
-                DEFAULT="yes"
-                if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+                DEFAULT_ANSWER="yes"
+                if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
                     direct_install fontconfig
                     fc_installed="y"
                 fi

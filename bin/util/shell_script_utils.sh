@@ -69,7 +69,7 @@ success() {
 answer_is_yes() {
     QUESTION="${1}"
     FORCE="${2}"
-    YN="${3}" # Default
+    YN="${3}" # Default answer
     if [ -z "${FORCE-}" ]; then
         printf '%b' "${BOLD}${CYAN}[?]${NO_COLOR} ${CYAN}${QUESTION} ${BOLD}[y/N] ${NO_COLOR}"
         set +e

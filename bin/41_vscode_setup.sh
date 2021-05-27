@@ -42,8 +42,8 @@ info "Starting VSCode setup ..."
 
 install_code() {
     Q="Do you want to install VSCode?"
-    DEFAULT="yes"
-    if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    DEFAULT_ANSWER="yes"
+    if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
         if installed code; then
             info "VSCode is already installed."
         else
@@ -72,8 +72,8 @@ install_code
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 install_code_extensions() {
     Q="Do you want to install VSCode extionsions from the list?"
-    DEFAULT="yes"
-    if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    DEFAULT_ANSWER="yes"
+    if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
         info "Installing VSCode extensions."
         while read -r line; do
             # skip empty line and lines staring with '#'
@@ -105,8 +105,8 @@ install_code_extensions
 
 copy_code_configs() {
     Q="Do you want to copy the VSCode configuration files?"
-    DEFAULT="yes"
-    if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    DEFAULT_ANSWER="yes"
+    if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
 
         if [ -n "${APPDATA}" ]; then
             copy_target=$(echo "${APPDATA}/Code/User" | sed 's|\\|/|g')

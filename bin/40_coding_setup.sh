@@ -43,8 +43,8 @@ info "Starting coding setup ..."
 install_python_versions() {
     PY_VERSIONS="${1}"
     Q="Do you want to install python versions ${PY_VERSIONS}?"
-    DEFAULT="yes"
-    if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    DEFAULT_ANSWER="yes"
+    if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
         add_ppa deadsnakes/ppa
 
         echo "${PY_VERSIONS}" | tr ' ' '\n' | while read -r version; do
@@ -61,8 +61,8 @@ install_python_versions "3.6 3.7 3.8 3.9"
 
 install_poetry() {
     Q="Do you want to install poetry?"
-    DEFAULT="yes"
-    if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    DEFAULT_ANSWER="yes"
+    if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
         info "Installing poetry."
         link="https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py"
         # shellcheck disable=2086
@@ -83,8 +83,8 @@ install_poetry
 
 install_rust() {
     Q="Do you want to install rust?"
-    DEFAULT="yes"
-    if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    DEFAULT_ANSWER="yes"
+    if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
         info "Installing rust."
         link="https://sh.rustup.rs"
         # shellcheck disable=2086
@@ -100,8 +100,8 @@ install_rust
 
 install_nodejs() {
     Q="Do you want to install nodeJS?"
-    DEFAULT="yes"
-    if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    DEFAULT_ANSWER="yes"
+    if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
         checked_install nodejs
     fi
 }

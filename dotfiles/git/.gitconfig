@@ -11,18 +11,18 @@
 	amend = commit --amend --no-edit --reuse-message=HEAD
     br = branch
     # Remove branches that have already been merged
-	brdm = "!git branch --merged | grep --invert-match '\\*' | xargs --max-args=1 git branch --delete"
+	brdm = !"git branch --merged | grep --invert-match '\\*' | xargs --max-args=1 git branch --delete"
     branches = branch --all
     c = commit
     # Commit all changes.
     ca = !git add --all && git commit --verbose --verbose
     # Find commits by source code.
-    cfc = "!f() { \
-        git log --decorate --pretty=oneliner -S\"$1\"; \
+    cfc = !"f() { \
+        git log --decorate --pretty=oneliner -S\"${1}\"; \
     }; f"
     # Find commits by commit message.
-    cfm = "!f() { \
-        git log --decorate --pretty=oneliner --grep=\"$1\"; \
+    cfm = !"f() { \
+        git log --decorate --pretty=oneliner --grep=\"${1}\"; \
     }; f"
     cl = clone
     # `git clean -d --force`: remove untracked files and directories from the working tree
@@ -31,39 +31,42 @@
     cm = commit --message
     cmv = commit --no-verify --message
 	# Switch to a branch, creating it if necessary
-	co = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+	co = !"f() { git checkout -b \"${1}\" 2> /dev/null || git checkout \"${1}\"; }; f"
 	# List contributors with number of commits
 	contributors = shortlog --summary --numbered --email
     cp = cherry-pick
     # Credit an author on the latest commit.
-    credit = "!f() { \
-        if [ -n \"$1\" ] && [ -n \"$2\" ]; then \
-            git commit --amend --author \"$1 <$2>\" --no-edit --reuse-message=HEAD; \
+    credit = !"f() { \
+        if [ -n \"${1}\" ] && [ -n \"${2}\" ]; then \
+            git commit --amend --author \"${1} <${2}>\" --no-edit --reuse-message=HEAD; \
         fi \
     }; f"
     # Credit a co-author on the latest commit.
     # https://help.github.com/en/articles/creating-a-commit-with-multiple-authors
     # https://help.github.com/en/articles/creating-a-commit-on-behalf-of-an-organization
-    credit-co-author = "!f() { \
-        if [ -n \"$1\" ] && [ -n \"$2\" ]; then \
-            GIT_EDITOR=\"git interpret-trailers --in-place --trailer='Co-authored-by: $1 <$2>'\" git commit --amend; \
+    credit-co-author = !"f() { \
+        if [ -n \"${1}\" ] && [ -n \"${2}\" ]; then \
+            GIT_EDITOR=\"git interpret-trailers --in-place --trailer='Co-authored-by: ${1} <${2}>'\" git commit --amend; \
         fi \
     }; f"
     # TODO: check diff commands
-    # d = diff -- . ':!*package-lock.json' ':!*yarn.lock'
-    # dc = diff --cached -- . ':!*package-lock.json' ':!*yarn.lock'
-	# # Show the diff between the latest commit and the current state
-	# d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
-	# # `git di $number` shows the diff between the state `$number` revisions ago and the current state
-	# di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
-    dev = checkout development
+    d1 = diff -- . ':!*package-lock.json' ':!*yarn.lock'
+    dc = diff --cached -- . ':!*package-lock.json' ':!*yarn.lock'
+	# Show the diff between the latest commit and the current state
+	d2 = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+	# `git di $number` shows the diff between the state `$number` revisions ago and the current state
+	di = !"f() { git diff --patch-with-stat HEAD~${1}; }; git diff-index --quiet HEAD -- || clear; f"
+    dev = !"git checkout development 2> /dev/null || \
+        git checkout develop 2> /dev/null || \
+        git checkout devel 2> /dev/null || \
+        git checkout dev 2> /dev/null"
     f = fetch
     # Allow `$ git git git...`
     git = !exec git
     # # List remote branches.
-    rbranches = "!f() { \
+    rbranches = !"f() { \
         remote=\"${1:-origin}\"; \
-        git ls-remote --heads \"$remote\"; \
+        git ls-remote --heads \"${remote}\"; \
     }; f"
     lg = log --graph --format=oneliner
     lgs = log --graph --format=onelinersig
@@ -78,18 +81,18 @@
     mgv = merge --verify-signatures
     # Merge GitHub pull request on top of the current branch or,
     # if a branch name is specified, on top of the specified branch.
-    mpr = "!f() { \
+    mpr = !"f() { \
         current_branch=\"$(git symbolic-ref --short HEAD)\"; \
-        branch=\"${2:-$current_branch}\"; \
+        branch=\"${2:-${current_branch}}\"; \
         \
-        if [ $(printf \"%s\" \"$1\" | grep '^[0-9]\\+$' > /dev/null; printf $?) -eq 0 ]; then \
-            git fetch origin refs/pull/$1/head:pr/$1 && \
-            git checkout -B \"$branch\" && \
-            git rebase \"$branch\" pr/$1 && \
-            git checkout -B \"$branch\" && \
-            git merge pr/$1 && \
-            git branch --delete --force pr/$1 && \
-            git commit --amend --message=\"$(git log --max-count=1 --pretty=%B)\n\nClose: #$1\"; \
+        if [ $(printf \"%s\" \"${1}\" | grep '^[0-9]\\+$' > /dev/null; printf $?) -eq 0 ]; then \
+            git fetch origin refs/pull/${1}/head:pr/${1} && \
+            git checkout -B \"${branch}\" && \
+            git rebase \"${branch}\" pr/${1} && \
+            git checkout -B \"${branch}\" && \
+            git merge pr/${1} && \
+            git branch --delete --force pr/${1} && \
+            git commit --amend --message=\"$(git log --max-count=1 --pretty=%B)\n\nClose: #${1}\"; \
         fi \
     }; f"
     pl = pull
@@ -97,12 +100,12 @@
     remotes = remote --verbose
     rb = rebase
 	# Interactive rebase with the given number of latest commits
-	rbi = "!f() { git rebase --interactive HEAD~$1; }; f"
+	rbi = !"f() { git rebase --interactive HEAD~${1}; }; f"
 	# Overwrite tag locally and remove on origin
-	retag = "!f() { \
-        git tag --delete $1 || (echo 'tag does not exist. Aborting ...' && exit 1) \
-        git push origin :refs/tags/$1 || echo 'tag does not exist on origin. Skipping ...'  \
-        git tag $1; \
+	retag = !"f() { \
+        git tag --delete ${1} || (echo 'tag does not exist. Aborting ...' && exit 1) \
+        git push origin :refs/tags/${1} || echo 'tag does not exist on origin. Skipping ...'  \
+        git tag ${1}; \
     }; f"
     s = status --short
     # Create empty commit to let CI skip
@@ -116,10 +119,10 @@
     # `git gc`: cleanup unnecessary files and optimize the local repository
     trim = !git remote prune origin && git gc
     # Undo HEAD~X commit(s) in Y style (default: X=1 Y=soft)
-    uncommit = "!f() { \
+    uncommit = !"f() { \
         amount=\"${1:-1}\"; \
         style=\"${2:-soft}\"; \
-        git reset --$style \"HEAD~$amount\"; \
+        git reset --${style} \"HEAD~${amount}\"; \
     }; f"
     # Remove file(s) from stage
     unstage = reset HEAD --

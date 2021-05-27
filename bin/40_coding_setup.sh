@@ -15,11 +15,11 @@ while [ "$#" -gt 0 ]; do
     case "$1" in
 
     -f | -y | --force | --yes)
-        FORCE="yes"
+        FORCE="y"
         shift 1
         ;;
 
-    -- | -n | --no)
+    -)
         shift 1
         ;;
 

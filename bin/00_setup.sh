@@ -58,16 +58,16 @@ while [ "$#" -gt 0 ]; do
         ;;
 
     -f | -y | --force | --yes)
-        FORCE="yes"
-        shift 1
-        ;;
-
-    -- | -n | --no)
+        FORCE="y"
         shift 1
         ;;
 
     -d=* | --dotfiles-dir=*)
         DOTFILES_DIR="${1#*=}"
+        shift 1
+        ;;
+
+    -)
         shift 1
         ;;
 
@@ -139,14 +139,14 @@ printf "\n"
 Q="Do you want to install additional software for linux?."
 DEFAULT="yes"
 if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
-    "${SCRIPT_DIR}/21_additional_software.sh" "--${FORCE:-no}"
+    "${SCRIPT_DIR}/21_additional_software.sh" "-${FORCE}"
 fi
 
 printf "\n"
 Q="Do you want to install starship prompt? Its automatically used by bash."
 DEFAULT="no"
 if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
-    "${SCRIPT_DIR}/30_prompt_setup.sh" "--${FORCE:-no}"
+    "${SCRIPT_DIR}/30_prompt_setup.sh" "-${FORCE}"
 fi
 
 printf "\n"
@@ -160,14 +160,14 @@ printf "\n"
 Q="Do you want to install coding setup (languages)?"
 DEFAULT="no"
 if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
-    "${SCRIPT_DIR}/40_coding_setup.sh" "--${FORCE:-no}"
+    "${SCRIPT_DIR}/40_coding_setup.sh" "-${FORCE}"
 fi
 
 printf "\n"
 Q="Do you want to install and setup VSCode?"
 DEFAULT="no"
 if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
-    "${SCRIPT_DIR}/41_vscode_setup.sh" "--${FORCE:-no}"
+    "${SCRIPT_DIR}/41_vscode_setup.sh" "-${FORCE}"
 fi
 
 printf "\n"
@@ -175,7 +175,7 @@ info "Installation of a nerdfont is highly recommend if you installed starship p
 Q="Do you want to install the vendored nerdfont?"
 DEFAULT="no"
 if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
-    "${SCRIPT_DIR}/42_nerdfonts.sh" "--${FORCE:-no}"
+    "${SCRIPT_DIR}/42_nerdfonts.sh" "-${FORCE}"
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

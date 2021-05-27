@@ -58,16 +58,16 @@ while [ "$#" -gt 0 ]; do
         ;;
 
     -f | -y | --force | --yes)
-        FORCE="yes"
-        shift 1
-        ;;
-
-    -- | -n | --no)
+        FORCE="y"
         shift 1
         ;;
 
     -d=* | --dotfiles-dir=*)
         DOTFILES_DIR="${1#*=}"
+        shift 1
+        ;;
+
+    -)
         shift 1
         ;;
 
@@ -138,15 +138,15 @@ fi
 printf "\n"
 Q="Do you want to install additional software for linux?."
 DEFAULT_ANSWER="yes"
-if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
-    "${SCRIPT_DIR}/21_additional_software.sh" "--${FORCE:-no}"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    "${SCRIPT_DIR}/21_additional_software.sh" "-${FORCE}"
 fi
 
 printf "\n"
 Q="Do you want to install starship prompt? Its automatically used by bash."
 DEFAULT_ANSWER="no"
-if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
-    "${SCRIPT_DIR}/30_prompt_setup.sh" "--${FORCE:-no}"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    "${SCRIPT_DIR}/30_prompt_setup.sh" "-${FORCE}"
 fi
 
 printf "\n"
@@ -159,23 +159,23 @@ fi
 printf "\n"
 Q="Do you want to install coding setup (languages)?"
 DEFAULT_ANSWER="no"
-if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
-    "${SCRIPT_DIR}/40_coding_setup.sh" "--${FORCE:-no}"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    "${SCRIPT_DIR}/40_coding_setup.sh" "-${FORCE}"
 fi
 
 printf "\n"
 Q="Do you want to install and setup VSCode?"
 DEFAULT_ANSWER="no"
-if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
-    "${SCRIPT_DIR}/41_vscode_setup.sh" "--${FORCE:-no}"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    "${SCRIPT_DIR}/41_vscode_setup.sh" "-${FORCE}"
 fi
 
 printf "\n"
 info "Installation of a nerdfont is highly recommend if you installed starship prompt."
 Q="Do you want to install the vendored nerdfont?"
 DEFAULT_ANSWER="no"
-if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
-    "${SCRIPT_DIR}/42_nerdfonts.sh" "--${FORCE:-no}"
+if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT}"; then
+    "${SCRIPT_DIR}/42_nerdfonts.sh" "-${FORCE}"
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

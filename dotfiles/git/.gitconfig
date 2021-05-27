@@ -30,8 +30,7 @@
     cleanup = !git clean -d --force && git stash clear
     cm = commit --message
     cmv = commit --no-verify --message
-	# Switch to a branch, creating it if necessary
-	co = !"f() { git checkout -b \"${1}\" 2> /dev/null || git checkout \"${1}\"; }; f"
+    co = checkout
 	# List contributors with number of commits
 	contributors = shortlog --summary --numbered --email
     cp = cherry-pick
@@ -63,6 +62,8 @@
     f = fetch
     # Allow `$ git git git...`
     git = !exec git
+    # Switch to a branch, creating it if necessary
+	go = !"f() { git checkout -b \"${1}\" 2> /dev/null || git checkout \"${1}\"; }; f"
     # # List remote branches.
     rbranches = !"f() { \
         remote=\"${1:-origin}\"; \

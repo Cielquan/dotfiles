@@ -189,15 +189,29 @@ install_dotfiles() {
 }
 
 git_user_data() {
-    git_name=
-    git_email=
-    git_signingKey=
+    GIT_USER_FILE="${HOME}/.gitconfig.d/user.gitconfig"
 
-    "# WARNING !!!\n" \
-    "# This file was created by the dotfiles script.\n" \
-    "# Changes are overwritten when rerunning the script.\n" \
-    "# The file is deleted when running the script to uninstall dotfiles.\n\n" \
-    "[user]\n"
+    question "Please enter your name used for git: "
+    read -r git_name < /dev/tty
+    question "Please enter your email used for git: "
+    read -r git_email < /dev/tty
+    question "Please enter your signingKey used for git: "
+    read -r git_signingKey < /dev/tty
+
+cat << EOF > "${GIT_USER_FILE}"
+# WARNING !!!
+# This file was created by the dotfiles script.
+# Changes are overwritten when rerunning the script.
+# The file is deleted when running the script to uninstall dotfiles.
+
+[user]
+    name=${git_name}
+    email=${git_email}
+EOF
+
+    if [ -n "${git_signingKey}" ]; then
+        echo "    signingKey=${git_signingKey}" >> "${GIT_USER_FILE}"
+    fi
 }
 
 git_warning() {

@@ -99,10 +99,11 @@ install_rust
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 install_nodejs() {
-    Q="Do you want to install nodeJS?"
+    Q="Do you want to install nodeJS and npm?"
     DEFAULT_ANSWER="yes"
     if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
         checked_install nodejs
+        checked_install npm
     fi
 }
 install_nodejs

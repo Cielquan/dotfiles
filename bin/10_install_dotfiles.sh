@@ -212,6 +212,8 @@ EOF
     if [ -n "${git_signingKey}" ]; then
         echo "    signingKey=${git_signingKey}" >> "${GIT_USER_FILE}"
     fi
+
+    success "Created 'user.gitconfig' file."
 }
 
 git_warning() {

@@ -68,6 +68,7 @@ alias dupgrade='sudo apt dist-upgrade'
 
 ### Shortcuts
 alias c='clear' # Shortcut for clear
+alias g='git'
 alias sha1='openssl sha1' # Shortcut for openssl sha1
 
 

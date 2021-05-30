@@ -160,6 +160,7 @@
 
     abbrev = 12
     attributesFile = ~/.gitconfig.d/global.gitattributes
+    autocrlf = input
     editor = nano
     excludesFile = ~/.gitconfig.d/global.gitignore
     preloadIndex = true

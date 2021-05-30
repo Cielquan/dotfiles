@@ -216,6 +216,18 @@ EOF
     success "Created 'user.gitconfig' file."
 }
 
+git_osinfy_config() {
+    GIT_CONFIG_FILE="${HOME}/.gitconfig"
+    if [ -n "${APPDATA}" ]; then
+        old="autocrlf = input"
+        new="autocrlf = true"
+    else
+        old="autocrlf = true"
+        new="autocrlf = input"
+    fi
+    sed -i "s|${old}|${new}|g" "${GIT_CONFIG_FILE}"
+}
+
 git_warning() {
     warn "WARNING The gitconfig uses 'bright' colors added in git version 2.26.0." \
         "Please make sure that your git version is greater or equal elsewise you will" \
@@ -226,6 +238,7 @@ git_setup() {
     DIRS=",$(cat "${DIR_LIST}"),"
     if [ "${DIRS}" = ",all," ] || [ "${DIRS#*,git,}" != "${DIRS}" ]; then
         git_user_data
+        git_osinfy_config
         git_warning
     fi
 }

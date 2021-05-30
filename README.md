@@ -6,7 +6,6 @@ which is a python script.
 Therefore you need:
 - POSIX compliant shell
 - apt package manager
-- python >3.6
 
 # Usage
 

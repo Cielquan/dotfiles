@@ -117,15 +117,11 @@ Q="Do you want to install the dotfiles?"
 DEFAULT_ANSWER="yes"
 if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
     if [ -z "${FORCE-}" ]; then
-        info "Installer script's help page:"
-        python3 "${SCRIPT_DIR}/10_install_dotfiles.py" --help
-        info "Please see the script's help page above. If you want to customize the" \
-            "install add your parameters before pressing enter."
-        printf "Args: "
+        question "Do you want to add argument to the script call? Args: "
         read -r ARGV </dev/tty
     fi
     # shellcheck disable=2086
-    python3 "${SCRIPT_DIR}/10_install_dotfiles.py" ${ARGV}
+    "${SCRIPT_DIR}/10_install_dotfiles.sh" ${ARGV}
 fi
 
 printf "\n"

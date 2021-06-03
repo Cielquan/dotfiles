@@ -99,11 +99,33 @@ install_rust
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 install_nodejs() {
-    Q="Do you want to install nodeJS and npm?"
+    Q="Do you want to install nodeJS?"
     DEFAULT_ANSWER="yes"
     if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
-        checked_install nodejs
-        checked_install npm
+        info "Downloading and running NVM."
+        link="https://github.com/nvm-sh/nvm/releases/latest"
+        # shellcheck disable=2086
+        current_version=$(curl ${CURL_ARGS} -w "%{url_effective}" -o /dev/null ${link} | grep -Po 'v\d+\.\d+\.\d+')
+        link="https://raw.githubusercontent.com/nvm-sh/nvm/${current_version}/install.sh"
+        # shellcheck disable=2086
+        curl ${CURL_ARGS} --create-dirs -o- "${link}" | bash
+        success "Done."
+
+        info "Installing latest node."
+        nvm install node --latest-npm
+        success "Done."
+
+        info "Using installed node."
+        nvm use node
+        success "Done."
+
+        Q="Do you want to install nodeJS package manager 'yarn' globally?"
+        DEFAULT_ANSWER="yes"
+        if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
+            elevate_priv "install 'yarn' globally"
+            sudo npm install -g yarn
+            success "Done."
+        fi
     fi
 }
 install_nodejs

@@ -73,6 +73,11 @@ install_poetry() {
         # shellcheck disable=1091
         . "${HOME}/.poetry/env" && poetry config virtualenvs.in-project true
         success "Done."
+        Q="Do you want to add completion for poetry in bash?"
+        DEFAULT_ANSWER="yes"
+        if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
+            poetry completions bash > /etc/bash_completion.d/poetry.bash-completion
+        fi
     fi
 }
 install_poetry

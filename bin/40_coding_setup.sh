@@ -131,6 +131,19 @@ install_nodejs() {
 install_nodejs
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   Install ruby
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+install_ruby() {
+    Q="Do you want to install ruby?"
+    DEFAULT_ANSWER="yes"
+    if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
+        checked_install ruby-full
+    fi
+}
+install_ruby
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   FINISH
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

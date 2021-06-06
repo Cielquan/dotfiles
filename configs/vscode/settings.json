@@ -75,6 +75,20 @@
             "filenamePattern": "*.ipynb"
         }
     ],
+    "files.associations": {
+        ".babelrc": "json",
+        ".csslintrc": "json",
+        "cargo.lock": "toml",
+        ".eslintignore": "ignore",
+        ".htmlhintrc": "json",
+        ".htmllintrc": "jsonc",
+        ".prettierignore": "ignore",
+        ".prettierrc": "json",
+        "poetry.lock": "toml",
+        "*.rst_t": "jinja",
+        ".vuerc": "json",
+        ".yamllint": "yaml"
+    },
     "diffEditor.ignoreTrimWhitespace": false,
     // ---------------------------------------------------------------------------------
     // | COLORS / THEMES                                                               |

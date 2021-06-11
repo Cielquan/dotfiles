@@ -13,11 +13,16 @@ CoenraadS.bracket-pair-colorizer-2
 oderwat.indent-rainbow
 usernamehw.errorlens
 file-icons.file-icons
+# vscode-icons-team.vscode-icons
+
+### Better editor - functional
+formulahendry.auto-rename-tag
 
 ### Additional utils
 Gruntfuggly.todo-tree
 patbenatar.advanced-new-file
 eamodio.gitlens
+# ritwickdey.liveserver
 
 ### Langs
 VisualStudioExptTeam.vscodeintellicode
@@ -29,6 +34,9 @@ matklad.rust-analyzer
 snooty.snooty
 timonwong.shellcheck
 
+### Snippets
+dsznajder.es7-react-js-snippets
+
 ### File handles
 mechatroner.rainbow-csv
 alexcvzz.vscode-sqlite
@@ -39,5 +47,5 @@ sleistner.vscode-fileutils
 formulahendry.code-runner
 
 ### Spelling
-# ban.spellright (inactive)
-# streetsidesoftware.code-spell-checker (inactive)
+# ban.spellright
+# streetsidesoftware.code-spell-checker

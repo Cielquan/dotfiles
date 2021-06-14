@@ -4,6 +4,7 @@ samuelcolvin.jinjahtml
 lextudio.restructuredtext
 bungcip.better-toml
 redhat.vscode-yaml
+mtxr.sqltools
 
 ### Keybindings
 k--kato.intellij-idea-keybindings

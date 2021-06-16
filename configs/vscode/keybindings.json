@@ -63,5 +63,9 @@
     {
         "key": "shift shift",
         "command": "-workbench.action.showCommands"
+    },
+    {
+        "key": "shift shift",
+        "command": "-workbench.action.quickOpen"
     }
 ]

@@ -44,6 +44,39 @@
         "command": "-workbench.action.files.newUntitledFile"
     },
     // ==============================
+    // rename with F2
+    // ==============================
+    {
+        "key": "f2",
+        "command": "editor.action.rename",
+        "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "shift+f6",
+        "command": "-editor.action.rename",
+        "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "f2",
+        "command": "renameFile",
+        "when": "explorerViewletVisible && filesExplorerFocus"
+    },
+    {
+        "key": "shift+f6",
+        "command": "-renameFile",
+        "when": "explorerViewletVisible && filesExplorerFocus"
+    },
+    {
+        "key": "f2",
+        "command": "editor.action.changeAll",
+        "when": "editorTextFocus && !editorHasRenameProvider && !editorReadonly"
+    },
+    {
+        "key": "shift+f6",
+        "command": "-editor.action.changeAll",
+        "when": "editorTextFocus && !editorHasRenameProvider && !editorReadonly"
+    },
+    // ==============================
     // remove IntelliJ keymap bindings
     // ==============================
     {

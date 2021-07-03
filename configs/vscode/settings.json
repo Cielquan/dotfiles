@@ -372,6 +372,18 @@
     "autoDocstring.includeExtendedSummary": true,
     "autoDocstring.customTemplatePath": "~/.config/Code/User/sphinx_docstring_template_custom.mustache",
     // ==============================
+    // TypeScript
+    // ==============================
+    "[typescript]": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true
+    },
+    "[typescriptreact]": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true
+    },
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    // ==============================
     // reStructuredText
     // ==============================
     "redhat.telemetry.enabled": false,

@@ -82,6 +82,7 @@
         ".eslintignore": "ignore",
         ".htmlhintrc": "json",
         ".htmllintrc": "jsonc",
+        ".linguirc": "json",
         ".prettierignore": "ignore",
         ".prettierrc": "json",
         "poetry.lock": "toml",

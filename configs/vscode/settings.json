@@ -67,6 +67,7 @@
     "editor.codeLens": false,
     "editor.folding": false,
     "editor.wordWrapColumn": 88,
+    "editor.multiCursorModifier": "ctrlCmd",
     "editor.suggestSelection": "first",
     "workbench.activityBar.visible": true,
     "workbench.editorAssociations": [

@@ -4,3 +4,7 @@ find way to call script directly not DL + install call (problem with user input)
 
 cargo-edit
 
+# Dotfiles manged with bare repo
+https://www.atlassian.com/git/tutorials/dotfiles
+
+https://github.com/TheLocehiliosan/yadm

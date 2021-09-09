@@ -2,6 +2,7 @@
 jeff-hykin.better-dockerfile-syntax
 samuelcolvin.jinjahtml
 lextudio.restructuredtext
+trond-snekvik.simple-rst
 bungcip.better-toml
 redhat.vscode-yaml
 mtxr.sqltools

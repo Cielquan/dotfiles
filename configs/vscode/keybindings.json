@@ -29,6 +29,19 @@
         "when": "terminalFocus && terminalProcessSupported"
     },
     // ==============================
+    // ctrl + + alt + ö -> focus terminal
+    // ==============================
+    {
+        "key": "ctrl+alt+oem_3",
+        "command": "workbench.action.terminal.focus",
+        "when": "terminalProcessSupported && !terminalFocus"
+    },
+    {
+        "key": "alt+f12",
+        "command": "-workbench.action.terminal.focus",
+        "when": "terminalProcessSupported && !terminalFocus"
+    },
+    // ==============================
     // ctrl + n -> default to advancedNewFile
     // ==============================
     {

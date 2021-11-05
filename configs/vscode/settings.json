@@ -2,6 +2,7 @@
     // ---------------------------------------------------------------------------------
     // | GLOBAL                                                                        |
     // ---------------------------------------------------------------------------------
+    "telemetry.telemetryLevel": "off",
     "telemetry.enableTelemetry": false,
     "files.autoSave": "onFocusChange",
     "workbench.startupEditor": "newUntitledFile",
@@ -55,12 +56,12 @@
     },
     "terminal.integrated.defaultProfile.windows": "bash (git)",
     "terminal.integrated.automationShell.windows": "bash (git)",
-    // TODO: When line is removed Code opens a PS on boot.
-    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "terminal.external.windowsExec": "C:\\Program Files\\Git\\bin\\bash.exe",
     // ---------------------------------------------------------------------------------
     // | EDITOR                                                                        |
     // ---------------------------------------------------------------------------------
-    "window.zoomLevel": -0.001,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
     "editor.mouseWheelZoom": true,
     "editor.minimap.enabled": true,
     "editor.minimap.scale": 1,
@@ -100,7 +101,9 @@
     // ==============================
     "editor.fontFamily": "'Hack Nerd Font Mono', 'FiraCode Nerd Font Mono', 'Hack NF', 'FiraCode NF', Consolas, monospace",
     "editor.fontLigatures": true,
+    "editor.fontSize": 13,
     "terminal.integrated.fontFamily": "'Hack Nerd Font Mono', 'FiraCode Nerd Font Mono', 'Hack NF', 'FiraCode NF', Consolas, monospace",
+    "terminal.integrated.fontSize": 13,
     // ==============================
     // ICON THEME
     // ==============================
@@ -148,7 +151,11 @@
                     "foreground": "#94558d",
                     "fontStyle": ""
                 },
-                "magicFunction.declaration:python": {
+                "magicFunction:python": {
+                    "foreground": "#b200b2",
+                    "fontStyle": "italic"
+                },
+                "magicFunction.builtin:python": {
                     "foreground": "#b200b2",
                     "fontStyle": "italic"
                 },

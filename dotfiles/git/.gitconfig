@@ -76,6 +76,7 @@
     logs = log --show-signature
     l = log --format=oneliner
     ls = log --format=onelinersig
+    m = !"git checkout main 2> /dev/null || git checkout master 2> /dev/null"
     master = checkout master
     main = checkout main
     mg = merge

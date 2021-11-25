@@ -3,7 +3,6 @@
     // | GLOBAL                                                                        |
     // ---------------------------------------------------------------------------------
     "telemetry.telemetryLevel": "off",
-    "telemetry.enableTelemetry": false,
     "files.autoSave": "onFocusChange",
     "workbench.startupEditor": "newUntitledFile",
     "workbench.editor.untitled.hint": "hidden",
@@ -68,15 +67,12 @@
     "editor.codeLens": false,
     "editor.folding": false,
     "editor.wordWrapColumn": 88,
-    "editor.multiCursorModifier": "ctrlCmd",
     "editor.suggestSelection": "first",
+    "editor.multiCursorModifier": "ctrlCmd",
     "workbench.activityBar.visible": true,
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter.notebook.ipynb",
-            "filenamePattern": "*.ipynb"
-        }
-    ],
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
     "files.associations": {
         ".babelrc": "json",
         ".csslintrc": "json",
@@ -108,7 +104,6 @@
     // ICON THEME
     // ==============================
     "workbench.iconTheme": "file-icons",
-    "material-icon-theme.showWelcomeMessage": false,
     // ==============================
     // COLOR THEME
     // ==============================
@@ -116,83 +111,8 @@
     "editor.semanticTokenColorCustomizations": {
         "[Krys Colors]": {
             // Apply to this theme only
-            "enabled": true,
-            "rules": {
-                // https://github.com/microsoft/pylance-release#semantic-highlighting
-                "*.typeHint:python": {
-                    "foreground": "#89ffa6",
-                    "fontStyle": "italic"
-                },
-                "*.typeHintComment:python": {
-                    "foreground": "#75715E",
-                    "fontStyle": ""
-                },
-                "class:python": {
-                    "foreground": "#66d9ef",
-                    "fontStyle": ""
-                },
-                "class.builtin:python": {
-                    "foreground": "#268BD2",
-                    "fontStyle": "italic"
-                },
-                "class.declaration:python": {
-                    "foreground": "#a6e22e",
-                    "fontStyle": "underline bold"
-                },
-                "class.typeHint:python": {
-                    "foreground": "#89ffa6",
-                    "fontStyle": "italic"
-                },
-                "selfParameter:python": {
-                    "foreground": "#94558d",
-                    "fontStyle": ""
-                },
-                "clsParameter:python": {
-                    "foreground": "#94558d",
-                    "fontStyle": ""
-                },
-                "magicFunction:python": {
-                    "foreground": "#b200b2",
-                    "fontStyle": "italic"
-                },
-                "magicFunction.builtin:python": {
-                    "foreground": "#b200b2",
-                    "fontStyle": "italic"
-                },
-                "function:python": {
-                    "foreground": "#66d9ef",
-                    "fontStyle": ""
-                },
-                "function.builtin:python": {
-                    "foreground": "#66d9ef",
-                    "fontStyle": "italic"
-                },
-                "function.declaration:python": {
-                    "foreground": "#a6e22e",
-                    "fontStyle": "bold"
-                },
-                "function.typeHint:python": {
-                    "foreground": "#89ffa6",
-                    // "foreground": "#a7ff95",
-                    "fontStyle": "italic"
-                },
-                "member:python": {
-                    "foreground": "#F8F8F2",
-                    "fontStyle": ""
-                },
-                "intrinsic:python": {
-                    "foreground": "#66d9ef",
-                    "fontStyle": "italic"
-                },
-                "module:python": {
-                    "foreground": "#F8F8F2",
-                    "fontStyle": ""
-                },
-                "variable.readonly:python": {
-                    "foreground": "#F8F8F2",
-                    "fontStyle": "bold"
-                }
-            }
+            "enabled": true
+            // "enabled"   : false
         }
     },
     // ---------------------------------------------------------------------------------
@@ -202,18 +122,6 @@
     // ---------------------------------------------------------------------------------
     // | EXTENSIONS (coloring/highlighting)                                            |
     // ---------------------------------------------------------------------------------
-    // ==============================
-    // Bracket Pair Colorizer 2
-    // ==============================
-    "bracket-pair-colorizer-2.colors": [
-        "#E86233",
-        "#6F84FF",
-        "#E8BA36",
-        "#CD1CEF",
-        "#54A857"
-    ],
-    "bracket-pair-colorizer-2.highlightActiveScope": true,
-    "bracket-pair-colorizer-2.showBracketsInGutter": true,
     // ==============================
     // indent-rainbow
     // ==============================
@@ -230,13 +138,18 @@
     // ==============================
     // Error Lens
     // ==============================
-    "errorLens.addAnnotationTextPrefixes": true,
+    "errorLens.messageTemplate": "$severity [1/$count] $message [$source] <$code>",
+    "errorLens.statusBarMessageTemplate": "$severity $message [$source]",
     "errorLens.delay": 1,
     "errorLens.gutterIconsEnabled": true,
     "errorLens.gutterIconSet": "defaultOutline",
     // ---------------------------------------------------------------------------------
     // | EXTENSIONS (tooling)                                                          |
     // ---------------------------------------------------------------------------------
+    // ==============================
+    // Code Runner
+    // ==============================
+    "code-runner.enableAppInsights": false, // telemetry
     // ==============================
     // VS IntelliCode
     // ==============================
@@ -361,7 +274,6 @@
     // ==============================
     // PYTHON
     // ==============================
-    "python.showStartPage": false,
     "python.terminal.activateEnvInCurrentTerminal": false,
     "python.venvPath": "${workspaceFolder}/.venv/bin/activate",
     "python.pythonPath": "${workspaceFolder}/.venv/bin/python",
@@ -371,7 +283,6 @@
     "python.linting.flake8Path": "${workspaceFolder}/.venv/bin/flake8helled",
     "python.linting.mypyEnabled": true,
     "python.linting.mypyPath": "${workspaceFolder}/.venv/bin/mypy",
-    "python.analysis.disabled": ["undefined-variable"],
     "python.analysis.completeFunctionParens": true,
     // ==============================
     // Python Docstring Generator (python)
@@ -379,6 +290,13 @@
     "autoDocstring.docstringFormat": "sphinx",
     "autoDocstring.includeExtendedSummary": true,
     "autoDocstring.customTemplatePath": "~/.config/Code/User/sphinx_docstring_template_custom.mustache",
+    // ==============================
+    // Jupyter
+    // ==============================
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
     // ==============================
     // TypeScript
     // ==============================
@@ -402,5 +320,19 @@
         "--config ${workspaceFolder}/tox.ini"
     ],
     "restructuredtext.linter.run": "onSave",
-    "restructuredtext.sphinxBuildPath": "${workspaceFolder}/.venv/bin/sphinx-build"
+    "restructuredtext.sphinxBuildPath": "${workspaceFolder}/.venv/bin/sphinx-build",
+    // ==============================
+    // toml
+    // ==============================
+    "[toml]": {
+        "editor.language.brackets": [
+            ["[", "]"],
+            ["{", "}"]
+        ],
+        "editor.language.colorizedBracketPairs": [
+            ["[", "]"],
+            ["{", "}"]
+        ]
+    }
+
 }

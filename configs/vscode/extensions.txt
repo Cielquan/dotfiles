@@ -3,15 +3,15 @@ jeff-hykin.better-dockerfile-syntax
 samuelcolvin.jinjahtml
 lextudio.restructuredtext
 trond-snekvik.simple-rst
-bungcip.better-toml
+tamasfe.even-better-toml
 redhat.vscode-yaml
 mtxr.sqltools
+mrorz.language-gettext
 
 ### Keybindings
 k--kato.intellij-idea-keybindings
 
 ### Better editor - optical
-CoenraadS.bracket-pair-colorizer-2
 oderwat.indent-rainbow
 usernamehw.errorlens
 file-icons.file-icons
@@ -25,16 +25,18 @@ Gruntfuggly.todo-tree
 patbenatar.advanced-new-file
 eamodio.gitlens
 # ritwickdey.liveserver
+dbaeumer.vscode-eslint
+wix.vscode-import-cost
+tauri-apps.tauri-vscode
 
 ### Langs
 VisualStudioExptTeam.vscodeintellicode
 ms-python.vscode-pylance
 njqdev.vscode-python-typehint
 njpwerner.autodocstring
-# rust-lang.rust
 matklad.rust-analyzer
 snooty.snooty
-timonwong.shellcheck
+# timonwong.shellcheck
 
 ### Snippets
 dsznajder.es7-react-js-snippets

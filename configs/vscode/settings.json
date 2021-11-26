@@ -278,7 +278,6 @@
     "python.venvPath": "${workspaceFolder}/.venv/bin/activate",
     "python.pythonPath": "${workspaceFolder}/.venv/bin/python",
     "python.languageServer": "Pylance",
-    "python.autoComplete.addBrackets": true,
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Path": "${workspaceFolder}/.venv/bin/flake8helled",
     "python.linting.mypyEnabled": true,

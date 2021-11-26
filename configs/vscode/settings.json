@@ -322,7 +322,7 @@
     "restructuredtext.linter.run": "onSave",
     "restructuredtext.sphinxBuildPath": "${workspaceFolder}/.venv/bin/sphinx-build",
     // ==============================
-    // toml
+    // TOML
     // ==============================
     "[toml]": {
         "editor.language.brackets": [
@@ -333,6 +333,10 @@
             ["[", "]"],
             ["{", "}"]
         ]
-    }
-
+    },
+    "evenBetterToml.semanticTokens": true,
+    // ==============================
+    // Svelte
+    // ==============================
+    "svelte.enable-ts-plugin": true
 }

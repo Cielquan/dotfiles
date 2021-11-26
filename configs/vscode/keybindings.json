@@ -16,7 +16,7 @@
         "command": "workbench.action.terminal.new"
     },
     // ==============================
-    // ctrl + + shift + ö -> split terminal
+    // ctrl + shift + ö -> split terminal
     // ==============================
     {
         "key": "ctrl+shift+[Semicolon]",
@@ -29,17 +29,77 @@
         "when": "terminalFocus && terminalProcessSupported"
     },
     // ==============================
-    // ctrl + + alt + ö -> focus terminal
+    // ctrl + alt + ö -> focus terminal
     // ==============================
     {
-        "key": "ctrl+alt+oem_3",
+        "key": "ctrl+alt+[Semicolon]",
         "command": "workbench.action.terminal.focus",
-        "when": "terminalProcessSupported && !terminalFocus"
+        "when": "terminalHasBeenCreated && !terminalFocus || terminalProcessSupported && !terminalFocus"
     },
     {
         "key": "alt+f12",
         "command": "-workbench.action.terminal.focus",
-        "when": "terminalProcessSupported && !terminalFocus"
+        "when": "terminalHasBeenCreated && !terminalFocus || terminalProcessSupported && !terminalFocus"
+    },
+        // ==============================
+    // alt + arrow up -> terminal group up
+    // ==============================
+    {
+        "key": "alt+up",
+        "command": "-workbench.action.terminal.focusPreviousPane",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "alt+up",
+        "command": "workbench.action.terminal.focusPrevious",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    // ==============================
+    // alt + arrow down -> terminal group down
+    // ==============================
+    {
+        "key": "alt+down",
+        "command": "workbench.action.terminal.focusNext",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "alt+down",
+        "command": "-workbench.action.terminal.focusNextPane",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    // ==============================
+    // alt + arrow left -> inside terminal group go left
+    // ==============================
+    {
+        "key": "alt+left",
+        "command": "-workbench.action.terminal.focusPrevious",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "alt+left",
+        "command": "workbench.action.previousEditor",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "alt+left",
+        "command": "-workbench.action.previousEditor"
+    },
+    // ==============================
+    // alt + arrow right -> inside terminal group go right
+    // ==============================
+    {
+        "key": "alt+right",
+        "command": "-workbench.action.terminal.focusNext",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "alt+right",
+        "command": "workbench.action.nextEditor",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "alt+right",
+        "command": "-workbench.action.nextEditor"
     },
     // ==============================
     // ctrl + n -> default to advancedNewFile
@@ -113,5 +173,66 @@
     {
         "key": "shift shift",
         "command": "-workbench.action.quickOpen"
+    },
+    // ==============================
+    // remove rst key bindings
+    // ==============================
+    {
+        "key": "enter",
+        "command": "-restructuredtext.editor.listEditing.onEnterKey",
+        "when": "editorTextFocus && !editorReadonly && !suggestWidgetVisible && editorLangId == 'restructuredtext' && vim.mode != 'CommandlineInProgress' && vim.mode != 'EasyMotionInputMode' && vim.mode != 'EasyMotionMode' && vim.mode != 'Normal' && vim.mode != 'Replace' && vim.mode != 'SearchInProgressMode' && vim.mode != 'SurroundInputMode' && vim.mode != 'Visual' && vim.mode != 'VisualBlock' && vim.mode != 'VisualLine'"
+    },
+    {
+        "key": "alt+down",
+        "command": "-restructuredtext.editor.listEditing.onMoveLineDown",
+        "when": "editorTextFocus && !editorReadonly && !suggestWidgetVisible && editorLangId == 'restructuredtext'"
+    },
+    {
+        "key": "alt+up",
+        "command": "-restructuredtext.editor.listEditing.onMoveLineUp",
+        "when": "editorTextFocus && !editorReadonly && !suggestWidgetVisible && editorLangId == 'restructuredtext'"
+    },
+    {
+        "key": "backspace",
+        "command": "-restructuredtext.editor.listEditing.onBackspaceKey",
+        "when": "editorTextFocus && !editorReadonly && !suggestWidgetVisible && editorLangId == 'restructuredtext' && vim.mode != 'CommandlineInProgress' && vim.mode != 'EasyMotionInputMode' && vim.mode != 'EasyMotionMode' && vim.mode != 'Normal' && vim.mode != 'Replace' && vim.mode != 'SearchInProgressMode' && vim.mode != 'SurroundInputMode' && vim.mode != 'Visual' && vim.mode != 'VisualBlock' && vim.mode != 'VisualLine'"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "-restructuredtext.editor.listEditing.onCtrlEnterKey",
+        "when": "editorTextFocus && !editorReadonly && !suggestWidgetVisible && editorLangId == 'restructuredtext'"
+    },
+    {
+        "key": "shift+enter",
+        "command": "-restructuredtext.editor.listEditing.onShiftEnterKey",
+        "when": "editorTextFocus && !editorReadonly && !suggestWidgetVisible && editorLangId == 'restructuredtext'"
+    },
+    {
+        "key": "shift+tab",
+        "command": "-restructuredtext.editor.listEditing.onShiftTabKey",
+        "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus && !hasOtherSuggestions && !hasSnippetCompletions && !inSnippetMode && !suggestWidgetVisible && editorLangId == 'restructuredtext'"
+    },
+    {
+        "key": "tab",
+        "command": "-restructuredtext.editor.listEditing.onTabKey",
+        "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus && !hasOtherSuggestions && !hasSnippetCompletions && !inSnippetMode && !suggestWidgetVisible && editorLangId == 'restructuredtext'"
+    },
+    // ==============================
+    // remove default key bindings
+    // ==============================
+    {
+        "key": "ctrl+pageup",
+        "command": "-workbench.action.terminal.focusPrevious",
+        "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
+    },
+    {
+        "key": "ctrl+pagedown",
+        "command": "-workbench.action.terminal.focusNext",
+        "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
+    },
+    {
+        "key": "ctrl+shift+c",
+        "command": "-workbench.action.terminal.openNativeConsole",
+        "when": "!terminalFocus"
     }
 ]

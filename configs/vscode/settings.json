@@ -18,7 +18,6 @@
             "icon": "terminal-bash"
         },
         "python3 (global)": {"path": "python3"},
-        "python3.6 (global)": {"path": "python3.6"},
         "python3.7 (global)": {"path": "python3.7"},
         "python3.8 (global)": {"path": "python3.8"},
         "python3.9 (global)": {"path": "python3.9"},
@@ -47,7 +46,6 @@
             "icon": "terminal-cmd"
         },
         "python (global)": {"path": "python"},
-        "python3.6 (global)": {"path": "python3.6"},
         "python3.7 (global)": {"path": "python3.7"},
         "python3.8 (global)": {"path": "python3.8"},
         "python3.9 (global)": {"path": "python3.9"},
@@ -69,7 +67,7 @@
     "editor.minimap.scale": 1,
     "editor.codeLens": false,
     "editor.folding": false,
-    "editor.wordWrapColumn": 88,
+    "editor.wordWrapColumn": 100,
     "editor.suggestSelection": "first",
     "editor.multiCursorModifier": "ctrlCmd",
     "workbench.activityBar.visible": true,
@@ -180,57 +178,62 @@
     },
     "todo-tree.highlights.customHighlight": {
         "NOTE:": {
-            "foreground": "white",
-            "background": "green",
+            "foreground": "#fff",
+            "background": "#008000",
             "icon": "note",
-            "iconColour": "green",
-            "rulerColour": "rgba(0,0,0,0)",
-            "hideFromTree": true,
-            "hideFromStatusBar": true
+            "iconColour": "#008000",
+            "gutterIcon": false,
+            "type": "text",
+            "rulerColour": "#0000",
+            "hideFromStatusBar": true,
+            "hideFromTree": true
         },
         "CHANGE ME": {
-            "foreground": "black",
-            "background": "aqua",
+            "foreground": "#000",
+            "background": "#00ffff",
             "icon": "arrow-switch",
-            "iconColour": "aqua",
-            "rulerColour": "rgba(0,0,0,0)",
-            // "hideFromTree": true,
+            "iconColour": "#00ffff",
+            "gutterIcon": false,
+            "type": "text",
+            "rulerColour": "#0000",
             "hideFromStatusBar": true
+            // "hideFromTree": true
         },
         "TODO:": {
-            "foreground": "black",
+            "foreground": "#000",
             "background": "#ff00d4",
             "icon": "checklist",
             "iconColour": "#ff00d4",
-            "type": "text", 
+            "gutterIcon": false,
+            "type": "text",
             "rulerColour": "#ff00d4"
         },
         "BUG:": {
-            "foreground": "white",
-            "background": "red",
+            "foreground": "#fff",
+            "background": "#ff0000",
             "icon": "bug",
-            "iconColour": "red",
+            "iconColour": "#ff0000",
             "gutterIcon": true,
             "type": "text",
-            "rulerColour": "red"
+            "rulerColour": "#ff0000"
         },
         "FIXME:": {
-            "foreground": "white",
-            "background": "orangered",
+            "foreground": "#fff",
+            "background": "#ff4500",
             "icon": "flame",
-            "iconColour": "orangered",
+            "iconColour": "#ff4500",
             "gutterIcon": true,
             "type": "whole-line",
-            "rulerColour": "red"
+            "rulerColour": "#ff0000"
         },
         "HACK:": {
-            "foreground": "black",
-            "background": "orange",
+            "foreground": "#000",
+            "background": "#ffa500",
             "icon": "beaker",
-            "iconColour": "orange",
+            "iconColour": "#ffa500",
             "gutterIcon": true,
             "type": "text",
-            "rulerColour": "red"
+            "rulerColour": "#ff0000"
         }
     },
     "todo-tree.tree.showCountsInTree": true,
@@ -282,7 +285,7 @@
     "python.pythonPath": "${workspaceFolder}/.venv/bin/python",
     "python.languageServer": "Pylance",
     "python.linting.flake8Enabled": true,
-    "python.linting.flake8Path": "${workspaceFolder}/.venv/bin/flake8helled",
+    "python.linting.flake8Path": "${workspaceFolder}/.venv/bin/flake8heavened",
     "python.linting.mypyEnabled": true,
     "python.linting.mypyPath": "${workspaceFolder}/.venv/bin/mypy",
     "python.analysis.completeFunctionParens": true,
@@ -300,6 +303,17 @@
         "jupyter-notebook": "left"
     },
     // ==============================
+    // JavaScript
+    // ==============================
+    "[javascript]": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true
+    },
+    "[javascriptreact]": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true
+    },
+    // ==============================
     // TypeScript
     // ==============================
     "[typescript]": {
@@ -310,7 +324,7 @@
         "editor.tabSize": 2,
         "editor.insertSpaces": true
     },
-    "typescript.updateImportsOnFileMove.enabled": "always",
+    "typescript.updateImportsOnFileMove.enabled": "prompt",
     // ==============================
     // reStructuredText
     // ==============================
@@ -328,9 +342,22 @@
     // ==============================
     "markdown.extension.preview.autoShowPreviewToSide": true,
     // ==============================
-    // TOML
+    // json
+    // ==============================
+    "[json]": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true
+    },
+    "[jsonc]": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true
+    },
+    // ==============================
+    // toml
     // ==============================
     "[toml]": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
         "editor.language.brackets": [
             ["[", "]"],
             ["{", "}"]
@@ -345,4 +372,5 @@
     // Svelte
     // ==============================
     "svelte.enable-ts-plugin": true,
+    "sqltools.useNodeRuntime": true
 }

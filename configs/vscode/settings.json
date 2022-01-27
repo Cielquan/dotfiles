@@ -340,7 +340,7 @@
     // ==============================
     // Markdown
     // ==============================
-    "markdown.extension.preview.autoShowPreviewToSide": true,
+    "markdown.extension.preview.autoShowPreviewToSide": false,
     // ==============================
     // json
     // ==============================
@@ -372,5 +372,8 @@
     // Svelte
     // ==============================
     "svelte.enable-ts-plugin": true,
+    // ==============================
+    // SQL
+    // ==============================
     "sqltools.useNodeRuntime": true
 }

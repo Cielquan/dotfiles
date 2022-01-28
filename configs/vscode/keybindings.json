@@ -2,11 +2,15 @@
 // Comments based on keyboard with german (no dead keys) layout
 [
     // ==============================
-    // ctrl + alt + a -> git stage
+    // ctrl + shift + a -> git stage
     // ==============================
     {
-        "key": "ctrl+alt+a",
+        "key": "ctrl+shift+a",
         "command": "git.stage"
+    },
+    {
+        "key": "ctrl+shift+a",
+        "command": "-workbench.action.showCommands"
     },
     // ==============================
     // ctrl + ö -> new terminal

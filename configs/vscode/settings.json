@@ -60,6 +60,13 @@
     "editor.unicodeHighlight.ambiguousCharacters": true,
     "editor.unicodeHighlight.invisibleCharacters": true,
     "editor.unicodeHighlight.nonBasicASCII": true,
+    "editor.unicodeHighlight.includeComments": false,
+    "editor.unicodeHighlight.allowedCharacters": {
+        "ä": true,
+        "ö": true,
+        "ü": true,
+        "ß": true
+    },
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": "active",
     "editor.mouseWheelZoom": true,

@@ -66,6 +66,11 @@ alias upgrade='sudo apt upgrade'
 alias dupgrade='sudo apt dist-upgrade'
 
 
+# Activate python default venvs
+alias vac='source .venv/bin/activate'
+alias vacw='source .venv/Scripts/activate'
+
+
 ### Shortcuts
 alias c='clear' # Shortcut for clear
 alias g='git'

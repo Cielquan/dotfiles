@@ -167,7 +167,7 @@
     // Todo Tree
     // ==============================
     "todo-tree.filtering.includeHiddenFiles": true,
-    "todo-tree.regex.regex": "((^|//|#|<!--|;|/\\*|\\.\\.)\\s*($TAGS))",
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|\\.\\.|--|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)",
     "todo-tree.general.enableFileWatcher": true,
     "todo-tree.general.statusBar": "tags",
     "todo-tree.general.tags": [

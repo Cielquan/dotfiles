@@ -33,6 +33,7 @@
     co = checkout
 	# List contributors with number of commits
 	contributors = shortlog --summary --numbered --email
+    count = rev-list HEAD --count
     cp = cherry-pick
     # Credit an author on the latest commit.
     credit = !"f() { \

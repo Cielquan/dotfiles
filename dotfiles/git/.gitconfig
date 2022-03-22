@@ -4,14 +4,14 @@
 # https://sethrobertson.github.io/GitFixUm/fixup.html
 
 [alias]
-	a = add
+    a = add
     # List aliases
-	aliases = config --get-regexp alias
+    aliases = config --get-regexp alias
     # Amend the currently staged files to the latest commit
-	amend = commit --amend --no-edit --reuse-message=HEAD
+    amend = commit --amend --no-edit --reuse-message=HEAD
     br = branch
     # Remove branches that have already been merged
-	brdm = !"git branch --merged | grep --invert-match '\\*' | xargs --max-args=1 git branch --delete"
+    brdm = !"git branch --merged | grep --invert-match '\\*' | xargs --max-args=1 git branch --delete"
     branches = branch --all
     c = commit
     # Commit all changes.
@@ -31,8 +31,8 @@
     cm = commit --message
     cmv = commit --no-verify --message
     co = checkout
-	# List contributors with number of commits
-	contributors = shortlog --summary --numbered --email
+    # List contributors with number of commits
+    contributors = shortlog --summary --numbered --email
     count = rev-list HEAD --count
     cp = cherry-pick
     # Credit an author on the latest commit.
@@ -52,10 +52,10 @@
     # TODO: check diff commands
     d1 = diff -- . ':!*package-lock.json' ':!*yarn.lock'
     dc = diff --cached -- . ':!*package-lock.json' ':!*yarn.lock'
-	# Show the diff between the latest commit and the current state
-	d2 = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
-	# `git di $number` shows the diff between the state `$number` revisions ago and the current state
-	di = !"f() { git diff --patch-with-stat HEAD~${1}; }; git diff-index --quiet HEAD -- || clear; f"
+    # Show the diff between the latest commit and the current state
+    d2 = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+    # `git di $number` shows the diff between the state `$number` revisions ago and the current state
+    di = !"f() { git diff --patch-with-stat HEAD~${1}; }; git diff-index --quiet HEAD -- || clear; f"
     dev = !"git checkout development 2> /dev/null || \
         git checkout develop 2> /dev/null || \
         git checkout devel 2> /dev/null || \
@@ -64,7 +64,7 @@
     # Allow `$ git git git...`
     git = !exec git
     # Switch to a branch, creating it if necessary
-	go = !"f() { git checkout -b \"${1}\" 2> /dev/null || git checkout \"${1}\"; }; f"
+    go = !"f() { git checkout -b \"${1}\" 2> /dev/null || git checkout \"${1}\"; }; f"
     # # List remote branches.
     rbranches = !"f() { \
         remote=\"${1:-origin}\"; \
@@ -102,10 +102,10 @@
     ps = push
     remotes = remote --verbose
     rb = rebase
-	# Interactive rebase with the given number of latest commits
-	rbi = !"f() { git rebase --interactive HEAD~${1}; }; f"
-	# Overwrite tag locally and remove on origin
-	retag = !"f() { \
+    # Interactive rebase with the given number of latest commits
+    rbi = !"f() { git rebase --interactive HEAD~${1}; }; f"
+    # Overwrite tag locally and remove on origin
+    retag = !"f() { \
         git tag --delete ${1} || (echo 'tag does not exist. Aborting ...' && exit 1) \
         git push origin :refs/tags/${1} || echo 'tag does not exist on origin. Skipping ...'  \
         git tag ${1}; \

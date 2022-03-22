@@ -5,6 +5,8 @@
 
 [alias]
     a = add
+    # Add file as executable
+    addx = add --chmod=+x
     # List aliases
     aliases = config --get-regexp alias
     # Amend the currently staged files to the latest commit

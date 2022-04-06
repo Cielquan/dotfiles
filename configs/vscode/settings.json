@@ -336,14 +336,14 @@
     // reStructuredText
     // ==============================
     "redhat.telemetry.enabled": false,
-    "restructuredtext.builtDocumentationPath": "${workspaceFolder}/docs/build/html",
-    "restructuredtext.confPath": "${workspaceFolder}/docs/source",
-    "restructuredtext.linter.executablePath": "${workspaceFolder}/.venv/bin/rstcheck",
-    "restructuredtext.linter.extraArgs": [
+    "esbonio.sphinx.buildDir": "${workspaceFolder}/docs/build/html",
+    "esbonio.sphinx.confDir": "${workspaceFolder}/docs/source",
+    "esbonio.server.enabled": true,
+    "restructuredtext.linter.rstcheck.executablePath": "${workspaceFolder}/.venv/bin/rstcheck",
+    "restructuredtext.linter.rstcheck.extraArgs": [
         "--config ${workspaceFolder}/tox.ini"
     ],
     "restructuredtext.linter.run": "onSave",
-    "restructuredtext.sphinxBuildPath": "${workspaceFolder}/.venv/bin/sphinx-build",
     // ==============================
     // Markdown
     // ==============================

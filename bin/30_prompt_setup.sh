@@ -51,6 +51,7 @@ install_starship() {
         success "Done."
     fi
 }
+install_starship
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   FINISH

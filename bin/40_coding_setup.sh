@@ -64,7 +64,7 @@ install_poetry() {
     DEFAULT_ANSWER="yes"
     if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
         info "Installing poetry."
-        link="https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py"
+        link="https://install.python-poetry.org"
         # shellcheck disable=2086
         curl ${CURL_ARGS} ${link} | python3 - -y
         success "Done."

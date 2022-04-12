@@ -114,6 +114,8 @@ install_nodejs() {
         link="https://raw.githubusercontent.com/nvm-sh/nvm/${current_version}/install.sh"
         # shellcheck disable=2086
         curl ${CURL_ARGS} --create-dirs -o- "${link}" | bash
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
         success "Done."
 
         info "Installing latest node."
@@ -128,7 +130,7 @@ install_nodejs() {
         DEFAULT_ANSWER="yes"
         if answer_is_yes "${Q}" "${FORCE}" "${DEFAULT_ANSWER}"; then
             elevate_priv "install 'yarn' globally"
-            sudo npm install -g yarn
+            (sudo npm install -g yarn)
             success "Done."
         fi
     fi

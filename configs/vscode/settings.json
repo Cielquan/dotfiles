@@ -63,8 +63,11 @@
     "editor.unicodeHighlight.includeComments": false,
     "editor.unicodeHighlight.allowedCharacters": {
         "ä": true,
+        "Ä": true,
         "ö": true,
+        "Ö": true,
         "ü": true,
+        "Ü": true,
         "ß": true
     },
     "editor.bracketPairColorization.enabled": true,

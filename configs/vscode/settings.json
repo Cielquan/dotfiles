@@ -57,6 +57,8 @@
     // ---------------------------------------------------------------------------------
     // | EDITOR                                                                        |
     // ---------------------------------------------------------------------------------
+    "workbench.editor.limit.enabled": true,
+    "workbench.editor.limit.perEditorGroup": true,
     "editor.unicodeHighlight.ambiguousCharacters": true,
     "editor.unicodeHighlight.invisibleCharacters": true,
     "editor.unicodeHighlight.nonBasicASCII": true,

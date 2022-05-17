@@ -337,6 +337,8 @@
         "editor.insertSpaces": true
     },
     "typescript.updateImportsOnFileMove.enabled": "prompt",
+    "typescript.format.semicolons": "insert",
+    "typescript.preferences.useAliasesForRenames": false,
     // ==============================
     // reStructuredText
     // ==============================

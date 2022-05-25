@@ -1,0 +1,5 @@
+set autoindent
+set constantshow
+set linenumbers
+set mouse
+set tabstospaces

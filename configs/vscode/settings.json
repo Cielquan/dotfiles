@@ -101,6 +101,9 @@
         ".vuerc": "json",
         ".yamllint": "yaml"
     },
+    "files.exclude": {
+        "**/__pycache__": true
+    },
     "diffEditor.ignoreTrimWhitespace": false,
     // ---------------------------------------------------------------------------------
     // | COLORS / THEMES                                                               |

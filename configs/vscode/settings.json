@@ -90,6 +90,7 @@
         ".babelrc": "json",
         ".csslintrc": "json",
         "cargo.lock": "toml",
+        ".env": "ini",
         ".eslintignore": "ignore",
         ".htmlhintrc": "json",
         ".htmllintrc": "jsonc",

@@ -74,7 +74,6 @@ alias vacw='source .venv/Scripts/activate'
 
 ### Shortcuts
 alias c='clear' # Shortcut for clear
-alias g='git'
 alias sha1='openssl sha1' # Shortcut for openssl sha1
 
 

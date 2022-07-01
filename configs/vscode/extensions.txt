@@ -37,6 +37,7 @@ njpwerner.autodocstring
 matklad.rust-analyzer
 snooty.snooty
 # timonwong.shellcheck
+bradlc.vscode-tailwindcss
 
 ### Snippets
 dsznajder.es7-react-js-snippets

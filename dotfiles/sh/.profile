@@ -10,7 +10,7 @@ if [ -d "${HOME}/bin" ] ; then
     PATH="${HOME}/bin:${PATH}"
 fi
 
-# Add ~/bin to PATH if it exists
+# Add /usr/sbin to PATH if it exists
 if [ -d /usr/sbin ] ; then
     PATH="/usr/sbin:${PATH}"
 fi

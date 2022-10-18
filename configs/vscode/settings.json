@@ -342,6 +342,7 @@
         "editor.insertSpaces": true
     },
     "typescript.updateImportsOnFileMove.enabled": "prompt",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
     "typescript.format.semicolons": "insert",
     "typescript.preferences.useAliasesForRenames": false,
     // ==============================

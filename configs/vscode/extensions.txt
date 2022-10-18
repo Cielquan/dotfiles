@@ -34,7 +34,7 @@ VisualStudioExptTeam.vscodeintellicode
 ms-python.vscode-pylance
 njqdev.vscode-python-typehint
 njpwerner.autodocstring
-matklad.rust-analyzer
+rust-lang.rust-analyzer
 snooty.snooty
 # timonwong.shellcheck
 bradlc.vscode-tailwindcss

@@ -64,7 +64,8 @@ alias rmd='rm -rf -I --preserve-root'
 
 alias update='sudo apt update'
 alias upgrade='sudo apt upgrade'
-alias dupgrade='sudo apt dist-upgrade'
+
+alias diskuse='du -sch * .[!.]* | sort -rh'
 
 
 # Activate python default venvs

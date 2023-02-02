@@ -28,6 +28,7 @@ eamodio.gitlens
 dbaeumer.vscode-eslint
 wix.vscode-import-cost
 tauri-apps.tauri-vscode
+Orta.vscode-twoslash-queries
 
 ### Langs
 VisualStudioExptTeam.vscodeintellicode

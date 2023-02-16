@@ -306,6 +306,7 @@
     "python.linting.mypyEnabled": true,
     "python.linting.mypyPath": "${workspaceFolder}/.venv/bin/mypy",
     "python.analysis.completeFunctionParens": true,
+    "python.analysis.typeCheckingMode": "strict",
     // ==============================
     // Python Docstring Generator (python)
     // ==============================

@@ -160,6 +160,7 @@
 [commit]
 
     gpgSign = false
+    template = ~/.gitconfig.d/commit-msg-template.txt
 
 
 [core]

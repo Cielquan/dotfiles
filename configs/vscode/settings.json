@@ -6,6 +6,7 @@
     "files.autoSave": "onFocusChange",
     "workbench.startupEditor": "newUntitledFile",
     "workbench.editor.untitled.hint": "hidden",
+    "extensions.ignoreRecommendations": true,
     // ---------------------------------------------------------------------------------
     // | TERMINAL                                                                      |
     // ---------------------------------------------------------------------------------
@@ -113,10 +114,10 @@
     // ==============================
     // FONTS
     // ==============================
-    "editor.fontFamily": "'ComicCodeLigatures NF', 'Hack Nerd Font Mono', 'FiraCode Nerd Font Mono', 'Hack NF', 'FiraCode NF', Consolas, monospace",
-    "editor.fontLigatures": false,
+    "editor.fontFamily": "'ComicCodeLigatures NF', 'Comic Code Ligatures', 'Hack Nerd Font Mono', 'FiraCode Nerd Font Mono', 'Hack NF', 'FiraCode NF', Consolas, monospace",
+    "editor.fontLigatures": true,
     // "editor.fontSize": 13,
-    "terminal.integrated.fontFamily": "'ComicCodeLigatures NF', 'Hack Nerd Font Mono', 'FiraCode Nerd Font Mono', 'Hack NF', 'FiraCode NF', Consolas, monospace",
+    "terminal.integrated.fontFamily": "'ComicCodeLigatures NF', 'Comic Code Ligatures', 'Hack Nerd Font Mono', 'FiraCode Nerd Font Mono', 'Hack NF', 'FiraCode NF', Consolas, monospace",
     // "terminal.integrated.fontSize": 13,
     // ==============================
     // ICON THEME
@@ -301,12 +302,14 @@
     "python.venvPath": "${workspaceFolder}/.venv/bin/activate",
     "python.pythonPath": "${workspaceFolder}/.venv/bin/python",
     "python.languageServer": "Pylance",
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintPath": "${workspaceFolder}/.venv/bin/pylint",
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Path": "${workspaceFolder}/.venv/bin/flake8heavened",
     "python.linting.mypyEnabled": true,
     "python.linting.mypyPath": "${workspaceFolder}/.venv/bin/mypy",
     "python.analysis.completeFunctionParens": true,
-    "python.analysis.typeCheckingMode": "strict",
+    "python.analysis.typeCheckingMode": "off",
     // ==============================
     // Python Docstring Generator (python)
     // ==============================
@@ -353,9 +356,10 @@
     "esbonio.sphinx.buildDir": "${workspaceFolder}/docs/build/html",
     "esbonio.sphinx.confDir": "${workspaceFolder}/docs/source",
     "esbonio.server.enabled": true,
+    "restructuredtext.linter.rst-lint.executablePath": "${workspaceFolder}/.venv/bin/rstcheck",
     "restructuredtext.linter.rstcheck.executablePath": "${workspaceFolder}/.venv/bin/rstcheck",
     "restructuredtext.linter.rstcheck.extraArgs": [
-        "--config ${workspaceFolder}/tox.ini"
+        "--config ${workspaceFolder}/.rstcheck.cfg"
     ],
     "restructuredtext.linter.run": "onSave",
     // ==============================

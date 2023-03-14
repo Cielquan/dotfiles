@@ -33,12 +33,20 @@ Orta.vscode-twoslash-queries
 ### Langs
 VisualStudioExptTeam.vscodeintellicode
 ms-python.vscode-pylance
+ms-python.black-formatter
+charliermarsh.ruff
+tcwalther.cython
 njqdev.vscode-python-typehint
 njpwerner.autodocstring
 rust-lang.rust-analyzer
 snooty.snooty
 # timonwong.shellcheck
+esbenp.prettier-vscode
+dbaeumer.vscode-eslint
+tlent.jest-snapshot-language-support
 bradlc.vscode-tailwindcss
+# GrapeCity.gc-excelviewer
+ms-vscode.powershell
 
 ### Snippets
 dsznajder.es7-react-js-snippets
@@ -51,6 +59,7 @@ tomoki1207.pdf
 ### Advanced
 sleistner.vscode-fileutils
 formulahendry.code-runner
+ms-vscode-remote.remote-ssh
 
 ### Spelling
 # ban.spellright

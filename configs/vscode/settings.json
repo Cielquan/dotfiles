@@ -15,10 +15,7 @@
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.cursorStyle": "block",
   "terminal.integrated.profiles.linux": {
-    "bash": {
-      "path": "bash",
-      "icon": "terminal-bash"
-    },
+    "bash": { "path": "bash", "icon": "terminal-bash" },
     "python3 (global)": { "path": "python3" },
     "python3.7 (global)": { "path": "python3.7" },
     "python3.8 (global)": { "path": "python3.8" },
@@ -26,19 +23,15 @@
     "python3.10 (global)": { "path": "python3.10" }
   },
   "terminal.integrated.defaultProfile.linux": "bash",
-  "terminal.integrated.automationProfile.linux": {
-    "path": "bash"
-  },
+  "terminal.integrated.automationProfile.linux": { "path": "bash" },
+  "terminal.integrated.env.linux": {},
   "terminal.integrated.profiles.windows": {
     "bash (git)": {
       "source": "Git Bash",
       "args": ["--login"],
       "icon": "terminal-bash"
     },
-    "PowerShell": {
-      "source": "PowerShell",
-      "icon": "terminal-powershell"
-    },
+    "PowerShell": { "source": "PowerShell", "icon": "terminal-powershell" },
     "cmd": {
       "path": [
         "${env:windir}\\Sysnative\\cmd.exe",
@@ -54,10 +47,9 @@
     "python3.10 (global)": { "path": "python3.10" }
   },
   "terminal.integrated.defaultProfile.windows": "bash (git)",
-  "terminal.integrated.automationProfile.windows": {
-    "path": "bash"
-  },
+  "terminal.integrated.automationProfile.windows": { "path": "bash" },
   "terminal.external.windowsExec": "C:\\Program Files\\Git\\bin\\bash.exe",
+  "terminal.integrated.env.windows": {},
   // ---------------------------------------------------------------------------------
   // | EDITOR                                                                        |
   // ---------------------------------------------------------------------------------

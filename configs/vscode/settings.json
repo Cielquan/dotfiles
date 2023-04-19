@@ -322,8 +322,10 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
-      "source.organizeImports": true,
-      "source.fixAll": true
+      "source.organizeImports": false,
+      // removes unreachable code probably via ts
+      "source.fixAll": false,
+      "source.fixAll.eslint": true
     }
   },
   "[javascriptreact]": {
@@ -331,12 +333,19 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
-      "source.organizeImports": true,
-      "source.fixAll": true
+      "source.organizeImports": false,
+      // removes unreachable code probably via ts
+      "source.fixAll": false,
+      "source.fixAll.eslint": true
     }
   },
+  "javascript.updateImportsOnFileMove.enabled": "prompt",
+  "javascript.format.semicolons": "insert",
+  "javascript.preferences.useAliasesForRenames": false,
+  "javascript.preferences.quoteStyle": "double",
   "eslint.packageManager": "yarn",
   "eslint.format.enable": true,
+  "console-ninja.outputMode": "In View",
   // ==============================
   // TypeScript
   // ==============================
@@ -345,8 +354,10 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
-      "source.organizeImports": true,
-      "source.fixAll": true
+      "source.organizeImports": false,
+      // removes unreachable code probably via ts
+      "source.fixAll": false,
+      "source.fixAll.eslint": true
     }
   },
   "[typescriptreact]": {
@@ -354,14 +365,18 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
-      "source.organizeImports": true,
-      "source.fixAll": true
+      "source.organizeImports": false,
+      // removes unreachable code probably via ts
+      "source.fixAll": false,
+      "source.fixAll.eslint": true
     }
   },
   "typescript.updateImportsOnFileMove.enabled": "prompt",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.format.semicolons": "insert",
   "typescript.preferences.useAliasesForRenames": false,
+  "typescript.preferences.quoteStyle": "double",
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
   // ==============================
   // reStructuredText
   // ==============================

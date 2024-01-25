@@ -78,6 +78,7 @@
   "editor.wordWrapColumn": 100,
   "editor.suggestSelection": "first",
   "editor.multiCursorModifier": "ctrlCmd",
+  "editor.rulers": [100, 120],
   "workbench.activityBar.visible": true,
   "files.associations": {
     ".babelrc": "json",

@@ -400,6 +400,9 @@
   // Markdown
   // ==============================
   "markdown.extension.preview.autoShowPreviewToSide": false,
+  "[markdown]": {
+    "editor.wordWrap": "off"
+  },
   // ==============================
   // json
   // ==============================

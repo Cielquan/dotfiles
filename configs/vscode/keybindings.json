@@ -45,7 +45,7 @@
         "command": "-workbench.action.terminal.focus",
         "when": "terminalHasBeenCreated && !terminalFocus || terminalProcessSupported && !terminalFocus"
     },
-        // ==============================
+    // ==============================
     // alt + arrow up -> terminal group up
     // ==============================
     {
@@ -121,7 +121,7 @@
         "command": "-workbench.action.files.newUntitledFile"
     },
     // ==============================
-    // rename with F2
+    // F2 -> rename
     // ==============================
     {
         "key": "f2",
@@ -152,6 +152,32 @@
         "key": "shift+f6",
         "command": "-editor.action.changeAll",
         "when": "editorTextFocus && !editorHasRenameProvider && !editorReadonly"
+    },
+    // ==============================
+    // ctrl + l -> toggle word wrap
+    // ==============================
+    {
+        "key": "ctrl+l",
+        "command": "-workbench.action.chat.newChat",
+        "when": "chatIsEnabled && inChat"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "-expandLineSelection",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "-notebook.centerActiveCell",
+        "when": "notebookEditorFocused"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "editor.action.toggleWordWrap"
+    },
+    {
+        "key": "alt+z",
+        "command": "-editor.action.toggleWordWrap"
     },
     // ==============================
     // remove IntelliJ keymap bindings
@@ -243,5 +269,10 @@
         "key": "ctrl+shift+c",
         "command": "-workbench.action.terminal.openNativeConsole",
         "when": "!terminalFocus"
+    },
+    {
+        "key": "alt+r",
+        "command": "-workbench.action.terminal.toggleFindRegex",
+        "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
     }
 ]

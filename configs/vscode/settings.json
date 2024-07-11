@@ -133,6 +133,15 @@
   // | GIT                                                                           |
   // ---------------------------------------------------------------------------------
   "git.autofetch": true,
+  "git.terminalGitEditor": true,
+  "git.inputValidationSubjectLength": 80,
+  "git.inputValidationLength": 100,
+  "[git-commit]": {
+    "editor.rulers": [50, 72, 80, 100],
+    "editor.wordWrap": "off",
+    "workbench.editor.restoreViewState": false
+  },
+  "github.gitProtocol": "ssh",
   // ---------------------------------------------------------------------------------
   // | EXTENSIONS (coloring/highlighting)                                            |
   // ---------------------------------------------------------------------------------

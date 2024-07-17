@@ -209,6 +209,10 @@
         "key": "shift shift",
         "command": "-workbench.action.quickOpen"
     },
+    {
+        "key": "ctrl+s",
+        "command": "-workbench.action.files.saveAll"
+    },
     // ==============================
     // remove rst key bindings
     // ==============================

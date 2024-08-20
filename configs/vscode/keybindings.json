@@ -180,6 +180,18 @@
         "command": "-editor.action.toggleWordWrap"
     },
     // ==============================
+    // ctrl + shift + , -> open VSCode user settings JSON
+    // ==============================
+    {
+      "key": "ctrl+shift+oem_comma",
+      "command": "-editor.action.inPlaceReplace.up",
+      "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+      "key": "ctrl+shift+oem_comma",
+      "command": "workbench.action.openSettingsJson"
+    },
+    // ==============================
     // remove IntelliJ keymap bindings
     // ==============================
     {

@@ -162,7 +162,6 @@
     gpgSign = false
     template = ~/.gitconfig.d/commit-msg-template.txt
 
-
 [core]
 
     abbrev = 12
@@ -170,12 +169,19 @@
     autocrlf = input
     editor = nano
     excludesFile = ~/.gitconfig.d/global.gitignore
+    # NOTE: requires git-delta to be installed
+    pager = delta
     preloadIndex = true
     symlinks = true
     # Speeds up commands involving untracked files e.g. `git status`.
     # Test if usable with `git update-index --test-untracked-cache`
     # https://git-scm.com/docs/git-update-index#_untracked_cache
     untrackedCache = true
+
+[delta]
+
+    line-numbers = true
+    navigate = true
 
 [diff]
 
@@ -189,6 +195,10 @@
 
     # diff binary files with `hexdump`
     textconv = hexdump --canonical --no-squeezing
+
+# [gpg]
+
+    # program = <PATH>
 
 [help]
 
@@ -225,8 +235,9 @@
 
 [push]
 
+    autoSetupRemote = true
     # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault
-    default = simple
+    default = current
     # Push relevant annotated tags also
     followTags = true
 

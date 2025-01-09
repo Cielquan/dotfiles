@@ -353,6 +353,7 @@
     }
   },
   "javascript.updateImportsOnFileMove.enabled": "prompt",
+  "javascript.updateImportsOnPaste.enabled": false,
   "javascript.format.semicolons": "insert",
   "javascript.preferences.useAliasesForRenames": false,
   "javascript.preferences.quoteStyle": "double",
@@ -385,6 +386,7 @@
     }
   },
   "typescript.updateImportsOnFileMove.enabled": "prompt",
+  "typescript.updateImportsOnPaste.enabled": false,
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.format.semicolons": "insert",
   "typescript.preferences.useAliasesForRenames": false,

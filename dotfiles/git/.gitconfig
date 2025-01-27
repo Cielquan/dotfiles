@@ -180,6 +180,9 @@
 
 [delta]
 
+    dark = true
+    hyperlinks = true
+    hyperlinks-file-link-format = "vscode://file/{path}:{line}"
     line-numbers = true
     navigate = true
 
@@ -210,8 +213,13 @@
 
     defaultBranch = main
 
+[interactive]
+
+    diffFilter = delta --color-only
+
 [merge]
 
+    conflictstyle = zdiff3
     # Include subjects of merged commits in merge commit message
     log = 1024
     ff = no

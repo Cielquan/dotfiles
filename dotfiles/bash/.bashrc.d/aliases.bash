@@ -36,7 +36,6 @@ alias ping='ping -c 5' # Standard ping to only do 5
 
 ### New commands
 alias fastping='ping -c 25 -s.2' # Fast ping -> 5 pings/sec for 5 secs
-alias loc='git ls-files | xargs wc -l' # line in files in git repo (only tracked)
 alias now='date +"%T"' # current time hh:mm:ss
 alias nowdate='date +"%d-%m-%Y"' # current date dd-MM-yyyy
 alias week='date +%V' # Get week number
@@ -64,6 +63,7 @@ alias rmd='rm -rf -I --preserve-root'
 
 alias update='sudo apt update'
 alias upgrade='sudo apt upgrade'
+alias dupgrade='sudo apt dist-upgrade'
 
 alias diskuse='du -sch * .[!.]* | sort -rh'
 
@@ -75,6 +75,7 @@ alias vacw='source .venv/Scripts/activate'
 
 ### Shortcuts
 alias c='clear' # Shortcut for clear
+alias g='git'
 alias sha1='openssl sha1' # Shortcut for openssl sha1
 
 

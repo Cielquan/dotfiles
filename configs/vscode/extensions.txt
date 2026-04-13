@@ -8,9 +8,6 @@ redhat.vscode-yaml
 mtxr.sqltools
 mrorz.language-gettext
 
-### Keybindings
-k--kato.intellij-idea-keybindings
-
 ### Better editor - optical
 oderwat.indent-rainbow
 usernamehw.errorlens

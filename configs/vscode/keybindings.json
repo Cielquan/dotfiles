@@ -1,161 +1,48 @@
 // Place your key bindings in this file to override the defaultsauto[]
 // Comments based on keyboard with german (no dead keys) layout
 [
+    // ------------------------------
+    // ------------------------------
+    // Core Keybindings
+    // ------------------------------
+    // ------------------------------
+
     // ==============================
-    // ctrl + shift + a -> git stage
-    // ==============================
-    {
-        "key": "ctrl+shift+a",
-        "command": "git.stage"
-    },
-    {
-        "key": "ctrl+shift+a",
-        "command": "-workbench.action.showCommands"
-    },
-    // ==============================
-    // ctrl + ö -> new terminal
+    // Replace
+    // Ctrl + R
     // ==============================
     {
-        "key": "ctrl+[Semicolon]",
-        "command": "workbench.action.terminal.new"
+        "key": "ctrl+r",
+        "command": "editor.action.startFindReplaceAction",
+        "when": "editorFocus || editorIsOpen"
     },
+
     // ==============================
-    // ctrl + shift + ö -> split terminal
-    // ==============================
-    {
-        "key": "ctrl+shift+[Semicolon]",
-        "command": "workbench.action.terminal.split",
-        "when": "terminalFocus && terminalProcessSupported"
-    },
-    {
-        "key": "ctrl+shift+5",
-        "command": "-workbench.action.terminal.split",
-        "when": "terminalFocus && terminalProcessSupported"
-    },
-    // ==============================
-    // ctrl + alt + ö -> focus terminal
+    // Search: Replace in Files
+    // Ctrl + Shift + R
     // ==============================
     {
-        "key": "ctrl+alt+[Semicolon]",
-        "command": "workbench.action.terminal.focus",
-        "when": "terminalHasBeenCreated && !terminalFocus || terminalProcessSupported && !terminalFocus"
+        "key": "ctrl+shift+r",
+        "command": "workbench.action.replaceInFiles"
     },
-    {
-        "key": "alt+f12",
-        "command": "-workbench.action.terminal.focus",
-        "when": "terminalHasBeenCreated && !terminalFocus || terminalProcessSupported && !terminalFocus"
-    },
+
     // ==============================
-    // alt + arrow up -> terminal group up
+    // Go to Line/Column...
+    // Ctrl + G
     // ==============================
     {
-        "key": "alt+up",
-        "command": "-workbench.action.terminal.focusPreviousPane",
-        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+        "key": "ctrl+g",
+        "command": "workbench.action.gotoLine"
     },
-    {
-        "key": "alt+up",
-        "command": "workbench.action.terminal.focusPrevious",
-        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-    },
+
     // ==============================
-    // alt + arrow down -> terminal group down
+    // Toggle Word Wrap
+    // Ctrl + L
     // ==============================
     {
-        "key": "alt+down",
-        "command": "workbench.action.terminal.focusNext",
-        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+        "key": "ctrl+l",
+        "command": "editor.action.toggleWordWrap"
     },
-    {
-        "key": "alt+down",
-        "command": "-workbench.action.terminal.focusNextPane",
-        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-    },
-    // ==============================
-    // alt + arrow left -> inside terminal group go left
-    // ==============================
-    {
-        "key": "alt+left",
-        "command": "-workbench.action.terminal.focusPrevious",
-        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-    },
-    {
-        "key": "alt+left",
-        "command": "workbench.action.previousEditor",
-        "when": "!terminalFocus"
-    },
-    {
-        "key": "alt+left",
-        "command": "-workbench.action.previousEditor"
-    },
-    // ==============================
-    // alt + arrow right -> inside terminal group go right
-    // ==============================
-    {
-        "key": "alt+right",
-        "command": "-workbench.action.terminal.focusNext",
-        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-    },
-    {
-        "key": "alt+right",
-        "command": "workbench.action.nextEditor",
-        "when": "!terminalFocus"
-    },
-    {
-        "key": "alt+right",
-        "command": "-workbench.action.nextEditor"
-    },
-    // ==============================
-    // ctrl + n -> default to advancedNewFile
-    // ==============================
-    {
-        "key": "ctrl+n",
-        "command": "extension.advancedNewFile"
-    },
-    {
-        "key": "ctrl+alt+n",
-        "command": "-extension.advancedNewFile"
-    },
-    {
-        "key": "ctrl+n",
-        "command": "-workbench.action.files.newUntitledFile"
-    },
-    // ==============================
-    // F2 -> rename
-    // ==============================
-    {
-        "key": "f2",
-        "command": "editor.action.rename",
-        "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
-    },
-    {
-        "key": "shift+f6",
-        "command": "-editor.action.rename",
-        "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
-    },
-    {
-        "key": "f2",
-        "command": "renameFile",
-        "when": "explorerViewletVisible && filesExplorerFocus"
-    },
-    {
-        "key": "shift+f6",
-        "command": "-renameFile",
-        "when": "explorerViewletVisible && filesExplorerFocus"
-    },
-    {
-        "key": "f2",
-        "command": "editor.action.changeAll",
-        "when": "editorTextFocus && !editorHasRenameProvider && !editorReadonly"
-    },
-    {
-        "key": "shift+f6",
-        "command": "-editor.action.changeAll",
-        "when": "editorTextFocus && !editorHasRenameProvider && !editorReadonly"
-    },
-    // ==============================
-    // ctrl + l -> toggle word wrap
-    // ==============================
     {
         "key": "ctrl+l",
         "command": "-workbench.action.chat.newChat",
@@ -166,67 +53,105 @@
         "command": "-expandLineSelection",
         "when": "textInputFocus"
     },
-    {
-        "key": "ctrl+l",
-        "command": "-notebook.centerActiveCell",
-        "when": "notebookEditorFocused"
-    },
-    {
-        "key": "ctrl+l",
-        "command": "editor.action.toggleWordWrap"
-    },
-    {
-        "key": "alt+z",
-        "command": "-editor.action.toggleWordWrap"
-    },
+
     // ==============================
-    // ctrl + shift + , -> open VSCode user settings JSON
+    // Toggle Line Comment
+    // Ctrl + #
+    // Ctrl + Num /
     // ==============================
     {
-      "key": "ctrl+shift+oem_comma",
-      "command": "-editor.action.inPlaceReplace.up",
-      "when": "editorTextFocus && !editorReadonly"
+        "key": "ctrl+/",
+        "command": "editor.action.commentLine",
+        "when": "editorTextFocus && !editorReadonly"
     },
     {
-      "key": "ctrl+shift+oem_comma",
-      "command": "workbench.action.openSettingsJson"
+        "key": "ctrl+numpad_divide",
+        "command": "editor.action.commentLine",
+        "when": "editorTextFocus && !editorReadonly"
     },
+
     // ==============================
-    // remove IntelliJ keymap bindings
+    // Toggle Block Comment
+    // Ctrl + #
+    // Ctrl + Num /
     // ==============================
     {
-        "key": "ctrl+w",
-        "command": "-editor.action.smartSelect.grow",
-        "when": "editorTextFocus"
+        "key": "ctrl+shift+/",
+        "command": "editor.action.blockComment",
+        "when": "editorTextFocus && !editorReadonly"
     },
     {
-        "key": "ctrl+t",
-        "command": "-git.sync"
+        "key": "ctrl+shift+numpad_divide",
+        "command": "editor.action.blockComment",
+        "when": "editorTextFocus && !editorReadonly"
     },
-    {
-        "key": "ctrl+alt+k",
-        "command": "-git.commitAll",
-        "when": "!inDebugMode && !operationInProgress && !terminalFocus"
-    },
-    {
-        "key": "ctrl+shift+c",
-        "command": "-copyFilePath",
-        "when": "!editorFocus"
-    },
-    {
-        "key": "shift shift",
-        "command": "-workbench.action.showCommands"
-    },
-    {
-        "key": "shift shift",
-        "command": "-workbench.action.quickOpen"
-    },
-    {
-        "key": "ctrl+s",
-        "command": "-workbench.action.files.saveAll"
-    },
+
     // ==============================
-    // remove rst key bindings
+    // Duplicate Selection
+    // Ctrl + D
+    // ==============================
+    {
+        "key": "ctrl+d",
+        "command": "editor.action.duplicateSelection",
+        "when": "editorHasSelection && editorTextFocus && !editorReadonly"
+    },
+
+    // ==============================
+    // Duplicate Line / Copy Line Down
+    // Ctrl + D
+    // ==============================
+    {
+        "key": "ctrl+d",
+        "command": "editor.action.copyLinesDownAction",
+        "when": "editorTextFocus && !editorHasSelection && !editorReadonly"
+    },
+
+    // ==============================
+    // Delete Line
+    // Ctrl + Y
+    // ==============================
+    {
+        "key": "ctrl+y",
+        "command": "editor.action.deleteLines",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+
+    // ==============================
+    // Quick Fix...
+    // Alt + Enter
+    // ==============================
+    {
+        "key": "alt+enter",
+        "command": "editor.action.quickFix",
+        "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+    },
+
+    // ==============================
+    // Git Stage File
+    // Ctrl + Shift + A
+    // ==============================
+    {
+        "key": "ctrl+shift+a",
+        "command": "git.stage"
+    },
+
+    // ==============================
+    // Open VSCode User Settings as JSON file
+    // Ctrl + Shift + ,
+    // ==============================
+    {
+        "key": "ctrl+shift+oem_comma",
+        "command": "workbench.action.openSettingsJson"
+    },
+
+    // ------------------------------
+    // ------------------------------
+    // Extension Keybindings
+    // ------------------------------
+    // ------------------------------
+
+    // ==============================
+    // Remove rst Key Bindings
     // ==============================
     {
         "key": "enter",
@@ -268,27 +193,21 @@
         "command": "-restructuredtext.editor.listEditing.onTabKey",
         "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus && !hasOtherSuggestions && !hasSnippetCompletions && !inSnippetMode && !suggestWidgetVisible && editorLangId == 'restructuredtext'"
     },
-    // ==============================
-    // remove default key bindings
-    // ==============================
+
+   // ==============================
+   // Default to advancedNewFile
+   // Ctrl + N
+   // ==============================
     {
-        "key": "ctrl+pageup",
-        "command": "-workbench.action.terminal.focusPrevious",
-        "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
+        "key": "ctrl+n",
+        "command": "extension.advancedNewFile"
     },
     {
-        "key": "ctrl+pagedown",
-        "command": "-workbench.action.terminal.focusNext",
-        "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
+        "key": "ctrl+alt+n",
+        "command": "-extension.advancedNewFile"
     },
     {
-        "key": "ctrl+shift+c",
-        "command": "-workbench.action.terminal.openNativeConsole",
-        "when": "!terminalFocus"
-    },
-    {
-        "key": "alt+r",
-        "command": "-workbench.action.terminal.toggleFindRegex",
-        "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+        "key": "ctrl+n",
+        "command": "-workbench.action.files.newUntitledFile"
     }
 ]

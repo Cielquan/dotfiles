@@ -3,15 +3,19 @@
   // | GLOBAL                                                                        |
   // ---------------------------------------------------------------------------------
   "telemetry.telemetryLevel": "off",
+  "window.zoomPerWindow": true,
+  "window.zoomLevel": 0,
   "files.autoSave": "onFocusChange",
+  "files.autoSaveWorkspaceFilesOnly": true,
   "workbench.startupEditor": "newUntitledFile",
-  "workbench.editor.untitled.hint": "hidden",
   "extensions.ignoreRecommendations": true,
+  "editor.accessibilitySupport": "off",
   // ---------------------------------------------------------------------------------
   // | TERMINAL                                                                      |
   // ---------------------------------------------------------------------------------
   "terminal.integrated.shellIntegration.enabled": false,
   "terminal.integrated.tabs.enabled": true,
+  "terminal.integrated.tabs.location": "left",
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.cursorStyle": "block",
   "terminal.integrated.profiles.linux": {
@@ -53,8 +57,10 @@
   // ---------------------------------------------------------------------------------
   // | EDITOR                                                                        |
   // ---------------------------------------------------------------------------------
+  "workbench.editor.empty.hint": "hidden",
   "workbench.editor.limit.enabled": true,
   "workbench.editor.limit.perEditorGroup": true,
+  "editor.largeFileOptimizations": false,
   "editor.unicodeHighlight.ambiguousCharacters": true,
   "editor.unicodeHighlight.invisibleCharacters": true,
   "editor.unicodeHighlight.nonBasicASCII": true,
@@ -68,18 +74,17 @@
     "Ü": true,
     "ß": true
   },
-  "editor.bracketPairColorization.enabled": true,
-  "editor.guides.bracketPairs": "active",
-  "editor.mouseWheelZoom": true,
-  "editor.minimap.enabled": true,
+  "editor.mouseWheelZoom": false,
+  "editor.minimap.enabled": false,
   "editor.minimap.scale": 1,
+  "editor.minimap.showSlider": "always",
+  "editor.minimap.renderCharacters": false,
   "editor.codeLens": false,
   "editor.folding": false,
   "editor.wordWrapColumn": 100,
   "editor.suggestSelection": "first",
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.rulers": [100, 120],
-  "workbench.activityBar.visible": true,
   "files.associations": {
     ".babelrc": "json",
     ".csslintrc": "json",
@@ -91,8 +96,11 @@
     ".htmllintrc": "jsonc",
     ".linguirc": "json",
     "*.log?": "log",
+    "*.log.?": "log",
     ".prettierignore": "ignore",
     ".prettierrc": "json",
+    "Pipfile": "toml",
+    "Pipfile.lock": "json",
     "poetry.lock": "toml",
     "*.rst_t": "jinja",
     ".sqlfluff": "ini",
@@ -103,25 +111,28 @@
     "**/__pycache__": true
   },
   "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.maxComputationTime": 0,
   // ---------------------------------------------------------------------------------
-  // | COLORS / THEMES                                                               |
+  // | COLORS / THEMEING                                                             |
   // ---------------------------------------------------------------------------------
   // ==============================
-  // FONTS
+  // BRACKETS
   // ==============================
-  "editor.fontFamily": "'ComicCodeLigatures NF', 'Comic Code Ligatures', 'Hack Nerd Font Mono', 'FiraCode Nerd Font Mono', 'Hack NF', 'FiraCode NF', Consolas, monospace",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  // ==============================
+  // FONTS == != ===
+  // ==============================
+  "editor.fontFamily": "'ComicCodeLigatures Nerd Font', 'ComicCodeLigatures NF', 'Comic Code Ligatures', 'Hack Nerd Font Mono', 'FiraCode Nerd Font Mono', 'Hack NF', 'FiraCode NF', Consolas, monospace",
   "editor.fontLigatures": true,
   // "editor.fontSize": 13,
-  "terminal.integrated.fontFamily": "'ComicCodeLigatures NF', 'Comic Code Ligatures', 'Hack Nerd Font Mono', 'FiraCode Nerd Font Mono', 'Hack NF', 'FiraCode NF', Consolas, monospace",
+  "terminal.integrated.fontFamily": "'ComicCodeLigatures Nerd Font', 'ComicCodeLigatures NF', 'Comic Code Ligatures', 'Hack Nerd Font Mono', 'FiraCode Nerd Font Mono', 'Hack NF', 'FiraCode NF', Consolas, monospace",
   // "terminal.integrated.fontSize": 13,
   // ==============================
-  // ICON THEME
-  // ==============================
-  "workbench.iconTheme": "file-icons",
-  // ==============================
-  // COLOR THEME
+  // (ICON) THEME
   // ==============================
   "workbench.colorTheme": "Krys Colors",
+  "workbench.iconTheme": "file-icons",
   "editor.semanticTokenColorCustomizations": {
     "[Krys Colors]": {
       // Apply to this theme only
@@ -129,19 +140,31 @@
       // "enabled"   : false
     }
   },
+  "editor.guides.indentation": false,
+  "workbench.colorCustomizations": {},
   // ---------------------------------------------------------------------------------
-  // | GIT                                                                           |
+  // | GIT / GITHUB                                                                  |
   // ---------------------------------------------------------------------------------
   "git.autofetch": true,
+  "git.terminalAuthentication": false,
   "git.terminalGitEditor": true,
   "git.inputValidationSubjectLength": 80,
   "git.inputValidationLength": 100,
+  "git.inputValidation": true,
+  "git.openRepositoryInParentFolders": "never",
   "[git-commit]": {
     "editor.rulers": [50, 72, 80, 100],
     "editor.wordWrap": "off",
     "workbench.editor.restoreViewState": false
   },
   "github.gitProtocol": "ssh",
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "chat.tools.urls.autoApprove": {
+    "https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/advanced-security-dependency-scanning-v1": {
+      "approveRequest": false,
+      "approveResponse": true
+    }
+  },
   // ---------------------------------------------------------------------------------
   // | EXTENSIONS (coloring/highlighting)                                            |
   // ---------------------------------------------------------------------------------
@@ -149,10 +172,10 @@
   // indent-rainbow
   // ==============================
   "indentRainbow.colors": [
-    "rgba(255,255,64,0.07)",
-    "rgba(127,255,127,0.07)",
-    "rgba(255,127,255,0.07)",
-    "rgba(79,236,236,0.07)"
+    "rgba(255,255,64,0.15)", // ffff4026
+    "rgba(127,255,127,0.15)", // 7fff7f26
+    "rgba(255,127,255,0.15)", // ff7fff26
+    "rgba(79,236,236,0.15)" // 4fecec26
   ],
   "indentRainbow.ignoreErrorLanguages": ["markdown", "restructuredtext"],
   // ==============================
@@ -179,14 +202,20 @@
   // Todo Tree
   // ==============================
   "todo-tree.filtering.includeHiddenFiles": true,
-  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*{1,2}|\\.\\.|--|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)",
+  // "todo-tree.regex.regex": "(//|#|;|<!--|/\\*{1,2}|\\.\\.|--|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)",
+  "todo-tree.regex.regex": "((//|#|;|\\.\\.|--|^|^[ \t]*(-|\\d+.))\\s*($TAGS))|(<!--\\s*($TAGS).*(\\s|.)*?-->)|(/\\*{1,2}\\s*($TAGS)(\\s|.)*?\\*/)",
+  "[javascript][javascriptreact][typescript][typescriptreact]": {
+    "todo-tree.regex.regex": "(//\\s*($TAGS))|(/\\*{1,2}\\s*($TAGS)(\\s|.)*?\\*/)"
+  },
+  "todo-tree.regex.enableMultiLine": true,
+  "todo-tree.general.debug": true,
   "todo-tree.general.statusBar": "tags",
   "todo-tree.general.tags": [
     "NOTE:",
     "CHANGE ME",
     "TODO:",
-    "BUG:",
     "FIXME:",
+    "BUG:",
     "HACK:"
   ],
   "todo-tree.highlights.enabled": true,
@@ -226,15 +255,6 @@
       "type": "text",
       "rulerColour": "#ff00d4"
     },
-    "BUG:": {
-      "foreground": "#fff",
-      "background": "#ff0000",
-      "icon": "bug",
-      "iconColour": "#ff0000",
-      "gutterIcon": true,
-      "type": "text",
-      "rulerColour": "#ff0000"
-    },
     "FIXME:": {
       "foreground": "#fff",
       "background": "#ff4500",
@@ -244,6 +264,15 @@
       "type": "whole-line",
       "rulerColour": "#ff0000"
     },
+    "BUG:": {
+      "foreground": "#fff",
+      "background": "#ff0000",
+      "icon": "bug",
+      "iconColour": "#ff0000",
+      "gutterIcon": true,
+      "type": "text",
+      "rulerColour": "#ff0000"
+    },
     "HACK:": {
       "foreground": "#000",
       "background": "#ffa500",
@@ -251,7 +280,7 @@
       "iconColour": "#ffa500",
       "gutterIcon": true,
       "type": "text",
-      "rulerColour": "#ff0000"
+      "rulerColour": "#ffa500"
     }
   },
   "todo-tree.tree.showCountsInTree": true,
@@ -280,10 +309,6 @@
   "spellright.documentTypes": ["markdown", "latex", "plaintext"],
   "spellright.ignoreFiles": ["**/.gitignore", "**/.spellignore"],
   // ==============================
-  // ESLint
-  // ==============================
-  "eslint.run": "onSave",
-  // ==============================
   // Jest
   // ==============================
   "jest.showTerminalOnLaunch": false,
@@ -301,17 +326,26 @@
   "python.languageServer": "Pylance",
   "python.analysis.completeFunctionParens": true,
   "python.analysis.typeCheckingMode": "off",
-  "python.linting.mypyEnabled": true,
-  "python.linting.mypyPath": "${workspaceFolder}/.venv/bin/mypy",
-  "python.linting.mypyArgs": [],
-  "python.formatting.provider": "none",
-  "black-formatter.args": ["--safe"],
+  "python.analysis.autoImportCompletions": true,
+  "black-formatter.args": [
+    "--safe",
+    "--config=${workspaceFolder}/pyproject.toml"
+  ],
+  "ruff.configuration": {
+    "lint": {
+      "unfixable": ["ERA001", "F401", "F841"],
+    },
+  },
+  "mypy-type-checker.args": ["--config-file=${workspaceFolder}/pyproject.toml"],
+  "mypy-type-checker.importStrategy": "fromEnvironment",
+  "mypy-type-checker.path": ["${workspaceFolder}/.tox/mypy/bin/mypy"],
+  "mypy-type-checker.showNotifications": "onWarning",
   "[python]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.defaultFormatter": "charliermarsh.ruff", // ms-python.black-formatter
     "editor.codeActionsOnSave": {
-      "source.organizeImports": true,
-      "source.fixAll": true
+      "source.organizeImports": "explicit",
+      "source.fixAll": "explicit"
     }
   },
   // ==============================
@@ -319,7 +353,7 @@
   // ==============================
   "autoDocstring.docstringFormat": "sphinx",
   "autoDocstring.includeExtendedSummary": true,
-  "autoDocstring.customTemplatePath": "C:/Users/riedelc/AppData/Roaming/Code/User/sphinx_docstring_template_custom.mustache",
+  "autoDocstring.customTemplatePath": "~/.config/VSCodium/User/sphinx_docstring_template_custom.mustache",
   // ==============================
   // Jupyter
   // ==============================
@@ -328,70 +362,57 @@
     "jupyter-notebook": "left"
   },
   // ==============================
-  // JavaScript
+  // CSS
   // ==============================
-  "[javascript]": {
+  "[css]": {
+    "editor.tabSize": 2
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(((\\S|\\s)*?)\\);", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(((\\S|\\s)*?)\\);", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "classNames",
+    "ngClass",
+    "class:list"
+  ],
+  // ==============================
+  // JavaScript / TypeScript
+  // ==============================
+  "[javascript][typescript][javascriptreact][typescriptreact]": {
     "editor.tabSize": 2,
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
     "editor.codeActionsOnSave": {
-      "source.organizeImports": false,
-      // removes unreachable code probably via ts
-      "source.fixAll": false,
-      "source.fixAll.eslint": true
+      "source.organizeImports": "never",
+      // prettier removes unreachable code probably via ts
+      "source.fixAll": "never",
+      "source.fixAll.eslint": "explicit"
     }
   },
-  "[javascriptreact]": {
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": false,
-      // removes unreachable code probably via ts
-      "source.fixAll": false,
-      "source.fixAll.eslint": true
-    }
-  },
-  "javascript.updateImportsOnFileMove.enabled": "prompt",
-  "javascript.updateImportsOnPaste.enabled": false,
-  "javascript.format.semicolons": "insert",
-  "javascript.preferences.useAliasesForRenames": false,
-  "javascript.preferences.quoteStyle": "double",
-  "eslint.packageManager": "yarn",
+  "js/ts.updateImportsOnFileMove.enabled": "prompt",
+  "js/ts.updateImportsOnPaste.enabled": false,
+  "js/ts.format.semicolons": "insert",
+  "js/ts.preferences.useAliasesForRenames": false,
+  "js/ts.preferences.quoteStyle": "double",
+  "js/ts.enablePromptUseWorkspaceTsdk": true,
+  "js/ts.inlayHints.functionLikeReturnTypes.enabled": true,
+  "prettier.prettierPath": "./node_modules/prettier",
+  "eslint.run": "onSave",
   "eslint.format.enable": true,
+  "eslint.debug": true,
+  "eslint.options": {
+    "overrideConfigFile": "eslint.config.ts",
+    "flags": ["unstable_ts_config"],
+    "overrideConfig": {
+      "linterOptions": { "reportUnusedDisableDirectives": false }
+    }
+  },
+  "eslint.useFlatConfig": true,
   "console-ninja.outputMode": "In View",
-  // ==============================
-  // TypeScript
-  // ==============================
-  "[typescript]": {
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": false,
-      // removes unreachable code probably via ts
-      "source.fixAll": false,
-      "source.fixAll.eslint": true
-    }
-  },
-  "[typescriptreact]": {
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": false,
-      // removes unreachable code probably via ts
-      "source.fixAll": false,
-      "source.fixAll.eslint": true
-    }
-  },
-  "typescript.updateImportsOnFileMove.enabled": "prompt",
-  "typescript.updateImportsOnPaste.enabled": false,
-  "typescript.enablePromptUseWorkspaceTsdk": true,
-  "typescript.format.semicolons": "insert",
-  "typescript.preferences.useAliasesForRenames": false,
-  "typescript.preferences.quoteStyle": "double",
-  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "console-ninja.featureSet": "Community",  // ==============================  // TypeScript  // ==============================
   // ==============================
   // reStructuredText
   // ==============================
@@ -399,6 +420,7 @@
   "esbonio.sphinx.buildDir": "${workspaceFolder}/docs/build/html",
   "esbonio.sphinx.confDir": "${workspaceFolder}/docs/source",
   "esbonio.server.enabled": true,
+  "restructuredtext.linter.rst-lint.executablePath": "${workspaceFolder}/.venv/bin/rstcheck",
   "restructuredtext.linter.rst-lint.extraArgs": [
     "--config ${workspaceFolder}/.rstcheck.cfg"
   ],
@@ -411,28 +433,29 @@
   // Markdown
   // ==============================
   "markdown.extension.preview.autoShowPreviewToSide": false,
+  "markdown.extension.tableFormatter.normalizeIndentation": true,
+  "markdown.extension.toc.slugifyMode": "github",
+  // "markdown.extension.toc.slugifyMode": "azureDevops",
+  "markdown.extension.toc.levels": "1..3",
   "[markdown]": {
+    "editor.formatOnSave": false,
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+    // "editor.codeActionsOnSave": {
+    //   "source.organizeImports": "explicit",
+    //   "source.fixAll": "explicit"
+    // }
     "editor.wordWrap": "off"
   },
   // ==============================
   // json
   // ==============================
-  "[json]": {
+  "[json][jsonc]": {
     "editor.tabSize": 2,
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
-      "source.organizeImports": true,
-      "source.fixAll": true
-    }
-  },
-  "[jsonc]": {
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": true,
-      "source.fixAll": true
+      "source.organizeImports": "explicit",
+      "source.fixAll": "explicit"
     }
   },
   // ==============================
@@ -452,12 +475,43 @@
   },
   "evenBetterToml.semanticTokens": true,
   // ==============================
+  // dockercompose
+  // ==============================
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  // ==============================
+  // Github Actions Workflow files
+  // ==============================
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  // ==============================
   // Svelte
   // ==============================
   "svelte.enable-ts-plugin": true,
   // ==============================
   // SQL
   // ==============================
+  "sqltools.disableChordKeybindings": true,
   "sqltools.useNodeRuntime": true,
-  "sqltools.detectNodeRuntime": false
+  "sqltools.detectNodeRuntime": false,
+  "sqltools.disableNodeDetectNotifications": true,
+  "sqltools.completionLanguages": ["sql"],
+  "inlineSQL.dbDriver": "mysql",
+  "sqlfluff.linter.run": "onSave",
+  "sqlfluff.format.enabled": true,
+  "sqlfluff.experimental.format.executeInTerminal": true,
+  "[sql]": {
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "editor.formatOnSave": false,
+    "editor.defaultFormatter": "dorzey.vscode-sqlfluff"
+  },
+  // ==============================
+  // NEW
+  // ==============================
+  "testing.automaticallyOpenTestResults": "neverOpen",
 }

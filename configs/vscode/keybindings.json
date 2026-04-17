@@ -150,6 +150,25 @@
         "command": "workbench.action.openSettingsJson"
     },
 
+    // ==============================
+    // Open new Terminal
+    // Ctrl + Ö (Semicolon)
+    // ==============================
+    {
+        "key": "ctrl+[Semicolon]",
+        "command": "workbench.action.terminal.new"
+    },
+
+    // ==============================
+    // Remove "Open external Terminal"
+    // Ctrl + Shift + C
+    // ==============================
+    {
+        "key": "ctrl+shift+c",
+        "command": "-workbench.action.terminal.openNativeConsole",
+        "when": "!terminalFocus"
+    },
+
     // ------------------------------
     // ------------------------------
     // Extension Keybindings
@@ -235,4 +254,5 @@
         "command": "-markdown.extension.onTabKey",
         "when": "editorTextFocus && markdown.extension.editor.cursor.inList && !editorHasMultipleSelections && !editorReadonly && !editorTabMovesFocus && !hasOtherSuggestions && !hasSnippetCompletions && !inSnippetMode && !inlineSuggestionVisible && !markdown.extension.editor.cursor.inFencedCodeBlock && !markdown.extension.editor.cursor.inMathEnv && !suggestWidgetVisible && !tabShouldAcceptInlineEdit && !tabShouldJumpToInlineEdit && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
     },
+    // NEW
 ]

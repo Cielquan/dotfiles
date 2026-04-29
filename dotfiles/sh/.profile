@@ -1,5 +1,10 @@
 #!/usr/bin/env sh
 
+# Add /usr/sbin to PATH if it exists
+if [ -d /usr/sbin ] ; then
+    PATH="/usr/sbin:${PATH}"
+fi
+
 # Add ~/.local/bin to PATH if it exists
 if [ -d "${HOME}"/.local/bin ] ; then
     PATH=${HOME}/.local/bin:${PATH}
@@ -8,11 +13,6 @@ fi
 # Add ~/bin to PATH if it exists
 if [ -d "${HOME}/bin" ] ; then
     PATH="${HOME}/bin:${PATH}"
-fi
-
-# Add /usr/sbin to PATH if it exists
-if [ -d /usr/sbin ] ; then
-    PATH="/usr/sbin:${PATH}"
 fi
 
 # Load all supplementary scripts in ~/.profile.d

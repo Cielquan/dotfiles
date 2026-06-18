@@ -102,6 +102,7 @@
     "Pipfile": "toml",
     "Pipfile.lock": "json",
     "poetry.lock": "toml",
+    "rust-toolchain": "toml",
     "*.rst_t": "jinja",
     ".sqlfluff": "ini",
     ".vuerc": "json",

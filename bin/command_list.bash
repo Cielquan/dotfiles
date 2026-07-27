@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # shellcheck disable=SC2317
 
 echo "This file is not intended to be run!"

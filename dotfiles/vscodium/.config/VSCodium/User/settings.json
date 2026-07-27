@@ -505,7 +505,7 @@
   // SQL
   // ==============================
   "sqltools.disableChordKeybindings": true,
-  "sqltools.useNodeRuntime": true,
+  "sqltools.useNodeRuntime": false,
   "sqltools.detectNodeRuntime": false,
   "sqltools.disableNodeDetectNotifications": true,
   "sqltools.completionLanguages": ["sql"],

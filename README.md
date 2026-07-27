@@ -1,9 +1,11 @@
-# Prerequisites
+# Dotfiles
+
+## Prerequisites
 
 - `python3` - The dotfile copy script is written in python
 - (`apt`) - The commands in the command list target the apt package manager
 
-# Usage
+## Usage
 
 ```bash
 # Clone the repo to where you want
@@ -12,11 +14,11 @@ git clone https://github.com/Cielquan/dotfiles.git
 .dotfiles/bin/copy_dotfiles.py
 ```
 
-## Script
+### Script
 
 The script has some flags, run it with `--help` to learn more.
 
-# Acknowledgements
+## Acknowledgements
 
 Thanks to those inspiring repos:
 

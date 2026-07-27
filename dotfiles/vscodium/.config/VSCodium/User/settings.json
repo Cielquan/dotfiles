@@ -212,16 +212,17 @@
   // ==============================
   // Todo Tree
   // ==============================
-  "todo-tree.filtering.includeHiddenFiles": true,
   // "todo-tree.regex.regex": "(//|#|;|<!--|/\\*{1,2}|\\.\\.|--|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)",
-  "todo-tree.regex.regex": "((//|#|;|\\.\\.|--|^|^[ \t]*(-|\\d+.))\\s*($TAGS))|(<!--\\s*($TAGS).*(\\s|.)*?-->)|(/\\*{1,2}\\s*($TAGS)(\\s|.)*?\\*/)",
+  "better-todo-tree.regex.regex": "((//|#|;|\\.\\.|--|^|^[ \t]*(-|\\d+.))\\s*($TAGS))|(<!--\\s*($TAGS).*(\\s|.)*?-->)|(/\\*{1,2}\\s*($TAGS)(\\s|.)*?\\*/)",
   "[javascript][javascriptreact][typescript][typescriptreact]": {
-    "todo-tree.regex.regex": "(//\\s*($TAGS))|(/\\*{1,2}\\s*($TAGS)(\\s|.)*?\\*/)"
+    "better-todo-tree.regex.regex": "(//\\s*($TAGS))|(/\\*{1,2}\\s*($TAGS)(\\s|.)*?\\*/)"
   },
-  "todo-tree.regex.enableMultiLine": true,
-  "todo-tree.general.debug": true,
-  "todo-tree.general.statusBar": "tags",
-  "todo-tree.general.tags": [
+  "better-todo-tree.regex.enableMultiLine": true,
+  "better-todo-tree.filtering.includeHiddenFiles": true,
+  "better-todo-tree.tree.showCountsInTree": true,
+  "better-todo-tree.general.debug": true,
+  "better-todo-tree.general.statusBar": "tags",
+  "better-todo-tree.general.tags": [
     "NOTE:",
     "CHANGE ME",
     "TODO:",
@@ -229,12 +230,12 @@
     "BUG:",
     "HACK:"
   ],
-  "todo-tree.highlights.enabled": true,
-  "todo-tree.highlights.defaultHighlight": {
+  "better-todo-tree.highlights.enabled": true,
+  "better-todo-tree.highlights.defaultHighlight": {
     "opacity": 90,
     "type": "tag"
   },
-  "todo-tree.highlights.customHighlight": {
+  "better-todo-tree.highlights.customHighlight": {
     "NOTE:": {
       "foreground": "#fff",
       "background": "#008000",
@@ -294,8 +295,7 @@
       "rulerColour": "#ffa500"
     }
   },
-  "todo-tree.tree.showCountsInTree": true,
-  "todo-tree.filtering.excludeGlobs": [
+  "better-todo-tree.filtering.excludeGlobs": [
     // DIRECTORIES
     "**/node_modules/**",
     "**/bower_components/**",

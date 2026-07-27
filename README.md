@@ -1,80 +1,20 @@
 # Prerequisites
 
-The installer scripts are mostly shell script, except for the dotfiles installer script
-which is a python script.
-
-Therefore you need:
-- POSIX compliant shell
-- apt package manager
+- `python3` - The dotfile copy script is written in python
+- (`apt`) - The commands in the command list target the apt package manager
 
 # Usage
 
-## Git clone repo and run setup script
-```
+```bash
+# Clone the repo to where you want
 git clone https://github.com/Cielquan/dotfiles.git
-./dotfiles/bin/00_setup.sh
+# Run the copy script
+.dotfiles/bin/copy_dotfiles.py
 ```
 
-or oneliner with `curl`:
-```
-curl -sSL https://raw.githubusercontent.com/Cielquan/dotfiles/main/bin/00_setup.sh | sh && ~/.dotfiles/bin/00_setup.sh
-```
-or with `wget`:
-```
-wget -qO - https://raw.githubusercontent.com/Cielquan/dotfiles/main/bin/00_setup.sh | sh && ~/.dotfiles/bin/00_setup.sh
-```
+## Script
 
-## Scripts
-You can find all the scripts to utilize this repo inside the `/bin` directory.
-All shell scripts below that ask for the users permission can be called with one of
-these switches `-f | -y | --force | --yes` to skip prompting and taking the default
-actions. You can also set this switch for the `00_setup.sh` script which will than pass
-this switch down to the other scripts.
-
-#### `00_setup.sh`
-This shell script will install git if missing and then git clone the repo if its not
-called from within the repo (like in the oneliner setups above). If it is called from
-within it will call all the other scripts in numeric order.
-This script takes the `-d | --dotfiles-dir` argument to change the location and name of the
-local git repository. Defaults to `~/.dotfiles`.
-
-#### `10_install_dotfiles.py`
-This python script installes the dotfiles you can find inside the `/dotfiles` directory.
-It will rename existing files by appending a suffix und then copy the files to their
-locations.
-The script can take different configuration via it's CLI. Call the script with `--help`
-for more information about its options.
-To uninstall the dotfiles run the python script again with the `--uninstall` switch.
-This will delete the installed files and remove the backup suffix
-
-#### `20_linux_setup.sh`
-This script installs basic linux tooling. At first it will install `ca-certificates`
-and `apt-transport-https`, add the git ppa and upgrade the system. Afterwards some
-packages are installed. See the top of the script for the packages. Some following
-scripts depend on some packages installed by this script.
-
-#### `30_prompt_setup.sh`
-This script installs the [starship prompt](https://starship.rs/)
-and the [nerd font](https://www.nerdfonts.com/) DejaVuSansMono for starship prompt to
-use. The prompt is automatically loaded by the bash config from this repo.
-
-#### `31_ls_colors.sh`
-This script will download the LS_COLORS file from
-[gh:trapd00r/LS_COLORS](https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS)
-and set it up to be used if your terminal supports 256 colors.
-
-#### `40_coding_setup.sh`
-This script installs programming langauges and some tooling for them.
-The deadsnakes ppa is added and from there different python versions are installed.
-See the top of the script for the actual versions. But it keeps the default installed
-one. The corresponding pythonX.Y-venv and pythonX.Y-dev packages are also installed for
-all versions. Then [poetry](https://python-poetry.org/) is installed and configured to
-create python venvs inside the project dirs. Then rust and nodejs are installed.
-
-#### `41_vscode_setup.sh`
-This script installs the VS Code IDE. Afterwards my default config and keybindings are
-copied to there location on the system and the extensions from the `extensions.txt` file
-are installed. You can find the mentioned files in `/configs/vscode` directory.
+The script has some flags, run it with `--help` to learn more.
 
 # Acknowledgements
 Thanks to those inspiring repos:

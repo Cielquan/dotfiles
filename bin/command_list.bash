@@ -34,10 +34,10 @@ sudo curl -fsSL --proto '=https' --tlsv1.2 -o /etc/apt/sources.list.d/brave-brow
 
 
 # -----------------------------------------------------------------------------
-# Additional PPAs
+# KeePassXC
 # -----------------------------------------------------------------------------
-sudo add-apt-repository ppa:git-core/ppa
-sudo add-apt-repository ppa:phoerious/keepassxc # NOTE: Flatpak is recommended for `keepassxc`
+# NOTE: Flatpak is recommended for `keepassxc`
+sudo add-apt-repository ppa:phoerious/keepassxc
 
 
 # -----------------------------------------------------------------------------
@@ -78,6 +78,13 @@ echo "Install a nerdfont"
 
 
 # -----------------------------------------------------------------------------
+# Git
+# -----------------------------------------------------------------------------
+sudo add-apt-repository ppa:git-core/ppa
+cargo install --locked git-delta
+
+
+# -----------------------------------------------------------------------------
 # Starship prompt
 # -----------------------------------------------------------------------------
 cargo install --locked starship
@@ -110,3 +117,9 @@ echo "Download godot from in ~/bin: https://godotengine.org/download/linux/"
 ln -s ~/bin/godot ~/bin/godot4
 # `godot-raw` is used in above wrapper script
 ln -s ~/bin/godot-raw ~/bin/...
+
+
+# -----------------------------------------------------------------------------
+# General tools
+# -----------------------------------------------------------------------------
+cargo install --locked ripgrep

@@ -342,13 +342,6 @@
   "python.terminal.activateEnvInCurrentTerminal": false,
   "python.venvPath": "${workspaceFolder}/.venv/bin/activate",
   "python.languageServer": "None",
-  "python.analysis.completeFunctionParens": true,
-  "python.analysis.typeCheckingMode": "off",
-  "python.analysis.autoImportCompletions": true,
-  "black-formatter.args": [
-    "--safe",
-    "--config=${workspaceFolder}/pyproject.toml"
-  ],
   "ruff.configuration": {
     "lint": {
       "unfixable": ["ERA001", "F401", "F841"],
@@ -360,7 +353,7 @@
   "mypy-type-checker.showNotifications": "onWarning",
   "[python]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "charliermarsh.ruff", // ms-python.black-formatter
+    "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.codeActionsOnSave": {
       "source.organizeImports": "explicit",
       "source.fixAll": "explicit"

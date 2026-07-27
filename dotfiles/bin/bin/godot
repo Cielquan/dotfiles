@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+exec env -i \
+    HOME="$HOME" \
+    USER="$USER" \
+    PATH="$PATH" \
+    GDK_BACKEND=x11 \
+    QT_QPA_PLATFORM=x11 \
+    DISPLAY="${DISPLAY:-:0}" \
+    LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu" \
+    /home/krys/bin/godot-raw "$@"

@@ -1,0 +1,75 @@
+---
+version: 1
+disable_existing_loggers: false
+
+# NOTE: https://docs.python.org/3/howto/logging.html#configuring-logging
+# NOTE: https://docs.python.org/3/library/logging.config.html
+
+formatters:
+  default:
+    (): 'uvicorn.logging.DefaultFormatter'
+    fmt: '%(asctime)s %(levelprefix)s [%(process)d] %(name)-13s - %(message)s - %(pathname)s:%(lineno)s'
+  access:
+    (): 'uvicorn.logging.AccessFormatter'
+    fmt: '%(asctime)s %(levelprefix)s [%(process)d] %(client_addr)s - "%(request_line)s" %(status_code)s'
+  file_default:
+    (): 'uvicorn.logging.DefaultFormatter'
+    fmt: '%(asctime)s %(levelprefix)s [%(process)d] %(name)-13s - %(message)s - %(pathname)s:%(lineno)s'
+    use_colors: false
+  file_access:
+    (): 'uvicorn.logging.AccessFormatter'
+    fmt: '%(asctime)s %(levelprefix)s [%(process)d] %(client_addr)s - "%(request_line)s" %(status_code)s'
+    use_colors: false
+
+handlers:
+  default:
+    class: logging.StreamHandler
+    formatter: default
+    stream: "ext://sys.stderr"
+  access:
+    class: logging.StreamHandler
+    formatter: access
+    stream: "ext://sys.stdout"
+  file_default:
+    class: logging.handlers.RotatingFileHandler
+    formatter: file_default
+    filename: logs/api.log
+    mode: a
+    maxBytes: 2_097_152
+    backupCount: 10
+  file_access:
+    class: logging.handlers.RotatingFileHandler
+    formatter: file_access
+    filename: logs/api-access.log
+    mode: a
+    maxBytes: 2_097_152
+    backupCount: 10
+
+loggers:
+  uvicorn:
+    handlers:
+      - default
+      - file_default
+  uvicorn.error:
+    level: INFO
+  uvicorn.access:
+    level: INFO
+    propagate: false
+    handlers:
+      - access
+      - file_access
+  asyncmy:
+    level: INFO
+    handlers:
+      - default
+      - file_default
+  aiosqlite:
+    level: INFO
+    handlers:
+      - default
+      - file_default
+  app:
+    level: INFO
+    handlers:
+      - default
+      - file_default

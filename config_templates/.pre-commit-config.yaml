@@ -1,0 +1,533 @@
+---
+minimum_pre_commit_version: "2.17"
+default_stages: [pre-commit]
+default_language_version:
+  python: python3.12
+
+ci:
+  skip: [mypy, pylint]
+
+repos:
+  # ----------------------------------------------
+  # Branch guard hook
+  # ----------------------------------------------
+
+  # git context checking out-of-the-box hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
+    hooks:
+      - id: no-commit-to-branch
+        args: ["--branch", "main"]
+
+  # ----------------------------------------------
+  # Meta hooks
+  # ----------------------------------------------
+
+  - repo: meta
+    hooks:
+      - id: identity
+        stages: [pre-commit, manual]
+      - id: check-hooks-apply
+        stages: [manual]
+      - id: check-useless-excludes
+        stages: [manual]
+
+  # ----------------------------------------------
+  # File hooks
+  # ----------------------------------------------
+
+  # file checking out-of-the-box hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
+    hooks:
+      - id: check-case-conflict
+      - id: check-shebang-scripts-are-executable
+        exclude: '^.*\.rs$'
+        stages: [pre-commit]
+      - id: check-symlinks
+      - id: destroyed-symlinks
+      - id: forbid-new-submodules
+
+  # ----------------------------------------------
+  # Dependency hooks
+  # ----------------------------------------------
+
+  # pipenv - python dependency management
+  - repo: local
+    hooks:
+      # Config file: Pipfile
+      - id: pipenv-verify
+        name: pipenv-verify
+        description: verify python dependency lock file is up-to-date
+        language: python
+        additional_dependencies: ["pipenv"]
+        entry: pipenv
+        args: ["verify"]
+        pass_filenames: false
+        require_serial: true
+        files: ^Pipfile$
+
+  # pipenv - python dependency management
+  - repo: local
+    hooks:
+      # Config file: Pipfile
+      - id: pipenv-requirements
+        name: pipenv-requirements
+        description: generate requirements.txt from Pipfile.lock
+        language: python
+        additional_dependencies: ["pipenv"]
+        entry: python
+        args:
+          - "-c"
+          - |
+            import subprocess;
+            with open("requirements.txt", "w") as f:
+                subprocess.run(["pipenv", "requirements", "--hash", "--dev", "--categories=packages,dev-packages,testing,coverage,mypy"], stdout=f, check=True)
+        pass_filenames: false
+        require_serial: true
+        files: ^Pipfile$
+
+  - repo: https://github.com/pypa/pip-audit
+    rev: 89ba95983281980506b662fb08cea634d75907c5  # frozen: v2.9.0
+    hooks:
+      - id: pip-audit
+        args: ["-r", "requirements.txt", "--disable-pip"]
+
+  # pnpm - node dependency management
+  - repo: local
+    hooks:
+      - id: pnpm-audit
+        name: pnpm-audit
+        description: check for vulnerabilities in node dependencies
+        language: system
+        entry: pnpm
+        args: ["audit"]
+        pass_filenames: false
+        require_serial: true
+        files: ^package.json|pnpm-lock.yaml$
+
+  # ####################################################################################
+  #
+  #       FORMATTING
+  #
+  # ####################################################################################
+
+  # ----------------------------------------------
+  # Python
+  # ----------------------------------------------
+
+  # ruff - python linter with fixing ability
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: 2700fd5671c633760d912769c041bfcde2b9a01b # frozen: v0.15.22
+    hooks:
+      - id: ruff
+        name: ruff (fix)
+        args: ["--fix-only", "--exit-non-zero-on-fix", "--config=pyproject.toml"]
+      - id: ruff-format
+        name: ruff (format)
+
+  # blacken-docs - black for python code in docs (rst/md/tex)
+  - repo: https://github.com/asottile/blacken-docs
+    rev: dda8db18cfc68df532abf33b185ecd12d5b7b326 # frozen: 1.20.0
+    hooks:
+      # Config file: same as `black`
+      # Inline skip: same as `black`
+      - id: blacken-docs
+        args: ["--line-length=100", "--target-version=py312"]
+        exclude: testing|tests
+
+  # ----------------------------------------------
+  # Rust
+  # ----------------------------------------------
+
+  # rust toolchain
+  - repo: local
+    hooks:
+      # rustfmt - rust formatter
+      # Config file: rustfmt.toml
+      - id: cargo-fmt
+        name: rustfmt
+        description: Format rust source with rustfmt.
+        entry: cargo fmt
+        args: ["--"]
+        language: system
+        types: [rust]
+
+  # ----------------------------------------------
+  # JavaScript / TypeScript
+  # ----------------------------------------------
+
+  # eslint - JS linter (run as formatter - also run as linter afterwards (below))
+  - repo: https://github.com/eslint/eslint
+    # Config file: eslint.config.ts
+    #     https://eslint.org/docs/user-guide/configuring/configuration-files
+    # Ignore file: .eslintignore [file ignore pattern]
+    rev: a7d5fe64f402eefdc2bbb73992d3a4ac49f426a5  # frozen: v9.39.3
+    hooks:
+      - id: eslint
+        name: eslint (fix)
+        # TODO:#i# lock node version because of bug in node v23 - wait for release
+        # https://github.com/nodejs/node/pull/55414
+        language_version: 22.18.0
+        stages: ["pre-commit"]
+        # *.js, *.ts, *.cjs, *.cts, *.mjs, *.mts, *.jsx, *.tsx
+        files: '(\.[cm]?[jt]s$)|(\.[jt]sx$)'
+        types: [file]
+        args: ["--fix", "--max-warnings=0"]
+        require_serial: true
+        additional_dependencies:
+          - eslint@9.39.3 # NOTE: version overwrites rev version - keep in sync
+          - "@eslint/compat@1.3.2"
+          - "@eslint/eslintrc@3.3.4"
+          - "@eslint/js@9.39.3"
+          - "@next/eslint-plugin-next@15.5.10"
+          - "@stylistic/eslint-plugin@5.2.3"
+          - "@typescript-eslint/parser@8.39.1"
+          - confusing-browser-globals@1.0.11
+          - eslint-config-next@15.5.10
+          - eslint-import-resolver-node@0.3.9
+          - eslint-import-resolver-typescript@4.4.4
+          - eslint-plugin-chai-friendly@1.1.0
+          - eslint-plugin-cypress@5.1.1
+          - eslint-plugin-import-x@4.16.1
+          - eslint-plugin-jest@29.0.1
+          - eslint-plugin-jest-dom@5.5.0
+          - eslint-plugin-jsx-a11y@6.10.2
+          - eslint-plugin-mocha@11.1.0
+          - eslint-plugin-n@17.21.3
+          - eslint-plugin-prettier@5.5.4
+          - eslint-plugin-react@7.37.5
+          - eslint-plugin-react-compiler@19.1.0-rc.2
+          - eslint-plugin-react-hooks@5.2.0
+          - eslint-plugin-testing-library@7.6.6
+          - globals@16.3.0
+          - jiti@2.5.1
+          - prettier@3.6.2
+          - prettier-plugin-tailwindcss@0.6.14
+          - typescript@~5.8.3
+          - typescript-eslint@8.39.1
+
+  # ----------------------------------------------
+  # Markdown
+  # ----------------------------------------------
+
+  # markdownlint - md file checker
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: 06f92c99e930c11230426b5edd775021d25e08a8 # frozen: v0.23.1
+    # Config file: .markdownlint-cli2.jsonc
+    # Inline config:
+    # Disable all rules: <!-- markdownlint-disable -->
+    # Enable all rules: <!-- markdownlint-enable -->
+    # Disable all rules for the next line only: <!-- markdownlint-disable-next-line -->
+    # Disable rules by name: <!-- markdownlint-disable MD001 MD005 -->
+    # Enable rules by name: <!-- markdownlint-enable MD001 MD005 -->
+    # Disable rules by name for next line only: <!-- markdownlint-disable-next-line MD001 MD005 -->
+    # Capture the current rule configuration: <!-- markdownlint-capture -->
+    # Restore the captured rule configuration: <!-- markdownlint-restore -->
+    hooks:
+      - id: markdownlint-cli2
+        # TODO:#i# lock node version because of bug in node v23 - wait for release
+        # https://github.com/nodejs/node/pull/55414
+        language_version: 22.18.0
+        args: ["--fix"]
+
+  # ----------------------------------------------
+  # JS / TS / HTML / CSS / JSON / YAML / MD
+  # ----------------------------------------------
+
+  # prettier - multi formatter
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    # https://github.com/prettier/prettier
+    # Config file: "prettier" key package.json | .prettierrc | .prettierrc.json |
+    #     https://prettier.io/docs/en/configuration.html
+    # Ignore file: .prettierignore [file ignore pattern]
+    rev: f12edd9c7be1c20cfa42420fd0e6df71e42b51ea  # frozen: v4.0.0-alpha.8
+    hooks:
+      - id: prettier
+        additional_dependencies:
+          - prettier@^3.3.2 # NOTE: version overwrites rev version - keep in sync
+          - prettier-plugin-tailwindcss@^0.6.5 # NOTE: Plugin only so config does not error
+        args: ["--ignore-path", ".gitignore"]
+        files: \.(html|css|json,yaml,md)$
+
+  # ----------------------------------------------
+  # SQL
+  # ----------------------------------------------
+
+  # sqlfluff - SQL linter and formatter
+  - repo: https://github.com/sqlfluff/sqlfluff
+    # Config file: ".sqlfluff"
+    # Ignore file: .sqlfluffignore [file ignore pattern]
+    rev: 5f6d8626c8c13537866ec476e82bb9781afb32ac  # frozen: 3.4.2
+    hooks:
+      - id: sqlfluff-fix
+
+  # ----------------------------------------------
+  # Spelling dict
+  # ----------------------------------------------
+
+  # Custom hook as python command
+  - repo: local
+    hooks:
+      - id: sort-spelling-dicts
+        name: Sort spelling_dict.txt files
+        description: Sort spelling_dict.txt files
+        language: python
+        entry: python
+        args:
+          - "-c"
+          - |
+            import pathlib;
+            import sys;
+            p = pathlib.Path(sys.argv[1]);
+            p.write_text("\n".join(sorted(set(p.read_text("utf-8").splitlines()))) + "\n", "utf-8")
+        files: "spelling_dict.txt"
+
+  # ----------------------------------------------
+  # General (code unspecific)
+  # ----------------------------------------------
+
+  # code unspecific out-of-the-box hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
+    hooks:
+      - id: end-of-file-fixer
+        stages: [pre-commit]
+      - id: trailing-whitespace
+        stages: [pre-commit]
+        exclude: '\.tsx\.snap$'
+
+  # ####################################################################################
+  #
+  #       LINTING
+  #
+  # ####################################################################################
+
+  # ----------------------------------------------
+  # General (code unspecific)
+  # ----------------------------------------------
+
+  - repo: local
+    hooks:
+      # Find TODO:|FIXME: comments in all files
+      # Inline skip: `#i#` directly after the colon after the tag-word
+      - id: find-todos
+        name: "Find TODO:|FIXME: comments"
+        description: "Check for TODO:|FIXME: comments in all files"
+        language: pygrep
+        entry: '(^|//!?|#|<!--|;|/\*(\*|!)?|\.\.)\s*(TODO:|FIXME:)(?!\s*#i#)'
+        exclude: TODO
+
+  # code unspecific out-of-the-box hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
+    hooks:
+      - id: check-merge-conflict
+      - id: detect-private-key
+
+  # ----------------------------------------------
+  # Python
+  # ----------------------------------------------
+
+  # ruff - python linter with fixing ability
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: 2700fd5671c633760d912769c041bfcde2b9a01b # frozen: v0.15.22
+    hooks:
+      - id: ruff
+        name: ruff (lint)
+        args: ["--config=pyproject.toml"]
+      - id: ruff-format
+        name: ruff (format-check)
+        args: ["--diff"]
+
+  # python specific out-of-the-box hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
+    hooks:
+      - id: debug-statements
+      - id: name-tests-test
+
+  # several python code regex hooks
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: 3a6eb0fadf60b3cccfd80bad9dbb6fae7e47b316  # frozen: v1.10.0
+    hooks:
+      - id: python-check-blanket-noqa
+      - id: python-check-blanket-type-ignore
+      - id: python-check-mock-methods
+      - id: python-no-eval
+      - id: python-no-log-warn
+
+  # Lint hooks managed via tox `pre-commit` env b/c they need the pkg installed
+  - repo: local
+    hooks:
+      # mypy - python type checker
+      # Config file: [tool.mypy] section in project.toml
+      # Inline skip file: `# type: ignore` at top
+      # Inline skip: `# type: ignore` or `# type: ignore[CODE, ...]`
+      - id: mypy
+        name: mypy
+        description: run mypy over the installed package via tox
+        language: python
+        additional_dependencies: ["tox"]
+        entry: tox
+        args: ["-e", "mypy"]
+        types: [python]
+        pass_filenames: false
+        require_serial: true
+
+  # pylint - python linter
+  - repo: https://github.com/PyCQA/pylint/
+    rev: 8a396357098337ba8be714fffdf2d00947a9778c # frozen: v4.0.6
+    hooks:
+      # Inline skip file: `# pylint: skip-file`
+      # Inline change: `# pylint: disable|enable=CODE|NAME`
+      - id: pylint
+        name: spell-check (pylint+pyenchant)
+        description: >
+          spell-check in docstrings/comments in py-source via pyenchant and pylint
+        additional_dependencies: [pyenchant]
+        args: ["--disable=all", "--enable=spelling", "--rcfile=.pylintrc.spelling.toml"]
+
+  # ----------------------------------------------
+  # Rust
+  # ----------------------------------------------
+
+  # Run rust toolchain
+  - repo: local
+    hooks:
+      # clippy - rust linter
+      - id: cargo-clippy
+        name: clippy
+        description: Lint rust source with clippy.
+        entry: cargo clippy
+        language: system
+        types: [rust]
+        pass_filenames: false
+      # check - rust package checker
+      - id: cargo-check
+        name: cargo check
+        description: Check rust package for errors.
+        entry: cargo check
+        language: system
+        types: [rust]
+        pass_filenames: false
+
+  # ----------------------------------------------
+  # Shell script
+  # ----------------------------------------------
+
+  # shellscript (via PyPI package)
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: 745eface02aef23e168a8afb6b5737818efbea95 # frozen: v0.11.0.1
+    hooks:
+      - id: shellcheck
+
+  # ----------------------------------------------
+  # HTML
+  # ----------------------------------------------
+
+  - repo: https://github.com/Lucas-C/pre-commit-hooks-nodejs
+    rev: 013455c0de40486ccf40a982d6ba68d3c0d78474 # frozen: v1.1.2
+    hooks:
+      # htmlhint - HTML linter
+      # https://htmlhint.com/
+      # Config file: .htmlhintrc [JSON|YAML|JS containing config obj] [--config/-c]
+      # Ignore file: .htmlhintignore [file ignore pattern] [--ignore/-i]
+      # Inline config e.g.: `<!-- htmlhint tag-pair,id-class-value:underline -->`
+      - id: htmlhint
+        # TODO:#i# lock node version because of bug in node v23 - wait for release
+        # https://github.com/nodejs/node/pull/55414
+        language_version: 22.18.0
+      # htmllint - HTML linter
+      # https://github.com/htmllint/htmllint/wiki/Options
+      # Config file (required): .htmllintrc [json] [--rc]
+      # Inline config: `<!-- htmllint [key]="[value]" -->`
+      - id: htmllint
+        # TODO:#i# lock node version because of bug in node v23 - wait for release
+        # https://github.com/nodejs/node/pull/55414
+        language_version: 22.18.0
+
+  # ----------------------------------------------
+  # CSS
+  # ----------------------------------------------
+
+  - repo: https://github.com/cielquan/mirrors-stylelint
+    # Config file: .stylelintrc.json
+    rev: a4d65c89f416c91a4878b33168f65ed0506675b1  # frozen: v17.7.0
+    hooks:
+      - id: stylelint
+        additional_dependencies:
+          - stylelint@v17.7.0
+          - stylelint-config-standard@40.0.0
+          - stylelint-config-tailwindcss@1.0.1
+
+  # ----------------------------------------------
+  # JSON / TOML / YAML
+  # ----------------------------------------------
+
+  # JSON specific out-of-the-box hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
+    hooks:
+      - id: check-json
+        exclude: tsconfig\.json
+      - id: check-toml
+      - id: check-yaml
+
+  # yamllint - yaml linter
+  - repo: https://github.com/adrienverge/yamllint
+    rev: 79a6b2b1392eaf49cdd32ac4f14be1a809bbd8f7  # frozen: v1.37.1
+    hooks:
+      # Config file: .yamllint.yaml [--config-file]
+      # Inline skip: `# yamllint disable-line[ rule:<RULE>]`
+      # Block skip: `# yamllint disable[ rule:<RULE>]`
+      # Block skip end: `# yamllint enable`
+      - id: yamllint
+        exclude: 'pnpm-lock.yaml'
+
+  # ----------------------------------------------
+  # Validate .pre-commit-hooks.yaml file
+  # ----------------------------------------------
+
+  - repo: https://github.com/pre-commit/pre-commit
+    rev: f35134b05028ec938ac605ae500fdf95462655d3 # frozen: v4.6.0
+    hooks:
+      - id: validate_manifest
+
+  # ----------------------------------------------
+  # reStructuredText
+  # ----------------------------------------------
+
+  # rstcheck - rst file checker
+  - repo: https://github.com/rstcheck/rstcheck
+    rev: 27258fde1ee7d3b1e6a7bbc58f4c7b1dd0e719e5  # frozen: v6.2.5
+    hooks:
+      # Config file: .rstcheck.cfg [--config]
+      - id: rstcheck
+        additional_dependencies: [sphinx]
+
+  # ----------------------------------------------
+  # Markdown
+  # ----------------------------------------------
+
+  # markdownlint - md file checker
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: 06f92c99e930c11230426b5edd775021d25e08a8 # frozen: v0.23.1
+    hooks:
+      # Config files:
+      # - .markdownlint-cli2.jsonc
+      # - .markdownlint-cli2.yaml
+      # - .markdownlint-cli2.cjs
+      # - .markdownlint.jsonc or .markdownlint.json
+      # - .markdownlint.yaml or .markdownlint.yml
+      # - .markdownlint.cjs
+      # Inline config:
+      # Disable all rules: <!-- markdownlint-disable -->
+      # Enable all rules: <!-- markdownlint-enable -->
+      # Disable all rules for the next line only: <!-- markdownlint-disable-next-line -->
+      # Disable rules by name: <!-- markdownlint-disable MD001 MD005 -->
+      # Enable rules by name: <!-- markdownlint-enable MD001 MD005 -->
+      # Disable rules by name for next line only: <!-- markdownlint-disable-next-line MD001 MD005 -->
+      # Capture the current rule configuration: <!-- markdownlint-capture -->
+      # Restore the captured rule configuration: <!-- markdownlint-restore -->
+      - id: markdownlint-cli2

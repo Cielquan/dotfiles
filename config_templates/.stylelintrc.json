@@ -1,0 +1,17 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-tailwindcss"],
+  "rules": {
+    "selector-class-pattern": [
+      "^(dark:)?([a-z][a-z0-9]*)(-[a-z0-9]+)*$",
+      {
+        "message": "Expected class selector name to be kebab-case and optionally start with 'dark:'"
+      }
+    ],
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": ["interpolate-size"]
+      }
+    ]
+  }
+}

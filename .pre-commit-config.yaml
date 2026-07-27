@@ -54,8 +54,10 @@ repos:
       - id: ruff
         name: ruff (fix)
         args: ["--fix-only", "--exit-non-zero-on-fix", "--config=pyproject.toml"]
+        exclude: \.pdbrc
       - id: ruff-format
         name: ruff (format)
+        exclude: \.pdbrc
 
   # ----------------------------------------------
   # Markdown
@@ -162,15 +164,18 @@ repos:
       - id: ruff
         name: ruff (lint)
         args: ["--config=pyproject.toml"]
+        exclude: \.pdbrc
       - id: ruff-format
         name: ruff (format-check)
         args: ["--diff"]
+        exclude: \.pdbrc
 
   # python specific out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
     hooks:
       - id: debug-statements
+        exclude: \.pdbrc
       - id: name-tests-test
 
   # several python code regex hooks
@@ -195,6 +200,7 @@ repos:
           spell-check in docstrings/comments in py-source via pyenchant and pylint
         additional_dependencies: [pyenchant]
         args: ["--disable=all", "--enable=spelling", "--rcfile=.pylintrc.spelling.toml"]
+        exclude: \.pdbrc
 
   # ----------------------------------------------
   # Shell script
@@ -215,7 +221,7 @@ repos:
     rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
     hooks:
       - id: check-json
-        exclude: tsconfig\.json
+        exclude: tsconfig\.json|dotfiles/vscodium/\.config/VSCodium/User/keybindings\.json|dotfiles/vscodium/\.config/VSCodium/User/settings\.json
       - id: check-toml
       - id: check-yaml
 

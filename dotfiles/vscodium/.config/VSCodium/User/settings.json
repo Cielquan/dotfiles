@@ -320,6 +320,13 @@
   // | EXTENSIONS (languages)                                                        |
   // ---------------------------------------------------------------------------------
   // ==============================
+  // RUST
+  // ==============================
+  "[rust]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
+  },
+  // ==============================
   // PYTHON
   // ==============================
   "python.terminal.activateEnvInCurrentTerminal": false,

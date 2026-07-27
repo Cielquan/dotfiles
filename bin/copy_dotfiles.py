@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# ruff: noqa: TRY400
+"""Script to copy dotfiles."""
 
 import argparse
 import enum
@@ -14,7 +16,9 @@ logging.addLevelName(SUCCESS_LEVEL_NUM, "SUCCESS")
 
 
 class CustomLogger(logging.Logger):
-    def success(self, message, *args, **kwargs):
+    """Custom logger."""
+
+    def success(self, message: object, *args, **kwargs) -> None:  # noqa: ANN002, ANN003
         """Log a SUCCESS-level message."""
         if self.isEnabledFor(SUCCESS_LEVEL_NUM):
             # _log takes care of formatting
@@ -22,7 +26,7 @@ class CustomLogger(logging.Logger):
 
 
 logging.setLoggerClass(CustomLogger)
-logger = t.cast(CustomLogger, logging.getLogger(__name__))
+logger = t.cast("CustomLogger", logging.getLogger(__name__))
 
 
 root_dir = pathlib.Path(__file__).parents[1]
@@ -40,6 +44,7 @@ GIT_USER_CONFIG_FILE = """\
 
 
 def run_cli() -> argparse.Namespace:
+    """CLI definition."""
     parser = argparse.ArgumentParser(allow_abbrev=False)
 
     parser.add_argument(
@@ -75,6 +80,8 @@ def run_cli() -> argparse.Namespace:
 
 
 class Color(enum.StrEnum):
+    """ANSI color codes."""
+
     RESET = "\033[" + "39" + "m"
     BLACK = "\033[" + "30" + "m"
     RED = "\033[" + "31" + "m"
@@ -87,6 +94,8 @@ class Color(enum.StrEnum):
 
 
 class Style(enum.StrEnum):
+    """ANSI style codes."""
+
     RESET = "\033[" + "0" + "m"
     BRIGHT = "\033[" + "1" + "m"
     DIM = "\033[" + "2" + "m"
@@ -114,7 +123,7 @@ class CustomFormatter(logging.Formatter):
     }
     RESET = Color.RESET + Style.RESET
 
-    def __init__(self, *args, no_color: bool, **kwargs) -> None:
+    def __init__(self, *args, no_color: bool, **kwargs) -> None:  # noqa: ANN002, ANN003
         """Init custom logging formatter.
 
         Determine if colorful output should be enabled.
@@ -124,7 +133,7 @@ class CustomFormatter(logging.Formatter):
         )
         super().__init__(*args, **kwargs)
 
-    def format(self, record) -> str:
+    def format(self, record: logging.LogRecord) -> str:
         """Format the logging message."""
         if self.use_colors:
             icon = self.ICONS.get(record.levelname, " ")
@@ -139,9 +148,7 @@ class CustomFormatter(logging.Formatter):
 def setup_logging(args: argparse.Namespace) -> None:
     """Set up logging."""
     handler = logging.StreamHandler(sys.stdout)
-    handler.setFormatter(
-        CustomFormatter(fmt="%(levelname)s %(message)s", no_color=args.no_color)
-    )
+    handler.setFormatter(CustomFormatter(fmt="%(levelname)s %(message)s", no_color=args.no_color))
     logger.addHandler(handler)
 
     if args.quiet:
@@ -154,7 +161,10 @@ def setup_logging(args: argparse.Namespace) -> None:
 
 
 class DotfileCopier:
-    def __init__(self, dry_run: bool = False) -> None:
+    """Dotfile copy handler."""
+
+    def __init__(self, *, dry_run: bool = False) -> None:
+        """Init dotfile copy handler."""
         self._dry_run = dry_run
         self._backup_base_dir_created: bool = False
 
@@ -214,17 +224,13 @@ class DotfileCopier:
         try:
             user_config_file.parent.mkdir(parents=True, exist_ok=True)
         except (PermissionError, OSError) as exc:
-            logger.error(
-                f"Failed to create gitconfig directory '{user_config_file.parent}': {exc}"
-            )
+            logger.error(f"Failed to create gitconfig directory '{user_config_file.parent}': {exc}")
             return 1
 
         try:
             user_config_file.write_text(GIT_USER_CONFIG_FILE)
         except (PermissionError, OSError) as exc:
-            logger.error(
-                f"Failed to create git user config file '{user_config_file}': {exc}"
-            )
+            logger.error(f"Failed to create git user config file '{user_config_file}': {exc}")
             return 1
 
         logger.warning(f"Please don't forget to update '{user_config_file}'")
@@ -276,9 +282,7 @@ class DotfileCopier:
             logger.debug(f"Target file already exists '{target_path}'")
 
             if source_path.read_bytes() == target_path.read_bytes():
-                logger.info(
-                    f"Skipping '{source_path}' as '{target_path}' has identical content"
-                )
+                logger.info(f"Skipping '{source_path}' as '{target_path}' has identical content")
                 self.files_skipped += 1
                 return
 

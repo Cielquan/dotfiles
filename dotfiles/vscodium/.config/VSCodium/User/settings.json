@@ -331,7 +331,7 @@
   // ==============================
   "python.terminal.activateEnvInCurrentTerminal": false,
   "python.venvPath": "${workspaceFolder}/.venv/bin/activate",
-  "python.languageServer": "Pylance",
+  "python.languageServer": "None",
   "python.analysis.completeFunctionParens": true,
   "python.analysis.typeCheckingMode": "off",
   "python.analysis.autoImportCompletions": true,

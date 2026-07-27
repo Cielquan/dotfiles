@@ -1,1 +1,0 @@
-../../dotfiles/bash/.bashrc.d/util/xterm-color-count.bash

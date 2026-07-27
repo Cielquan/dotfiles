@@ -1,0 +1,15 @@
+---
+extends: default
+
+rules:
+  line-length: false # Handled by `prettier` autoformatter
+
+  new-lines: false # Handled by `prettier` autoformatter
+
+  comments:
+    require-starting-space: false
+    min-spaces-from-content: 1
+
+  comments-indentation:
+    ignore: |
+      .pre-commit-config.yaml

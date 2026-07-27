@@ -20,6 +20,10 @@ alias mv="mv -iv"
 #             └─ prompt before overwriting an existing file
 alias rm='rm -I --preserve-root' # prompt if deleting more than 3 files at a time && do not delete '/'#
 
+# Replace grep with ripgrep, if installed
+if command -v rg &> /dev/null; then
+    alias grep='rg'
+fi
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert

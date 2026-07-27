@@ -430,7 +430,7 @@
   },
   "eslint.useFlatConfig": true,
   "console-ninja.outputMode": "In View",
-  "console-ninja.featureSet": "Community",  // ==============================  // TypeScript  // ==============================
+  "console-ninja.featureSet": "Community",
   // ==============================
   // reStructuredText
   // ==============================

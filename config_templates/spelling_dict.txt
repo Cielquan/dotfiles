@@ -73,6 +73,8 @@ docstrings
 doctest
 docutils
 dotenv
+dotfile
+dotfiles
 dunder
 enum
 enum's

@@ -11,7 +11,7 @@
 # Clone the repo to where you want
 git clone https://github.com/Cielquan/dotfiles.git
 # Run the copy script
-.dotfiles/bin/copy_dotfiles.py
+./dotfiles/bin/copy_dotfiles.py
 ```
 
 ### Script

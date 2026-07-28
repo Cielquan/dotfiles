@@ -68,6 +68,7 @@ timonwong.shellcheck
 
 ```
 geequlim.godot-tools
+DoHe.godot-format
 ```
 
 ### TOML

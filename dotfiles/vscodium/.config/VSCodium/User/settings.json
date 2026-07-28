@@ -425,6 +425,15 @@
   "console-ninja.outputMode": "In View",
   "console-ninja.featureSet": "Community",
   // ==============================
+  // Godot (GDScript)
+  // ==============================
+  "godotFormatter.useBuiltInBinary": false,
+  "godotFormatter.enabled": true,
+  "[gdscript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "DoHe.godot-format"
+  },
+  // ==============================
   // reStructuredText
   // ==============================
   "redhat.telemetry.enabled": false,

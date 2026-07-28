@@ -80,7 +80,7 @@
     ".csslintrc": "json",
     "cargo.lock": "toml",
     "*.ddl": "sql",
-    ".env": "ini",
+    ".env": "properties",
     ".eslintignore": "ignore",
     ".htmlhintrc": "json",
     ".htmllintrc": "jsonc",
@@ -163,10 +163,11 @@
   // indent-rainbow
   // ==============================
   "indentRainbow.colors": [
-    "rgba(255,255,64,0.15)", // ffff4026
-    "rgba(127,255,127,0.15)", // 7fff7f26
-    "rgba(255,127,255,0.15)", // ff7fff26
-    "rgba(79,236,236,0.15)" // 4fecec26
+    "#fcae9226", // orange
+    "#4fecec26", // blue
+    "#ffff4026", // yellow
+    "#ff7fff26", // red
+    "#7fff7f26" // green
   ],
   "indentRainbow.ignoreErrorLanguages": ["markdown", "restructuredtext"],
   // ==============================

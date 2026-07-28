@@ -113,10 +113,13 @@ echo "ext list in dotfiles/vscodium/.config/VSCodium/User/extensions.txt"
 # -----------------------------------------------------------------------------
 echo "Download godot from in ~/bin: https://godotengine.org/download/linux/"
 # `godot` wrapper is in `dotfiles`; `godot4` is needed by a VSCode ext
-ln -s ~/bin/godot ~/bin/godot4
+ln -s godot godot4
 # `godot-raw` is used in above wrapper script
-ln -s ~/bin/godot-raw ~/bin/...
+ln -s godot-raw ...
 
+echo "Download gdscript-formatter from in ~/bin:https://github.com/GDQuest/GDScript-formatter/releases"
+# `godot-raw` is used in above wrapper script
+ln -s gdscript-formatter ...
 
 # -----------------------------------------------------------------------------
 # General tools

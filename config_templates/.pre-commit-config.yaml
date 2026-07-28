@@ -208,6 +208,17 @@ repos:
           - typescript-eslint@8.39.1
 
   # ----------------------------------------------
+  # GDScript
+  # ----------------------------------------------
+
+  # GDScript-Formatter
+  - repo: https://github.com/GDQuest/GDScript-formatter
+    rev: 0d98930d11cedd22430c1375fc8d02a6f88f1c30  # frozen: 0.24.0
+    hooks:
+      - id: gdscript-formatter
+        args: ["--verify-structure"]
+
+  # ----------------------------------------------
   # Markdown
   # ----------------------------------------------
 
@@ -411,6 +422,17 @@ repos:
         language: system
         types: [rust]
         pass_filenames: false
+
+  # ----------------------------------------------
+  # GDScript
+  # ----------------------------------------------
+
+  # GDScript-Formatter
+  - repo: https://github.com/GDQuest/GDScript-formatter
+    rev: 0d98930d11cedd22430c1375fc8d02a6f88f1c30  # frozen: 0.24.0
+    hooks:
+      - id: gdscript-formatter
+        args: ["lint"]
 
   # ----------------------------------------------
   # Shell script

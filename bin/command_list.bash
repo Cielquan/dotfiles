@@ -74,6 +74,10 @@ sudo apt install ruby-full
 # Nerdfont (needed by starship)
 # -----------------------------------------------------------------------------
 echo "Install a nerdfont"
+mkdir -p ~/.local/share/fonts
+cp fonts ~/.local/share/fonts
+fc-cache -fv
+fc-list | grep -i "FONT_NAME"
 
 
 # -----------------------------------------------------------------------------
@@ -115,11 +119,11 @@ echo "Download godot from in ~/bin: https://godotengine.org/download/linux/"
 # `godot` wrapper is in `dotfiles`; `godot4` is needed by a VSCode ext
 ln -s godot godot4
 # `godot-raw` is used in above wrapper script
-ln -s godot-raw ...
+ln -s ... godot-raw
 
 echo "Download gdscript-formatter from in ~/bin:https://github.com/GDQuest/GDScript-formatter/releases"
 # `godot-raw` is used in above wrapper script
-ln -s gdscript-formatter ...
+ln -s ... gdscript-formatter
 
 # -----------------------------------------------------------------------------
 # General tools

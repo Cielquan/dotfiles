@@ -58,6 +58,12 @@ def run_cli() -> argparse.Namespace:
         default=False,
         help="Disable colorful output. Colors are automatically disabled for non-tty stdout",
     )
+    parser.add_argument(
+        "--missing-only",
+        action="store_true",
+        default=False,
+        help="Only copy missing dotfiles. File content comparision is deactivated.",
+    )
 
     log_lvl_group = parser.add_mutually_exclusive_group()
     log_lvl_group.add_argument(
@@ -162,9 +168,10 @@ def setup_logging(args: argparse.Namespace) -> None:
 class DotfileCopier:
     """Dotfile copy handler."""
 
-    def __init__(self, *, dry_run: bool = False) -> None:
+    def __init__(self, *, dry_run: bool = False, missing_only: bool = False) -> None:
         """Init dotfile copy handler."""
         self._dry_run = dry_run
+        self._missing_only = missing_only
         self._backup_base_dir_created: bool = False
 
         self.files_copied = 0
@@ -261,7 +268,7 @@ class DotfileCopier:
                 logger.warning(f"Ignoring special file '{path}'")
                 self.files_ignored += 1
 
-    def _copy_dotfile(
+    def _copy_dotfile(  # noqa: PLR0911
         self,
         source_path: pathlib.Path,
         relative_root_dir: pathlib.Path,
@@ -279,6 +286,11 @@ class DotfileCopier:
 
         if target_path.exists():
             logger.debug(f"Target file already exists '{target_path}'")
+
+            if self._missing_only:
+                logger.info(f"Skipping '{source_path}' as '{target_path}' already exists")
+                self.files_skipped += 1
+                return
 
             if source_path.read_bytes() == target_path.read_bytes():
                 logger.info(f"Skipping '{source_path}' as '{target_path}' has identical content")
@@ -353,7 +365,7 @@ def main() -> int:
 
     setup_logging(args)
 
-    dotfile_copier = DotfileCopier(dry_run=args.dry)
+    dotfile_copier = DotfileCopier(dry_run=args.dry, missing_only=args.missing_only)
     return dotfile_copier.run()
 
 

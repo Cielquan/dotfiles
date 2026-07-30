@@ -219,7 +219,7 @@ repos:
       # Inline ignore part: -- stylua: ignore
       # Inline ignore start: -- stylua: ignore start
       # Inline ignore end: -- stylua: ignore end
-      - id: stylua
+      - id: stylua-github
 
   # ----------------------------------------------
   # GDScript

@@ -441,7 +441,7 @@ repos:
   # Lua
   # ----------------------------------------------
 
-  # StyLua
+  # luacheck
   - repo: https://github.com/lunarmodules/luacheck
     rev: main
     hooks:

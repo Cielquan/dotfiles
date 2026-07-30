@@ -208,6 +208,20 @@ repos:
           - typescript-eslint@8.39.1
 
   # ----------------------------------------------
+  # Lua
+  # ----------------------------------------------
+
+  # StyLua
+  - repo: https://github.com/JohnnyMorganz/StyLua
+    rev: main
+    hooks:
+      # Config file: .stylua.toml
+      # Inline ignore part: -- stylua: ignore
+      # Inline ignore start: -- stylua: ignore start
+      # Inline ignore end: -- stylua: ignore end
+      - id: stylua
+
+  # ----------------------------------------------
   # GDScript
   # ----------------------------------------------
 
@@ -422,6 +436,19 @@ repos:
         language: system
         types: [rust]
         pass_filenames: false
+
+  # ----------------------------------------------
+  # Lua
+  # ----------------------------------------------
+
+  # StyLua
+  - repo: https://github.com/lunarmodules/luacheck
+    rev: main
+    hooks:
+      # Config file: `.luacheckrc`
+      # Inline config: -- luacheck: ...
+      # Inline ignore: -- luacheck: ignore
+      - id: luacheck
 
   # ----------------------------------------------
   # GDScript

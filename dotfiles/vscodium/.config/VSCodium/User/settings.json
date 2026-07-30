@@ -19,7 +19,7 @@
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.cursorStyle": "block",
   "terminal.integrated.profiles.linux": {
-    "bash": { "path": "bash", "icon": "terminal-bash" }
+    "bash": { "path": "bash", "icon": "terminal-bash" },
   },
   "terminal.integrated.defaultProfile.linux": "bash",
   "terminal.integrated.automationProfile.linux": { "path": "bash" },
@@ -28,17 +28,17 @@
     "bash (git)": {
       "source": "Git Bash",
       "args": ["--login"],
-      "icon": "terminal-bash"
+      "icon": "terminal-bash",
     },
     "PowerShell": { "source": "PowerShell", "icon": "terminal-powershell" },
     "cmd": {
       "path": [
         "${env:windir}\\Sysnative\\cmd.exe",
-        "${env:windir}\\System32\\cmd.exe"
+        "${env:windir}\\System32\\cmd.exe",
       ],
       "args": [],
-      "icon": "terminal-cmd"
-    }
+      "icon": "terminal-cmd",
+    },
   },
   "terminal.integrated.defaultProfile.windows": "bash (git)",
   "terminal.integrated.automationProfile.windows": { "path": "bash" },
@@ -62,7 +62,7 @@
     "Ö": true,
     "ü": true,
     "Ü": true,
-    "ß": true
+    "ß": true,
   },
   "editor.mouseWheelZoom": false,
   "editor.minimap.enabled": false,
@@ -97,10 +97,10 @@
     "*.rst_t": "jinja",
     ".sqlfluff": "ini",
     ".vuerc": "json",
-    ".yamllint": "yaml"
+    ".yamllint": "yaml",
   },
   "files.exclude": {
-    "**/__pycache__": true
+    "**/__pycache__": true,
   },
   "diffEditor.ignoreTrimWhitespace": false,
   "diffEditor.maxComputationTime": 0,
@@ -128,9 +128,9 @@
   "editor.semanticTokenColorCustomizations": {
     "[Krys Colors]": {
       // Apply to this theme only
-      "enabled": true
+      "enabled": true,
       // "enabled"   : false
-    }
+    },
   },
   "editor.guides.indentation": false,
   "workbench.colorCustomizations": {},
@@ -147,15 +147,15 @@
   "[git-commit]": {
     "editor.rulers": [50, 72, 80, 100],
     "editor.wordWrap": "off",
-    "workbench.editor.restoreViewState": false
+    "workbench.editor.restoreViewState": false,
   },
   "github.gitProtocol": "ssh",
   "github.copilot.nextEditSuggestions.enabled": true,
   "chat.tools.urls.autoApprove": {
     "https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/advanced-security-dependency-scanning-v1": {
       "approveRequest": false,
-      "approveResponse": true
-    }
+      "approveResponse": true,
+    },
   },
   // ---------------------------------------------------------------------------------
   // | EXTENSIONS (coloring/highlighting)                                            |
@@ -168,7 +168,7 @@
     "#4fecec26", // blue
     "#ffff4026", // yellow
     "#ff7fff26", // red
-    "#7fff7f26" // green
+    "#7fff7f26", // green
   ],
   "indentRainbow.ignoreErrorLanguages": ["markdown", "restructuredtext"],
   // ==============================
@@ -197,7 +197,7 @@
   // "todo-tree.regex.regex": "(//|#|;|<!--|/\\*{1,2}|\\.\\.|--|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)",
   "better-todo-tree.regex.regex": "((//|#|;|\\.\\.|--|^|^[ \t]*(-|\\d+.))\\s*($TAGS))|(<!--\\s*($TAGS).*(\\s|.)*?-->)|(/\\*{1,2}\\s*($TAGS)(\\s|.)*?\\*/)",
   "[javascript][javascriptreact][typescript][typescriptreact]": {
-    "better-todo-tree.regex.regex": "(//\\s*($TAGS))|(/\\*{1,2}\\s*($TAGS)(\\s|.)*?\\*/)"
+    "better-todo-tree.regex.regex": "(//\\s*($TAGS))|(/\\*{1,2}\\s*($TAGS)(\\s|.)*?\\*/)",
   },
   "better-todo-tree.regex.enableMultiLine": true,
   "better-todo-tree.filtering.includeHiddenFiles": true,
@@ -210,12 +210,12 @@
     "TODO:",
     "FIXME:",
     "BUG:",
-    "HACK:"
+    "HACK:",
   ],
   "better-todo-tree.highlights.enabled": true,
   "better-todo-tree.highlights.defaultHighlight": {
     "opacity": 90,
-    "type": "tag"
+    "type": "tag",
   },
   "better-todo-tree.highlights.customHighlight": {
     "NOTE:": {
@@ -227,7 +227,7 @@
       "type": "text",
       "rulerColour": "#0000",
       "hideFromStatusBar": true,
-      "hideFromTree": true
+      "hideFromTree": true,
     },
     "CHANGE ME": {
       "foreground": "#000",
@@ -237,7 +237,7 @@
       "gutterIcon": false,
       "type": "text",
       "rulerColour": "#0000",
-      "hideFromStatusBar": true
+      "hideFromStatusBar": true,
       // "hideFromTree": true
     },
     "TODO:": {
@@ -247,7 +247,7 @@
       "iconColour": "#ff00d4",
       "gutterIcon": false,
       "type": "text",
-      "rulerColour": "#ff00d4"
+      "rulerColour": "#ff00d4",
     },
     "FIXME:": {
       "foreground": "#fff",
@@ -256,7 +256,7 @@
       "iconColour": "#ff4500",
       "gutterIcon": true,
       "type": "whole-line",
-      "rulerColour": "#ff0000"
+      "rulerColour": "#ff0000",
     },
     "BUG:": {
       "foreground": "#fff",
@@ -265,7 +265,7 @@
       "iconColour": "#ff0000",
       "gutterIcon": true,
       "type": "text",
-      "rulerColour": "#ff0000"
+      "rulerColour": "#ff0000",
     },
     "HACK:": {
       "foreground": "#000",
@@ -274,8 +274,8 @@
       "iconColour": "#ffa500",
       "gutterIcon": true,
       "type": "text",
-      "rulerColour": "#ffa500"
-    }
+      "rulerColour": "#ffa500",
+    },
   },
   "better-todo-tree.filtering.excludeGlobs": [
     // DIRECTORIES
@@ -293,7 +293,7 @@
     "**/*venv*/**",
     // FILES
     "**/.gitignore",
-    "**/.gitattributes"
+    "**/.gitattributes",
   ],
   // ==============================
   // Spell Right
@@ -316,7 +316,7 @@
   // ==============================
   "[rust]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
   },
   // ==============================
   // PYTHON
@@ -326,8 +326,8 @@
   "python.languageServer": "None",
   "ruff.configuration": {
     "lint": {
-      "unfixable": ["ERA001", "F401", "F841"]
-    }
+      "unfixable": ["ERA001", "F401", "F841"],
+    },
   },
   "mypy-type-checker.args": ["--config-file=${workspaceFolder}/pyproject.toml"],
   "mypy-type-checker.importStrategy": "fromEnvironment",
@@ -338,8 +338,8 @@
     "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.codeActionsOnSave": {
       "source.organizeImports": "explicit",
-      "source.fixAll": "explicit"
-    }
+      "source.fixAll": "explicit",
+    },
   },
   // ==============================
   // Python Docstring Generator (python)
@@ -352,24 +352,24 @@
   // ==============================
   "notebook.cellToolbarLocation": {
     "default": "right",
-    "jupyter-notebook": "left"
+    "jupyter-notebook": "left",
   },
   // ==============================
   // CSS
   // ==============================
   "[css]": {
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
   },
   "tailwindCSS.experimental.classRegex": [
     ["cva\\(((\\S|\\s)*?)\\);", "[\"'`]([^\"'`]*).*?[\"'`]"],
-    ["cx\\(((\\S|\\s)*?)\\);", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+    ["cx\\(((\\S|\\s)*?)\\);", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
   ],
   "tailwindCSS.classAttributes": [
     "class",
     "className",
     "classNames",
     "ngClass",
-    "class:list"
+    "class:list",
   ],
   // ==============================
   // JavaScript / TypeScript
@@ -382,8 +382,8 @@
       "source.organizeImports": "never",
       // prettier removes unreachable code probably via ts
       "source.fixAll": "never",
-      "source.fixAll.eslint": "explicit"
-    }
+      "source.fixAll.eslint": "explicit",
+    },
   },
   "js/ts.updateImportsOnFileMove.enabled": "prompt",
   "js/ts.updateImportsOnPaste.enabled": false,
@@ -400,8 +400,8 @@
     "overrideConfigFile": "eslint.config.ts",
     "flags": ["unstable_ts_config"],
     "overrideConfig": {
-      "linterOptions": { "reportUnusedDisableDirectives": false }
-    }
+      "linterOptions": { "reportUnusedDisableDirectives": false },
+    },
   },
   "eslint.useFlatConfig": true,
   "console-ninja.outputMode": "In View",
@@ -413,7 +413,7 @@
   "stylua.searchBinaryInPATH": true,
   "[lua]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "JohnnyMorganz.stylua"
+    "editor.defaultFormatter": "JohnnyMorganz.stylua",
   },
   // ==============================
   // Godot (GDScript)
@@ -422,7 +422,7 @@
   "godotFormatter.enabled": true,
   "[gdscript]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "DoHe.godot-format"
+    "editor.defaultFormatter": "DoHe.godot-format",
   },
   // ==============================
   // reStructuredText
@@ -433,11 +433,11 @@
   "esbonio.server.enabled": true,
   "restructuredtext.linter.rst-lint.executablePath": "${workspaceFolder}/.venv/bin/rstcheck",
   "restructuredtext.linter.rst-lint.extraArgs": [
-    "--config ${workspaceFolder}/.rstcheck.cfg"
+    "--config ${workspaceFolder}/.rstcheck.cfg",
   ],
   "restructuredtext.linter.rstcheck.executablePath": "${workspaceFolder}/.venv/bin/rstcheck",
   "restructuredtext.linter.rstcheck.extraArgs": [
-    "--config ${workspaceFolder}/.rstcheck.cfg"
+    "--config ${workspaceFolder}/.rstcheck.cfg",
   ],
   "restructuredtext.linter.run": "onSave",
   // ==============================
@@ -455,7 +455,7 @@
     //   "source.organizeImports": "explicit",
     //   "source.fixAll": "explicit"
     // }
-    "editor.wordWrap": "off"
+    "editor.wordWrap": "off",
   },
   // ==============================
   // json
@@ -466,8 +466,18 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
       "source.organizeImports": "explicit",
-      "source.fixAll": "explicit"
-    }
+      "source.fixAll": "explicit",
+    },
+  },
+  "json.schemaDownload.trustedDomains": {
+    "https://developer.microsoft.com/json-schemas/": true,
+    "https://json-schema.org/": true,
+    "https://json.schemastore.org/": true,
+    "https://raw.githubusercontent.com/devcontainers/spec/": true,
+    "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json": true,
+    "https://raw.githubusercontent.com/microsoft/vscode/": true,
+    "https://schemastore.azurewebsites.net/": true,
+    "https://www.schemastore.org/": true,
   },
   // ==============================
   // toml
@@ -477,12 +487,12 @@
     "editor.insertSpaces": true,
     "editor.language.brackets": [
       ["[", "]"],
-      ["{", "}"]
+      ["{", "}"],
     ],
     "editor.language.colorizedBracketPairs": [
       ["[", "]"],
-      ["{", "}"]
-    ]
+      ["{", "}"],
+    ],
   },
   "evenBetterToml.semanticTokens": true,
   // ==============================
@@ -492,13 +502,13 @@
     "editor.insertSpaces": true,
     "editor.tabSize": 2,
     "editor.autoIndent": "advanced",
-    "editor.defaultFormatter": "redhat.vscode-yaml"
+    "editor.defaultFormatter": "redhat.vscode-yaml",
   },
   // ==============================
   // Github Actions Workflow files
   // ==============================
   "[github-actions-workflow]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
+    "editor.defaultFormatter": "redhat.vscode-yaml",
   },
   // ==============================
   // Svelte
@@ -519,10 +529,10 @@
   "[sql]": {
     "editor.acceptSuggestionOnCommitCharacter": false,
     "editor.formatOnSave": false,
-    "editor.defaultFormatter": "dorzey.vscode-sqlfluff"
+    "editor.defaultFormatter": "dorzey.vscode-sqlfluff",
   },
   // ==============================
   // NEW
   // ==============================
-  "testing.automaticallyOpenTestResults": "neverOpen"
+  "testing.automaticallyOpenTestResults": "neverOpen",
 }

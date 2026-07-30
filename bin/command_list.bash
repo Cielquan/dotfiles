@@ -46,13 +46,6 @@ echo "check LS_COLORS for updates: https://github.com/trapd00r/LS_COLORS/"
 
 
 # -----------------------------------------------------------------------------
-# Python (additional versions)
-# -----------------------------------------------------------------------------
-sudo add-apt-repository ppa:deadsnakes/ppa
-export V=3.14 && sudo apt install "python${V}" "python${V}-dev"
-
-
-# -----------------------------------------------------------------------------
 # Rust
 # -----------------------------------------------------------------------------
 curl -fsSL --proto '=https' --tlsv1.2 https://sh.rustup.rs | sh

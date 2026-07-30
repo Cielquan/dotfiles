@@ -10,3 +10,7 @@ fi
 if command -v rg &> /dev/null; then
     alias grep='rg'
 fi
+
+if command -v prek &> /dev/null; then
+    alias pre-commit='prek'
+fi

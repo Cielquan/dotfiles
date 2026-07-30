@@ -25,6 +25,12 @@ sleistner.vscode-fileutils
 tomoki1207.pdf
 ```
 
+### NeoVim
+
+```
+asvetliakov.vscode-neovim
+```
+
 ## Languages
 
 ### Python

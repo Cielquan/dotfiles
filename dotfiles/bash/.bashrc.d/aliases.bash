@@ -20,11 +20,6 @@ alias mv="mv -iv"
 #             └─ prompt before overwriting an existing file
 alias rm='rm -I --preserve-root' # prompt if deleting more than 3 files at a time && do not delete '/'#
 
-# Replace grep with ripgrep, if installed
-if command -v rg &> /dev/null; then
-    alias grep='rg'
-fi
-
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 # https://askubuntu.com/questions/423646/use-of-default-alias-alert
@@ -80,12 +75,6 @@ alias vacw='source .venv/Scripts/activate'
 alias c='clear' # Shortcut for clear
 alias g='git'
 alias sha1='openssl sha1' # Shortcut for openssl sha1
-
-
-### Relabeled / Overwritten commands
-if command -v colordiff &> /dev/null; then
-    alias diff='colordiff'
-fi
 
 
 ### cd aliases

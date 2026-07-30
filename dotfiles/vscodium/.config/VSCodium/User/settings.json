@@ -87,6 +87,7 @@
     ".linguirc": "json",
     "*.log?": "log",
     "*.log.?": "log",
+    ".luacheckrc": "lua",
     ".prettierignore": "ignore",
     ".prettierrc": "json",
     "Pipfile": "toml",
@@ -405,6 +406,15 @@
   "eslint.useFlatConfig": true,
   "console-ninja.outputMode": "In View",
   "console-ninja.featureSet": "Community",
+  // ==============================
+  // Lua
+  // ==============================
+  "Lua.diagnostics.enable": true,
+  "stylua.searchBinaryInPATH": true,
+  "[lua]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "JohnnyMorganz.stylua"
+  },
   // ==============================
   // Godot (GDScript)
   // ==============================

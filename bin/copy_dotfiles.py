@@ -21,7 +21,6 @@ class CustomLogger(logging.Logger):
     def success(self, message: object, *args, **kwargs) -> None:  # noqa: ANN002, ANN003
         """Log a SUCCESS-level message."""
         if self.isEnabledFor(SUCCESS_LEVEL_NUM):
-            # _log takes care of formatting
             self._log(SUCCESS_LEVEL_NUM, message, args, **kwargs)
 
 

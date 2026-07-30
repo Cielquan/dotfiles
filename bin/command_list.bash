@@ -141,3 +141,5 @@ ln -s ... gdscript-formatter
 # -----------------------------------------------------------------------------
 # Replacement for grep
 cargo install --locked ripgrep
+# Replacement for pre-commit
+cargo install --locked prek

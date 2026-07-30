@@ -121,6 +121,7 @@ echo -e 'Types: deb\nURIs: https://download.vscodium.com/debs\nSuites: vscodium\
     | sudo tee /etc/apt/sources.list.d/vscodium.sources
 echo "ext list in dotfiles/vscodium/.config/VSCodium/User/extensions.txt"
 
+
 # -----------------------------------------------------------------------------
 # Godot
 # -----------------------------------------------------------------------------
@@ -133,6 +134,7 @@ ln -s ... godot-raw
 echo "Download gdscript-formatter from in ~/bin:https://github.com/GDQuest/GDScript-formatter/releases"
 # `godot-raw` is used in above wrapper script
 ln -s ... gdscript-formatter
+
 
 # -----------------------------------------------------------------------------
 # General tools

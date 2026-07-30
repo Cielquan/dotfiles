@@ -58,6 +58,13 @@ bradlc.vscode-tailwindcss
 tlent.jest-snapshot-language-support
 ```
 
+### Lua
+
+```
+sumneko.lua
+JohnnyMorganz.stylua
+```
+
 ### Shell (bash, sh)
 
 ```

@@ -108,7 +108,7 @@ curl -fsSL --proto '=https' --tlsv1.2 https://astral.sh/uv/install.sh | sh
 sudo apt install lua5.1 luajit luarocks
 luarocks install --local luacheck
 luarocks install --local lanes
-cargo install --locked stylua
+cargo install --locked stylua --features luajit
 
 
 # -----------------------------------------------------------------------------

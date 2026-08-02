@@ -424,6 +424,8 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "DoHe.godot-format",
   },
+  "godotTools.inlayHints.gdscript": true,
+  "godotTools.lsp.headless": true,
   // ==============================
   // reStructuredText
   // ==============================

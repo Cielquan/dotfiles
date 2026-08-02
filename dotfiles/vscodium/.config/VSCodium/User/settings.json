@@ -426,6 +426,7 @@
   },
   "godotTools.inlayHints.gdscript": true,
   "godotTools.lsp.headless": true,
+  "godotTools.lsp.serverPort": 6005,
   // ==============================
   // reStructuredText
   // ==============================

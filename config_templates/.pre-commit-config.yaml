@@ -275,6 +275,7 @@ repos:
           - prettier-plugin-tailwindcss@^0.6.5 # NOTE: Plugin only so config does not error
         args: ["--ignore-path", ".gitignore"]
         files: \.(html|css|json|yaml|md)$
+        exclude: 'pnpm-lock.yaml'
 
   # ----------------------------------------------
   # SQL
@@ -523,6 +524,7 @@ repos:
         exclude: tsconfig\.json
       - id: check-toml
       - id: check-yaml
+        exclude: 'pnpm-lock.yaml'
 
   # yamllint - yaml linter
   - repo: https://github.com/adrienverge/yamllint

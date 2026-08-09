@@ -727,6 +727,7 @@ const eslintConfig = [
                 "**/eslint.config.{js,cjs,mjs,ts}", // eslint config
                 "testing-frontend/**",
                 "translations/**",
+                "scripts/**",
               ],
               optionalDependencies: false,
             },

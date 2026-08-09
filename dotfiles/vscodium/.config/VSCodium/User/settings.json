@@ -125,6 +125,7 @@
   // ==============================
   "workbench.colorTheme": "Krys Colors",
   "workbench.iconTheme": "file-icons",
+  "workbench.colorCustomizations": {},
   "editor.semanticTokenColorCustomizations": {
     "[Krys Colors]": {
       // Apply to this theme only
@@ -133,7 +134,6 @@
     },
   },
   "editor.guides.indentation": false,
-  "workbench.colorCustomizations": {},
   // ---------------------------------------------------------------------------------
   // | GIT / GITHUB                                                                  |
   // ---------------------------------------------------------------------------------

@@ -273,7 +273,7 @@ repos:
           - prettier@^3.6.2 # NOTE: version overwrites rev version - keep in sync
           - prettier-plugin-tailwindcss@^0.6.5 # NOTE: Plugin only so config does not error
         args: ["--ignore-path", ".gitignore"]
-        files: \.(html|css|json,yaml,md)$
+        files: \.(html|css|json|yaml|md)$
 
   # ----------------------------------------------
   # SQL

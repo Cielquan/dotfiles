@@ -136,3 +136,5 @@ ln -s ... gdscript-formatter
 cargo install --locked ripgrep
 # Replacement for pre-commit
 cargo install --locked prek
+# Run command when file changes
+cargo install --locked watchexec-cli

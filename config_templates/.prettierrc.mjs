@@ -15,6 +15,17 @@ const config = {
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
   importOrderGroupNamespaceSpecifiers: true,
+
+  overrides: [
+    // Revert JSONC parsing:
+    // https://github.com/prettier/prettier/issues/15553
+    {
+      files: ["**/.markdownlint-cli2.jsonc"],
+      options: {
+        parser: "json",
+      },
+    },
+  ],
 };
 
 export default config;

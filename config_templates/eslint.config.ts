@@ -1576,13 +1576,13 @@ const eslintConfig = [
   RULESETS_TO_RUN.has(RULESET.NORMAL)
     ? {
         name: "custom/exception/script-files",
-        files: ["translations/*.mjs"],
+        files: ["scripts/*.mjs", "translations/*.mjs"],
         rules: {
           "n/hashbang": [
             "warn",
             {
               ignoreUnpublished: true,
-              additionalExecutables: ["translations/*.mjs"],
+              additionalExecutables: ["scripts/*.mjs", "translations/*.mjs"],
             },
           ],
           "no-console": "off",

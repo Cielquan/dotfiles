@@ -169,6 +169,21 @@
         "when": "!terminalFocus"
     },
 
+    // ==============================
+    // Reload Window (Development Host)
+    // Ctrl + Alt + R
+    // ==============================
+    {
+        "key": "ctrl+alt+r",
+        "command": "workbench.action.reloadWindow",
+        "when": "isDevelopment",
+    },
+    {
+        "key": "ctrl+r",
+        "command": "-workbench.action.reloadWindow",
+        "when": "isDevelopment",
+    },
+
     // ------------------------------
     // ------------------------------
     // Extension Keybindings

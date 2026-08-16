@@ -23,7 +23,9 @@
   },
   "terminal.integrated.defaultProfile.linux": "bash",
   "terminal.integrated.automationProfile.linux": { "path": "bash" },
-  "terminal.integrated.env.linux": {},
+  "terminal.integrated.env.linux": {
+    "PATH": "${workspaceFolder}/scripts:${env:PATH}",
+  },
   "terminal.integrated.profiles.windows": {
     "bash (git)": {
       "source": "Git Bash",
@@ -43,7 +45,9 @@
   "terminal.integrated.defaultProfile.windows": "bash (git)",
   "terminal.integrated.automationProfile.windows": { "path": "bash" },
   "terminal.external.windowsExec": "C:\\Program Files\\Git\\bin\\bash.exe",
-  "terminal.integrated.env.windows": {},
+  "terminal.integrated.env.windows": {
+    "Path": "${workspaceFolder}\\scripts;${env:Path}",
+  },
   // ---------------------------------------------------------------------------------
   // | EDITOR                                                                        |
   // ---------------------------------------------------------------------------------

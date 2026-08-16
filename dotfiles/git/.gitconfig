@@ -7,6 +7,11 @@
     a = add
     # Add file as executable
     addx = add --chmod=+x
+    # Find alias
+    alias = !"f() { \
+        alias=\"${1:-*}\"; \
+        git config --get-regexp \"alias.${alias}\"; \
+    }; f"
     # List aliases
     aliases = config --get-regexp alias
     # Amend the currently staged files to the latest commit

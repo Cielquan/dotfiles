@@ -202,9 +202,9 @@
   // Todo Tree
   // ==============================
   // "todo-tree.regex.regex": "(//|#|;|<!--|/\\*{1,2}|\\.\\.|--|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)",
-  "better-todo-tree.regex.regex": "((//|#|;|\\.\\.|--|^|^[ \t]*(-|\\d+.))\\s*($TAGS))|(<!--\\s*($TAGS).*(\\s|.)*?-->)|(/\\*{1,2}\\s*($TAGS)(\\s|.)*?\\*/)",
+  "better-todo-tree.regex.regex": "((//|#|;|\\.\\.|--|^|^[ \t]*(-|\\d+\\.))\\s*($TAGS)\\b)|(<!--\\s*($TAGS)\\b(\\s|.)*?-->)|(/\\*{1,2}\\s*($TAGS)\\b(\\s|.)*?\\*/)",
   "[javascript][javascriptreact][typescript][typescriptreact]": {
-    "better-todo-tree.regex.regex": "(//\\s*($TAGS))|(/\\*{1,2}\\s*($TAGS)(\\s|.)*?\\*/)",
+    "better-todo-tree.regex.regex": "(//\\s*($TAGS)\\b)|(/\\*{1,2}\\s*($TAGS)\\b(\\s|.)*?\\*/)",
   },
   "better-todo-tree.regex.enableMultiLine": true,
   "better-todo-tree.filtering.includeHiddenFiles": true,
@@ -557,4 +557,6 @@
   // NEW
   // ==============================
   "testing.automaticallyOpenTestResults": "neverOpen",
+  "explorer.confirmPasteNative": false,
+  "explorer.confirmDragAndDrop": false,
 }

@@ -22,10 +22,10 @@
     "bash": { "path": "bash", "icon": "terminal-bash" },
   },
   "terminal.integrated.defaultProfile.linux": "bash",
-  "terminal.integrated.automationProfile.linux": { "path": "bash" },
   "terminal.integrated.env.linux": {
     "PATH": "${workspaceFolder}/scripts:${env:PATH}",
   },
+  "terminal.integrated.automationProfile.linux": { "path": "bash" },
   "terminal.integrated.profiles.windows": {
     "bash (git)": {
       "source": "Git Bash",

@@ -113,6 +113,32 @@ repos:
   # ####################################################################################
 
   # ----------------------------------------------
+  # Casefold hex color codes
+  # ----------------------------------------------
+
+  - repo: local
+    hooks:
+      - id: casefold-color-codes
+        name: casefold-color-codes
+        description: Casefold hex color codes
+        language: python
+        entry: python
+        args:
+          - "-c"
+          - |
+            import re,sys;
+            p = sys.argv[1];
+            f = open(p, mode="r", encoding="utf-8");
+            s = re.sub(r"#[A-Fa-f0-9]{6,8}", lambda m: m.group().casefold(), f.read());
+            f.close();
+            f = open(p, mode="w", encoding="utf-8");
+            f.write(s);
+            f.close()
+        pass_filenames: true
+        require_serial: true
+        files: themes/.*\.jsonc?
+
+  # ----------------------------------------------
   # Python
   # ----------------------------------------------
 

@@ -254,7 +254,7 @@ repos:
 
   # GDScript-Formatter
   - repo: https://github.com/GDQuest/GDScript-formatter
-    rev: 0d98930d11cedd22430c1375fc8d02a6f88f1c30  # frozen: 0.24.0
+    rev: 516c1d60875c99d5ed95aab5b8e21aa31d2c6740  # frozen: 0.27.0
     hooks:
       - id: gdscript-formatter
         args: ["--verify-structure"]
@@ -484,7 +484,7 @@ repos:
 
   # GDScript-Formatter
   - repo: https://github.com/GDQuest/GDScript-formatter
-    rev: 0d98930d11cedd22430c1375fc8d02a6f88f1c30  # frozen: 0.24.0
+    rev: 516c1d60875c99d5ed95aab5b8e21aa31d2c6740  # frozen: 0.27.0
     hooks:
       - id: gdscript-formatter
         args: ["lint"]

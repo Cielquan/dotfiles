@@ -93,6 +93,7 @@ curl -sS https://starship.rs/install.sh | sh
 # -----------------------------------------------------------------------------
 cargo install --locked uv
 curl -fsSL --proto '=https' --tlsv1.2 https://astral.sh/uv/install.sh | sh
+sudo apt install python-is-python3
 
 
 # -----------------------------------------------------------------------------

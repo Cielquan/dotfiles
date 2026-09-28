@@ -74,6 +74,7 @@ _default_feature_profile = ""
 _script_setup_templates_dictionary = {
 "Camera3D": "0NodeDefault",
 "Node": "0NodeDefault",
+"Node2D": "0NodeDefault",
 "Node3D": "0NodeDefault"
 }
 _script_setup_use_script_templates = true

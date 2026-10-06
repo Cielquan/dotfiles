@@ -14,7 +14,7 @@ repos:
 
   # git context checking out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c # frozen: v6.0.0
     hooks:
       - id: no-commit-to-branch
         args: ["--branch", "main"]
@@ -38,7 +38,7 @@ repos:
 
   # file checking out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c # frozen: v6.0.0
     hooks:
       - id: check-case-conflict
       - id: check-shebang-scripts-are-executable
@@ -88,7 +88,7 @@ repos:
         files: ^Pipfile$
 
   - repo: https://github.com/pypa/pip-audit
-    rev: 89ba95983281980506b662fb08cea634d75907c5  # frozen: v2.9.0
+    rev: 89ba95983281980506b662fb08cea634d75907c5 # frozen: v2.9.0
     hooks:
       - id: pip-audit
         args: ["-r", "requirements.txt", "--disable-pip"]
@@ -188,7 +188,7 @@ repos:
     # Config file: eslint.config.ts
     #     https://eslint.org/docs/user-guide/configuring/configuration-files
     # Ignore file: .eslintignore [file ignore pattern]
-    rev: a7d5fe64f402eefdc2bbb73992d3a4ac49f426a5  # frozen: v9.39.3
+    rev: a7d5fe64f402eefdc2bbb73992d3a4ac49f426a5 # frozen: v9.39.3
     hooks:
       - id: eslint
         name: eslint (fix)
@@ -240,7 +240,7 @@ repos:
 
   # StyLua
   - repo: https://github.com/JohnnyMorganz/StyLua
-    rev: a6433cd8ed974a1dd769d41a46b5008858e58e94  # frozen: v2.5.2
+    rev: a6433cd8ed974a1dd769d41a46b5008858e58e94 # frozen: v2.5.2
     hooks:
       # Config file: .stylua.toml
       # Inline ignore part: -- stylua: ignore
@@ -254,7 +254,7 @@ repos:
 
   # GDScript-Formatter
   - repo: https://github.com/GDQuest/GDScript-formatter
-    rev: 516c1d60875c99d5ed95aab5b8e21aa31d2c6740  # frozen: 0.27.0
+    rev: 516c1d60875c99d5ed95aab5b8e21aa31d2c6740 # frozen: 0.27.0
     hooks:
       - id: gdscript-formatter
         args: ["--verify-structure"]
@@ -293,7 +293,7 @@ repos:
     # Config file: "prettier" key package.json | .prettierrc | .prettierrc.json |
     #     https://prettier.io/docs/en/configuration.html
     # Ignore file: .prettierignore [file ignore pattern]
-    rev: f12edd9c7be1c20cfa42420fd0e6df71e42b51ea  # frozen: v4.0.0-alpha.8
+    rev: f12edd9c7be1c20cfa42420fd0e6df71e42b51ea # frozen: v4.0.0-alpha.8
     hooks:
       - id: prettier
         additional_dependencies:
@@ -301,7 +301,7 @@ repos:
           - prettier-plugin-tailwindcss@^0.6.5 # NOTE: Plugin only so config does not error
         args: ["--ignore-path", ".gitignore"]
         files: \.(html|css|json|jsonc|yaml|md)$
-        exclude: 'pnpm-lock.yaml'
+        exclude: "pnpm-lock.yaml"
 
   # ----------------------------------------------
   # SQL
@@ -311,7 +311,7 @@ repos:
   - repo: https://github.com/sqlfluff/sqlfluff
     # Config file: ".sqlfluff"
     # Ignore file: .sqlfluffignore [file ignore pattern]
-    rev: 5f6d8626c8c13537866ec476e82bb9781afb32ac  # frozen: 3.4.2
+    rev: 5f6d8626c8c13537866ec476e82bb9781afb32ac # frozen: 3.4.2
     hooks:
       - id: sqlfluff-fix
 
@@ -342,7 +342,7 @@ repos:
 
   # code unspecific out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c # frozen: v6.0.0
     hooks:
       - id: end-of-file-fixer
         stages: [pre-commit]
@@ -373,7 +373,7 @@ repos:
 
   # code unspecific out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c # frozen: v6.0.0
     hooks:
       - id: check-merge-conflict
       - id: detect-private-key
@@ -395,14 +395,14 @@ repos:
 
   # python specific out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c # frozen: v6.0.0
     hooks:
       - id: debug-statements
       - id: name-tests-test
 
   # several python code regex hooks
   - repo: https://github.com/pre-commit/pygrep-hooks
-    rev: 3a6eb0fadf60b3cccfd80bad9dbb6fae7e47b316  # frozen: v1.10.0
+    rev: 3a6eb0fadf60b3cccfd80bad9dbb6fae7e47b316 # frozen: v1.10.0
     hooks:
       - id: python-check-blanket-noqa
       - id: python-check-blanket-type-ignore
@@ -471,7 +471,7 @@ repos:
 
   # luacheck
   - repo: https://github.com/lunarmodules/luacheck
-    rev: cc089e3f65acdd1ef8716cc73a3eca24a6b845e4  # frozen: v1.2.0
+    rev: cc089e3f65acdd1ef8716cc73a3eca24a6b845e4 # frozen: v1.2.0
     hooks:
       # Config file: `.luacheckrc`
       # Inline config: -- luacheck: ...
@@ -484,7 +484,7 @@ repos:
 
   # GDScript-Formatter
   - repo: https://github.com/GDQuest/GDScript-formatter
-    rev: 516c1d60875c99d5ed95aab5b8e21aa31d2c6740  # frozen: 0.27.0
+    rev: 516c1d60875c99d5ed95aab5b8e21aa31d2c6740 # frozen: 0.27.0
     hooks:
       - id: gdscript-formatter
         args: ["lint", "--disable", "max-line-length"]
@@ -530,7 +530,7 @@ repos:
 
   - repo: https://github.com/cielquan/mirrors-stylelint
     # Config file: .stylelintrc.json
-    rev: a4d65c89f416c91a4878b33168f65ed0506675b1  # frozen: v17.7.0
+    rev: a4d65c89f416c91a4878b33168f65ed0506675b1 # frozen: v17.7.0
     hooks:
       - id: stylelint
         additional_dependencies:
@@ -544,24 +544,24 @@ repos:
 
   # JSON specific out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c # frozen: v6.0.0
     hooks:
       - id: check-json
         exclude: tsconfig\.json
       - id: check-toml
       - id: check-yaml
-        exclude: 'pnpm-lock.yaml'
+        exclude: "pnpm-lock.yaml"
 
   # yamllint - yaml linter
   - repo: https://github.com/adrienverge/yamllint
-    rev: 79a6b2b1392eaf49cdd32ac4f14be1a809bbd8f7  # frozen: v1.37.1
+    rev: 79a6b2b1392eaf49cdd32ac4f14be1a809bbd8f7 # frozen: v1.37.1
     hooks:
       # Config file: .yamllint.yaml [--config-file]
       # Inline skip: `# yamllint disable-line[ rule:<RULE>]`
       # Block skip: `# yamllint disable[ rule:<RULE>]`
       # Block skip end: `# yamllint enable`
       - id: yamllint
-        exclude: 'pnpm-lock.yaml'
+        exclude: "pnpm-lock.yaml"
 
   # ----------------------------------------------
   # Validate .pre-commit-hooks.yaml file
@@ -578,7 +578,7 @@ repos:
 
   # rstcheck - rst file checker
   - repo: https://github.com/rstcheck/rstcheck
-    rev: 27258fde1ee7d3b1e6a7bbc58f4c7b1dd0e719e5  # frozen: v6.2.5
+    rev: 27258fde1ee7d3b1e6a7bbc58f4c7b1dd0e719e5 # frozen: v6.2.5
     hooks:
       # Config file: .rstcheck.cfg [--config]
       - id: rstcheck

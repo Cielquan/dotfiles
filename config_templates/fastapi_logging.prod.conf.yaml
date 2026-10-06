@@ -7,17 +7,17 @@ disable_existing_loggers: false
 
 formatters:
   default:
-    (): 'uvicorn.logging.DefaultFormatter'
-    fmt: '%(asctime)s %(levelprefix)s [%(process)d] %(name)-13s - %(message)s - %(pathname)s:%(lineno)s'
+    (): "uvicorn.logging.DefaultFormatter"
+    fmt: "%(asctime)s %(levelprefix)s [%(process)d] %(name)-13s - %(message)s - %(pathname)s:%(lineno)s"
   access:
-    (): 'uvicorn.logging.AccessFormatter'
+    (): "uvicorn.logging.AccessFormatter"
     fmt: '%(asctime)s %(levelprefix)s [%(process)d] %(client_addr)s - "%(request_line)s" %(status_code)s'
   file_default:
-    (): 'uvicorn.logging.DefaultFormatter'
-    fmt: '%(asctime)s %(levelprefix)s [%(process)d] %(name)-13s - %(message)s - %(pathname)s:%(lineno)s'
+    (): "uvicorn.logging.DefaultFormatter"
+    fmt: "%(asctime)s %(levelprefix)s [%(process)d] %(name)-13s - %(message)s - %(pathname)s:%(lineno)s"
     use_colors: false
   file_access:
-    (): 'uvicorn.logging.AccessFormatter'
+    (): "uvicorn.logging.AccessFormatter"
     fmt: '%(asctime)s %(levelprefix)s [%(process)d] %(client_addr)s - "%(request_line)s" %(status_code)s'
     use_colors: false
 

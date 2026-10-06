@@ -99,7 +99,7 @@ repos:
         additional_dependencies:
           - prettier@^3.3.2 # NOTE: version overwrites rev version - keep in sync
         args: ["--ignore-path", ".gitignore"]
-        files: \.(html|css|json,yaml,md)$
+        files: \.(html|css|json|yaml|md)$
 
   # ----------------------------------------------
   # Spelling dict

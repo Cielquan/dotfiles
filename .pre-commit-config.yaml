@@ -200,7 +200,7 @@ repos:
           spell-check in docstrings/comments in py-source via pyenchant and pylint
         additional_dependencies: [pyenchant]
         args: ["--disable=all", "--enable=spelling", "--rcfile=.pylintrc.spelling.toml"]
-        exclude: \.pdbrc
+        exclude: \.pdbrc|install_vscodium_ext.py
 
   # ----------------------------------------------
   # Shell script

@@ -8,4 +8,4 @@ exec env -i \
     QT_QPA_PLATFORM=x11 \
     DISPLAY="${DISPLAY:-:0}" \
     LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu" \
-    /home/krys/bin/godot-raw "$@"
+    ~/bin/godot-raw "$@"

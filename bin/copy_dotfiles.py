@@ -4,6 +4,7 @@
 
 import argparse
 import enum
+import fnmatch
 import logging
 import pathlib
 import shutil
@@ -31,6 +32,7 @@ logger = t.cast("CustomLogger", logging.getLogger(__name__))
 root_dir = pathlib.Path(__file__).parents[1]
 home = pathlib.Path.home()
 
+ignore_file = root_dir / ".dotfiles-ignore"
 dotfiles_dir = root_dir / "dotfiles"
 backup_base_dir = root_dir / "backups" / datetime.now().strftime("%Y%m%d_%H%M%S")  # noqa: DTZ005
 
@@ -165,6 +167,43 @@ def setup_logging(args: argparse.Namespace) -> None:
     logger.setLevel(level)
 
 
+class IgnoreFileHandler:
+    """Ignore file handler.
+
+    Uses `fnmatch` for Unix shell-style wildcards.
+    """
+
+    def __init__(self) -> None:
+        """Load ignore file."""
+        self._ignore_patterns = []
+
+        if not ignore_file.exists():
+            err_msg = "Ignore file does not exist."
+            logger.warning(err_msg)
+            return
+
+        if not ignore_file.is_file():
+            err_msg = "Ignore file is not a file."
+            logger.warning(err_msg)
+            return
+
+        with ignore_file.open("r") as f:
+            for line in f:
+                line_stripped = line.strip()
+                if line_stripped and not line_stripped.startswith("#"):
+                    self._ignore_patterns.append(line_stripped)
+
+    def is_ignored(self, path: pathlib.Path) -> bool:
+        """Check if path is ignored.
+
+        First checks the last path segment, then the full path.
+        """
+        return any(
+            (fnmatch.fnmatch(path.name, pattern) or fnmatch.fnmatch(str(path), pattern))
+            for pattern in self._ignore_patterns
+        )
+
+
 class DotfileCopier:
     """Dotfile copy handler."""
 
@@ -173,6 +212,7 @@ class DotfileCopier:
         self._dry_run = dry_run
         self._missing_only = missing_only
         self._backup_base_dir_created: bool = False
+        self._ignore_file = IgnoreFileHandler()
 
         self.files_copied = 0
         self.files_skipped = 0
@@ -245,6 +285,12 @@ class DotfileCopier:
     def _iter_dotfiles_dir(self) -> None:
         """Iterate through the application dirs in the 'dotfiles' dir."""
         for path in sorted(dotfiles_dir.iterdir()):
+            if self._ignore_file.is_ignored(path):
+                logger.warning(
+                    f"1 Ignoring path '{path}' as it matches with a pattern in '.dotfiles-ignore'"
+                )
+                self.files_ignored += 1
+                continue
             if path.is_dir():
                 self._recursive_iter_dir_and_copy_files(path, path)
             else:
@@ -259,6 +305,12 @@ class DotfileCopier:
         """Recursively iterate over the given dir and copy the dotfiles accordingly."""
         path: pathlib.Path
         for path in sorted(dir_path.iterdir()):
+            if self._ignore_file.is_ignored(path):
+                logger.warning(
+                    f"2 Ignoring path '{path}' as it matches with a pattern in '.dotfiles-ignore'"
+                )
+                self.files_ignored += 1
+                continue
             if path.is_dir():
                 logger.debug(f"Checking dir '{path}'")
                 self._recursive_iter_dir_and_copy_files(path, relative_root_dir)

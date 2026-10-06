@@ -63,6 +63,8 @@ shopt -s histreedit
 shopt -s histverify
 # Don't assume a word with a @ in it is a hostname
 shopt -u hostcomplete
+# Apply 'set -e' in command substitutions $(...)
+shopt -s inherit_errexit
 # Don't change newlines to semicolons in history
 shopt -s lithist
 # Don't try to tell me when my mail is read

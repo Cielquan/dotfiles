@@ -91,6 +91,7 @@
     ".eslintignore": "ignore",
     ".htmlhintrc": "json",
     ".htmllintrc": "jsonc",
+    "*.ignore": "ignore",
     ".linguirc": "json",
     "*.log?": "log",
     "*.log.?": "log",

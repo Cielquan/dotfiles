@@ -191,6 +191,30 @@
   // | EXTENSIONS (tooling)                                                          |
   // ---------------------------------------------------------------------------------
   // ==============================
+  // FIM Autocomplete
+  // ==============================
+  "fim.enabled": true,
+  "fim.provider": "llama.cpp",
+  "fim.model": "/models/qwen/qwen2.5-coder-7b-q8_0.gguf",
+  "fim.apiBase": "http://127.0.0.1:8080",
+  "fim.contextLength": 8192,
+  "fim.completionOptions": {
+    "temperature": 0.0,
+    "maxTokens": 128,
+  },
+  "fim.debounceDelay": 200,
+  "fim.modelTimeout": 1000,
+  "fim.maxPromptTokens": 2048,
+  "fim.maxCompletionTokens": 128,
+  "fim.multilineCompletions": "auto",
+  "fim.transform": true,
+  "fim.useDiagnostics": false,
+  "fim.debug": true,
+  // ==============================
+  // Claude
+  // ==============================
+  "claudeCode.preferredLocation": "panel",
+  // ==============================
   // Code Runner
   // ==============================
   "code-runner.enableAppInsights": false, // telemetry

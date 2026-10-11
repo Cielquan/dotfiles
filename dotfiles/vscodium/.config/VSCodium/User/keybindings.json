@@ -191,6 +191,15 @@
   // ------------------------------
 
   // ==============================
+  // Force FIM Autocomplete
+  // ==============================
+  {
+    "key": "ctrl+alt+[Minus]",
+    "command": "fim.forceAutocomplete",
+    "when": "editorTextFocus",
+  },
+
+  // ==============================
   // Remove rst Key Bindings
   // ==============================
   {

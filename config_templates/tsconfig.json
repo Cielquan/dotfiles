@@ -29,11 +29,6 @@
     },
     "plugins": [{ "name": "next" }]
   },
-  "include": [
-    "src",
-    "public",
-    "translations",
-    "vendored",
-  ],
+  "include": ["src", "public", "translations", "vendored"],
   "exclude": ["node_modules", "dist", "cypress", "*.bak.*"]
 }

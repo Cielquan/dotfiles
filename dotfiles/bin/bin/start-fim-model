@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -euox pipefail
+
+docker run --rm -it \
+  --device=/dev/kfd \
+  --device=/dev/dri \
+  -p 127.0.0.1:8080:8080 \
+  -v ~/models:/models:ro \
+  -v ~/projects_ext/llama.cpp:/src:ro \
+  rocm/dev-ubuntu-24.04:latest \
+  /src/build/bin/llama-server \
+    -m /models/qwen/qwen2.5-coder-7b-q8_0.gguf \
+    --host 0.0.0.0 \
+    --port 8080 \
+    -ngl 999 \
+    -c 8192 \
+    --parallel 1

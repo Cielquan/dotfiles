@@ -32,7 +32,7 @@ logger = t.cast("CustomLogger", logging.getLogger(__name__))
 root_dir = pathlib.Path(__file__).parents[1]
 home = pathlib.Path.home()
 
-ignore_file = root_dir / ".dotfiles-ignore"
+ignore_file = root_dir / ".dotfiles.ignore"
 dotfiles_dir = root_dir / "dotfiles"
 backup_base_dir = root_dir / "backups" / datetime.now().strftime("%Y%m%d_%H%M%S")  # noqa: DTZ005
 

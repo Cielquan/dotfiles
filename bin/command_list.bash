@@ -79,6 +79,8 @@ fc-list | grep -i "FONT_NAME"
 sudo add-apt-repository ppa:git-core/ppa
 cargo install --locked git-delta
 
+sudo apt install gh
+
 
 # -----------------------------------------------------------------------------
 # Starship prompt

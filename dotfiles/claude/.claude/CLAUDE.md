@@ -13,7 +13,7 @@ Everything you do on GitHub runs under my account, so mark it clearly as yours.
 
 ### Commits
 
-- End every commit message with this trailer: `Co-Authored-By: Claude <noreply@anthropic.com>`
+- End every commit message with this trailer: `Co-Authored-By: Claude {MODEL_NAME} <noreply@anthropic.com>`
 - Never amend, squash or rebase commits you didn't make in this session.
 
 ### Branches
@@ -25,6 +25,6 @@ Everything you do on GitHub runs under my account, so mark it clearly as yours.
 
 - Add the label `claude` to every issue and PR you open.
 - End every issue body, PR description and comment you write with:
-  `🤖 Written by Claude`
+  `🤖 Written by [Claude Code](https://claude.com/claude-code)`
 - Don't edit the body or title of issues and PRs I wrote. Add a comment instead.
 - Don't close, reopen, assign or relabel issues unless I ask you to.

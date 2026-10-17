@@ -28,3 +28,4 @@ Everything you do on GitHub runs under my account, so mark it clearly as yours.
   `🤖 Written by [Claude Code](https://claude.com/claude-code)`
 - Don't edit the body or title of issues and PRs I wrote. Add a comment instead.
 - Don't close, reopen, assign or relabel issues unless I ask you to.
+- If you merge a PR, add a comment, that you did the merge.

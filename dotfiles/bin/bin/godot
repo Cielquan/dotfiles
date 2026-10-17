@@ -7,6 +7,8 @@ exec env -i \
     USER="$USER" \
     PATH="$PATH" \
     GDK_BACKEND=x11 \
+    XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}" \
+    DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-unix:path=/run/user/$(id -u)/bus}" \
     QT_QPA_PLATFORM=x11 \
     DISPLAY="${DISPLAY:-:0}" \
     LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu" \

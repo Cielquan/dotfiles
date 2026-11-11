@@ -30,6 +30,7 @@ sudo usermod -aG docker "${USER}"
 # -----------------------------------------------------------------------------
 sudo curl -fsSL --proto '=https' --tlsv1.2 -o /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 sudo curl -fsSL --proto '=https' --tlsv1.2 -o /etc/apt/sources.list.d/brave-browser-release.sources https://brave-browser-apt-release.s3.brave.com/brave-browser.sources
+sudo apt install brave-browser
 
 
 # -----------------------------------------------------------------------------

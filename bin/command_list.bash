@@ -133,6 +133,17 @@ ln -s ... gdscript-formatter
 
 
 # -----------------------------------------------------------------------------
+# Backups
+# -----------------------------------------------------------------------------
+flatpak install flathub com.github.mtkennerly.ludusavi
+
+# After dotfile copy
+systemctl --user daemon-reload
+systemctl --user enable --now pc-backup.timer
+systemctl --user start pc-backup.service
+
+
+# -----------------------------------------------------------------------------
 # General tools
 # -----------------------------------------------------------------------------
 # Replacement for grep

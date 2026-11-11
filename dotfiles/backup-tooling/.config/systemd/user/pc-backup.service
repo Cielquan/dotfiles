@@ -1,0 +1,6 @@
+[Unit]
+Description=PC backup (software list + game saves)
+
+[Service]
+Type=oneshot
+ExecStart=%h/bin/pc-backup.sh

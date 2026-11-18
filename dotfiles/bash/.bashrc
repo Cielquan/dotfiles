@@ -107,12 +107,3 @@ for bash_source in "${HOME}"/.bashrc.d/*.bash ; do
     source "${bash_source}"
 done
 unset -v bash_source
-
-# Set path to starship.toml
-STARSHIP_CONFIG=${HOME}/.config/starship/starship.toml
-export STARSHIP_CONFIG
-
-# Load starship prompt if installed (needs to be called at the end)
-if command -v starship &> /dev/null; then
-    eval "$(starship init bash)"
-fi

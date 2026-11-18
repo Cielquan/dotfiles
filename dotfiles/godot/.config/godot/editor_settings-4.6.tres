@@ -1,5 +1,7 @@
 [gd_resource type="EditorSettings" format=3]
 
+[sub_resource type="Shortcut" id="Shortcut_c6y84"]
+
 [resource]
 interface/editor/code_font_contextual_ligatures = 0
 interface/editor/code_font = "/home/krys/.local/share/fonts/ComicCodeLigaturesNerdFont-Regular.otf"
@@ -79,3 +81,13 @@ _script_setup_templates_dictionary = {
 }
 _script_setup_use_script_templates = true
 _use_favorites_root_selection = false
+gdquest_gdscript_formatter/format_mode = 0
+gdquest_gdscript_formatter/format_on_save = true
+gdquest_gdscript_formatter/use_spaces = true
+gdquest_gdscript_formatter/indent_size = 4
+gdquest_gdscript_formatter/formatter_path = ""
+gdquest_gdscript_formatter/lint_on_save = false
+gdquest_gdscript_formatter/max_line_length = 100
+gdquest_gdscript_formatter/lint_ignored_rules = ""
+gdquest_gdscript_formatter/format_on_save_ignored_directories = PackedStringArray("addons/")
+gdquest_gdscript_formatter/shortcut = SubResource("Shortcut_c6y84")

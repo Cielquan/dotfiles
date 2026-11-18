@@ -8,7 +8,7 @@ exit 1
 # Basics (APT)
 # -----------------------------------------------------------------------------
 sudo apt install ca-certificates apt-transport-https
-sudo apt install nano curl unzip htop ldnsutils net-tools wget
+sudo apt install nano curl unzip htop ldnsutils bind9-dnsutils net-tools wget
 
 
 # -----------------------------------------------------------------------------

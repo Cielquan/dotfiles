@@ -149,6 +149,8 @@ systemctl --user start pc-backup.service
 # -----------------------------------------------------------------------------
 # Replacement for grep
 cargo install --locked ripgrep
+# Replacement for find
+cargo install --locked fd-find
 # Replacement for cd
 cargo install --locked zoxide
 # Replacement for pre-commit

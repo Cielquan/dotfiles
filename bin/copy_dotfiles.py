@@ -332,7 +332,7 @@ class DotfileCopier:
         source file is copied over.
         """
         relative_path = source_path.relative_to(relative_root_dir)
-        logger.info(f"Handling dotfile '{relative_path}' ...")
+        logger.debug(f"Handling dotfile '{relative_path}' ...")
 
         target_path = home / relative_path
 
@@ -340,12 +340,12 @@ class DotfileCopier:
             logger.debug(f"Target file already exists '{target_path}'")
 
             if self._missing_only:
-                logger.info(f"Skipping '{source_path}' as '{target_path}' already exists")
+                logger.debug(f"Skipping '{source_path}' as '{target_path}' already exists")
                 self.files_skipped += 1
                 return
 
             if source_path.read_bytes() == target_path.read_bytes():
-                logger.info(f"Skipping '{source_path}' as '{target_path}' has identical content")
+                logger.debug(f"Skipping '{source_path}' as '{target_path}' has identical content")
                 self.files_skipped += 1
                 return
 

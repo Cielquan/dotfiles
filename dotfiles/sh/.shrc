@@ -1,5 +1,11 @@
 #!/usr/bin/env sh
 
+# Make sure the shell is interactive
+case $- in
+    *i*) ;;
+    *) return ;;
+esac
+
 # Don't let anyone write(1) to my terminal
 command -p mesg n 2>/dev/null
 

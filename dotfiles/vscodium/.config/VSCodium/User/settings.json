@@ -96,6 +96,8 @@
     "*.log?": "log",
     "*.log.?": "log",
     ".luacheckrc": "lua",
+    "nanorc": "nanorc",
+    "*.nanorc": "nanorc",
     ".prettierignore": "ignore",
     ".prettierrc": "json",
     "Pipfile": "toml",

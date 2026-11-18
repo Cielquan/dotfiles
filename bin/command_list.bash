@@ -116,7 +116,8 @@ wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.g
     | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
 echo -e 'Types: deb\nURIs: https://download.vscodium.com/debs\nSuites: vscodium\nComponents: main\nArchitectures: amd64 arm64\nSigned-by: /usr/share/keyrings/vscodium-archive-keyring.gpg' \
     | sudo tee /etc/apt/sources.list.d/vscodium.sources
-echo "ext list in dotfiles/vscodium/.config/VSCodium/User/extensions.txt"
+# Install extensions
+./bin/install_vscodium_ext.py
 
 
 # -----------------------------------------------------------------------------

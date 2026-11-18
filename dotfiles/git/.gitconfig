@@ -115,9 +115,9 @@
     rbi = !"f() { git rebase --interactive HEAD~${1}; }; f"
     # Overwrite tag locally and remove on origin
     retag = !"f() { \
-        git tag --delete ${1} || (echo 'tag does not exist. Aborting ...' && exit 1) \
-        git push origin :refs/tags/${1} || echo 'tag does not exist on origin. Skipping ...'  \
-        git tag ${1}; \
+        git tag --delete \"${1}\" || { echo 'tag does not exist. Aborting ...'; return 1; }; \
+        git push origin \":refs/tags/${1}\" || echo 'tag does not exist on origin. Skipping ...'; \
+        git tag \"${1}\"; \
     }; f"
     s = status --short
     # Create empty commit to let CI skip

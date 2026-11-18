@@ -7,6 +7,7 @@ import enum
 import fnmatch
 import logging
 import pathlib
+import re
 import shutil
 import sys
 import typing as t
@@ -35,6 +36,10 @@ home = pathlib.Path.home()
 ignore_file = root_dir / ".dotfiles.ignore"
 dotfiles_dir = root_dir / "dotfiles"
 backup_base_dir = root_dir / "backups" / datetime.now().strftime("%Y%m%d_%H%M%S")  # noqa: DTZ005
+
+# Sourced bash/sh files use a number prefix for their sourcing order (see README)
+NUMBERED_SCRIPT_SUFFIXES = {".sh", ".bash"}
+NUMBER_PREFIX_RE = re.compile(r"^\d{2}-")
 
 
 GIT_USER_CONFIG_FILE = """\
@@ -215,12 +220,14 @@ class DotfileCopier:
         self._ignore_file = IgnoreFileHandler()
 
         self.files_copied = 0
+        self.files_renamed = 0
         self.files_skipped = 0
         self.files_ignored = 0
         self.files_failed = 0
 
     def _reset_stats(self) -> None:
         self.files_copied = 0
+        self.files_renamed = 0
         self.files_skipped = 0
         self.files_ignored = 0
         self.files_failed = 0
@@ -246,6 +253,8 @@ class DotfileCopier:
         if self._dry_run:
             summary_msg = "[DRY-RUN] " + summary_msg
 
+        if self.files_renamed:
+            summary_msg += f", renamed: {self.files_renamed}"
         if self.files_skipped:
             summary_msg += f", skipped: {self.files_skipped}"
         if self.files_ignored:
@@ -330,11 +339,16 @@ class DotfileCopier:
         The target path is checked before. If the file already exists, its content is compared.
         If the contents are the same, the file is skipped, else the target file is backed up and the
         source file is copied over.
+
+        If the target file does not exist, but a version of it with a different number prefix does
+        (see `_find_renumbered_file`), the contents are compared. If they are the same, the old file
+        is renamed, else the old file is backed up and replaced by the source file.
         """
         relative_path = source_path.relative_to(relative_root_dir)
         logger.debug(f"Handling dotfile '{relative_path}' ...")
 
         target_path = home / relative_path
+        renumbered_path = None
 
         if target_path.exists():
             logger.debug(f"Target file already exists '{target_path}'")
@@ -349,66 +363,163 @@ class DotfileCopier:
                 self.files_skipped += 1
                 return
 
-            if not self._backup_base_dir_created:
-                logger.debug("Creating backup base directory")
+            if not self._backup_file(target_path):
+                return
+        else:
+            renumbered_path = self._find_renumbered_file(target_path)
 
-                if not self._dry_run:
-                    try:
-                        backup_base_dir.mkdir(parents=True, exist_ok=True)
-                    except (PermissionError, OSError) as exc:
-                        logger.error(
-                            f"Failed to create backup base directory '{backup_base_dir}': {exc}"
-                        )
-                        self.files_failed += 1
-                        return
+        if renumbered_path is not None:
+            logger.debug(f"Found renumbered version '{renumbered_path}' of '{target_path}'")
 
-                self._backup_base_dir_created = True
-
-            logger.debug(f"Backing up target file '{target_path}'")
-            backup_path = backup_base_dir / relative_path
-            if not self._dry_run:
-                try:
-                    backup_path.parent.mkdir(parents=True, exist_ok=True)
-                except (PermissionError, OSError) as exc:
-                    logger.error(
-                        f"Failed to create sub-directory for backup '{backup_path.parent}': {exc}"
-                    )
-                    self.files_failed += 1
-                    return
-
-                try:
-                    shutil.copy2(target_path, backup_path)
-                except (PermissionError, OSError) as exc:
-                    logger.error(
-                        f"Failed to back-up (copy) target file '{target_path}' to '{backup_path}': {exc}"
-                    )
-                    self.files_failed += 1
-                    return
-
-            logger.success(f"Backed up target file '{target_path}' to '{backup_path}'")
-
-        logger.debug(f"Copying source file '{source_path}'")
-        if not self._dry_run:
-            try:
-                target_path.parent.mkdir(parents=True, exist_ok=True)
-            except (PermissionError, OSError) as exc:
-                logger.error(
-                    f"Failed to create sub-directory for target '{target_path.parent}': {exc}"
+            if self._missing_only:
+                logger.warning(
+                    f"Skipping '{source_path}' as renumbered version '{renumbered_path}' exists"
                 )
-                self.files_failed += 1
+                self.files_skipped += 1
                 return
 
-            try:
-                shutil.copy2(source_path, target_path)
-            except (PermissionError, OSError) as exc:
-                logger.error(
-                    f"Failed to copy source file '{source_path}' to '{target_path}': {exc}"
-                )
-                self.files_failed += 1
+            if source_path.read_bytes() == renumbered_path.read_bytes():
+                self._rename_file_number_prefix(renumbered_path, target_path)
                 return
+
+            if not self._backup_file(renumbered_path):
+                return
+
+        if not self._copy_file(source_path, target_path):
+            return
+
+        if renumbered_path is not None and not self._remove_replaced_file(
+            renumbered_path, target_path
+        ):
+            return
 
         self.files_copied += 1
         logger.success(f"Copied source file '{source_path}' to '{target_path}'")
+
+    def _find_renumbered_file(self, target_path: pathlib.Path) -> pathlib.Path | None:
+        """Find an existing version of a numbered bash/sh file with a different number prefix.
+
+        A file without a number prefix also counts, e.g. `lang.sh` for `21-lang.sh`. Files which
+        are targets of another source file in the 'dotfiles' dir are not considered.
+        """
+        if target_path.suffix not in NUMBERED_SCRIPT_SUFFIXES:
+            return None
+        if not NUMBER_PREFIX_RE.match(target_path.name) or not target_path.parent.is_dir():
+            return None
+
+        base_name = NUMBER_PREFIX_RE.sub("", target_path.name)
+        candidates = [
+            path
+            for path in sorted(target_path.parent.iterdir())
+            if path != target_path
+            and path.is_file()
+            and NUMBER_PREFIX_RE.sub("", path.name) == base_name
+            and not any(dotfiles_dir.glob(f"*/{path.relative_to(home)}"))
+        ]
+
+        if not candidates:
+            return None
+
+        if len(candidates) > 1:
+            logger.error(
+                f"Found multiple renumbered versions of '{target_path}', please clean up manually: "
+                + ", ".join(f"'{path}'" for path in candidates)
+            )
+            self.files_ignored += 1
+            return None
+
+        return candidates[0]
+
+    def _rename_file_number_prefix(self, old_path: pathlib.Path, new_path: pathlib.Path) -> None:
+        """Rename a file with identical content to its new number prefix."""
+        if not self._dry_run:
+            try:
+                old_path.rename(new_path)
+            except (PermissionError, OSError) as exc:
+                logger.error(f"Failed to rename '{old_path}' to '{new_path}': {exc}")
+                self.files_failed += 1
+                return
+
+        self.files_renamed += 1
+        logger.warning(f"Renamed '{old_path}' to '{new_path}' as their number prefix changed")
+
+    def _remove_replaced_file(self, old_path: pathlib.Path, new_path: pathlib.Path) -> bool:
+        """Remove a renumbered file which was replaced by a new file. Returns False on failure."""
+        if not self._dry_run:
+            try:
+                old_path.unlink()
+            except (PermissionError, OSError) as exc:
+                logger.error(f"Failed to remove replaced file '{old_path}': {exc}")
+                self.files_failed += 1
+                return False
+
+        logger.info(
+            f"Replaced renumbered file '{old_path}' with '{new_path}' as their content differs"
+        )
+        return True
+
+    def _backup_file(self, path: pathlib.Path) -> bool:
+        """Back up the given file from the home dir. Returns False on failure."""
+        if not self._backup_base_dir_created:
+            logger.debug("Creating backup base directory")
+
+            if not self._dry_run:
+                try:
+                    backup_base_dir.mkdir(parents=True, exist_ok=True)
+                except (PermissionError, OSError) as exc:
+                    logger.error(
+                        f"Failed to create backup base directory '{backup_base_dir}': {exc}"
+                    )
+                    self.files_failed += 1
+                    return False
+
+            self._backup_base_dir_created = True
+
+        logger.debug(f"Backing up target file '{path}'")
+        backup_path = backup_base_dir / path.relative_to(home)
+        if not self._dry_run:
+            try:
+                backup_path.parent.mkdir(parents=True, exist_ok=True)
+            except (PermissionError, OSError) as exc:
+                logger.error(
+                    f"Failed to create sub-directory for backup '{backup_path.parent}': {exc}"
+                )
+                self.files_failed += 1
+                return False
+
+            try:
+                shutil.copy2(path, backup_path)
+            except (PermissionError, OSError) as exc:
+                logger.error(
+                    f"Failed to back-up (copy) target file '{path}' to '{backup_path}': {exc}"
+                )
+                self.files_failed += 1
+                return False
+
+        logger.success(f"Backed up target file '{path}' to '{backup_path}'")
+        return True
+
+    def _copy_file(self, source_path: pathlib.Path, target_path: pathlib.Path) -> bool:
+        """Copy the source file to the target path. Returns False on failure."""
+        logger.debug(f"Copying source file '{source_path}'")
+        if self._dry_run:
+            return True
+
+        try:
+            target_path.parent.mkdir(parents=True, exist_ok=True)
+        except (PermissionError, OSError) as exc:
+            logger.error(f"Failed to create sub-directory for target '{target_path.parent}': {exc}")
+            self.files_failed += 1
+            return False
+
+        try:
+            shutil.copy2(source_path, target_path)
+        except (PermissionError, OSError) as exc:
+            logger.error(f"Failed to copy source file '{source_path}' to '{target_path}': {exc}")
+            self.files_failed += 1
+            return False
+
+        return True
 
 
 def main() -> int:

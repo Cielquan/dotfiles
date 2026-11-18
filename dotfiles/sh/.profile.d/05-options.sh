@@ -11,8 +11,11 @@ options() {
     prog=${1}
     shift
 
-    # Directory already exists; bail out
-    [ -d "${dir}" ] && return
+    # Cache is up to date if it exists and is newer than the program; else rebuild it
+    if [ -d "${dir}" ] ; then
+        [ "$(command -v "${prog}")" -nt "${dir}/help" ] || return
+        rm -rf -- "${dir}"
+    fi
 
     # Create the directory and step into it
     mkdir -p -- "${dir}" || return

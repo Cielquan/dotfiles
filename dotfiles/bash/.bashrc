@@ -16,11 +16,10 @@ esac
 # POSIX utilities, like fc(1) and type(1)
 unalias -a
 
-# If ENV is set, source it to get all the POSIX-compatible interactive stuff;
-# we should be able to do this even if we're running a truly ancient Bash
-if [ -n "${ENV}" ] ; then
-    # shellcheck disable=1090
-    . "${ENV}"
+# Don't rely on $ENV and get all the POSIX-compatible interactive stuff directly from .shrc
+if [ -f "${HOME}/.shrc" ] ; then
+    # shellcheck disable=SC1091
+    . "${HOME}/.shrc"
 fi
 
 # Ensure we're using at least version 3.0

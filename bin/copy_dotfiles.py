@@ -243,7 +243,7 @@ class DotfileCopier:
 
         start_msg = "Starting dotfile copy process..."
         if self._dry_run:
-            summary_msg = "[DRY-RUN] " + start_msg
+            start_msg = "[DRY-RUN] " + start_msg
         logger.info(start_msg)
 
         self._iter_dotfiles_dir()

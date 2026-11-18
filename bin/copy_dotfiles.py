@@ -276,17 +276,20 @@ class DotfileCopier:
             logger.debug("Skipping git user config file creation, already exists")
             return 0
 
-        try:
-            user_config_file.parent.mkdir(parents=True, exist_ok=True)
-        except (PermissionError, OSError) as exc:
-            logger.error(f"Failed to create gitconfig directory '{user_config_file.parent}': {exc}")
-            return 1
+        if not self._dry_run:
+            try:
+                user_config_file.parent.mkdir(parents=True, exist_ok=True)
+            except (PermissionError, OSError) as exc:
+                logger.error(
+                    f"Failed to create gitconfig directory '{user_config_file.parent}': {exc}"
+                )
+                return 1
 
-        try:
-            user_config_file.write_text(GIT_USER_CONFIG_FILE)
-        except (PermissionError, OSError) as exc:
-            logger.error(f"Failed to create git user config file '{user_config_file}': {exc}")
-            return 1
+            try:
+                user_config_file.write_text(GIT_USER_CONFIG_FILE)
+            except (PermissionError, OSError) as exc:
+                logger.error(f"Failed to create git user config file '{user_config_file}': {exc}")
+                return 1
 
         logger.warning(f"Please don't forget to update '{user_config_file}'")
         return 0

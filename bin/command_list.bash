@@ -124,6 +124,7 @@ echo -e 'Types: deb\nURIs: https://download.vscodium.com/debs\nSuites: vscodium\
 # NeoVim
 # -----------------------------------------------------------------------------
 flatpak install flathub io.neovim.nvim
+ln -sf ~/.local/share/flatpak/exports/bin/io.neovim.nvim ~/.local/bin/nvim
 cargo install --locked tree-sitter-cli
 sudo apt install xclip
 

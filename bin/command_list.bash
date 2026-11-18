@@ -153,3 +153,7 @@ cargo install --locked ripgrep
 cargo install --locked prek
 # Run command when file changes
 cargo install --locked watchexec-cli
+
+# Fuzzy finder CLI
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install

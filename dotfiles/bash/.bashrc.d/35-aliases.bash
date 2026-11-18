@@ -63,7 +63,8 @@ alias rmd='rm -rf -I --preserve-root'
 alias update='sudo apt update'
 alias upgrade='sudo apt upgrade'
 
-alias diskuse='du -sch * .[!.]* | sort -rh'
+# `*` includes dotfiles as .bashrc sets `dotglob`
+alias diskuse='du -sch * | sort -rh'
 
 
 # Activate python default venvs

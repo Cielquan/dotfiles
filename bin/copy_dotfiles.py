@@ -13,7 +13,7 @@ import sys
 import typing as t
 from datetime import datetime
 
-SUCCESS_LEVEL_NUM = 20
+SUCCESS_LEVEL_NUM = 25
 logging.addLevelName(SUCCESS_LEVEL_NUM, "SUCCESS")
 
 
@@ -119,7 +119,7 @@ class CustomFormatter(logging.Formatter):
 
     COLORS: t.ClassVar = {
         "DEBUG": Color.CYAN + Style.BRIGHT,
-        "INFO": Color.GREEN + Style.BRIGHT,
+        "INFO": Color.BLUE + Style.BRIGHT,
         "SUCCESS": Color.GREEN + Style.BRIGHT,
         "WARNING": Color.YELLOW + Style.BRIGHT,
         "ERROR": Color.RED + Style.BRIGHT,

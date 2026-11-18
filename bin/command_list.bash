@@ -125,7 +125,7 @@ echo "ext list in dotfiles/vscodium/.config/VSCodium/User/extensions.txt"
 curl -fsSL --proto '=https' --tlsv1.2 -o /tmp/nvim-linux-x86_64.tar.gz https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
 rm -rf ~/.local/opt/nvim && mkdir -p ~/.local/opt/nvim
 tar -xzf /tmp/nvim-linux-x86_64.tar.gz -C ~/.local/opt/nvim --strip-components=1
-ln -sff ~/.local/opt/nvim/bin/nvim ~/.local/bin/nvim
+ln -sf ~/.local/opt/nvim/bin/nvim ~/.local/bin/nvim
 
 
 # -----------------------------------------------------------------------------

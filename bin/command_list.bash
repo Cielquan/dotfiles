@@ -125,7 +125,7 @@ echo "ext list in dotfiles/vscodium/.config/VSCodium/User/extensions.txt"
 curl -fsSL --proto '=https' --tlsv1.2 -o /tmp/nvim-linux-x86_64.tar.gz https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
 rm -rf ~/.local/opt/nvim && mkdir -p ~/.local/opt/nvim
 tar -xzf /tmp/nvim-linux-x86_64.tar.gz -C ~/.local/opt/nvim --strip-components=1
-ln -sf ~/.local/opt/nvim/bin/nvim ~/.local/bin/nvim
+ln -sff ~/.local/opt/nvim/bin/nvim ~/.local/bin/nvim
 
 
 # -----------------------------------------------------------------------------
@@ -133,13 +133,13 @@ ln -sf ~/.local/opt/nvim/bin/nvim ~/.local/bin/nvim
 # -----------------------------------------------------------------------------
 echo "Download godot from in ~/bin: https://godotengine.org/download/linux/"
 # `godot` wrapper is in `dotfiles`; `godot4` is needed by a VSCode ext
-ln -s godot godot4
+ln -sf godot godot4
 # `godot-raw` is used in above wrapper script
-ln -s ... godot-raw
+ln -sf ... godot-raw
 
 echo "Download gdscript-formatter from in ~/bin:https://github.com/GDQuest/GDScript-formatter/releases"
 # `godot-raw` is used in above wrapper script
-ln -s ... gdscript-formatter
+ln -sf ... gdscript-formatter
 
 
 # -----------------------------------------------------------------------------
@@ -170,4 +170,4 @@ cargo install --locked watchexec-cli
 # Fuzzy finder CLI
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.local/opt/fzf/
 ~/.local/opt/fzf/install --bin
-ln -s ~/.local/opt/fzf/bin/fzf ~/.local/bin/fzf
+ln -sf ~/.local/opt/fzf/bin/fzf ~/.local/bin/fzf

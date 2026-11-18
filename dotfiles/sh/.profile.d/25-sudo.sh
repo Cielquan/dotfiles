@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 # Make the "sudo" prompt more useful, without requiring access to "visudo".
 SUDO_PROMPT='[sudo] password for %u on %h: '

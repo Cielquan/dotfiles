@@ -265,7 +265,7 @@ class DotfileCopier:
         if self.files_failed:
             logger.error(summary_msg)
         else:
-            logger.info(summary_msg)
+            logger.success(summary_msg)
 
         return max(min(self.files_failed, 1), rv_git_user)
 

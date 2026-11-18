@@ -1,19 +1,11 @@
 #!/usr/bin/env sh
 
-# Add /usr/sbin to PATH if it exists
-if [ -d /usr/sbin ] ; then
-    PATH="/usr/sbin:${PATH}"
-fi
+# shellcheck disable=1091
+. "${HOME}/.profile.d/util/path_utils.sh"
 
-# Add ~/.local/bin to PATH if it exists
-if [ -d "${HOME}"/.local/bin ] ; then
-    PATH=${HOME}/.local/bin:${PATH}
-fi
-
-# Add ~/bin to PATH if it exists
-if [ -d "${HOME}/bin" ] ; then
-    PATH="${HOME}/bin:${PATH}"
-fi
+path_prepend /usr/sbin
+path_prepend "${HOME}/.local/bin"
+path_prepend "${HOME}/bin"
 
 # Load all supplementary scripts in ~/.profile.d
 for sh in "${HOME}"/.profile.d/*.sh ; do
@@ -28,3 +20,5 @@ if [ -f "${HOME}"/.shinit ] ; then
     ENV=${HOME}/.shinit
     export ENV
 fi
+
+path_utils_cleanup

@@ -15,10 +15,4 @@ for sh in "${HOME}"/.profile.d/*.sh ; do
 done
 unset -v sh
 
-# If ~/.shrc exists, set ENV to that
-if [ -f "${HOME}"/.shrc ] ; then
-    ENV=${HOME}/.shrc
-    export ENV
-fi
-
 path_utils_cleanup

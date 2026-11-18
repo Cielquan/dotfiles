@@ -20,7 +20,7 @@ source "${HOME}/.bashrc.d/util/color_check.bash"
 # 'color_prompt' comes from the sourced file
 # shellcheck disable=2154
 if [ "${color_prompt}" = yes ]; then
-# std: PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    # std: PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
     PS1='\[\033[0m\]\A `
         `\[\033[0m\]${debian_chroot:+($debian_chroot)}`
         `\[\033[1;92m\]\u@\h`
@@ -29,7 +29,7 @@ if [ "${color_prompt}" = yes ]; then
         `\[\033[0;93m\]$(parse_git_branch)`
         `\[\033[1;91m\]\n\$ \[\033[0m\]'
 else
-# std: PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    # std: PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
     PS1='\A ${debian_chroot:+($debian_chroot)}\u@\h:\w $(parse_git_branch)\$'
 fi
 

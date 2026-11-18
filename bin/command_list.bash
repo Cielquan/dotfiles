@@ -159,5 +159,5 @@ cargo install --locked prek
 cargo install --locked watchexec-cli
 
 # Fuzzy finder CLI
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.local/opt/fzf/
+~/.local/opt/fzf/install

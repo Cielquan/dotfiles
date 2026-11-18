@@ -4,8 +4,8 @@ FZF_DEFAULT_OPTS_FILE="${HOME}/.config/fzf/fzfrc"
 export FZF_DEFAULT_OPTS_FILE
 
 # Add fzf to PATH
-if [[ ! "$PATH" == */home/krys/projects_ext/fzf/bin* ]]; then
-    PATH="${PATH:+${PATH}:}${HOME}.fzf/bin"
+if [[ ! "${PATH}" == *${HOME}.local/opt/fzf/bin* ]]; then
+    PATH="${PATH:+${PATH}:}${HOME}.local/opt/fzf/bin"
 fi
 
 # Set up fzf key bindings and fuzzy completion, if installed

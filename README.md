@@ -18,6 +18,29 @@ git clone https://github.com/Cielquan/dotfiles.git
 
 The script has some flags, run it with `--help` to learn more.
 
+## Sourced scripts
+
+`bash`/`sh` files sourced from files like `.bashrc`, `.profile`, etc. follow this scheme.
+- File suffix of `.bash` or `.sh`.
+- Always two digits followed by a dash, followed by the file name.
+- Multiple files can use the same number, if their relative sourcing order is irrelevant.
+- First digit is the group (see below).
+- Second digit is the order inside group.
+- By default the second digit should be a 5, so other files can be sourced before or after.
+
+|Group|Purpose|
+|-----|-------|
+|0x   |Helpers, used by later files|
+|1x   |PATH additions|
+|2x   |Variables|
+|3x   |Aliases, commands and overrides|
+|4x   |Completions|
+|5x   |Prompt|
+|6x   |-|
+|7x   |Tool integrations|
+|8x   |-|
+|9x   |Must be last|
+
 ## Acknowledgements
 
 Thanks to those inspiring repos:

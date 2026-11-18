@@ -101,12 +101,12 @@ if ((BASH_VERSINFO[0] >= 4)) ; then
 fi
 
 # Load Bash-specific startup files
-for bash in "${HOME}"/.bashrc.d/*.bash ; do
-    [[ -e ${bash} ]] || continue
+for bash_source in "${HOME}"/.bashrc.d/*.bash ; do
+    [[ -e ${bash_source} ]] || continue
     # shellcheck disable=1090
-    source "${bash}"
+    source "${bash_source}"
 done
-unset -v bash
+unset -v bash_source
 
 # Set path to starship.toml
 STARSHIP_CONFIG=${HOME}/.config/starship/starship.toml

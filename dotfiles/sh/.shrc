@@ -31,10 +31,3 @@ for sh_source in "${HOME}"/.shrc.d/*.sh ; do
     . "${sh_source}"
 done
 unset -v sh_source
-
-# If ENV_EXT was set and exists, source that too, then clean it away
-if [ -e "${ENV_EXT}" ] ; then
-    # shellcheck disable=1090
-    . "${ENV_EXT}"
-fi
-unset -v ENV_EXT

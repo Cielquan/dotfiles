@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-CONF_DIR=${HOME}/.config/less/
+CONF_DIR=${HOME}/.config/less
 LESSKEY=${CONF_DIR}/lesskey
 
 if ! [ -f "${LESSKEY}" ] || \
